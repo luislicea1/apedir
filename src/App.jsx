@@ -1,13 +1,16 @@
 import './App.css'
 import * as React from "react";
 import {NextUIProvider} from "@nextui-org/react";
-import Prueba from './components/prueba/prueba';
+import Header from './components/header/Header';
+import Seccion from './components/Seccion/Seccion';
+
 
 function App() {
   
   return (
     <NextUIProvider>
-      <div className='div'><Prueba></Prueba></div>
+      <Header></Header>
+      <Seccion></Seccion>
       
     </NextUIProvider>
   );
