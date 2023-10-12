@@ -11,11 +11,11 @@ function App() {
   
   return (
     <NextUIProvider>
-      {/* <Header></Header>
+      <Header></Header>
       <Seccion title="Lugares Recomendados" lugares = {lugaresRecomendados}></Seccion>
       <Seccion title="Lugares" lugares = {lugares}></Seccion>
-      <Seccion title="Otros Lugares" lugares = {lugares}></Seccion> */}
-      <Login></Login>
+      <Seccion title="Otros Lugares" lugares = {lugares}></Seccion>
+      {/* <Login></Login> */}
     </NextUIProvider>
   );
 }
