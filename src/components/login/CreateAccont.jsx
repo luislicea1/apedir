@@ -13,7 +13,7 @@ export default function CreateAccont() {
   return (
     <div className="contenedor-pt-login">
       <div className="login-container">
-        <img src={ApedirLogoNegro} alt="" srcset="" className="logo-img" />
+        <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
         <Input type="text" variant={"bordered"} label="Nombre" />
         <Input type="email" variant={"bordered"} label="Email" />
         <Input
