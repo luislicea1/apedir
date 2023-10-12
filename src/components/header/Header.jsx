@@ -19,10 +19,11 @@ import supabase from "../../api/client.js";
 export default function Header() {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null)
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
-
+    
     if (!error) {
       setSession(null);
       return;
@@ -32,6 +33,9 @@ export default function Header() {
     console.log(event);
     if (session) {
       setSession(session);
+      const {user} = session
+      console.log(user)
+      setUser(user)
     }
   }
   useEffect(() => {
@@ -75,13 +79,13 @@ export default function Header() {
                 color="secondary"
                 name="Jason Hughes"
                 size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                src={user.user_metadata.avatar_url}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
+                <p className="font-semibold">{user.email}</p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
               <DropdownItem key="team_settings">Team Settings</DropdownItem>
