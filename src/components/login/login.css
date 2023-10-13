@@ -21,5 +21,5 @@
 
 .btn-black{
     height: 56px;
-    background-color: black;
+    background-color: black !important;
 }

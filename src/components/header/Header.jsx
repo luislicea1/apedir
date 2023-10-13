@@ -19,23 +19,23 @@ import supabase from "../../api/client.js";
 export default function Header() {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
-    
+
     if (!error) {
       setSession(null);
       return;
     }
   };
   function handleAuthStateChange(event, session) {
-    console.log(event);
+    
     if (session) {
       setSession(session);
-      const {user} = session
-      console.log(user)
-      setUser(user)
+      const { user } = session;
+      console.log(user);
+      setUser(user);
     }
   }
   useEffect(() => {
@@ -79,6 +79,7 @@ export default function Header() {
                 color="secondary"
                 name="Jason Hughes"
                 size="sm"
+                showFallback={true}
                 src={user.user_metadata.avatar_url}
               />
             </DropdownTrigger>
