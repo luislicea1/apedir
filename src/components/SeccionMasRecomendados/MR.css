@@ -1,8 +1,13 @@
-
+.img-containerMR{
+    max-height: 200px !important;
+    max-width: fit-content;
+    display: grid;
+}
 .img-sinShadow{
     box-shadow: none !important;
     border: none !important;
     border-radius: 20px;
+    max-height: 200px !important;
 }
 
 @media (max-width: 400px) {
