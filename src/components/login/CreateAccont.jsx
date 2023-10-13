@@ -10,6 +10,9 @@ export default function CreateAccont() {
   const variants = ["flat", "bordered", "underlined", "faded"];
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+  const btnStyle = {
+    height : "56px" ,
+  }
   return (
     <div className="contenedor-pt-login">
       <div className="login-container">
@@ -35,7 +38,7 @@ export default function CreateAccont() {
           }
           type={isVisible ? "text" : "password"}
         />
-        <Button  className="text-white btn-black">
+        <Button  className="text-white" style={btnStyle}>
             Create Accont
         </Button>
       </div>

@@ -12,6 +12,11 @@ export default function Login() {
   const variants = ["flat", "bordered", "underlined", "faded"];
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+  const btnStyle = {
+    height : "56px" ,
+  }
+    
+  
   return (
     <div className="contenedor-pt-login">
       <div className="login-container">
@@ -37,7 +42,7 @@ export default function Login() {
           }
           type={isVisible ? "text" : "password"}
         />
-        <Button className="text-white btn-black">Login</Button>
+        <Button className="text-white " color="default" style={btnStyle}>Login</Button>
 
         <Link isBlock showAnchorIcon href="/register" color="secondary">
           Crear cuenta

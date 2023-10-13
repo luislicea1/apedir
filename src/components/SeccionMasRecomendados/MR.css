@@ -1,0 +1,15 @@
+
+.img-sinShadow{
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 20px;
+}
+
+@media (max-width: 400px) {
+    .tarjetasMR{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+    .img-containerMR{
+        width: 100% !important;
+    }
+}
