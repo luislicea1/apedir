@@ -15,6 +15,10 @@ export default function Login() {
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  const btnStyle = {
+    height: "56px",
+  };
+
   const form = useRef();
   const navigate = useNavigate();
 
@@ -59,7 +63,11 @@ export default function Login() {
             }
             type={isVisible ? "text" : "password"}
           />
-          <Button className="text-white btn-black" type="submit">
+          <Button
+            className="text-white btn-black"
+            style={btnStyle}
+            type="submit"
+          >
             LOGIN
           </Button>
         </form>
