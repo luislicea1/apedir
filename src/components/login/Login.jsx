@@ -41,13 +41,12 @@ export default function Login() {
       <div className="login-container">
         <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
         <form className="login-container" ref={form} onSubmit={loginSubmit}>
-          {/* <Input type="text" variant={"bordered"} label="Nombre" /> */}
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input
             label="Password"
             name="password"
             variant="bordered"
-            placeholder="Enter your password"
+            placeholder="Escribe la contraseña"
             endContent={
               <button
                 className="focus:outline-none"
@@ -70,19 +69,20 @@ export default function Login() {
           >
             LOGIN
           </Button>
+
+          <Link isBlock showAnchorIcon href="/register" color="secondary">
+            Crear cuenta
+          </Link>
+          <Link
+            isBlock
+            showAnchorIcon
+            onClick={signInWithGoogle}
+            color="secondary"
+          >
+            Inicia sesión con Google
+          </Link>
         </form>
 
-        <Link isBlock showAnchorIcon href="/register" color="secondary">
-          Crear cuenta
-        </Link>
-        <Link
-          isBlock
-          showAnchorIcon
-          onClick={signInWithGoogle}
-          color="secondary"
-        >
-          Sign in with Google
-        </Link>
         <Toaster
           position="bottom-center"
           duration={3000}

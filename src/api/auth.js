@@ -13,31 +13,69 @@ async function login(email, password) {
       password: password,
     });
 
-    console.log({ error }, { data });
     if (error) {
       const message = "Email o contraseña incorrectos";
       return { message: message, isValid: false };
-    } else
+    } else {
+      const { d, err } = await supabase
+        .from("profiles")
+        .update([
+          {
+            isActive: true,
+          },
+        ])
+        .eq("id", data.user.id)
+        .select();
       return { session: data.session, message: "Login Exitoso", isValid: true };
+    }
   } catch (error) {
     return { message: error.message, isValid: false };
   }
 }
 
-async function register(email, password, confirmPassword) {
-  console.log(email, password, confirmPassword);
-  if (password !== confirmPassword) {
-    const error = "Las contraseñas no coinciden";
-    return error, false;
+async function register(
+  name,
+  last_name,
+  phone,
+  email,
+  password,
+  confirmPassword
+) {
+  if (password.length < 6 || confirmPassword.length < 6) {
+    return {
+      message: "La contraseña tiene que tener al menos 6 caracteres",
+      isValid: false,
+    };
+  } else if (password !== confirmPassword) {
+    return { message: "Las contraseñas no coinciden", isValid: false };
   }
 
   try {
     const { data, error } = await supabase.auth.signUp({ email, password });
-    console.log(error);
-    if (error) return error, false;
-    else "Registro exitoso", true;
+
+    if (error) return { message: error.message, isValid: false };
+    else {
+      const { d, error } = await supabase
+        .from("profiles")
+        .update([
+          {
+            name: name,
+            last_name: last_name,
+            phone_number: phone,
+            email: email,
+            isActive: false,
+          },
+        ])
+        .eq("id", data.user.id)
+        .select();
+
+      return {
+        message: "Revisa tu correo electrónico para confirmar tu registro.",
+        isValid: true,
+      };
+    }
   } catch (error) {
-    return error, false;
+    return { message: error.message, isValid: false };
   }
 }
 

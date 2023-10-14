@@ -17,9 +17,14 @@ export default function CreateAccont() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const { email, password, confirmPassword } = form.current;
-    console.log(email.value, password.value, confirmPassword.value);
+    const { name, last_name, phone, email, password, confirmPassword } =
+      form.current;
+
+    
     if (
+      (name.value === "") |
+      (last_name.value === "") |
+      (phone.value === "") |
       (email.value === "") |
       (password.value === "") |
       (confirmPassword.value === "")
@@ -27,11 +32,14 @@ export default function CreateAccont() {
       return toast.error("Los campos no pueden estar vacios");
     }
     const { message, isValid } = await register(
+      name.value,
+      last_name.value,
+      phone.value,
       email.value,
       password.value,
       confirmPassword.value
     );
-    if (isValid) toast.success("message");
+    if (isValid) toast.success(message);
     else toast.error(message);
   }
 
@@ -43,6 +51,21 @@ export default function CreateAccont() {
       <div className="login-container">
         <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
         <form ref={form} className="login-container" onSubmit={handleSubmit}>
+          <Input type="name" name="name" variant={"bordered"} label="Nombre" />
+          <Input
+            type="name"
+            name="last_name"
+            variant={"bordered"}
+            label="Apellidos"
+          />
+          <Input
+            type="number"
+            minLength={10}
+            maxLength={10}
+            name="phone"
+            variant={"bordered"}
+            label="Número de teléfono"
+          />
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input
             name="password"
