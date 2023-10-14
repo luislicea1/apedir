@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 export default function ComponenteLugar(props) {
-
+  const navigate = useNavigate();
   const CardStyles = {
     height: "100%",
     maxHeight: "400px" 
@@ -18,7 +19,7 @@ export default function ComponenteLugar(props) {
   }
 
   return (
-    <a href="#">
+    <a onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles} >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
