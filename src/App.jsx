@@ -1,5 +1,4 @@
 import "./App.css";
-import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/router";

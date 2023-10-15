@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/header/Header";
 import Seccion from "../components/Seccion/Seccion";
 import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";

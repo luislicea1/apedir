@@ -20,17 +20,15 @@ export default function CreateAccont() {
     const { name, last_name, phone, email, password, confirmPassword } =
       form.current;
 
-    
+    const isFieldEmpty = (field) => field.value === "";
     if (
-      (name.value === "") |
-      (last_name.value === "") |
-      (phone.value === "") |
-      (email.value === "") |
-      (password.value === "") |
-      (confirmPassword.value === "")
+      [name, last_name, phone, email, password, confirmPassword].some(
+        isFieldEmpty
+      )
     ) {
       return toast.error("Los campos no pueden estar vacios");
     }
+
     const { message, isValid } = await register(
       name.value,
       last_name.value,
@@ -39,8 +37,7 @@ export default function CreateAccont() {
       password.value,
       confirmPassword.value
     );
-    if (isValid) toast.success(message);
-    else toast.error(message);
+    toast[isValid ? "success" : "error"](message);
   }
 
   const btnStyle = {
@@ -65,6 +62,7 @@ export default function CreateAccont() {
             name="phone"
             variant={"bordered"}
             label="Número de teléfono"
+            
           />
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input

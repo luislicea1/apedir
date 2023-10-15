@@ -1,7 +1,7 @@
 import supabase from "./client";
 
 async function signInWithGoogle() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  await supabase.auth.signInWithOAuth({
     provider: "google",
   });
 }
@@ -17,7 +17,7 @@ async function login(email, password) {
       const message = "Email o contraseña incorrectos";
       return { message: message, isValid: false };
     } else {
-      const { d, err } = await supabase
+      await supabase
         .from("profiles")
         .update([
           {
@@ -51,11 +51,19 @@ async function register(
   }
 
   try {
+    let { data: profiles } = await supabase
+      .from("profiles")
+      .select("email")
+      .eq("email", email);
+
+    if (profiles.length > 0) {
+      return { message: "El correo ya existe", isValid: false };
+    }
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) return { message: error.message, isValid: false };
     else {
-      const { d, error } = await supabase
+      await supabase
         .from("profiles")
         .update([
           {
