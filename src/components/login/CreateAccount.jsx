@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Input } from "@nextui-org/react";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
@@ -8,7 +8,7 @@ import { Button } from "@nextui-org/react";
 import { register } from "../../api/auth";
 import { Toaster, toast } from "sonner";
 
-export default function CreateAccont() {
+export default function CreateAccount() {
   const variants = ["flat", "bordered", "underlined", "faded"];
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -62,7 +62,6 @@ export default function CreateAccont() {
             name="phone"
             variant={"bordered"}
             label="Número de teléfono"
-            
           />
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input

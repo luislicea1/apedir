@@ -87,4 +87,25 @@ async function register(
   }
 }
 
-export { signInWithGoogle, login, register };
+const getUserRole = async () => {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (data.session === undefined || data.session === null || error) {
+    return null;
+  }
+
+  let { data: profiles } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("email", data.session.user.email);
+
+  if (error) {
+    console.log(error)
+    return null;
+  }
+  if (profiles[0] !== null && profiles[0] !== undefined) {
+    return profiles[0].role;
+  }
+};
+
+export { signInWithGoogle, login, register, getUserRole };
