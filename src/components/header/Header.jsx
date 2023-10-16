@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
+import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.js";
 
 export default function Header() {
@@ -51,7 +52,7 @@ export default function Header() {
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
+        {/* <NavbarItem>
           <Link color="foreground" href="#">
             Features
           </Link>
@@ -65,10 +66,12 @@ export default function Header() {
           <Link color="foreground" href="#">
             Integrations
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
+        
       </NavbarContent>
-
+      <SelectProvincia></SelectProvincia>
       {session !== null ? (
+        
         <NavbarContent as="div" justify="end">
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
