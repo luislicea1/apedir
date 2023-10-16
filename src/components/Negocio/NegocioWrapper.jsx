@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import Lugar from "./Lugar";
+import Lugar from "./Negocio";
+import Imagen from '../../assets/img/img (1).png'
 
-const LugarWrapper = () => {
+const NegocioWrapper = () => {
   const { nombre,localizacion,numeroPersonas } = useParams();
   
 
@@ -13,4 +14,4 @@ const LugarWrapper = () => {
   return <Lugar nombre={nombre} localizacion={localizacion} numeroPersonas={numeroPersonas} {...propsAdicionales} />;
 };
 
-export default LugarWrapper;
+export default NegocioWrapper;

@@ -14,6 +14,7 @@ export default function Seccion(props){
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        
     }
 
     return(

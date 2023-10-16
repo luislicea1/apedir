@@ -21,3 +21,7 @@ input[type=number] {
     box-sizing: border-box;
 
 }
+
+:root{
+    --primary: "#5E17EB";
+}

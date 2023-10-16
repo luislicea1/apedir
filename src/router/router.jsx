@@ -2,12 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../components/login/Login";
 import CreateAccount from "../components/login/CreateAccount";
-import LugarWrapper from "../components/LugarVista/LugarWrapper";
+import NegocioWrapper from "../components/Negocio/NegocioWrapper";
+import AyudaInformacion from "../pages/AyudaInformacion";
 import {
   RequireUserRole,
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
+
+
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <CreateAccount />,
+  },
+  {
+    path: "/ayuda_e_informacion",
+    element: <AyudaInformacion/>,
   },
   {
     path: "/user",
@@ -48,7 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/lugar/:localizacion/:nombre",
-    element: <LugarWrapper />,
+    element: <NegocioWrapper/>,
   },
 ]);
 

@@ -5,8 +5,8 @@ import router from "./router/router";
 
 function App() {
   return (
-    <NextUIProvider>
-      <RouterProvider router={router} />
+    <NextUIProvider> 
+      <RouterProvider router={router}/>
     </NextUIProvider>
   );
 }

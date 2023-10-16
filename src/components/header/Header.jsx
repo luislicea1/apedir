@@ -18,6 +18,7 @@ import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.js";
 import { getUser } from "../../api/profile.js";
 
+
 export default function Header() {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
@@ -93,18 +94,16 @@ export default function Header() {
                 <p className="font-semibold">Registrado como</p>
                 <p className="font-semibold">{user?.email}</p>
               </DropdownItem>
-              <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
+              {user?.role === 'user' ?  <DropdownItem key="settings">Crear negocio</DropdownItem> : <DropdownItem key="settings">Ver negocio</DropdownItem>}
               <DropdownItem
                 key="analytics"
                 onClick={() => navigate(`/${user.role}`)}
               >
                 Mi rol: {user?.role}
               </DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
+              
               <DropdownItem key="help_and_feedback">
-                Help & Feedback
+                Ayuda e Información
               </DropdownItem>
               <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                 Log Out
