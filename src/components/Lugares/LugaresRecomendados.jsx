@@ -1,10 +1,7 @@
 import imagen1 from "../../assets/img/img (1).jpg";
 import imagen2 from "../../assets/img/img (2).jpg";
 import imagen3 from "../../assets/img/img (3).jpg";
-import imagen4 from "../../assets/img/img (4).jpg";
 import imagen5 from "../../assets/img/img (5).png";
-import imagen6 from "../../assets/img/img (1).jpg";
-import imagen7 from "../../assets/img/lg.jpg";
 
 export const lugaresRecomendados = [
   { nombre: "Club LED", localizacion: "Santiago de Cuba", numeroPersonas: 30, imagen: imagen1 },

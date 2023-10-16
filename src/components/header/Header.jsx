@@ -35,7 +35,6 @@ export default function Header() {
     if (session) {
       setSession(session);
       const { user } = session;
-      console.log(user);
       setUser(user);
     }
   }
