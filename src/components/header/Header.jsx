@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -15,6 +15,7 @@ import {
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.js";
+import { getUser } from "../../api/profile.js";
 
 export default function Header() {
   const [session, setSession] = useState(null);
@@ -29,17 +30,19 @@ export default function Header() {
       return;
     }
   };
-  function handleAuthStateChange(event, session) {
-    
+  async function handleAuthStateChange(event, session) {
     if (session) {
       setSession(session);
-      const { user } = session;
+      const user = await getUser(session.user.email);
       setUser(user);
+    } else {
+      setSession(null);
     }
   }
+
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      handleAuthStateChange
+      async (event, session) => await handleAuthStateChange(event, session)
     );
   }, [navigate]);
 
@@ -79,17 +82,22 @@ export default function Header() {
                 name="Jason Hughes"
                 size="sm"
                 showFallback={true}
-                src={user.user_metadata.avatar_url}
+                src={session.user?.user_metadata?.avatar_url}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">{user.email}</p>
+                <p className="font-semibold">Registrado como</p>
+                <p className="font-semibold">{user?.email}</p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
               <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
+              <DropdownItem
+                key="analytics"
+                onClick={() => navigate(`/${user.role}`)}
+              >
+                Mi rol: {user?.role}
+              </DropdownItem>
               <DropdownItem key="system">System</DropdownItem>
               <DropdownItem key="configurations">Configurations</DropdownItem>
               <DropdownItem key="help_and_feedback">
