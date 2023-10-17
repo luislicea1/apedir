@@ -16,5 +16,9 @@
 }
 
 .logo-img{
-    width: 90%;
+    width: 88%;
+}
+.img-login-container{
+    display: grid;
+    place-items: center;
 }

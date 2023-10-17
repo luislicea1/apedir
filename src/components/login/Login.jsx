@@ -39,7 +39,10 @@ export default function Login() {
   return (
     <div className="contenedor-pt-login">
       <div className="login-container">
-        <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
+        <div className="img-login-container">
+          <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
+        </div>
+        
         <form className="login-container" ref={form} onSubmit={loginSubmit}>
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input
@@ -63,7 +66,8 @@ export default function Login() {
             type={isVisible ? "text" : "password"}
           />
           <Button
-            className="text-white btn-black"
+            color="secondary"
+            className="text-white"
             style={btnStyle}
             type="submit"
           >

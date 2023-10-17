@@ -17,9 +17,9 @@ import { useNavigate } from "react-router-dom";
 import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.js";
 import { getUser } from "../../api/profile.js";
+import ApedirLogoNegro from '../../assets/ApedirLogoNegro.svg'
 
-
-export default function Header() {
+export default function Header(props) {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -51,7 +51,7 @@ export default function Header() {
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
-        <AcmeLogo />
+        <AcmeLogo logo = {ApedirLogoNegro}/>
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -73,6 +73,7 @@ export default function Header() {
         
       </NavbarContent>
       <SelectProvincia></SelectProvincia>
+      
       {session !== null ? (
         
         <NavbarContent as="div" justify="end">
@@ -91,6 +92,7 @@ export default function Header() {
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
+                
                 <p className="font-semibold">Registrado como</p>
                 <p className="font-semibold">{user?.email}</p>
               </DropdownItem>

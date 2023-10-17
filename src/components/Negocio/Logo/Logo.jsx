@@ -1,6 +1,5 @@
 import React from "react";
 import {Avatar} from "@nextui-org/react";
-import LocationIcon from "../../Icons/Location/Location";
 
 export default function Logo(props) {
 
@@ -35,13 +34,7 @@ export default function Logo(props) {
         <Avatar isBordered color="default" src={props.logo} style={avatar}/>
         <div style={tituloContainer}>
             {props.estado === "Abierto" ? <h2 style={green}>Abierto</h2>:<h2 style={red}>Cerrado</h2>}
-            <h2 className="mb-2">{props.nombre}</h2>
-            <div className="flex">
-                <LocationIcon w = "20px"></LocationIcon>
-                <p className="ml-2">{props.localizacion}</p>
-            </div>
-            
-            
+            <h2>{props.nombre}</h2>
         </div>
     </div>
     

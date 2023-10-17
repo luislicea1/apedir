@@ -1,6 +1,6 @@
 import React from "react";
 import {Image} from "@nextui-org/react";
-
+import Imagen22 from "../../../assets/img/img (1).jpg"
 
 export default function PortadaDeNegocio(props) {
 
@@ -8,13 +8,26 @@ export default function PortadaDeNegocio(props) {
     width: "100%",
     height: "500px",
     display: "grid",
-    placeItems: "center"
+    placeItems: "center",
+    background: "#ECECEE",
+    borderRadius: "0 0 40px 40px",
+    position: "relative"
   }
 
   const imagenStyle = {
-   /* width: "100%",*/
+    width: "100%",
     height: "100%",
     objectFit: "cover",
+    //borderRadius: "0 0 20px 20px"
+    // objectFit: "contain",
+  }
+
+  const background ={
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: "30%",
+    background: "linear-gradient(rgba(255, 255, 255, 0),white)"
   }
 
   return (
@@ -22,8 +35,10 @@ export default function PortadaDeNegocio(props) {
         <img
           style={imagenStyle}
           src={props.imagenPortada}
+          objectFit="contain"
+          alt="Card background"
         />
-        
+        <div style={background}></div>
     </div>
     
   );
