@@ -1,6 +1,10 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
+
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+
 import {
   RequireUserRole,
   RequireAdminRole,
@@ -20,7 +24,8 @@ const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <AdminDashboard />,
+    // element: <Home />,
   },
   {
     path: "/login",
@@ -58,9 +63,19 @@ const router = createBrowserRouter([
     path: "/admin",
     element: (
       <RequireAdminRole>
-        <h1>Welcome to protected role admin</h1>
+        <Outlet />
       </RequireAdminRole>
     ),
+    children: [
+      {
+        path: "/admin/role",
+        element: <h1>Welcome to protected role admin</h1>,
+      },
+
+      // { path: "/dashboard", element: <Dashboard /> },
+      // { path: "/settings", element: <Settings /> },
+      // Agrega aquí más rutas hijas según sea necesario
+    ],
   },
   {
     path: "/merchant",
