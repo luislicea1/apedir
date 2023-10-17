@@ -7,18 +7,6 @@ import Imagen5 from "../../assets/comidas/comida (6).png";
 import Imagen6 from "../../assets/comidas/comida (7).png";
 import Imagen7 from "../../assets/comidas/comida (8).png";
 import Imagen8 from "../../assets/comidas/comida (9).png";
-import Imagen9 from "../../assets/comidas/comida (10).png";
-
-import Imagen10 from "../../assets/comidas/comida (11).png";
-import Imagen11 from "../../assets/comidas/comida (12).png";
-import Imagen12 from "../../assets/comidas/comida (13).png";
-import Imagen13 from "../../assets/comidas/comida (14).png";
-import Imagen14 from "../../assets/comidas/comida (15).png";
-import Imagen15 from "../../assets/comidas/comida (16).png";
-import Imagen16 from "../../assets/comidas/comida (16).png";
-import Imagen17 from "../../assets/comidas/comida (17).png";
-import Imagen18 from "../../assets/comidas/comida (18).png";
-
 
   export const comidas = [
     {
@@ -66,42 +54,42 @@ import Imagen18 from "../../assets/comidas/comida (18).png";
   export const desayuno= [
     {
       title: "Orange",
-      img: Imagen9,
+      img: Imagen22,
       price: "$5.50",
     },
     {
       title: "Tangerine",
-      img: Imagen10,
+      img: Imagen2,
       price: "$3.00",
     },
     {
       title: "Raspberry",
-      img: Imagen11,
+      img: Imagen3,
       price: "$10.00",
     },
     {
       title: "Lemon",
-      img: Imagen12,
+      img: Imagen4,
       price: "$5.30",
     },
     {
       title: "Avocado",
-      img: Imagen13,
+      img: Imagen5,
       price: "$15.70",
     },
     {
       title: "Lemon 2",
-      img: Imagen14,
+      img: Imagen6,
       price: "$8.00",
     },
     {
       title: "Banana",
-      img: Imagen15,
+      img: Imagen7,
       price: "$7.50",
     },
     {
       title: "Watermelon",
-      img: Imagen16,
+      img: Imagen8,
       price: "$12.20",
     },
   ];
