@@ -2,20 +2,13 @@ import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import {NegocioLogo} from "./NegocioLogo.jsx";
 import Izquierda from "../../Icons/Angulo/izquierda.jsx";
+import AbiertoCerrado from "./AbiertoCerrado.jsx";
+
 
 export default function HeaderNegocio(props) {
-    const green = {
-        color: "green"
-    }
-
-    const red = {
-        color: "red"
-    }
-
     const style = {
         marginLeft: "30px"
     }
-
   return (
     <Navbar>
       <NavbarBrand>
@@ -24,11 +17,11 @@ export default function HeaderNegocio(props) {
         <NegocioLogo logo = {props.logo}/>
         <div className="ml-2" style={style}>
             <p className="font-bold text-inherit">{props.nombre}</p>
-            {props.estado === "Abierto" ? <h2 style={green}>Abierto</h2>:<h2 style={red}>Cerrado</h2>}
+            <AbiertoCerrado></AbiertoCerrado>
         </div>
        
       </NavbarBrand>
-
+      
       
 
       <NavbarContent as="div" justify="end">

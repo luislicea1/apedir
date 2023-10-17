@@ -14,7 +14,7 @@ export default function Contact(props) {
   return (
    <>
     <div id="props.titulo" style={style} className="mb-2">
-        <h2 style={fuente}> {props.title}</h2>
+        <h2 style={fuente} id="contact"> {props.title}</h2>
     </div>
     <IconosNegocio></IconosNegocio>
    </>

@@ -7,6 +7,7 @@ export default function ListadoProductos(props) {
   const list = props.lista
 
   const listContainer = {
+    
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3,1fr)",
