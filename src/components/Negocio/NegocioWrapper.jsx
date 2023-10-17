@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Lugar from "./Negocio";
+import Negocio from "./Negocio";
 import Imagen from '../../assets/img/img (1).png'
 
 const NegocioWrapper = () => {
@@ -11,7 +11,7 @@ const NegocioWrapper = () => {
     // Agrega aquí los props adicionales que quieras pasar a Lugar
   };
 
-  return <Lugar nombre={nombre} localizacion={localizacion} numeroPersonas={numeroPersonas} {...propsAdicionales} />;
+  return <Negocio nombre={nombre} localizacion={localizacion} numeroPersonas={numeroPersonas} {...propsAdicionales} />;
 };
 
 export default NegocioWrapper;

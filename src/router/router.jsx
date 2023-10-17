@@ -6,6 +6,8 @@ import {
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
+import {CircularProgress} from "@nextui-org/react";
+import verEventoWrapper from "../components/VisualizadorContenido/verEventoWrapper";
 
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
@@ -15,6 +17,11 @@ const LazyCreateAccount = lazy(() =>
 const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
+
+const LazyverEventoWrapper = lazy(() =>
+  import("../components/VisualizadorContenido/verEventoWrapper")
+);
+
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
 const router = createBrowserRouter([
@@ -25,7 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyLogin />
       </Suspense>
     ),
@@ -33,7 +40,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyCreateAccount />
       </Suspense>
     ),
@@ -41,7 +48,7 @@ const router = createBrowserRouter([
   {
     path: "/ayuda_e_informacion",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyAyudaInformacion />
       </Suspense>
     ),
@@ -73,8 +80,16 @@ const router = createBrowserRouter([
   {
     path: "/lugar/:localizacion/:nombre",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyNegocioWrapper />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/evento/:nombre",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <LazyverEventoWrapper />
       </Suspense>
     ),
   },
