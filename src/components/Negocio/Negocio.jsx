@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import Imagen from "../../assets/fondo/restaurant.jpg";
 import LogoImg from "../../assets/img/img (1).png";
 import PortadaDeNegocio from "./PortadaDeNegocio/portadaNegocio";
-import Logo from "./Logo/Logo";
 import HeaderNegocio from "./HeaderNegocio/HeaderNegocio";
 import DescripcionNegocio from "./Descripcion/Descripcion";
 import TituloNegocio from "./TituloNegocio/TituloNegocio";
@@ -53,7 +52,7 @@ export default function Negocio({ nombre, localizacion }) {
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={sectionStyle}>
-        <HeaderNegocio logo={LogoImg} nombre={nombre}></HeaderNegocio>
+        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"}></HeaderNegocio>
         
         <section className="section" style={sectionStyle}>
           <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>

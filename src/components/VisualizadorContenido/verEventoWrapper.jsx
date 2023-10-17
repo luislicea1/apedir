@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
-import verEvento from "./verEvento";
-import Imagen from '../../assets/img/img (1).png'
+import VerEvento from "./verEvento";
+
 
 const verEventoWrapper = () => {
   const { nombre,localizacion,numeroPersonas } = useParams();
   
   const propsAdicionales = {
-   
+    
   };
 
-  return <verEvento nombre={nombre} localizacion={localizacion} numeroPersonas={numeroPersonas} {...propsAdicionales} />;
+  return <VerEvento nombre={nombre} />;
 };
 
 export default verEventoWrapper;

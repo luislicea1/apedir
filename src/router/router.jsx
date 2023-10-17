@@ -7,7 +7,6 @@ import {
   RequireMerchantRole,
 } from "../components/ProtectRole";
 import {CircularProgress} from "@nextui-org/react";
-import verEventoWrapper from "../components/VisualizadorContenido/verEventoWrapper";
 
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
@@ -18,7 +17,7 @@ const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
 
-const LazyverEventoWrapper = lazy(() =>
+const LazyVerEventoWrapper = lazy(() =>
   import("../components/VisualizadorContenido/verEventoWrapper")
 );
 
@@ -89,7 +88,7 @@ const router = createBrowserRouter([
     path: "/evento/:nombre",
     element: (
       <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
-        <LazyverEventoWrapper />
+        <LazyVerEventoWrapper />
       </Suspense>
     ),
   },
