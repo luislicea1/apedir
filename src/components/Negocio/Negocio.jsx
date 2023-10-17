@@ -13,13 +13,6 @@ import Contact from "./Contact/Contact";
 import { comidas } from "../Lugares/Comidas";
 import { desayuno } from "../Lugares/Comidas";
 
-const containerStyle = {
-  marginTop: "0px",
-  width: "100vw",
-  display: "flex",
-  justifyContent: "center",
-};
-
 const sectionStyle = {
   width: "100%",
   maxWidth: "735px",
@@ -32,8 +25,8 @@ const text =
 
 export default function Negocio({ nombre, localizacion }) {
   return (
-    <div style={containerStyle} >
-      <section style={sectionStyle}>
+    <div className = "container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+      <section style={sectionStyle} >
         <HeaderNegocio logo={LogoImg} nombre={nombre}></HeaderNegocio>
 
         <section className="section" style={sectionStyle}>
@@ -58,3 +51,5 @@ Negocio.propTypes = {
   nombre: PropTypes.string.isRequired,
   localizacion: PropTypes.string.isRequired,
 };
+
+

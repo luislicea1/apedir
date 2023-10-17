@@ -3,16 +3,22 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 export default function Producto(props){
     const CardStyles = {
         height: "100%",
-        maxHeight: "400px",
+        //minHeight: "300px",
+        maxHeight: "500px",
       };
       const ImgCardStyle = {
+        width: "100%",
         height: "100%",
         display: "grid",
         placeItems: "center",
+        aspectRatio: "16 / 9", 
       };
       const ImgStyle = {
-        maxHeight: "200px",
-        borderRadius: "20px",
+        width: "100%",
+        height: "100%",
+        maxHeight: "400px",
+        borderRadius: "10px",
+        
       };
     return(
         <Card
@@ -21,6 +27,7 @@ export default function Producto(props){
           isPressable
           onPress={() => console.log("item pressed")}
           style={CardStyles}
+          className="producto-card"
         >
           <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
             <Image
