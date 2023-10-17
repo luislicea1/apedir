@@ -32,7 +32,7 @@ const text =
 
 export default function Negocio({ nombre, localizacion }) {
   return (
-    <div style={containerStyle} >
+    <div style={containerStyle}>
       <section style={sectionStyle}>
         <HeaderNegocio logo={LogoImg} nombre={nombre}></HeaderNegocio>
 
@@ -41,13 +41,18 @@ export default function Negocio({ nombre, localizacion }) {
           <div className="p-2 m-2">
             <TituloNegocio title={nombre}></TituloNegocio>
             <DescripcionNegocio descripcion={text}></DescripcionNegocio>
-           
-            <Promo seguidores = {300} productos = {200} lesGusta={1200}></Promo>
-            <ListadoProductos title = "Desayuno" lista = {desayuno}></ListadoProductos>
-            <ListadoProductos title = "Comidas" lista = {comidas}></ListadoProductos>
+
+            <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
+            <ListadoProductos
+              title="Desayuno"
+              lista={desayuno}
+            ></ListadoProductos>
+            <ListadoProductos
+              title="Comidas"
+              lista={comidas}
+            ></ListadoProductos>
             <Contact title="Contactenos"></Contact>
           </div>
-          
         </section>
       </section>
     </div>
