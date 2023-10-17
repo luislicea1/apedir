@@ -3,7 +3,6 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
   Link,
   DropdownItem,
   DropdownTrigger,
@@ -17,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.js";
 import { getUser } from "../../api/profile.js";
-import ApedirLogoNegro from '../../assets/ApedirLogoNegro.svg'
+import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 
 export default function Header(props) {
   const [session, setSession] = useState(null);
@@ -51,7 +50,7 @@ export default function Header(props) {
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
-        <AcmeLogo logo = {ApedirLogoNegro}/>
+        <AcmeLogo logo={ApedirLogoNegro} />
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -70,12 +69,10 @@ export default function Header(props) {
             Integrations
           </Link>
         </NavbarItem> */}
-        
       </NavbarContent>
       <SelectProvincia></SelectProvincia>
-      
+
       {session !== null ? (
-        
         <NavbarContent as="div" justify="end">
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
@@ -92,18 +89,21 @@ export default function Header(props) {
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
-                
                 <p className="font-semibold">Registrado como</p>
                 <p className="font-semibold">{user?.email}</p>
               </DropdownItem>
-              {user?.role === 'user' ?  <DropdownItem key="settings">Crear negocio</DropdownItem> : <DropdownItem key="settings">Ver negocio</DropdownItem>}
+              {user?.role === "user" ? (
+                <DropdownItem key="settings">Crear negocio</DropdownItem>
+              ) : (
+                <DropdownItem key="settings">Ver negocio</DropdownItem>
+              )}
               <DropdownItem
                 key="analytics"
                 onClick={() => navigate(`/${user.role}`)}
               >
                 Mi rol: {user?.role}
               </DropdownItem>
-              
+
               <DropdownItem key="help_and_feedback">
                 Ayuda e Información
               </DropdownItem>

@@ -1,16 +1,21 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
-import Login from "../components/login/Login";
-import CreateAccount from "../components/login/CreateAccount";
-import NegocioWrapper from "../components/Negocio/NegocioWrapper";
-import AyudaInformacion from "../pages/AyudaInformacion";
 import {
   RequireUserRole,
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
 
-
+// Utilizando lazy para importar los componentes diferidos
+const LazyLogin = lazy(() => import("../components/login/Login"));
+const LazyCreateAccount = lazy(() =>
+  import("../components/login/CreateAccount")
+);
+const LazyNegocioWrapper = lazy(() =>
+  import("../components/Negocio/NegocioWrapper")
+);
+const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
 const router = createBrowserRouter([
   {
@@ -19,15 +24,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyLogin />
+      </Suspense>
+    ),
   },
   {
     path: "/register",
-    element: <CreateAccount />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyCreateAccount />
+      </Suspense>
+    ),
   },
   {
     path: "/ayuda_e_informacion",
-    element: <AyudaInformacion/>,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyAyudaInformacion />
+      </Suspense>
+    ),
   },
   {
     path: "/user",
@@ -55,7 +72,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/lugar/:localizacion/:nombre",
-    element: <NegocioWrapper/>,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyNegocioWrapper />
+      </Suspense>
+    ),
   },
 ]);
 
