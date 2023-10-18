@@ -8,7 +8,6 @@ import {
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
-import Example from "../pages/Example";
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
 const LazyCreateAccount = lazy(() =>
@@ -24,8 +23,7 @@ const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <Home />,
-    element: <Example/>
+    element: <Home />,
   },
   {
     path: "/login",
