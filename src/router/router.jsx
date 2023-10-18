@@ -95,15 +95,23 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/lugar/:localizacion/:nombre",
+    path: "/lugar",
     element: (
       <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
-        <LazyNegocioWrapper />
+        <Outlet />
       </Suspense>
     ),
     children: [
       {
-        path: "/producto/:title",
+        path: ":localizacion/:nombre/",
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <LazyNegocioWrapper />
+          </Suspense>
+        ),
+      },
+      {
+        path: ":localizacion/:nombre/producto/:title",
         element: (
           <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
             <LazyVisualizarProductoWrapper />

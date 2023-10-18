@@ -1,10 +1,3 @@
-
-
-export default function VisualizarProducto({nombre}){
-    return(
-        <p>
-            {nombre}
-        </p>
-    );
+export default function VisualizarProducto({ nombre }) {
+  return <h1>{nombre}</h1>;
 }
-
