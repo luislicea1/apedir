@@ -27,6 +27,8 @@ export default function ListadoProductos(props) {
             img={item.img}
             price={item.price}
             title={item.title}
+            nombre = {props.nombre}
+            localizacion = {props.localizacion}
           ></Producto>
         ))}
       </div>

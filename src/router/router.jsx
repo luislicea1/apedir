@@ -21,6 +21,10 @@ const LazyVerEventoWrapper = lazy(() =>
   import("../components/VisualizadorContenido/verEventoWrapper")
 );
 
+const LazyVisualizarProductoWrapper = lazy(() =>
+  import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
+);
+
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
 const router = createBrowserRouter([
@@ -83,6 +87,16 @@ const router = createBrowserRouter([
         <LazyNegocioWrapper />
       </Suspense>
     ),
+    children: [
+      {
+        path: "/lugar/:localizacion/:nombre/producto/:title",
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <LazyVisualizarProductoWrapper />
+          </Suspense>
+        ),
+      },
+    ],
   },
   {
     path: "/evento/:nombre",

@@ -1,6 +1,9 @@
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Producto(props){
+  const navigate = useNavigate();
     const CardStyles = {
         height: "100%",
         //minHeight: "300px",
@@ -21,6 +24,7 @@ export default function Producto(props){
         
       };
     return(
+      <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}/producto/${props.title}`)}>
         <Card
           shadow="sm"
           key={props.index}
@@ -44,5 +48,7 @@ export default function Producto(props){
             <p className="text-default-500">{props.price}</p>
           </CardFooter>
         </Card>
+
+      </Link>
     );
 }

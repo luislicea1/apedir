@@ -57,6 +57,7 @@ export default function HeaderNegocio(props) {
             <p className="font-bold text-inherit">{props.nombre}</p>
             {props.horario === "si"?<AbiertoCerrado></AbiertoCerrado>:null}
             
+            
           </div>
         </NavbarBrand>
 

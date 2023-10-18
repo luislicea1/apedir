@@ -14,16 +14,23 @@ export default function AbiertoCerrado(){
     useEffect(() => {
       const actualizarEstatus = () => {
         const dia = new Date().getDay();
-        const hora = new Date().getHours() + ":" + new Date().getMinutes();
+        const horaActual = new Date();
         const diaSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"][dia];
         const [horaApertura, horaCierre] = horarios[diaSemana];
         
         if (horaApertura === "cerrado" || horaCierre === "cerrado") {
           setEstaAbierto(false);
-        } else if (hora >= horaApertura && hora <= horaCierre) {
-          setEstaAbierto(true);
         } else {
-          setEstaAbierto(false);
+          const horaAperturaObj = new Date();
+          horaAperturaObj.setHours(parseInt(horaApertura.split(":")[0]), parseInt(horaApertura.split(":")[1]));
+          const horaCierreObj = new Date();
+          horaCierreObj.setHours(parseInt(horaCierre.split(":")[0]), parseInt(horaCierre.split(":")[1]));
+          
+          if (horaActual >= horaAperturaObj && horaActual <= horaCierreObj) {
+            setEstaAbierto(true);
+          } else {
+            setEstaAbierto(false);
+          }
         }
       };
       

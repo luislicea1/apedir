@@ -64,6 +64,8 @@ export default function Negocio({ nombre, localizacion }) {
             <div className="first-product-list"></div>
             <ListadoProductos
               title="Desayuno"
+              nombre = {nombre}
+              localizacion = {localizacion}
               lista={desayuno}
             ></ListadoProductos>
             <ListadoProductos
