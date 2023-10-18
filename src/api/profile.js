@@ -30,4 +30,13 @@ const getUser = async (email) => {
   }
 };
 
-export { getRole, getUser };
+const getUsers = async () => {
+  let { data: profiles, error } = await supabase.from("profiles").select("*");
+  if (error) {
+    console.log(error);
+    return null;
+  }
+  return profiles;
+};
+
+export { getRole, getUser, getUsers };

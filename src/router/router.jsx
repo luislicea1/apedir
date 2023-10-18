@@ -3,14 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 
-import AdminDashboard from "../pages/Admin/AdminDashboard";
-
 import {
   RequireUserRole,
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
-
+import Example from "../pages/Example";
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
 const LazyCreateAccount = lazy(() =>
@@ -21,11 +19,13 @@ const LazyNegocioWrapper = lazy(() =>
 );
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
+const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AdminDashboard />,
     // element: <Home />,
+    element: <Example/>
   },
   {
     path: "/login",
@@ -68,8 +68,8 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/admin/role",
-        element: <h1>Welcome to protected role admin</h1>,
+        path: "/admin/",
+        element: <AdminDashboard />,
       },
 
       // { path: "/dashboard", element: <Dashboard /> },

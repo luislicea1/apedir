@@ -11,6 +11,8 @@ import {
   Button,
 } from "@nextui-org/react";
 import { HamburguerBtnMenu } from "./HamburgerBtnMenu.jsx";
+import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
+import { AcmeLogo } from "../header/AcmeLogo.jsx";
 
 export default function AdminNavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,34 +33,36 @@ export default function AdminNavBar() {
   }, []);
 
   const menuItems = [
-    "Profile",
     "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Log Out",
+    "Usuarios",
+    "Comercios",
+    "Planes",
   ];
 
+  const style = {
+    display: "flex",
+    justifyContent: "center",
+  };
   const navBar = (
-    <Navbar>
-      <NavbarContent className="flex" justify="start">
-        <NavbarBrand>
-          <p className="font-bold text-inherit">ACME</p>
-        </NavbarBrand>
-        <NavbarContent className="flex">
-          {menuItems.map((item, index) => (
-            <NavbarItem key={index}>
-              <Link color="primary" href="#">
-                {item}
-              </Link>
-            </NavbarItem>
-          ))}
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem className="flex">
-            <Link href="#">Login</Link>
+    <Navbar style={style}>
+      <NavbarBrand>
+        <AcmeLogo className="text-inherit" logo={ApedirLogoNegro} />
+      </NavbarBrand>
+      <NavbarContent className="flex">
+        {menuItems.map((item, index) => (
+          <NavbarItem key={index}>
+            <Link color="secondary" href="#">
+              {item}
+            </Link>
           </NavbarItem>
-        </NavbarContent>
+        ))}
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem className="flex">
+          <Link color="secondary" href="#">
+            Login
+          </Link>
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
