@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -18,8 +17,23 @@ input[type=number] {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 :root{
     --primary: "#5E17EB";
 }
+
+/* Ocultar barra de desplazamiento para Chrome, Safari y Opera */
+.list-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ocultar barra de desplazamiento para IE, Edge y Firefox */
+.list-container {
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
+    position:  static;
+}
+

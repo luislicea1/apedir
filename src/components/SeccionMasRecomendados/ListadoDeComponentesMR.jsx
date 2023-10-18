@@ -2,8 +2,6 @@ import React from "react";
 import '../Seccion/seccion.css'
 import ComponenteMR from "./ComponenteMR";
 
-
-
 export default function ListadoDeComponentesMR(props) {
     const listContainer = {
         width: "100%",

@@ -8,6 +8,8 @@ import {
   RequireAdminRole,
   RequireMerchantRole,
 } from "../components/ProtectRole";
+import { CircularProgress } from "@nextui-org/react";
+
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
 const LazyCreateAccount = lazy(() =>
@@ -16,6 +18,15 @@ const LazyCreateAccount = lazy(() =>
 const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
+
+const LazyVerEventoWrapper = lazy(() =>
+  import("../components/VisualizadorContenido/verEventoWrapper")
+);
+
+const LazyVisualizarProductoWrapper = lazy(() =>
+  import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
+);
+
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
 const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
@@ -28,7 +39,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyLogin />
       </Suspense>
     ),
@@ -36,7 +47,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyCreateAccount />
       </Suspense>
     ),
@@ -44,7 +55,7 @@ const router = createBrowserRouter([
   {
     path: "/ayuda_e_informacion",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyAyudaInformacion />
       </Suspense>
     ),
@@ -86,8 +97,26 @@ const router = createBrowserRouter([
   {
     path: "/lugar/:localizacion/:nombre",
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyNegocioWrapper />
+      </Suspense>
+    ),
+    children: [
+      {
+        path: "/producto/:title",
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <LazyVisualizarProductoWrapper />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/evento/:nombre",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <LazyVerEventoWrapper />
       </Suspense>
     ),
   },
