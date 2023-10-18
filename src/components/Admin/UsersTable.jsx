@@ -18,13 +18,12 @@ import {
   ModalBody,
   ModalFooter,
   // useDisclosure,
-  Checkbox,
-  Link,
 } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 import dateConverter from "../../utils/dateConverter";
+import UserRoleDropDown from "./UserRoleDropDown";
 const roleColorMap = {
   admin: "danger",
   user: "success",
@@ -100,6 +99,7 @@ export default function UsersTable({ users }) {
   const [selectedUser, setSelectedUser] = React.useState(null);
 
   const openModal = (user) => {
+    
     setSelectedUser(user);
   };
 
@@ -147,11 +147,11 @@ export default function UsersTable({ users }) {
         );
       case "actions":
         return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Edit user" >
+          <div className="relative flex items-center  gap-2">
+            <Tooltip content="Edit user">
               <span
                 className="text-lg text-default-500 cursor-pointer active:opacity-50"
-                onClick={openModal}
+                onClick={() => openModal(user)}
               >
                 <EditIcon />
               </span>
@@ -201,7 +201,7 @@ export default function UsersTable({ users }) {
 
   const topContent = React.useMemo(() => {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 justify-center">
         <div className="flex justify-between gap-3 items-start">
           <Input
             isClearable
@@ -252,8 +252,9 @@ export default function UsersTable({ users }) {
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
         </span>
         <Pagination
-          isCompact
-          showControls
+          className="text-white"
+          // isCompact
+          // showControls
           showShadow
           color="secondary"
           page={page}
@@ -315,7 +316,9 @@ export default function UsersTable({ users }) {
           {(item) => (
             <TableRow key={item.id}>
               {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
+                <TableCell align="center">
+                  {renderCell(item, columnKey)}
+                </TableCell>
               )}
             </TableRow>
           )}
@@ -324,6 +327,7 @@ export default function UsersTable({ users }) {
 
       {selectedUser && (
         <Modal
+          backdrop="blur"
           isOpen={!!selectedUser}
           onOpenChange={closeModal}
           placement="top-center"
@@ -332,7 +336,7 @@ export default function UsersTable({ users }) {
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
-                  Log in
+                  Editar a {selectedUser.name}
                 </ModalHeader>
                 <ModalBody>
                   <Input
@@ -347,25 +351,14 @@ export default function UsersTable({ users }) {
                     type="password"
                     variant="bordered"
                   />
-                  <div className="flex py-2 px-1 justify-between">
-                    <Checkbox
-                      classNames={{
-                        label: "text-small",
-                      }}
-                    >
-                      Remember me
-                    </Checkbox>
-                    <Link color="primary" href="#" size="sm">
-                      Forgot password?
-                    </Link>
-                  </div>
+                  <UserRoleDropDown role={selectedUser.role}/>
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Cerrar
                   </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Iniciar sesión
+                  <Button className="text-white" color="secondary" onPress={onClose}>
+                    Editar
                   </Button>
                 </ModalFooter>
               </>
