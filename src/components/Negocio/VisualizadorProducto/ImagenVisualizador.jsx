@@ -4,6 +4,7 @@ export default function ImagenVisualizador(props){
     const img = {
         height: "100%",
         width: "100%",
+        borderRadius: "0px",
         objectFit: "contain",
       };
     
@@ -12,7 +13,7 @@ export default function ImagenVisualizador(props){
         height: "50vh",
         maxHeight: "50vh",
         display: "grid",
-        placeItems: "center",
+        placeItems: "start",
       };
       return (
         <div style={center}>

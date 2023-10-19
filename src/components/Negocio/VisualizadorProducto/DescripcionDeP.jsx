@@ -1,14 +1,16 @@
+
+import { Button } from "@nextui-org/react"
+
 export default function DescripcionDeP(props){
 
     const glass = {
         width: "90%",
-        marginTop: "20px",
         position: "absolute",
         bottom: "0px",
-        height: "30vh",
+        height: "32vh",
         background: "rgba(150, 156, 161, 0.411)",
         borderRadius: "20px",
-        marginBottom: "5%",
+        marginBottom: "3%",
         padding: "10px",
         zIndex: "1000",
         border: "gray 1px solid"
@@ -20,10 +22,25 @@ export default function DescripcionDeP(props){
         color: "white",
         textAlign: "center"
     }
+    const centertext = {
+        display: "grid",
+        placeItems: "center",
+        width: "100%",
+        color: "white",
+        textAlign: "center",
+        height: "15vh",
+        overflowY: "scroll"
+    }
     const title ={
-        color: "#69E4AF",
+        color: "#FFD600",
         fontWeight: "bold",
         fontSize: "30px"
+    }
+
+    const btn = {
+        marginTop: "15px",
+        width: "95%",
+        
     }
 
     return(
@@ -31,9 +48,11 @@ export default function DescripcionDeP(props){
             <div style={center}>
                 <h2 style={title}>{props.title}</h2>
             </div>
-            <div style={center}>
+            <div style={centertext}>
                 <article>{props.text}</article>
             </div>
+
+            <Button color="primary" style={btn}>Pedir</Button>
         </div>
     )
 }

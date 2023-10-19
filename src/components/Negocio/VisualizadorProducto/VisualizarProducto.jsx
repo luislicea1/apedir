@@ -2,7 +2,7 @@ import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
 import LogoImg from "../../../assets/img/img (1).png";
 import { useState, useEffect } from "react";
 import Imagen from "../../../assets/img/img (2).png";
-//import Imagen from "../../../assets/comidas/comida (3).png";
+//import Imagen from "../../../assets/comidas/comida (5).png";
 import ImagenVisualizador from "./ImagenVisualizador";
 import "./visualizarProducto.css"
 import DescripcionDeP from "./DescripcionDeP";
@@ -10,6 +10,7 @@ import PromoProducto from "./PromoProducto";
 import OrdenarProducto from "./OrdenarProducto"
 
 const sectionStyle = {
+  
   width: "100%",
   maxWidth: "450px",
   display: "flex",
@@ -28,12 +29,24 @@ const sectionDescription = {
   justifyContent: "center",
   
 }
+const marginTop = {
+  //marginTop: "60px"
+}
+
+const degradado = {
+  width: "100%",
+  position: "absolute",
+  bottom: "30vh",
+  height: "50vh",
+  zIndex : "30",
+  background: "linear-gradient(#0e141700,#0E1417)"
+}
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iuret.";
 
 
-export default function VisualizarProducto({ nombre , title}) {
+export default function VisualizarProducto({ nombre , title, localizacion}) {
   
   const top = {
     top: "300px",
@@ -43,16 +56,16 @@ export default function VisualizarProducto({ nombre , title}) {
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={sectionStyle}>
-        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"}></HeaderNegocio>
+        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"} anterior = {`/lugar/${localizacion}/${nombre}`}></HeaderNegocio>
         
-        <section  >
+        <section  style={marginTop}>
           <ImagenVisualizador image = {Imagen}></ImagenVisualizador>
           <div style = {sectionDescription}>
-          <DescripcionDeP title={title} text = {text}></DescripcionDeP>
-          <PromoProducto title={title}></PromoProducto>
-          <OrdenarProducto></OrdenarProducto>
+            <DescripcionDeP title={title} text = {text}></DescripcionDeP>
+            <PromoProducto title={title}></PromoProducto>
+            <OrdenarProducto></OrdenarProducto>
           </div>
-         
+          <div style={degradado}></div>
         </section>
       </section>
     </div>
