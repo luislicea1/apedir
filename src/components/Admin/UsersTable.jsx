@@ -17,6 +17,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  useDisclosure,
+  user,
   // useDisclosure,
 } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
@@ -24,6 +26,8 @@ import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 import dateConverter from "../../utils/dateConverter";
 import UserRoleDropDown from "./UserRoleDropDown";
+import ActiveDropdw from "./ActiveDropdw";
+import { deleteProfile, updateProfile } from "../../api/profile";
 const roleColorMap = {
   admin: "danger",
   user: "success",
@@ -99,12 +103,44 @@ export default function UsersTable({ users }) {
   const [selectedUser, setSelectedUser] = React.useState(null);
 
   const openModal = (user) => {
-    
     setSelectedUser(user);
+    setEditedUser({ ...editedUser, id: user.id });
   };
 
   const closeModal = () => {
     setSelectedUser(null);
+  };
+
+  const [editedUser, setEditedUser] = React.useState({
+    id: "",
+    name: "",
+    last_name: "",
+    phone_number: "",
+    role: "",
+    isActive: "",
+  });
+
+  const handleEditClick = async () => {
+    await updateProfile(editedUser);
+    console.log(editedUser);
+
+    setEditedUser({
+      id: "",
+      name: "",
+      last_name: "",
+      phone_number: "",
+      role: "",
+      isActive: "",
+    });
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userToDelete, setUserToDelete] = React.useState(null);
+
+  const deleteUser = (user) => {
+    // console.log(user)
+    setUserToDelete(user);
+    onOpen();
   };
 
   const renderCell = React.useCallback((user, columnKey) => {
@@ -116,7 +152,7 @@ export default function UsersTable({ users }) {
           <User
             avatarProps={{ radius: "lg", src: user.avatar }}
             description={user.email}
-            name={cellValue}
+            name={cellValue + " " + user.last_name}
           >
             {user.email}
           </User>
@@ -157,7 +193,10 @@ export default function UsersTable({ users }) {
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+                onClick={() => deleteUser(user)}
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -324,7 +363,35 @@ export default function UsersTable({ users }) {
           )}
         </TableBody>
       </Table>
-
+      {isOpen && (
+        <Modal isOpen={isOpen} onOpenChange={onClose}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader>Eliminar a {userToDelete.name}</ModalHeader>
+                <ModalBody>
+                  ¿Estás seguro de que quieres eliminar al usuario{" "}
+                  {userToDelete.name}?
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="flat" onPress={onClose}>
+                    Cancelar
+                  </Button>
+                  <Button
+                    color="primary"
+                    onPress={async () => {
+                      await deleteProfile(userToDelete.id);
+                      onClose();
+                    }}
+                  >
+                    Eliminar
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      )}
       {selectedUser && (
         <Modal
           backdrop="blur"
@@ -339,25 +406,108 @@ export default function UsersTable({ users }) {
                   Editar a {selectedUser.name}
                 </ModalHeader>
                 <ModalBody>
-                  <Input
-                    autoFocus
-                    label="Email"
-                    placeholder="Enter your email"
-                    variant="bordered"
-                  />
-                  <Input
-                    label="Password"
-                    placeholder="Enter your password"
-                    type="password"
-                    variant="bordered"
-                  />
-                  <UserRoleDropDown role={selectedUser.role}/>
+                  <form action="submit">
+                    <Input
+                      autoFocus
+                      label="Nombre"
+                      placeholder="Escribe el nuevo nombre"
+                      variant="bordered"
+                      type="text"
+                      value={
+                        editedUser.name !== ""
+                          ? editedUser.name
+                          : selectedUser.name
+                      }
+                      onChange={(e) =>
+                        setEditedUser({ ...editedUser, name: e.target.value })
+                      }
+                    />
+                    <br />
+                    <Input
+                      autoFocus
+                      label="Apellido"
+                      placeholder="Escribe los nuevos apellidos"
+                      variant="bordered"
+                      type="text"
+                      value={
+                        editedUser.last_name !== ""
+                          ? editedUser.last_name
+                          : selectedUser.last_name
+                      }
+                      onChange={(e) =>
+                        setEditedUser({
+                          ...editedUser,
+                          last_name: e.target.value,
+                        })
+                      }
+                    />
+                    <br />
+                    <Input
+                      label="Teléfono"
+                      placeholder="Escribe el nuevo número"
+                      type="number"
+                      variant="bordered"
+                      value={
+                        editedUser.phone_number !== ""
+                          ? editedUser.phone_number
+                          : selectedUser.phone_number
+                      }
+                      onChange={(e) =>
+                        setEditedUser({
+                          ...editedUser,
+                          phone_number: e.target.value,
+                        })
+                      }
+                    />
+                    <br />
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <div style={{ width: "50%" }}>
+                        <span className="w-[30%] text-small text-default-400">
+                          Selecciona el rol{" "}
+                        </span>
+                        <br />
+                        <UserRoleDropDown
+                          role={
+                            editedUser.role !== ""
+                              ? editedUser.role
+                              : selectedUser.role
+                          }
+                          onChange={(value) =>
+                            setEditedUser({ ...editedUser, role: value })
+                          }
+                        />
+                      </div>
+                      <div style={{ width: "50%" }}>
+                        <span className="w-[30%] text-small text-default-400">
+                          Selecciona el estado
+                        </span>
+                        <br />
+                        <ActiveDropdw
+                          isActive={selectedUser.isActive}
+                          onChange={(value) => {
+                            console.log(value);
+                            setEditedUser({
+                              ...editedUser,
+                              isActive: value === "active" ? true : false,
+                            });
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </form>
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Cerrar
                   </Button>
-                  <Button className="text-white" color="secondary" onPress={onClose}>
+                  <Button
+                    className="text-white"
+                    color="secondary"
+                    onPress={() => {
+                      handleEditClick();
+                      onClose();
+                    }}
+                  >
                     Editar
                   </Button>
                 </ModalFooter>

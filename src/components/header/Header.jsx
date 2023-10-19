@@ -22,6 +22,7 @@ export default function Header(props) {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [channel, setChannel] = useState(null);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -31,18 +32,39 @@ export default function Header(props) {
       return;
     }
   };
+
   async function handleAuthStateChange(event, session) {
     if (session) {
       setSession(session);
       const user = await getUser(session.user.email);
       setUser(user);
+
+      // Suscribirse a los cambios en la tabla "profiles"
+      const channel = supabase
+        .channel("schema-db-changes")
+        .on(
+          "postgres_changes",
+          {
+            event: "UPDATE",
+            schema: "public",
+            table: "profiles",
+          },
+          async (payload) => {
+            setUser(payload.new);
+          }
+        )
+        .subscribe();
+      setChannel(channel);
     } else {
       setSession(null);
+      if (channel) {
+        channel.unsubscribe();
+      }
     }
   }
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
+    const authListener = supabase.auth.onAuthStateChange(
       async (event, session) => await handleAuthStateChange(event, session)
     );
   }, [navigate]);
@@ -52,24 +74,6 @@ export default function Header(props) {
       <NavbarBrand>
         <AcmeLogo logo={ApedirLogoNegro} />
       </NavbarBrand>
-
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {/* <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page" color="secondary">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem> */}
-      </NavbarContent>
       <SelectProvincia></SelectProvincia>
 
       {session !== null ? (

@@ -39,4 +39,23 @@ const getUsers = async () => {
   return profiles;
 };
 
-export { getRole, getUser, getUsers };
+const updateProfile = async (profile) => {
+  let updatedProfile = Object.keys(profile).reduce((acc, key) => {
+    if (profile[key] !== null && profile[key] !== "") {
+      acc[key] = profile[key];
+    }
+    return acc;
+  }, {});
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .update(updatedProfile)
+    .eq("id", profile.id)
+    .select();
+};
+
+const deleteProfile = async (id) => {
+  const { error } = await supabase.from("profiles").delete().eq("id", id);
+};
+
+export { getRole, getUser, getUsers, updateProfile, deleteProfile };

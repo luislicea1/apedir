@@ -1,4 +1,3 @@
-// UserRoleDropDown.js
 import React from "react";
 import {
   Dropdown,
@@ -8,15 +7,13 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function UserRoleDropDown({ role, onChange }) {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set([role]));
+export default function ActiveDropdw({ isActive, onChange }) {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([isActive === true? 'active' : 'inactive']));
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
     [selectedKeys]
   );
-
-  // Llama a la función `onChange` proporcionada con el valor seleccionado
   const handleSelectionChange = (selectedKeys) => {
     setSelectedKeys(selectedKeys);
     if (onChange) {
@@ -37,7 +34,7 @@ export default function UserRoleDropDown({ role, onChange }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="user role selection"
+        aria-label="user activity selection"
         color="secondary"
         variant="shadow"
         disallowEmptySelection
@@ -45,9 +42,8 @@ export default function UserRoleDropDown({ role, onChange }) {
         selectedKeys={selectedKeys}
         onSelectionChange={handleSelectionChange}
       >
-        <DropdownItem key="user">Usuario</DropdownItem>
-        <DropdownItem key="merchant">Comerciante</DropdownItem>
-        <DropdownItem key="admin">Admin</DropdownItem>
+        <DropdownItem key="active">Activo</DropdownItem>
+        <DropdownItem key="inactive">Inactivo</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );
