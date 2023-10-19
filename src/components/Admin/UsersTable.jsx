@@ -18,7 +18,6 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  user,
   // useDisclosure,
 } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
@@ -413,11 +412,6 @@ export default function UsersTable({ users }) {
                       placeholder="Escribe el nuevo nombre"
                       variant="bordered"
                       type="text"
-                      value={
-                        editedUser.name !== ""
-                          ? editedUser.name
-                          : selectedUser.name
-                      }
                       onChange={(e) =>
                         setEditedUser({ ...editedUser, name: e.target.value })
                       }
@@ -429,11 +423,6 @@ export default function UsersTable({ users }) {
                       placeholder="Escribe los nuevos apellidos"
                       variant="bordered"
                       type="text"
-                      value={
-                        editedUser.last_name !== ""
-                          ? editedUser.last_name
-                          : selectedUser.last_name
-                      }
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -447,11 +436,6 @@ export default function UsersTable({ users }) {
                       placeholder="Escribe el nuevo número"
                       type="number"
                       variant="bordered"
-                      value={
-                        editedUser.phone_number !== ""
-                          ? editedUser.phone_number
-                          : selectedUser.phone_number
-                      }
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,

@@ -7,9 +7,9 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-  Link,
-  Button,
+  // Link,
 } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 import { HamburguerBtnMenu } from "./HamburgerBtnMenu.jsx";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import { AcmeLogo } from "../header/AcmeLogo.jsx";
@@ -33,36 +33,25 @@ export default function AdminNavBar() {
   }, []);
 
   const menuItems = [
-    "Dashboard",
-    "Usuarios",
-    "Comercios",
-    "Planes",
+    { name: "Usuarios", href: "/admin" },
+    { name: "Comercios", href: "/admin/businesses" },
+    { name: "Categorías de Comercios", href: "/admin/categories" },
+    { name: "Planes", href: "/admin/plans" },
   ];
 
-  const style = {
-    display: "flex",
-    justifyContent: "center",
-  };
   const navBar = (
-    <Navbar style={style}>
+    <Navbar className="flex justify-center">
       <NavbarBrand>
         <AcmeLogo className="text-inherit" logo={ApedirLogoNegro} />
       </NavbarBrand>
-      <NavbarContent className="flex">
+      <NavbarContent className="flex space-x-5">
         {menuItems.map((item, index) => (
           <NavbarItem key={index}>
-            <Link color="secondary" href="#">
-              {item}
+            <Link style={{color: '#7828c8'}} to={item.href}>
+              {item.name}
             </Link>
           </NavbarItem>
         ))}
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="flex">
-          <Link color="secondary" href="#">
-            Login
-          </Link>
-        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
@@ -89,29 +78,23 @@ export default function AdminNavBar() {
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Features
+            Usuarios
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="#" aria-current="page">
-            Customers
+            Comercios
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+            Categorías de Comercios
           </Link>
         </NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <Link color="foreground" href="#">
+            Planes
+          </Link>
         </NavbarItem>
       </NavbarContent>
 

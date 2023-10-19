@@ -33,7 +33,6 @@ const getUser = async (email) => {
 const getUsers = async () => {
   let { data: profiles, error } = await supabase.from("profiles").select("*");
   if (error) {
-    console.log(error);
     return null;
   }
   return profiles;

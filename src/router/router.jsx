@@ -9,6 +9,7 @@ import {
   RequireMerchantRole,
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
+import NotFound from "../pages/NotFound/NotFound";
 
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
@@ -30,6 +31,7 @@ const LazyVisualizarProductoWrapper = lazy(() =>
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
 const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
+const AdminPlans = lazy(() => import("../pages/Admin/AdminPlans"));
 
 const router = createBrowserRouter([
   {
@@ -78,12 +80,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/",
-        element: <AdminDashboard />,
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <AdminDashboard />
+          </Suspense>
+        ),
       },
+      {
+        path: "/admin/plans",
 
-      // { path: "/dashboard", element: <Dashboard /> },
-      // { path: "/settings", element: <Settings /> },
-      // Agrega aquí más rutas hijas según sea necesario
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <AdminPlans />
+          </Suspense>
+        ),
+      },
     ],
   },
   {
@@ -127,6 +138,10 @@ const router = createBrowserRouter([
         <LazyVerEventoWrapper />
       </Suspense>
     ),
+  },
+  {
+    path: "*",
+    element: <NotFound/>,
   },
 ]);
 
