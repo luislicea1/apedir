@@ -48,7 +48,7 @@ export default function HeaderNegocio(props) {
     <>
       <Navbar style={zIndex}>
         <NavbarBrand>
-          <Link href="/">
+          <Link href={props.anterior}>
             <Izquierda h={"20px"} w={"20px"}></Izquierda>
           </Link>
 

@@ -52,7 +52,7 @@ export default function Negocio({ nombre, localizacion }) {
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={sectionStyle}>
-        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"}></HeaderNegocio>
+        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"} anterior = {"/"}></HeaderNegocio>
         
         <section className="section" style={sectionStyle}>
           <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>
