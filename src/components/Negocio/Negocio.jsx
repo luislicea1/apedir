@@ -58,7 +58,7 @@ export default function Negocio({ nombre, localizacion }) {
           <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>
           <div className="p-2 m-2">
             <TituloNegocio title={nombre}></TituloNegocio>
-            <DescripcionNegocio descripcion={text}></DescripcionNegocio>
+            <DescripcionNegocio descripcion={text} contact = {"si"} domicilio = {"si"} localizacion = {"si"} like = {"si"}></DescripcionNegocio>
 
             <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
             <div className="first-product-list"></div>

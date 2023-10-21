@@ -1,7 +1,7 @@
 import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
 import LogoImg from "../../../assets/img/img (1).png";
 import { useState, useEffect } from "react";
-import Imagen from "../../../assets/img/img (2).png";
+import Imagen from "../../../assets/img/img (3).jpg";
 //import Imagen from "../../../assets/comidas/comida (5).png";
 import ImagenVisualizador from "./ImagenVisualizador";
 import "./visualizarProducto.css"
@@ -33,14 +33,7 @@ const marginTop = {
   //marginTop: "60px"
 }
 
-const degradado = {
-  width: "100%",
-  position: "absolute",
-  bottom: "30vh",
-  height: "50vh",
-  zIndex : "30",
-  background: "linear-gradient(#0e141700,#0E1417)"
-}
+
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iuret.";
@@ -65,7 +58,7 @@ export default function VisualizarProducto({ nombre , title, localizacion}) {
             <PromoProducto title={title}></PromoProducto>
             <OrdenarProducto></OrdenarProducto>
           </div>
-          <div style={degradado}></div>
+          
         </section>
       </section>
     </div>

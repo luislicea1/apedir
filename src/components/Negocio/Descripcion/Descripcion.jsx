@@ -26,7 +26,7 @@ export default function DescripcionNegocio(props) {
       )}
 
     </article>
-    <BtnDescription></BtnDescription>
+    <BtnDescription contact = {props.contact} domicilio = {props.domicilio} localizacion = {props.localizacion} like = {props.like}></BtnDescription>
     </>
     
   );
