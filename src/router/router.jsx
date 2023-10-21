@@ -38,11 +38,19 @@ const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
 const AdminPlans = lazy(() => import("../pages/Admin/AdminPlans"));
 
+const PricingPage = lazy(() => import("../pages/PricingPage"));
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
   },
+
+  {
+    path: "/plans",
+    element: <PricingPage />,
+  },
+
   {
     path: "/login",
     element: (
@@ -165,7 +173,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <NotFound/>,
+    element: <NotFound />,
   },
 ]);
 
