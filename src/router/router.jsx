@@ -10,7 +10,6 @@ import {
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
 import NotFound from "../pages/NotFound/NotFound";
-import PricingPage from "../pages/PricingPage";
 
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
@@ -34,12 +33,19 @@ const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
 const AdminPlans = lazy(() => import("../pages/Admin/AdminPlans"));
 
+const PricingPage = lazy(() => import("../pages/PricingPage"));
+
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <Home />,
+    element: <Home />,
+  },
+
+  {
+    path: "/plans",
     element: <PricingPage />,
   },
+
   {
     path: "/login",
     element: (
