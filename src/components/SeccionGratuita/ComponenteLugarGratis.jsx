@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function ComponenteLugar(props) {
+export default function ComponenteLugarGratis(props) {
   const navigate = useNavigate();
   const CardStyles = {
     height: "100%",
@@ -14,12 +14,11 @@ export default function ComponenteLugar(props) {
     placeItems: "center",
   };
   const ImgStyle = {
-    minHeight: "100px",
     maxHeight: "300px",
     borderRadius: "20px",
   };
 
-  ComponenteLugar.propTypes = {
+  ComponenteLugarGratis.propTypes = {
     localizacion: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
     numeroPersonas: PropTypes.number.isRequired,
@@ -27,7 +26,7 @@ export default function ComponenteLugar(props) {
   };
   
   return (
-    <a onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
+    <a onClick={() => navigate(`/lugarGratuito/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>

@@ -1,0 +1,9 @@
+.contenedor-logos-portada{
+   
+}
+
+@media only screen and (max-width: 800px) {
+    .contenedor-logos-portada{    
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+}

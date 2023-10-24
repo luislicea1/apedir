@@ -1,24 +1,25 @@
 .bgtransparent{
-    background: linear-gradient(#0e131700,#0E1317,#0E1317);
-        
+    background: linear-gradient(#20263200,#202632,#202632); 
+    
     position: absolute;
     bottom: 0;
     z-index: 30;
-    height : 40vh;
+    height : 80vh;
     width: 100%;
+    
 }
 
 @media only screen and (max-height: 1100px) {
     .bgtransparent{
-        
-        height : 60vh !important;
+       
+        height : 70vh !important;
     }
 }
 
 @media only screen and (max-height: 1000px) {
     .bgtransparent{
-        
-        height : 50vh !important;
+       
+        height : 60vh !important;
     }
 }
 
@@ -26,15 +27,15 @@
 
 @media only screen and (max-height: 900px) {
     .bgtransparent{
-        
-        height : 40vh !important;
+       
+        height : 50vh !important;
     }
 }
 
 @media only screen and (max-height: 800px) {
     .bgtransparent{
         
-        height : 30vh !important;
+        height : 45vh !important;
     }
 }
 

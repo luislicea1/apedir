@@ -1,26 +1,48 @@
 import { Image } from "@nextui-org/react";
+import "./evento.css";
+import Like from "../Like/Like";
 
-export default function EventoCard() {
-  const img = {
-    height: "70vh",
-    width: "100%",
-    objectFit: "cover",
-  };
-
-  const center = {
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    placeItems: "center",
-  };
-  return (
-    <div style={center}>
-      <Image
-        style={img}
-        src="https://nextui-docs-v2.vercel.app/images/album-cover.png"
-        alt="NextUI Album Cover Image with delay"
-        classNames="m-5"
-      />
-    </div>
-  );
+export default function EventoCard(props){
+    const img = {
+        //maxHeight: "70vh",
+        //height: "50vh",
+        //width: "100%",
+        
+        borderRadius: "0px",
+        objectFit: "fill",
+     
+      };
+    
+      const center = {
+        width: "100%",
+        height: "70vh",
+        maxHeight: "70vh",
+        display: "grid",
+        placeItems: "start",
+        position:"relative",
+        justifyContent: "center",
+        //background: "red"
+      };
+      const like = {
+        zIndex : "50",
+        position: "absolute",
+        right: "15px",
+        bottom: "40%"
+      }
+      
+      return (
+        <div style={center}>
+          <Image
+            isBlurred
+            style={img}
+            src={props.evento}
+            alt="NextUI Album Cover Image with delay"
+            classNames="m-5"
+          />
+          <div  className="bgtransparent"></div>
+          <div style={like}>
+            <Like></Like>
+          </div>
+        </div>
+    );
 }

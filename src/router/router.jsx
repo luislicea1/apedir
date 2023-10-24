@@ -11,6 +11,7 @@ import {
 import { CircularProgress } from "@nextui-org/react";
 import NotFound from "../pages/NotFound/NotFound";
 
+
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
 const LazyCreateAccount = lazy(() =>
@@ -19,13 +20,19 @@ const LazyCreateAccount = lazy(() =>
 const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
-
+const LazyAdministradorNegocio = lazy(() =>
+  import("../pages/AdministradorNegocio")
+);
 const LazyVerEventoWrapper = lazy(() =>
   import("../components/VisualizadorContenido/verEventoWrapper")
 );
 
 const LazyVisualizarProductoWrapper = lazy(() =>
   import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
+);
+
+const LazyNegocioGratuitoWrapper = lazy(()=>
+  import("../components/NegociosGratuitos/NegocioGratuitoWrapper")
 );
 
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
@@ -144,10 +151,37 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/lugarGratuito",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <Outlet />
+      </Suspense>
+    ),
+    children: [
+      {
+        path: ":localizacion/:nombre/",
+        element: (
+          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+            <LazyNegocioGratuitoWrapper />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+
+  {
     path: "/evento/:nombre",
     element: (
       <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyVerEventoWrapper />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/administrador-negocio",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <LazyAdministradorNegocio />
       </Suspense>
     ),
   },
