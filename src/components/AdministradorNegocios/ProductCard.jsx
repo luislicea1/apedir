@@ -12,8 +12,7 @@ import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 
 export default function ProductCard({
-  localizacion,
-  nombre,
+
   title,
   img,
   price,
@@ -46,12 +45,12 @@ export default function ProductCard({
       className="producto-card"
     >
       <CardHeader style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Tooltip content="Edit user">
+        <Tooltip content="Editar producto">
           <span className="text-lg text-default-500 cursor-pointer active:opacity-50">
             <EditIcon />
           </span>
         </Tooltip>
-        <Tooltip color="danger" content="Delete user">
+        <Tooltip color="danger" content="Eliminar producto">
           <span className="text-lg text-danger cursor-pointer active:opacity-50">
             <DeleteIcon />
           </span>
@@ -76,10 +75,8 @@ export default function ProductCard({
 }
 
 ProductCard.propTypes = {
-  localizacion: PropTypes.string.isRequired,
-  nombre: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };

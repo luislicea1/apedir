@@ -26,7 +26,7 @@ export default function ManageProducts() {
 
   return (
     <div>
-      <section style={{ marginTop: '10px'}}>
+      <section style={{ marginTop: "10px" }}>
         <h3>Productos </h3>
         <br />
         <Button className="text-white" color="secondary" variant="shadow">
@@ -37,11 +37,10 @@ export default function ManageProducts() {
       <div className="mt-2 list-container" style={listContainer}>
         {products.map((product, index) => (
           <ProductCard
-            nombre={product.name}
             price={product.price}
             key={index + 1}
+            index={index}
             img={product.image}
-            localizacion={product.localizacion}
             title={product.name}
           />
         ))}
