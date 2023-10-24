@@ -20,7 +20,9 @@ const LazyCreateAccount = lazy(() =>
 const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
-
+const LazyAdministradorNegocio = lazy(() =>
+  import("../pages/AdministradorNegocio")
+);
 const LazyVerEventoWrapper = lazy(() =>
   import("../components/VisualizadorContenido/verEventoWrapper")
 );
@@ -168,6 +170,14 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
         <LazyVerEventoWrapper />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/administrador-negocio",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <LazyAdministradorNegocio />
       </Suspense>
     ),
   },

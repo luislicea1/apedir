@@ -14,6 +14,7 @@ export default function ComponenteLugar(props) {
     placeItems: "center",
   };
   const ImgStyle = {
+    minHeight: "100px",
     maxHeight: "300px",
     borderRadius: "20px",
   };
