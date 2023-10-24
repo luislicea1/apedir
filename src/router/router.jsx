@@ -43,7 +43,11 @@ const router = createBrowserRouter([
 
   {
     path: "/plans",
-    element: <PricingPage />,
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <PricingPage />,
+      </Suspense>
+    ),
   },
 
   {

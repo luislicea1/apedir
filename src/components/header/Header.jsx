@@ -17,6 +17,7 @@ import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.js";
 import { getUser } from "../../api/profile.js";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
+import Notification from "./Notification.jsx";
 
 export default function Header(props) {
   const [session, setSession] = useState(null);
@@ -74,40 +75,46 @@ export default function Header(props) {
       <NavbarBrand>
         <AcmeLogo logo={ApedirLogoNegro} />
       </NavbarBrand>
-      <SelectProvincia></SelectProvincia>
 
+      <SelectProvincia></SelectProvincia>
       {session !== null ? (
         <NavbarContent as="div" justify="end">
+          <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
-              <Avatar
+              <Avatar style={{color : "white"}}
                 isBordered
                 as="button"
                 className="transition-transform"
                 color="secondary"
-                name="Jason Hughes"
+                name={user?.name}
                 size="sm"
                 showFallback={true}
                 src={session.user?.user_metadata?.avatar_url}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Registrado como</p>
+              <DropdownItem key="profile" className="h-14 gap-4">
                 <p className="font-semibold">{user?.email}</p>
+                <p className="font-semibold">Plan: PREMIUM</p>
               </DropdownItem>
+
               {user?.role === "user" ? (
                 <DropdownItem key="settings">Crear negocio</DropdownItem>
               ) : (
                 <DropdownItem key="settings">Ver negocio</DropdownItem>
               )}
-              <DropdownItem
-                key="analytics"
-                onClick={() => navigate(`/${user.role}`)}
-              >
-                Mi rol: {user?.role}
+              {user?.role === "admin" && (
+                <DropdownItem
+                  key="analytics"
+                  onClick={() => navigate("/admin")}
+                >
+                  Panel de Administración
+                </DropdownItem>
+              )}
+              <DropdownItem key="analytics" onClick={() => navigate("/plans")}>
+                Planes y Precios
               </DropdownItem>
-
               <DropdownItem key="help_and_feedback">
                 Ayuda e Información
               </DropdownItem>

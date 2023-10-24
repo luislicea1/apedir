@@ -3,6 +3,7 @@ import PricingCard from "../components/PricingCard/PricingCard";
 import { GratisIcon } from "../components/Icons/GratisIcon";
 import { BasicIcon } from "../components/Icons/BasicIcon";
 import { PremiumIcon } from "../components/Icons/PremiumIcon";
+import TituloDeSeccion from "../components/Seccion/TituloDeSeccion";
 
 const containerStyle = {
   display: "flex",
@@ -16,6 +17,16 @@ const containerStyle = {
   gap: "20px",
 };
 
+const section = {
+  width: "100%",
+  maxWidth: "1024px",
+  marginTop: "20px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  
+}
+
 const cardStyle = {
   flexBasis: "300px",
 };
@@ -27,9 +38,9 @@ export default function PricingPage() {
       <div
         style={{ display: "flex", justifyContent: "center", margin: "20px" }}
       >
-        <h1 style={{ color: "black", fontWeight: "bold", fontSize: "2.5em" }}>
-          Planes
-        </h1>
+        <section style={section}>
+          <TituloDeSeccion title={"Planes"} />
+        </section>
       </div>
       <div style={containerStyle}>
         <PricingCard
