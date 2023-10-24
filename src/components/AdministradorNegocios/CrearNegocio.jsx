@@ -5,6 +5,7 @@ import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import Horarios from "./Inputs/Horarios";
+import ManageProducts from "./ManageProducts";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -42,8 +43,7 @@ export default function CrearNegocio() {
           <Tab key="videos" title="Productos">
             <Card>
               <CardBody>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
+                <ManageProducts/>
               </CardBody>
             </Card>
           </Tab>

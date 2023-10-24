@@ -78,11 +78,12 @@ export default function Header(props) {
 
       <SelectProvincia></SelectProvincia>
       {session !== null ? (
-        <NavbarContent as="div" justify="end">
+        <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
-              <Avatar style={{color : "white"}}
+              <Avatar
+                style={{ color: "white" }}
                 isBordered
                 as="button"
                 className="transition-transform"

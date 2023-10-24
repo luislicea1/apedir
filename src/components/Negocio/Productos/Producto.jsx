@@ -1,8 +1,16 @@
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function Producto(props) {
+export default function Producto({
+  localizacion,
+  nombre,
+  title,
+  img,
+  price,
+  index,
+}) {
   const navigate = useNavigate();
   const CardStyles = {
     height: "100%",
@@ -23,12 +31,10 @@ export default function Producto(props) {
     borderRadius: "10px 10px 0 0",
   };
   return (
-    <Link
-      href={`/lugar/${props.localizacion}/${props.nombre}/producto/${props.title}`}
-    >
+    <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
       <Card
         shadow="sm"
-        key={props.index}
+        key={index}
         isPressable
         // onPress={() => console.log("item pressed")}
         style={CardStyles}
@@ -40,15 +46,24 @@ export default function Producto(props) {
             width="100%"
             alt="Card background NextUI hero Image with delay"
             className="object-cover rounded-xl"
-            src={props.img}
+            src={img}
             style={ImgStyle}
           />
         </CardBody>
         <CardFooter className="text-small justify-between">
-          <b>{props.title}</b>
-          <p className="text-default-500">{props.price}</p>
+          <b>{title}</b>
+          <p className="text-default-500">{price}</p>
         </CardFooter>
       </Card>
     </Link>
   );
 }
+
+Producto.propTypes = {
+  localizacion: PropTypes.string.isRequired,
+  nombre: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
