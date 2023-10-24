@@ -62,6 +62,7 @@ export default function Horarios() {
         (dia) => (
           <Card key={dia} style={grid}>
             <h2>{dia}</h2>
+            
             {horarios[dia].trabaja && (
               <>
               <div  style={timePickerStyle}>
