@@ -8,7 +8,7 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import ManageProducts from "./ManageProducts";
 
-export default function CrearNegocio() {
+export default function CrearNegocioGratuito() {
   const contenedor = {
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
@@ -23,7 +23,7 @@ export default function CrearNegocio() {
   return (
     <div style={contenedor}>
       <div className="flex w-full flex-col">
-        <Tabs aria-label="Options">
+        <Tabs aria-label="Options" disabledKeys={["productos"]} >
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
@@ -34,15 +34,10 @@ export default function CrearNegocio() {
               </CardBody>
             </Card>
           </Tab>
-          <Tab key="music" title="Horario">
-            
-              
-          
-                <ResponsiveTimePickers></ResponsiveTimePickers>
-              
-            
+          <Tab key="horario" title="Horario">
+                <ResponsiveTimePickers></ResponsiveTimePickers>         
           </Tab>
-          <Tab key="videos" title="Productos">
+          <Tab key="productos" title="Productos">
             <Card>
               <CardBody>
                 <ManageProducts/>
