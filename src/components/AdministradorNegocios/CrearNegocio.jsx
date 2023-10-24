@@ -4,7 +4,8 @@ import ImageUploadButton from "./Inputs/ImagenUploadButton";
 import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import Horarios from "./Inputs/Horarios";
+
+import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -35,7 +36,8 @@ export default function CrearNegocio() {
           <Tab key="music" title="Horario">
             <Card>
               <CardBody>
-                <Horarios></Horarios>
+          
+                <ResponsiveTimePickers></ResponsiveTimePickers>
               </CardBody>
             </Card>
           </Tab>
