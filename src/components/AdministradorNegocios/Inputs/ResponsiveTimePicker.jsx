@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { Card } from "@nextui-org/react";
-import { Checkbox } from "@mui/material";
+import {Checkbox} from "@nextui-org/react";
 
 export default function ResponsiveTimePickers() {
   const grid = {

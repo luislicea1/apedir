@@ -23,6 +23,9 @@ const LazyNegocioWrapper = lazy(() =>
 const LazyAdministradorNegocio = lazy(() =>
   import("../pages/AdministradorNegocio")
 );
+const LazyAdministradorNegocioGratuito = lazy(() =>
+  import("../pages/AdministradorNegocioGratuito")
+);
 const LazyVerEventoWrapper = lazy(() =>
   import("../components/VisualizadorContenido/verEventoWrapper")
 );
@@ -186,9 +189,18 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/administrador-negocio-gratuito",
+    element: (
+      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+        <LazyAdministradorNegocioGratuito />
+      </Suspense>
+    ),
+  },
+  {
     path: "*",
     element: <NotFound />,
   },
 ]);
 
 export default router;
+

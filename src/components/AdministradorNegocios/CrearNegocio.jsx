@@ -49,11 +49,17 @@ export default function CrearNegocio() {
             </Card>
           </Tab>
           <Tab key="music" title="Horario">
+<<<<<<< HEAD
             <Card>
               <CardBody>
+=======
+            
+              
+          
+>>>>>>> bffc20d46202974aa5d646c55ec3d330d002c07f
                 <ResponsiveTimePickers></ResponsiveTimePickers>
-              </CardBody>
-            </Card>
+              
+            
           </Tab>
           <Tab key="videos" title="Productos">
             <Card>
