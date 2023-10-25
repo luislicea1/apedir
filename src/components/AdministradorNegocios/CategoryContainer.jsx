@@ -9,9 +9,7 @@ const listContainer = {
   gap: "20px",
 };
 
-const CategoryContainer = ({ category, products, onOpen }) => {
-  
-  
+const CategoryContainer = ({ category, products, onOpen, setProductInput }) => {
   return (
     <div
       style={{
@@ -26,7 +24,19 @@ const CategoryContainer = ({ category, products, onOpen }) => {
         className="text-white"
         color="secondary"
         variant="shadow"
-        onClick={onOpen}
+        onClick={() => {
+          setProductInput((prevState) => {
+            const updatedState = {
+              ...prevState,
+              category: category,
+            };
+
+            console.log(updatedState);
+
+            return updatedState;
+          });
+          onOpen();
+        }}
       >
         Agregar Producto
       </Button>

@@ -1,5 +1,5 @@
 // ConditionalDropDown.js
-import React from "react";
+import React, { useState } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,7 +8,12 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function CustomDropdown({ status, onChange, items, type }) {
+export default function CustomDropdown({
+  status,
+  onChange,
+  items,
+
+}) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([status]));
 
   const selectedValue = React.useMemo(
@@ -16,7 +21,6 @@ export default function CustomDropdown({ status, onChange, items, type }) {
     [selectedKeys]
   );
 
-  // Llama a la función `onChange` proporcionada con el valor seleccionado
   const handleSelectionChange = (selectedKeys) => {
     setSelectedKeys(selectedKeys);
     if (onChange) {
@@ -33,11 +37,7 @@ export default function CustomDropdown({ status, onChange, items, type }) {
           color="secondary"
           className="capitalize text-white w-4"
         >
-          {type === "boolean"
-            ? selectedValue === "true"
-              ? "Si"
-              : "No"
-            : selectedValue}
+          {Array.from(selectedKeys)[0]}
         </Button>
       </DropdownTrigger>
       <DropdownMenu

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../../api/products";
 import CategoryContainer from "./CategoryContainer";
-import {UploadIcon} from "../Icons/UploadIcon";
+import { UploadIcon } from "../Icons/UploadIcon";
 import "./addCategory.css";
 import {
   Modal,
@@ -16,11 +16,18 @@ import {
 } from "@nextui-org/react";
 import { CategoryIcon } from "../Icons/CategoryIcon";
 import { addCategory, getCategories } from "../../api/categories";
+import { addProduct } from "../../api/products";
 import CustomDropdown from "./CustomDropdown";
+import supabase from "../../api/client";
+import { resizeImage } from "../../api/helpers/image";
+import { uploadImage } from "../../api/images";
 
-const ManageProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+const ManageProducts = ({
+  products,
+  setProducts,
+  categories,
+  setCategories,
+}) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [categoryInput, setCategoryInput] = useState("");
   const {
@@ -29,12 +36,42 @@ const ManageProducts = () => {
     onOpenChange: onProductModalOpenChange,
   } = useDisclosure();
 
+  const productChanges = supabase
+    .channel("custom-all-channel")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "products" },
+      (payload) => {
+        console.log("Change received!", payload);
+      }
+    )
+    .subscribe();
+
+  const categoryChanges = supabase
+    .channel("custom-all-channel")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "categories",
+        filter: "bussiness=eq.banca",
+      },
+      (payload) => {
+        setCategories([...categories, payload.new.category]);
+      }
+    )
+    .subscribe();
+
+  useEffect(() => {}, [productChanges, categoryChanges]);
+
+  const [imageName, setImageName] = useState("");
   const [productInput, setProductInput] = useState({
     name: "",
     price: "",
     description: "",
     image: "",
-    category: "",
+    category: categories[0],
     isAvalaible: false,
   });
 
@@ -42,30 +79,48 @@ const ManageProducts = () => {
     const category = { bussiness: "banca", category: categoryInput };
     await addCategory(category);
     setCategoryInput("");
-    onOpenChange(false);
   };
+
   const handleAddProduct = async () => {
-    console.log(productInput);
+    // Añadiendo la imagen
+    const insertedImage = await uploadImage(productInput.image, imageName);
+
+    const updatedProductInput = {
+      ...productInput,
+      image: insertedImage.path,
+    };
+
+    await addProduct(updatedProductInput);
+    setProductInput({
+      name: "",
+      price: "",
+      description: "",
+      image: "",
+      category: categories[0],
+      isAvalaible: false,
+    });
+  };
+
+  const handleImageChange = async (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0]; // Guarda el archivo en una variable
+
+      setImageName(file.name);
+      // Llama a la función resizeImage pasándole el archivo de imagen
+      const resizedImage = await resizeImage(file); // Usa el archivo que guardaste
+      // Usa el resultado de resizeImage para actualizar el estado del producto
+      setProductInput((prevState) => {
+        const updatedState = {
+          ...prevState,
+          image: resizedImage,
+        };
+
+        return updatedState;
+      });
+    }
   };
 
   // Recuperar los productos y las categorías
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productList = await getProducts();
-      setProducts(productList);
-
-      //   const uniqueCategories = [
-      //     ...new Set(productList.map((product) => product.category)),
-      //   ];
-      //   setCategories(uniqueCategories);
-    };
-    const fetchCategories = async () => {
-      const categorylist = await getCategories("banca");
-      setCategories(categorylist);
-    };
-    fetchProducts();
-    fetchCategories();
-  }, []);
 
   return (
     <div>
@@ -83,6 +138,7 @@ const ManageProducts = () => {
             category={category}
             products={categoryProducts}
             onOpen={onProductModalOpen}
+            setProductInput={setProductInput}
             key={category}
           />
         );
@@ -105,7 +161,7 @@ const ManageProducts = () => {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
-                    Agregar Producto
+                    Agregar Producto a {productInput.category}
                   </ModalHeader>
                   <ModalBody>
                     <Input
@@ -159,9 +215,6 @@ const ManageProducts = () => {
                       }}
                     >
                       <label style={{ fontSize: "0.75em" }}>
-                        Selecciona la categoría
-                      </label>
-                      <label style={{ fontSize: "0.75em" }}>
                         Selecciona una imagen.
                       </label>
                     </div>
@@ -174,17 +227,20 @@ const ManageProducts = () => {
                         gap: "10px",
                       }}
                     >
-                      <CustomDropdown
-                        status={categories[0]}
-                        items={categories}
-                      />
-
                       <label
-                        style={{ backgroundColor: "#5E17EB", padding: "5px 60px", borderRadius: "10px" }}
+                        style={{
+                          backgroundColor: "#5E17EB",
+                          padding: "5px 60px",
+                          borderRadius: "10px",
+                        }}
                       >
-                        <div >
+                        <div>
                           <UploadIcon width={30} />
-                          <input type="file" style={{ display: "none" }} />
+                          <input
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={handleImageChange}
+                          />
                         </div>
                       </label>
                     </div>
@@ -236,8 +292,8 @@ const ManageProducts = () => {
                     </Button>
                     <Button
                       color="secondary"
-                      onPress={() => {
-                        handleAddCategory();
+                      onPress={async () => {
+                        await handleAddCategory();
                         onClose();
                       }}
                     >

@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
 import TextAreaDescription from "./Inputs/TextAreaDescripcion";
 import InputTitle from "./Inputs/InputTitle";
 import ImageUploadButton from "./Inputs/ImagenUploadButton";
 import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import ManageProducts from "./ManageProducts";
+import { getProducts } from "../../api/products";
+import { getCategories } from "../../api/categories";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -15,10 +17,22 @@ export default function CrearNegocio() {
     gap: "10px",
     padding: "20px",
   };
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  const bg = {
-    background: "red",
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productList = await getProducts();
+      setProducts(productList);
+    };
+    const fetchCategories = async () => {
+      const categorylist = await getCategories("banca");
+      setCategories(categorylist);
+    };
+    fetchProducts();
+    fetchCategories();
+  }, []);
+
 
   return (
     <div style={contenedor}>
@@ -37,7 +51,6 @@ export default function CrearNegocio() {
           <Tab key="music" title="Horario">
             <Card>
               <CardBody>
-          
                 <ResponsiveTimePickers></ResponsiveTimePickers>
               </CardBody>
             </Card>
@@ -45,7 +58,12 @@ export default function CrearNegocio() {
           <Tab key="videos" title="Productos">
             <Card>
               <CardBody>
-                <ManageProducts/>
+                <ManageProducts
+                  products={products}
+                  setProducts={setProducts}
+                  categories={categories}
+                  setCategories={setCategories}
+                />
               </CardBody>
             </Card>
           </Tab>
