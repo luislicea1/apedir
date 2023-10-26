@@ -36,6 +36,9 @@ export default function CrearNegocio() {
               products.filter((product) => product.id !== payload.old.id)
             );
             break;
+          case "UPDATE":
+            console.log(payload);
+            break;
           // Agregar más casos según sea necesario
         }
       }
