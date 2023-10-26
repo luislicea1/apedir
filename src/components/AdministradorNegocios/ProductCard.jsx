@@ -11,13 +11,7 @@ import PropTypes from "prop-types";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 
-export default function ProductCard({
-
-  title,
-  img,
-  price,
-  index,
-}) {
+export default function ProductCard({ title, img, price, index }) {
   const CardStyles = {
     height: "100%",
     //minHeight: "300px",
