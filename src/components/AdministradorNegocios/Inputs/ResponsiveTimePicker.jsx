@@ -45,18 +45,22 @@ export default function ResponsiveTimePickers() {
     placeItems: 'center',
     gap: "10px"
   }
-
+  const diaTitle = {
+    fontSize: "20px",
+    fontWeight: "bold"
+  }
 
   return (
     <div style={gridContainer}>
       {dias.map((dia, index) => (
-        <Card style={grid} key={index}>
+        <Card style={grid} key={index} className="card-horarios-picker">
           <div>
-            <h2>{dia.dia}</h2>
+            <h2 style={diaTitle}>{dia.dia}</h2>
           </div>
           <div>
             <Checkbox
               checked={dia.trabaja}
+              color="secondary"
               onChange={(event) => {
                 setDias(
                   dias.map((d, i) =>

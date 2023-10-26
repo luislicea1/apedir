@@ -5,6 +5,8 @@ import { Link } from "@nextui-org/react";
 import Like from "../../Like/Like";
 import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import LocalizacionImg from "../../../assets/img/img (1).jpg"
+import { Image } from "@nextui-org/react";
 
 export default function BtnDescription(props) {
   const white = {
@@ -28,6 +30,11 @@ export default function BtnDescription(props) {
     maxWidth: "40px",
     minWidth: "40px",
   };
+
+  const imagenLocalizacion = {
+    maxWidth: "300px",
+    marginTop: "30px"
+  }
   return (
     <div className="flex gap-4 items-center" style={margin}>
       {props.contact === "si" ? (
@@ -60,13 +67,14 @@ export default function BtnDescription(props) {
               <div className="text-small font-bold">Direccion</div>
               <div className="text-tiny">
                 Edificio 64 casa 14 entre Corona y Paseo Plaza de Marte
+                <Image  isZoomed src={LocalizacionImg} alt="" style={imagenLocalizacion}/>
               </div>
             </div>
           </PopoverContent>
         </Popover>
       ) : null}
 
-      {props.like === "si" ? <Like></Like> : null}
+      
     </div>
   );
 }

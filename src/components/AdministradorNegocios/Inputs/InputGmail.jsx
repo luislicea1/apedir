@@ -7,6 +7,7 @@ export default function InputGmail() {
         <Input
           type="email"
           label="Email"
+          variant="bordered"
           placeholder="you@example.com"
           labelPlacement="outside"
           endContent={

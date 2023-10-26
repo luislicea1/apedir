@@ -15,7 +15,7 @@ import {
 export default function IconosNegocio() {
 
   const telefono = {
-    background: "#5e17eb",
+    background: "#5E17EB",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -27,7 +27,7 @@ export default function IconosNegocio() {
     minWidth: "50px"
   }
   const whatsapp = {
-    background: "#25D366",
+    background: "#5E17EB",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -39,7 +39,7 @@ export default function IconosNegocio() {
     minWidth: "50px"
   }
   const instagram = {
-    background: "linear-gradient(#405DE6, #5B51D8, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #FCAF45, #FFDC80)",
+    background: "#5E17EB",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -51,7 +51,7 @@ export default function IconosNegocio() {
     minWidth: "50px"
   }
   const telegram = {
-    background: " #229ED9",
+    background:  "#5E17EB",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -63,7 +63,7 @@ export default function IconosNegocio() {
     minWidth: "50px"
   }
   const correo = {
-    background: "#f2a60c",
+    background: "#5E17EB",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -75,8 +75,16 @@ export default function IconosNegocio() {
     minWidth: "50px"
   }
 
+  const flex = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "20px"
+  }
+
   return (
-    <div className="mt-2" id="contactenos">
+    <div className="mt-2" id="contactenos" style={flex}>
       <Popover placement="bottom">
         <PopoverTrigger>
           <Button style={telefono}>
@@ -90,28 +98,12 @@ export default function IconosNegocio() {
           </div>
         </PopoverContent>
       </Popover>
-      
-          <Button style={whatsapp}>
-            <WhatsappIcons color="white"></WhatsappIcons>
-          </Button>
-        
-
-      
-          <Button style={telegram}>
-            <TelegramIcon color="white" ></TelegramIcon>
-          </Button>
-        
-
-     
-          <Button style={instagram}>
-            <InstagramIcon color="white"></InstagramIcon>
-          </Button>
-        
-
-      
-          <Button style={correo}>
-            <Correo color="white"></Correo>
-          </Button>
+    
+            <WhatsappIcons color="white" w = {"36px"}></WhatsappIcons>
+            <TelegramIcon color="white" w = {"50px"}></TelegramIcon>
+            <InstagramIcon color="white" w = {"36px"}></InstagramIcon>
+            <Correo color="white"w = {"36px"}></Correo>
+          
         
     </div>
   );

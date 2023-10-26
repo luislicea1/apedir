@@ -31,6 +31,11 @@ export default function InputLocation() {
     gridTemplateColumns: "repeat(2,1fr)",
     gap: "20px",
   };
+  const grid2 = {
+    display: "grid",
+    gridTemplateColumns: "repeat(1,1fr)",
+    gap: "5px",
+  };
 
   return (
     <div style={grid}>
@@ -42,7 +47,11 @@ export default function InputLocation() {
         labelPlacement="outside"
       />
       <div />
-      <SelectorProvincia></SelectorProvincia>
+      <div style={grid2}>
+        <label>Provincia</label>
+        <SelectorProvincia></SelectorProvincia>
+      </div>
+      
       <div />
       <div>
         <div>
