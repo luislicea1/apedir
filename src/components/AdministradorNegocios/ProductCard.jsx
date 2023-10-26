@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Card,
   CardHeader,
@@ -5,13 +7,26 @@ import {
   CardFooter,
   Image,
   Tooltip,
+  Checkbox,
 } from "@nextui-org/react";
 
 import PropTypes from "prop-types";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
+import { updateAvailability } from "../../api/products";
 
-export default function ProductCard({ title, img, price, index }) {
+export default function ProductCard({
+  id,
+  title,
+  img,
+  price,
+  index,
+  productInput,
+  setProductInput,
+  onProductEditOpen,
+  isAvalaible,
+}) {
+  const [isSelected, setIsSelected] = useState(isAvalaible);
   const CardStyles = {
     height: "100%",
     //minHeight: "300px",
@@ -30,6 +45,12 @@ export default function ProductCard({ title, img, price, index }) {
     maxHeight: "400px",
     borderRadius: "10px 10px 0 0",
   };
+
+  const changeAvailability = async () => {
+    setIsSelected(!isSelected);
+    await updateAvailability(id, !isSelected);
+  };
+
   return (
     <Card
       shadow="sm"
@@ -38,17 +59,33 @@ export default function ProductCard({ title, img, price, index }) {
       style={CardStyles}
       className="producto-card"
     >
-      <CardHeader style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Tooltip content="Editar producto">
-          <span className="text-lg text-default-500 cursor-pointer active:opacity-50">
-            <EditIcon />
-          </span>
-        </Tooltip>
-        <Tooltip color="danger" content="Eliminar producto">
-          <span className="text-lg text-danger cursor-pointer active:opacity-50">
-            <DeleteIcon />
-          </span>
-        </Tooltip>
+      <CardHeader style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="flex">
+          <Checkbox
+            isSelected={isSelected}
+            onValueChange={changeAvailability}
+          ></Checkbox>
+          <p className="text-sm text-default-500">Activo</p>
+        </div>
+
+        <div className="flex" style={{ gap: "10px" }}>
+          <Tooltip content="Editar producto">
+            <span
+              className="text-lg text-default-500 cursor-pointer active:opacity-50"
+              onClick={() => {
+                setProductInput(productInput);
+                onProductEditOpen();
+              }}
+            >
+              <EditIcon />
+            </span>
+          </Tooltip>
+          <Tooltip color="danger" content="Eliminar producto">
+            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <DeleteIcon />
+            </span>
+          </Tooltip>
+        </div>
       </CardHeader>
       <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
         <Image

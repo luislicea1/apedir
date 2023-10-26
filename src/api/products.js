@@ -1,19 +1,62 @@
 import supabase from "./client";
+import { uploadImage } from "./images";
 
 const addProduct = async (product) => {
   const { data, error } = await supabase
     .from("products")
     .insert(product)
     .select();
-    console.log({data}, {error})
+  console.log({ data }, { error });
 };
 
-// const getProducts = async () => {
-//   let { data: products, error } = await supabase.from("products").select("*");
+const updateAvailability = async (id, status) => {
+  const { data, error } = await supabase
+    .from("products")
+    .update({ isAvalaible: status })
+    .eq("id", id)
+    .select();
+};
 
-//   console.log(products, error);
-//   return products;
-// };
+const updateProduct = async (product, imageName) => {
+  if (imageName) {
+    const { data: oldData, error: oldError } = await supabase
+      .from("products")
+      .select("image")
+      .eq("id", product.id);
+
+    if (oldError) {
+      console.error("Error al obtener el valor antiguo: ", oldError);
+      return;
+    }
+    console.log(oldData[0].image);
+    await supabase.storage.from("products").remove(oldData[0].image);
+  }
+
+  let updatedProduct = Object.keys(product).reduce((acc, key) => {
+    if (product[key] !== null && product[key] !== "") {
+      acc[key] = product[key];
+    }
+    return acc;
+  }, {});
+  console.log(updateProduct)
+  if (updatedProduct.image) {
+    let img;
+    try {
+      img = await uploadImage(product.image, imageName, "products");
+    } catch (error) {
+      console.error("Error al subir la imagen:", error);
+      return;
+    }
+
+    updatedProduct.image = img.path;
+  }
+
+  const { data, error } = await supabase
+    .from("products")
+    .update(updatedProduct)
+    .eq("id", product.id)
+    .select();
+};
 
 const getProducts = async () => {
   let { data: products, error } = await supabase.from("products").select("*");
@@ -27,7 +70,7 @@ const getProducts = async () => {
   const productsWithPublicUrls = await Promise.all(
     products.map(async (product) => {
       const { data: url, error } = supabase.storage
-        .from("avatars")
+        .from("products")
         .getPublicUrl(product.image);
 
       if (error) {
@@ -40,8 +83,7 @@ const getProducts = async () => {
     })
   );
 
-  console.log(productsWithPublicUrls, error);
   return productsWithPublicUrls;
 };
 
-export { addProduct, getProducts };
+export { addProduct, getProducts, updateAvailability, updateProduct };

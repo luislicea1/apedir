@@ -9,6 +9,7 @@ import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import ManageProducts from "./ManageProducts";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
+import supabase from "../../api/client";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -19,6 +20,38 @@ export default function CrearNegocio() {
   };
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const productSubscription = supabase
+    .channel("custom-all-channel")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "products" },
+      (payload) => {
+        switch (payload.eventType) {
+          case "INSERT":
+            setProducts([...products, payload.new]);
+            break;
+          case "DELETE":
+            setProducts(
+              products.filter((product) => product.id !== payload.old.id)
+            );
+            break;
+          // Agregar más casos según sea necesario
+        }
+      }
+    )
+    .subscribe();
+
+  const categorySubscription = supabase
+    .channel("custom-all-channel")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "categories" },
+      (payload) => {
+        setCategories([...categories, payload.new.category]);
+      }
+    )
+    .subscribe();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,8 +64,7 @@ export default function CrearNegocio() {
     };
     fetchProducts();
     fetchCategories();
-  }, []);
-
+  }, [productSubscription, categorySubscription]);
 
   return (
     <div style={contenedor}>
@@ -49,17 +81,7 @@ export default function CrearNegocio() {
             </Card>
           </Tab>
           <Tab key="music" title="Horario">
-<<<<<<< HEAD
-            <Card>
-              <CardBody>
-=======
-            
-              
-          
->>>>>>> bffc20d46202974aa5d646c55ec3d330d002c07f
-                <ResponsiveTimePickers></ResponsiveTimePickers>
-              
-            
+            <ResponsiveTimePickers></ResponsiveTimePickers>
           </Tab>
           <Tab key="videos" title="Productos">
             <Card>

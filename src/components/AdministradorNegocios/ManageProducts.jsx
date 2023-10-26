@@ -21,6 +21,7 @@ import CustomDropdown from "./CustomDropdown";
 import supabase from "../../api/client";
 import { resizeImage } from "../../api/helpers/image";
 import { uploadImage } from "../../api/images";
+import ModalEditProduct from "./ModalEditProduct";
 
 const ManageProducts = ({
   products,
@@ -36,34 +37,11 @@ const ManageProducts = ({
     onOpenChange: onProductModalOpenChange,
   } = useDisclosure();
 
-  const productChanges = supabase
-    .channel("custom-all-channel")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "products" },
-      (payload) => {
-        console.log("Change received!", payload);
-      }
-    )
-    .subscribe();
-
-  const categoryChanges = supabase
-    .channel("custom-all-channel")
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "categories",
-        filter: "bussiness=eq.banca",
-      },
-      (payload) => {
-        setCategories([...categories, payload.new.category]);
-      }
-    )
-    .subscribe();
-
-  useEffect(() => {}, [productChanges, categoryChanges]);
+  const {
+    isOpen: isProductEditOpen,
+    onOpen: onProductEditOpen,
+    onOpenChange: onProductEditOpenChange,
+  } = useDisclosure();
 
   const [imageName, setImageName] = useState("");
   const [productInput, setProductInput] = useState({
@@ -72,7 +50,7 @@ const ManageProducts = ({
     description: "",
     image: "",
     category: categories[0],
-    isAvalaible: false,
+    isAvalaible: true,
   });
 
   const handleAddCategory = async () => {
@@ -83,7 +61,11 @@ const ManageProducts = ({
 
   const handleAddProduct = async () => {
     // Añadiendo la imagen
-    const insertedImage = await uploadImage(productInput.image, imageName);
+    const insertedImage = await uploadImage(
+      productInput.image,
+      imageName,
+      "products"
+    );
 
     const updatedProductInput = {
       ...productInput,
@@ -97,17 +79,27 @@ const ManageProducts = ({
       description: "",
       image: "",
       category: categories[0],
-      isAvalaible: false,
+      isAvalaible: true,
     });
   };
 
   const handleImageChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0]; // Guarda el archivo en una variable
+      // Obtiene la extensión del archivo
+      const extension = file.name.split(".").pop();
 
-      setImageName(file.name);
+      // Convierte la extensión a minúsculas
+      const lowerCaseExtension = extension.toLowerCase();
+
+      // Reemplaza la extensión original con la extensión en minúsculas
+      const newFileName = file.name.replace(extension, lowerCaseExtension);
+
+      setImageName(newFileName);
+
       // Llama a la función resizeImage pasándole el archivo de imagen
       const resizedImage = await resizeImage(file); // Usa el archivo que guardaste
+
       // Usa el resultado de resizeImage para actualizar el estado del producto
       setProductInput((prevState) => {
         const updatedState = {
@@ -138,6 +130,10 @@ const ManageProducts = ({
             category={category}
             products={categoryProducts}
             onOpen={onProductModalOpen}
+            imageName={imageName}
+            setImageName={setImageName}
+            onProductEditOpen={onProductEditOpen}
+            productInput={productInput}
             setProductInput={setProductInput}
             key={category}
           />
@@ -304,6 +300,17 @@ const ManageProducts = ({
               )}
             </ModalContent>
           </Modal>
+
+          <ModalEditProduct
+            isOpen={isProductEditOpen}
+            onOpen={onProductEditOpen}
+            onOpenChange={onProductEditOpenChange}
+            productInput={productInput}
+            setProductInput={setProductInput}
+            handleImageChange={handleImageChange}
+            imageName={imageName}
+            setImageName={setImageName}
+          />
         </div>
       </label>
     </div>
