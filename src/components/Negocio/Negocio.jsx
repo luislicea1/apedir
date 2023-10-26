@@ -11,6 +11,7 @@ import Promo from "./Promo/Promo";
 import Contact from "./Contact/Contact";
 import { comidas } from "../Lugares/Comidas";
 import { desayuno } from "../Lugares/Comidas";
+import FooterNegocio from "./Footer/FooterNegocio";
 
 const sectionStyle = {
   width: "100%",
@@ -72,10 +73,13 @@ export default function Negocio({ nombre, localizacion }) {
               title="Comidas"
               lista={comidas}
             ></ListadoProductos>
-            <Contact title="Contactenos"></Contact>
+            
+            
           </div>
         </section>
+        <FooterNegocio title = {nombre}></FooterNegocio>
       </section>
+      
     </div>
   );
 }

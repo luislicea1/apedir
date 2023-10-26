@@ -4,7 +4,10 @@ export default function Contact(props) {
     const style = {
         width: "100%", 
         marginTop: "30px", 
-        marginBottom: "30px"
+        display: "grid",
+        placeItems: "center",
+        color: "white"
+
     }
     const fuente = {
         fontSize: "30px",

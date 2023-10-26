@@ -8,6 +8,7 @@ export default function InputPrecio() {
         <Input
           label="Price"
           placeholder="0.00"
+          variant="bordered"
           labelPlacement="outside"
           startContent={
             <div className="pointer-events-none flex items-center">
