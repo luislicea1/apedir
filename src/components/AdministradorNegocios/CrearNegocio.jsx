@@ -4,9 +4,14 @@ import ImageUploadButton from "./Inputs/ImagenUploadButton";
 import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-
+import InputPhoneNumber from "./Inputs/InputPhoneNumber";
+import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import ManageProducts from "./ManageProducts";
+import InputDeFaceBook from "./Inputs/InputDeFaceBook";
+import InputDeInstagram from "./Inputs/InputDeInstagram";
+import InputTelegram from "./Inputs/InputTelegram";
+import InputWhatsapp from "./Inputs/InputWhatsapp";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -17,7 +22,10 @@ export default function CrearNegocio() {
   };
 
   const bg = {
-    background: "red",
+    display: "grid",
+    gridTemplateColumns: "repeat(2,1fr)",
+    gap: "10px",
+    padding: "40px 0",
   };
 
   return (
@@ -31,6 +39,18 @@ export default function CrearNegocio() {
                 <ImageUploadButton></ImageUploadButton>
                 <TextAreaDescription></TextAreaDescription>
                 <InputLocation></InputLocation>
+                
+                <div style={bg}>
+                  <InputGmail></InputGmail>
+                  <InputPhoneNumber></InputPhoneNumber>
+                  <InputWhatsapp></InputWhatsapp>
+                  <InputTelegram></InputTelegram>
+                  <InputTelefonoLocalNumber></InputTelefonoLocalNumber>
+                  <InputDeFaceBook></InputDeFaceBook>
+                  <InputDeInstagram></InputDeInstagram>
+                </div>
+               
+                
               </CardBody>
             </Card>
           </Tab>
