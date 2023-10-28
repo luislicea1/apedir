@@ -11,7 +11,6 @@ import {
 import { CircularProgress } from "@nextui-org/react";
 import NotFound from "../pages/NotFound/NotFound";
 
-
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
 const LazyCreateAccount = lazy(() =>
@@ -34,7 +33,7 @@ const LazyVisualizarProductoWrapper = lazy(() =>
   import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
 );
 
-const LazyNegocioGratuitoWrapper = lazy(()=>
+const LazyNegocioGratuitoWrapper = lazy(() =>
   import("../components/NegociosGratuitos/NegocioGratuitoWrapper")
 );
 
@@ -183,7 +182,11 @@ const router = createBrowserRouter([
   {
     path: "/administrador-negocio",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense
+        fallback={
+          <CircularProgress color="secondary" aria-label="Loading..." />
+        }
+      >
         <LazyAdministradorNegocio />
       </Suspense>
     ),
@@ -203,4 +206,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-

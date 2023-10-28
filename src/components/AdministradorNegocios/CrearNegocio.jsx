@@ -15,11 +15,7 @@ import InputWhatsapp from "./Inputs/InputWhatsapp";
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
-<<<<<<< HEAD
 import supabase from "../../api/client";
-=======
-import InputPrecio from "./Inputs/InputPrecio";
->>>>>>> 0685ef12c8c8b538033abe50d397848d942052de
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -31,45 +27,48 @@ export default function CrearNegocio() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const productSubscription = supabase
-    .channel("custom-all-channel")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "products" },
-      (payload) => {
-        switch (payload.eventType) {
-          case "INSERT":
-            setProducts([...products, payload.new]);
-            break;
-          case "DELETE":
-            setProducts(
-              products.filter((product) => product.id !== payload.old.id)
-            );
-            break;
-          case "UPDATE":
-            console.log(payload);
-            break;
-          // Agregar más casos según sea necesario
-        }
-      }
-    )
-    .subscribe();
-
-  const categorySubscription = supabase
-    .channel("custom-all-channel")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "categories" },
-      (payload) => {
-        setCategories([...categories, payload.new.category]);
-      }
-    )
-    .subscribe();
 
   useEffect(() => {
     const fetchProducts = async () => {
       const productList = await getProducts();
       setProducts(productList);
+    };
+    let productSubscription = null;
+    let categorySubscription = null;
+
+    const timer1 = setTimeout(
+      () => (productSubscription = subscribeToProducts()),
+      1000
+    );
+    const timer2 = setTimeout(
+      () => (categorySubscription = subscribeToCategories()),
+      1000
+    );
+
+    const subscribeToProducts = () => {
+      return supabase
+        .channel("products-channel")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "products" },
+          (payload) => {
+            fetchProducts();
+          }
+        )
+        .subscribe();
+    };
+
+    const subscribeToCategories = () => {
+      return supabase
+        .channel("category-channel")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "categories" },
+          (payload) => {
+            fetchCategories();
+          }
+        )
+        .subscribe();
     };
     const fetchCategories = async () => {
       const categorylist = await getCategories("banca");
@@ -77,8 +76,14 @@ export default function CrearNegocio() {
     };
     fetchProducts();
     fetchCategories();
-  }, [productSubscription, categorySubscription]);
 
+    return () => {
+      if (productSubscription) productSubscription.unsubscribe();
+      if (categorySubscription) categorySubscription.unsubscribe();
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
 
   const bg = {
     display: "grid",
@@ -107,13 +112,11 @@ export default function CrearNegocio() {
                   <InputDeFaceBook></InputDeFaceBook>
                   <InputDeInstagram></InputDeInstagram>
                 </div>
-               
-                
               </CardBody>
             </Card>
           </Tab>
           <Tab key="music" title="Horario">
-                <ResponsiveTimePickers></ResponsiveTimePickers>
+            <ResponsiveTimePickers></ResponsiveTimePickers>
           </Tab>
           <Tab key="videos" title="Productos">
             <Card>
@@ -130,6 +133,5 @@ export default function CrearNegocio() {
         </Tabs>
       </div>
     </div>
-    
   );
 }

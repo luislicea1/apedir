@@ -24,6 +24,7 @@ export default function ProductCard({
   productInput,
   setProductInput,
   onProductEditOpen,
+  onProductDeleteOpen,
   isAvalaible,
 }) {
   const [isSelected, setIsSelected] = useState(isAvalaible);
@@ -81,7 +82,11 @@ export default function ProductCard({
             </span>
           </Tooltip>
           <Tooltip color="danger" content="Eliminar producto">
-            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+            <span className="text-lg text-danger cursor-pointer active:opacity-50"
+            onClick={() => {
+              setProductInput(productInput);
+              onProductDeleteOpen()
+            }}>
               <DeleteIcon />
             </span>
           </Tooltip>

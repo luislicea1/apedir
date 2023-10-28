@@ -23,6 +23,7 @@ export default function ModalEditProduct({
   handleImageChange,
   imageName,
   setImageName,
+
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,6 +47,7 @@ export default function ModalEditProduct({
               <ModalBody>
                 <Input
                   autoFocus
+                  required
                   label="Nombre"
                   placeholder="Escribe el nombre del producto"
                   variant="bordered"
@@ -61,6 +63,7 @@ export default function ModalEditProduct({
                 <Textarea
                   autoFocus
                   label="Descripción"
+                  required
                   placeholder="Escribe la descripción del producto"
                   variant="bordered"
                   value={productInput.description}
@@ -73,6 +76,7 @@ export default function ModalEditProduct({
                 />
                 <Input
                   autoFocus
+                  required
                   label="Precio"
                   placeholder="Precio del producto"
                   variant="bordered"
@@ -140,7 +144,7 @@ export default function ModalEditProduct({
                   onPress={() => {
                     setIsLoading(true);
                     handleEditProduct();
-                    setIsLoading(false)
+                    setIsLoading(false);
                     onClose();
                   }}
                 >

@@ -6,15 +6,7 @@ const uploadImage = async (image, name, bucket) => {
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(filename, image);
-
-  if (error) {
-    console.error("Error subiendo la imagen a Supabase", error);
-  } else {
-    console.log("Imagen subida a Supabase con éxito", data);
-  }
-  return data
+  return data;
 };
-
-
 
 export { uploadImage };

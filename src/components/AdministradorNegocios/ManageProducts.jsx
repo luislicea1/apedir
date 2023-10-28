@@ -15,13 +15,15 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { CategoryIcon } from "../Icons/CategoryIcon";
-import { addCategory, getCategories } from "../../api/categories";
+import { addCategory } from "../../api/categories";
 import { addProduct } from "../../api/products";
-import CustomDropdown from "./CustomDropdown";
-import supabase from "../../api/client";
 import { resizeImage } from "../../api/helpers/image";
 import { uploadImage } from "../../api/images";
 import ModalEditProduct from "./ModalEditProduct";
+import ModalDeleteProduct from "./ModalDeleteProduct";
+import ModalDeleteCategory from "./ModalDeleteCategory";
+import ModalEditCategory from "./ModalEditCategory";
+import { Toaster, toast } from "sonner";
 
 const ManageProducts = ({
   products,
@@ -30,7 +32,10 @@ const ManageProducts = ({
   setCategories,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [categoryInput, setCategoryInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState({
+    bussiness: "banca",
+    category: "",
+  });
   const {
     isOpen: isProductModalOpen,
     onOpen: onProductModalOpen,
@@ -43,24 +48,80 @@ const ManageProducts = ({
     onOpenChange: onProductEditOpenChange,
   } = useDisclosure();
 
+  const {
+    isOpen: isCategoryEditOpen,
+    onOpen: onCategoryEditOpen,
+    onOpenChange: onCategoryEditOpenChange,
+  } = useDisclosure();
+
+  const {
+    isOpen: isProductDeleteOpen,
+    onOpen: onProductDeleteOpen,
+    onOpenChange: onProductDeleteOpenChange,
+  } = useDisclosure();
+
+  const {
+    isOpen: isCategoryDeleteOpen,
+    onOpen: onCategoryDeleteOpen,
+    onOpenChange: onCategoryDeleteOpenChange,
+  } = useDisclosure();
+
   const [imageName, setImageName] = useState("");
   const [productInput, setProductInput] = useState({
     name: "",
     price: "",
     description: "",
     image: "",
-    category: categories[0],
+    category: "",
     isAvalaible: true,
   });
 
+  const [isFormValid, setIsFormValid] = useState(false);
+  const validateForm = async () => {
+    if (
+      productInput.name.trim() !== "" &&
+      productInput.description.trim() !== "" &&
+      productInput.price.trim() !== ""
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  };
+
+  const [isCategoryFormValid, setIsCategoryFormValid] = useState(false);
+
+  const validateCategoryAdd = async () => {
+    if (categoryInput.category.trim() !== "") {
+      setIsCategoryFormValid(true);
+    } else {
+      setIsCategoryFormValid(false);
+    }
+  };
+
   const handleAddCategory = async () => {
-    const category = { bussiness: "banca", category: categoryInput };
-    await addCategory(category);
-    setCategoryInput("");
+    if (categoryInput.category.trim() === "") {
+      toast.error("El nombre de la categoría no puede estar vacío");
+      return;
+    }
+    console.log(categoryInput);
+
+    await addCategory(categoryInput);
+
+    setCategoryInput({
+      bussiness: "banca",
+      category: "",
+    });
   };
 
   const handleAddProduct = async () => {
     // Añadiendo la imagen
+    console.log(productInput);
+    await validateCategoryAdd();
+    if (!isCategoryFormValid) {
+      toast.error("Debes rellenar todos los campos del formulario");
+      return;
+    }
     const insertedImage = await uploadImage(
       productInput.image,
       imageName,
@@ -73,12 +134,13 @@ const ManageProducts = ({
     };
 
     await addProduct(updatedProductInput);
+
     setProductInput({
       name: "",
       price: "",
       description: "",
       image: "",
-      category: categories[0],
+      category: "",
       isAvalaible: true,
     });
   };
@@ -86,6 +148,7 @@ const ManageProducts = ({
   const handleImageChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0]; // Guarda el archivo en una variable
+
       // Obtiene la extensión del archivo
       const extension = file.name.split(".").pop();
 
@@ -112,6 +175,9 @@ const ManageProducts = ({
     }
   };
 
+  useEffect(() => {
+    validateForm();
+  }, [productInput]);
   // Recuperar los productos y las categorías
 
   return (
@@ -120,10 +186,10 @@ const ManageProducts = ({
         <h3>Categorías </h3>
         <br />
       </section>
-
+      <Toaster richColors duration={3000} theme="dark" position="top-center" />
       {categories.map((category) => {
         const categoryProducts = products.filter(
-          (product) => product.category === category
+          (product) => product.category === category.category
         );
         return (
           <CategoryContainer
@@ -132,10 +198,16 @@ const ManageProducts = ({
             onOpen={onProductModalOpen}
             imageName={imageName}
             setImageName={setImageName}
+            onCategoryEditOpen={onCategoryEditOpen}
+            onCategoryEditOpenChange={onCategoryEditOpenChange}
+            onCategoryDeleteOpen={onCategoryDeleteOpen}
             onProductEditOpen={onProductEditOpen}
+            onProductDeleteOpen={onProductDeleteOpen}
             productInput={productInput}
             setProductInput={setProductInput}
-            key={category}
+            categoryInput={categoryInput}
+            setCategoryInput={setCategoryInput}
+            key={category.id}
           />
         );
       })}
@@ -247,10 +319,12 @@ const ManageProducts = ({
                     </Button>
                     <Button
                       color="secondary"
+                      style={{ color: "white" }}
                       onPress={() => {
                         handleAddProduct();
                         onClose();
                       }}
+                      disabled={!isFormValid}
                     >
                       Agregar
                     </Button>
@@ -276,10 +350,16 @@ const ManageProducts = ({
                     <Input
                       autoFocus
                       label="Nombre"
+                      isRequired
                       placeholder="Escribe el nombre de la categoría"
                       variant="bordered"
-                      value={categoryInput}
-                      onChange={(event) => setCategoryInput(event.target.value)}
+                      value={categoryInput.category}
+                      onChange={(event) =>
+                        setCategoryInput((prevState) => ({
+                          ...prevState,
+                          category: event.target.value,
+                        }))
+                      }
                     />
                   </ModalBody>
                   <ModalFooter>
@@ -288,8 +368,8 @@ const ManageProducts = ({
                     </Button>
                     <Button
                       color="secondary"
-                      onPress={async () => {
-                        await handleAddCategory();
+                      onPress={() => {
+                        handleAddCategory();
                         onClose();
                       }}
                     >
@@ -307,9 +387,30 @@ const ManageProducts = ({
             onOpenChange={onProductEditOpenChange}
             productInput={productInput}
             setProductInput={setProductInput}
+            setCategoryInput={setCategoryInput}
             handleImageChange={handleImageChange}
             imageName={imageName}
             setImageName={setImageName}
+          />
+
+          <ModalEditCategory
+            isOpen={isCategoryEditOpen}
+            onOpenChange={onCategoryEditOpenChange}
+            categoryInput={categoryInput}
+            setCategoryInput={setCategoryInput}
+          />
+
+          <ModalDeleteProduct
+            isOpen={isProductDeleteOpen}
+            onOpen={onProductDeleteOpen}
+            onOpenChange={onProductDeleteOpenChange}
+            productToDelete={productInput}
+          />
+          <ModalDeleteCategory
+            isOpen={isCategoryDeleteOpen}
+            categoryToDelete={categoryInput}
+            onOpen={onCategoryDeleteOpen}
+            onOpenChange={onCategoryDeleteOpenChange}
           />
         </div>
       </label>

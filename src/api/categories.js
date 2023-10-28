@@ -1,23 +1,38 @@
 import supabase from "./client";
 
 const getCategories = async (bussiness) => {
-    let { data: categories, error } = await supabase
-      .from("categories")
-      .select("category")
-      .eq("bussiness", bussiness);
-  
-    categories = categories.map(category => category.category);
+  let { data: categories, error } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("bussiness", bussiness)
+    .order("category", { ascending: true });
 
-    return categories;
-  };
+  return categories;
+};
 
 const addCategory = async (category) => {
   const { data, error } = await supabase
     .from("categories")
     .insert(category)
     .select();
-    console.log(error)
+  console.log(error);
   return data;
 };
 
-export { getCategories, addCategory };
+const updateCategory = async (category) => {
+  const { data, error } = await supabase
+    .from("categories")
+    .update(category)
+    .eq("id", category.id);
+
+  console.log(error);
+};
+
+const deleteCategoryById = async (id) => {
+  const { data, error } = await supabase
+    .from("categories")
+    .delete()
+    .eq("id", id);
+};
+
+export { getCategories, addCategory, updateCategory, deleteCategoryById };

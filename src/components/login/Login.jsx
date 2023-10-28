@@ -42,7 +42,7 @@ export default function Login() {
         <div className="img-login-container">
           <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
         </div>
-        
+
         <form className="login-container" ref={form} onSubmit={loginSubmit}>
           <Input type="email" name="email" variant={"bordered"} label="Email" />
           <Input
@@ -92,6 +92,7 @@ export default function Login() {
           duration={3000}
           expand={false}
           richColors
+          theme="dark"
         />
       </div>
     </div>

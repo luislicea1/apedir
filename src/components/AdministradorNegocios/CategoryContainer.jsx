@@ -19,6 +19,12 @@ const CategoryContainer = ({
   productInput,
   setProductInput,
   onProductEditOpen,
+  onProductDeleteOpen,
+  categoryInput,
+  setCategoryInput,
+  onCategoryEditOpen,
+  onCategoryEditOpenChange,
+  onCategoryDeleteOpen,
 }) => {
   return (
     <div
@@ -29,7 +35,9 @@ const CategoryContainer = ({
         marginBottom: "30px",
       }}
     >
-      <h4 style={{ marginTop: "10px", marginBottom: "10px" }}>{category}</h4>
+      <h4 style={{ marginTop: "10px", marginBottom: "10px" }}>
+        {category.category}
+      </h4>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           className="text-white"
@@ -39,8 +47,9 @@ const CategoryContainer = ({
             setProductInput((prevState) => {
               const updatedState = {
                 ...prevState,
-                category: category,
+                category: category.category,
               };
+
               return updatedState;
             });
             onOpen();
@@ -50,12 +59,38 @@ const CategoryContainer = ({
         </Button>
         <div className="flex" style={{ gap: "10px" }}>
           <Tooltip content="Editar producto">
-            <span className="text-lg text-default-500 cursor-pointer active:opacity-50">
+            <span
+              className="text-lg text-default-500 cursor-pointer active:opacity-50"
+              onClick={() => {
+                setCategoryInput((prevState) => {
+                  const updatedState = {
+                    ...prevState,
+                    id: category.id,
+                    category: category.category,
+                  };
+                  return updatedState;
+                });
+                onCategoryEditOpen();
+              }}
+            >
               <EditIcon />
             </span>
           </Tooltip>
           <Tooltip color="danger" content="Eliminar producto">
-            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+            <span
+              className="text-lg text-danger cursor-pointer active:opacity-50"
+              onClick={() => {
+                setCategoryInput((prevState) => {
+                  const updatedState = {
+                    ...prevState,
+                    id: category.id,
+                    category: category.category,
+                  };
+                  return updatedState;
+                });
+                onCategoryDeleteOpen();
+              }}
+            >
               <DeleteIcon />
             </span>
           </Tooltip>
@@ -73,6 +108,7 @@ const CategoryContainer = ({
             title={product.name}
             description={product.description}
             onOpen={onOpen}
+            onProductDeleteOpen={onProductDeleteOpen}
             productInput={product}
             setProductInput={setProductInput}
             onProductEditOpen={onProductEditOpen}

@@ -117,6 +117,7 @@ export default function CreateAccount() {
           duration={3000}
           expand={false}
           richColors
+          theme="dark"
         />
       </div>
     </div>

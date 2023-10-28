@@ -6,7 +6,6 @@ const addProduct = async (product) => {
     .from("products")
     .insert(product)
     .select();
-  console.log({ data }, { error });
 };
 
 const updateAvailability = async (id, status) => {
@@ -18,7 +17,7 @@ const updateAvailability = async (id, status) => {
 };
 
 const updateProduct = async (product, imageName) => {
-  if (imageName) {
+  if (imageName !== "") {
     const { data: oldData, error: oldError } = await supabase
       .from("products")
       .select("image")
@@ -28,7 +27,6 @@ const updateProduct = async (product, imageName) => {
       console.error("Error al obtener el valor antiguo: ", oldError);
       return;
     }
-    console.log(oldData[0].image);
     await supabase.storage.from("products").remove(oldData[0].image);
   }
 
@@ -38,7 +36,7 @@ const updateProduct = async (product, imageName) => {
     }
     return acc;
   }, {});
-  console.log(updateProduct)
+
   if (updatedProduct.image) {
     let img;
     try {
@@ -59,7 +57,10 @@ const updateProduct = async (product, imageName) => {
 };
 
 const getProducts = async () => {
-  let { data: products, error } = await supabase.from("products").select("*");
+  let { data: products, error } = await supabase
+    .from("products")
+    .select("*")
+    .order("name", { ascending: true });
 
   if (error) {
     console.error("Error getting products:", error);
@@ -86,4 +87,24 @@ const getProducts = async () => {
   return productsWithPublicUrls;
 };
 
-export { addProduct, getProducts, updateAvailability, updateProduct };
+const deleteProductById = async (id) => {
+  const { data: oldData, error: oldError } = await supabase
+    .from("products")
+    .select("image")
+    .eq("id", id);
+
+  if (oldError) {
+    console.error("Error al obtener el valor antiguo: ", oldError);
+    return;
+  }
+  await supabase.storage.from("products").remove(oldData[0].image);
+  await supabase.from("products").delete().eq("id", id);
+};
+
+export {
+  addProduct,
+  getProducts,
+  updateAvailability,
+  updateProduct,
+  deleteProductById,
+};

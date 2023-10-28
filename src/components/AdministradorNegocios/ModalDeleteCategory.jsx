@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "@nextui-org/react";
+
+import { deleteCategoryById } from "../../api/categories";
+
+export default function ModalDeleteCategory({
+  isOpen,
+  onOpen,
+  onOpenChange,
+  categoryToDelete,
+}) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const deleteCategory = async (id) => {
+    setIsDeleting(true);
+    await deleteCategoryById(id);
+    setIsDeleting(false);
+  };
+
+  return (
+    <>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Eliminar a {categoryToDelete.category}</ModalHeader>
+              <ModalBody>
+                ¿Estás seguro de que quieres eliminar la categoria{" "}
+                {categoryToDelete.category}?
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="flat"
+                  onClick={onClose}
+                  disabled={isDeleting}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  color="primary"
+                  onClick={async () => {
+                    await deleteCategory(categoryToDelete.id);
+                    onClose();
+                  }}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? "Eliminando..." : "Eliminar"}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
