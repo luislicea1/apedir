@@ -1,7 +1,6 @@
-import React from "react";
 import {Input} from "@nextui-org/react";
 
-export default function InputDeFaceBook(){
+export default function InputDeFaceBook({value, setValue}){
     return(
         <Input
         type="url"
@@ -14,6 +13,12 @@ export default function InputDeFaceBook(){
             <span className="text-default-400 text-small"></span>
           </div>
         }
+        onChange={(event) => {
+          setValue({
+            ...value,
+            facebook: event.target.value,
+          });
+        }}
       />
     
     );

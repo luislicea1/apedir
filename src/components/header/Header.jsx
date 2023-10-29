@@ -18,11 +18,15 @@ import supabase from "../../api/client.js";
 import { getUser } from "../../api/profile.js";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import Notification from "./Notification.jsx";
+import useUserStore from "../../hooks/useStore.js";
 
 export default function Header(props) {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+
   const [channel, setChannel] = useState(null);
 
   const handleLogout = async () => {
@@ -37,8 +41,8 @@ export default function Header(props) {
   async function handleAuthStateChange(event, session) {
     if (session) {
       setSession(session);
-      const user = await getUser(session.user.email);
-      setUser(user);
+      const u = await getUser(session.user.email);
+      setUser(u);
 
       // Suscribirse a los cambios en la tabla "profiles"
       const channel = supabase
@@ -49,6 +53,7 @@ export default function Header(props) {
             event: "UPDATE",
             schema: "public",
             table: "profiles",
+            filter: `id=eq.${user.id}`,
           },
           async (payload) => {
             setUser(payload.new);
@@ -68,7 +73,8 @@ export default function Header(props) {
     const authListener = supabase.auth.onAuthStateChange(
       async (event, session) => await handleAuthStateChange(event, session)
     );
-  }, [navigate]);
+
+  }, [user]);
 
   return (
     <Navbar isBordered disableAnimation>

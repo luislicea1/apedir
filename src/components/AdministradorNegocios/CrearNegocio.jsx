@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react";
-import TextAreaDescription from "./Inputs/TextAreaDescripcion";
-import InputTitle from "./Inputs/InputTitle";
-import ImageUploadButton from "./Inputs/ImagenUploadButton";
-import InputGmail from "./Inputs/InputGmail";
-import InputLocation from "./Inputs/InputLocation";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import InputPhoneNumber from "./Inputs/InputPhoneNumber";
-import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
 import ManageProducts from "./ManageProducts";
-import InputDeFaceBook from "./Inputs/InputDeFaceBook";
-import InputDeInstagram from "./Inputs/InputDeInstagram";
-import InputTelegram from "./Inputs/InputTelegram";
-import InputWhatsapp from "./Inputs/InputWhatsapp";
+import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
 import supabase from "../../api/client";
+
+import NegocioDashboard from "./NegocioDashboard";
 
 export default function CrearNegocio() {
   const contenedor = {
@@ -27,12 +19,17 @@ export default function CrearNegocio() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-
   useEffect(() => {
     const fetchProducts = async () => {
       const productList = await getProducts();
-      setProducts(productList);
+      setProducts(productList !== null ? productList : []);
     };
+
+    const fetchCategories = async () => {
+      const categorylist = await getCategories("banca");
+      setCategories(categorylist !== null ? categorylist : []);
+    };
+
     let productSubscription = null;
     let categorySubscription = null;
 
@@ -70,10 +67,7 @@ export default function CrearNegocio() {
         )
         .subscribe();
     };
-    const fetchCategories = async () => {
-      const categorylist = await getCategories("banca");
-      setCategories(categorylist);
-    };
+
     fetchProducts();
     fetchCategories();
 
@@ -85,35 +79,12 @@ export default function CrearNegocio() {
     };
   }, []);
 
-  const bg = {
-    display: "grid",
-    gridTemplateColumns: "repeat(2,1fr)",
-    gap: "10px",
-    padding: "40px 0",
-  };
-
   return (
     <div style={contenedor}>
       <div className="flex w-full flex-col">
         <Tabs aria-label="Options">
           <Tab key="perfil" title="Perfil">
-            <Card>
-              <CardBody>
-                <InputTitle></InputTitle>
-                <ImageUploadButton></ImageUploadButton>
-                <TextAreaDescription></TextAreaDescription>
-                <InputLocation></InputLocation>
-                <div style={bg}>
-                  <InputGmail></InputGmail>
-                  <InputPhoneNumber></InputPhoneNumber>
-                  <InputWhatsapp></InputWhatsapp>
-                  <InputTelegram></InputTelegram>
-                  <InputTelefonoLocalNumber></InputTelefonoLocalNumber>
-                  <InputDeFaceBook></InputDeFaceBook>
-                  <InputDeInstagram></InputDeInstagram>
-                </div>
-              </CardBody>
-            </Card>
+            <NegocioDashboard />
           </Tab>
           <Tab key="music" title="Horario">
             <ResponsiveTimePickers></ResponsiveTimePickers>

@@ -9,7 +9,7 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import { updateCategory } from "../../api/categories";
+import { updateCategory } from "../../../api/categories";
 
 export default function ModalEditCategory({
   isOpen,

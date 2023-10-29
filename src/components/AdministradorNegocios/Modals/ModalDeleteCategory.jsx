@@ -8,7 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-import { deleteCategoryById } from "../../api/categories";
+import { deleteCategoryById } from "../../../api/categories";
 
 export default function ModalDeleteCategory({
   isOpen,

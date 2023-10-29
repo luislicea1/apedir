@@ -19,11 +19,14 @@ import { addCategory } from "../../api/categories";
 import { addProduct } from "../../api/products";
 import { resizeImage } from "../../api/helpers/image";
 import { uploadImage } from "../../api/images";
-import ModalEditProduct from "./ModalEditProduct";
-import ModalDeleteProduct from "./ModalDeleteProduct";
-import ModalDeleteCategory from "./ModalDeleteCategory";
-import ModalEditCategory from "./ModalEditCategory";
+import ModalEditProduct from "./Modals/ModalEditProduct";
+import ModalDeleteProduct from "./Modals/ModalDeleteProduct";
+import ModalDeleteCategory from "./Modals/ModalDeleteCategory";
+import ModalEditCategory from "./Modals/ModalEditCategory";
 import { Toaster, toast } from "sonner";
+import InputPrecio from "./Inputs/InputPrecio";
+import ProductInputSchema from "../../schemas/productInputSchema";
+import { Schema } from "yup";
 
 const ManageProducts = ({
   products,
@@ -70,6 +73,7 @@ const ManageProducts = ({
   const [productInput, setProductInput] = useState({
     name: "",
     price: "",
+    currency: "CUP",
     description: "",
     image: "",
     category: "",
@@ -78,13 +82,10 @@ const ManageProducts = ({
 
   const [isFormValid, setIsFormValid] = useState(false);
   const validateForm = async () => {
-    if (
-      productInput.name.trim() !== "" &&
-      productInput.description.trim() !== "" &&
-      productInput.price.trim() !== ""
-    ) {
+    try {
+      await ProductInputSchema.validate(productInput);
       setIsFormValid(true);
-    } else {
+    } catch (error) {
       setIsFormValid(false);
     }
   };
@@ -116,10 +117,12 @@ const ManageProducts = ({
 
   const handleAddProduct = async () => {
     // Añadiendo la imagen
-    console.log(productInput);
-    await validateCategoryAdd();
-    if (!isCategoryFormValid) {
-      toast.error("Debes rellenar todos los campos del formulario");
+
+    if (!isFormValid) {
+      toast.error(
+        await ProductInputSchema.validate().catch((error) => error.message)
+      );
+
       return;
     }
     const insertedImage = await uploadImage(
@@ -127,6 +130,7 @@ const ManageProducts = ({
       imageName,
       "products"
     );
+    console.log(insertedImage);
 
     const updatedProductInput = {
       ...productInput,
@@ -137,7 +141,8 @@ const ManageProducts = ({
 
     setProductInput({
       name: "",
-      price: "",
+      price: 1,
+      currency: "CUP",
       description: "",
       image: "",
       category: "",
@@ -259,7 +264,13 @@ const ManageProducts = ({
                         })
                       }
                     />
-                    <Input
+
+                    <InputPrecio
+                      value={productInput}
+                      setValues={setProductInput}
+                    />
+
+                    {/* <Input
                       autoFocus
                       label="Precio"
                       placeholder="Precio del producto"
@@ -272,7 +283,7 @@ const ManageProducts = ({
                           price: event.target.value,
                         })
                       }
-                    />
+                    /> */}
 
                     <div
                       style={{

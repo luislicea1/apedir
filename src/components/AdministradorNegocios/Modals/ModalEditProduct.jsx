@@ -11,8 +11,8 @@ import {
   Button,
   CircularProgress,
 } from "@nextui-org/react";
-import { UploadIcon } from "../Icons/UploadIcon";
-import { updateProduct } from "../../api/products";
+import { UploadIcon } from "../../Icons/UploadIcon";
+import { updateProduct } from "../../../api/products";
 
 export default function ModalEditProduct({
   isOpen,
@@ -23,7 +23,6 @@ export default function ModalEditProduct({
   handleImageChange,
   imageName,
   setImageName,
-
 }) {
   const [isLoading, setIsLoading] = useState(false);
 

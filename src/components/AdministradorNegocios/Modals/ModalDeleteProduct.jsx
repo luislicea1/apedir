@@ -8,7 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-import { deleteProductById } from "../../api/products";
+import { deleteProductById } from "../../../api/products";
 
 export default function ModalDeleteProduct({
   isOpen,

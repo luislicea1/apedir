@@ -3,7 +3,7 @@ import { Input, Button, Image } from "@nextui-org/react";
 import SelectorProvincia from "./SelectorDeProvincia";
 import { useState } from "react";
 
-export default function InputLocation() {
+export default function InputLocation({value, setValue}) {
   const [localizacionImage, setLocalizacionImage] = useState(null);
 
   const handlelocalizacionImageUpload = (event) => {
@@ -45,6 +45,12 @@ export default function InputLocation() {
         label="Localización"
         placeholder="Inserte la localización de su negocio"
         labelPlacement="outside"
+        onChange={(event) => {
+          setValue({
+            ...value,
+            address: event.target.value,
+          });
+        }}
       />
       <div />
       <div style={grid2}>
