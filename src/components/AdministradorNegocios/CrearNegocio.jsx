@@ -8,9 +8,9 @@ import { getCategories } from "../../api/categories";
 import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
 import NegocioDashboard from "./NegocioDashboard";
+import EventManagement from "./EventManagement";
 
 export default function CrearNegocio() {
-  
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -77,12 +77,24 @@ export default function CrearNegocio() {
   return (
     <div style={grid_1_col}>
       <div className="flex w-full flex-col">
-        <Tabs aria-label="Options">
+        <br />
+        <Tabs aria-label="Options" fullWidth>
           <Tab key="perfil" title="Perfil">
-            <NegocioDashboard />
+            <Card>
+              <CardBody>
+                <NegocioDashboard />
+              </CardBody>
+            </Card>
           </Tab>
           <Tab key="music" title="Horario">
             <ResponsiveTimePickers></ResponsiveTimePickers>
+          </Tab>
+          <Tab key="eventos" title="Eventos">
+            <Card>
+              <CardBody>
+                <EventManagement />
+              </CardBody>
+            </Card>
           </Tab>
           <Tab key="videos" title="Productos">
             <Card>

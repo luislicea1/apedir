@@ -15,7 +15,12 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import useUserStore from "../../hooks/useStore";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
-import { grid_2_col, btnHeight } from "../styles/styles";
+import {
+  grid_2_col,
+  btnHeight,
+  grid_1_col,
+  grid_center,
+} from "../styles/styles";
 
 const bg = {
   display: "grid",
@@ -87,81 +92,79 @@ export default function NegocioDashboard() {
     validateForm();
   }, [bussinessInput]);
 
-  return (
-    <>
-      <Card>
-        <CardBody>
-          <InputTitle
-            value={bussinessInput}
-            setValue={setBussinessInput}
-          ></InputTitle>
-          <ImageUploadButton></ImageUploadButton>
-          <TextAreaDescription
-            value={bussinessInput}
-            setValue={setBussinessInput}
-            maxChars={120}
-          ></TextAreaDescription>
-          <InputLocation
-            value={bussinessInput}
-            setValue={setBussinessInput}
-          ></InputLocation>
-          <div style={grid_2_col} className="mt-2 mb-2">
-            <InputGmail
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputGmail>
-            <InputPhoneNumber
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputPhoneNumber>
-            <InputWhatsapp
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputWhatsapp>
-            <InputTelegram
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputTelegram>
-            <InputTelefonoLocalNumber
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputTelefonoLocalNumber>
-            <InputDeFaceBook
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputDeFaceBook>
-            <InputDeInstagram
-              value={bussinessInput}
-              setValue={setBussinessInput}
-            ></InputDeInstagram>
-          </div>
-          <Toaster
-            richColors
-            theme="dark"
-            position="bottom-center"
-            duration={3000}
-            closeButton
-          />
-          <Button
-            color="secondary"
-            className="text-white mt-2"
-            style={btnHeight}
-            onClick={() => {
-              setBussinessInput((prevState) => {
-                const updatedState = {
-                  ...prevState,
-                  owner: user.id,
-                };
 
-                return updatedState;
-              });
-              handleUpsertBussiness();
-            }}
-          >
-            Agregar Negocio
-          </Button>
-        </CardBody>
-      </Card>
-    </>
+
+  return (
+    <div >
+      <InputTitle
+        value={bussinessInput}
+        setValue={setBussinessInput}
+      ></InputTitle>
+      <ImageUploadButton></ImageUploadButton>
+      <TextAreaDescription
+        value={bussinessInput}
+        setValue={setBussinessInput}
+        maxChars={120}
+      ></TextAreaDescription>
+      <InputLocation
+        value={bussinessInput}
+        setValue={setBussinessInput}
+      ></InputLocation>
+      <div style={grid_2_col} className="mt-2 mb-2">
+        <InputGmail
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputGmail>
+        <InputPhoneNumber
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputPhoneNumber>
+        <InputWhatsapp
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputWhatsapp>
+        <InputTelegram
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputTelegram>
+        <InputTelefonoLocalNumber
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputTelefonoLocalNumber>
+        <InputDeFaceBook
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputDeFaceBook>
+        <InputDeInstagram
+          value={bussinessInput}
+          setValue={setBussinessInput}
+        ></InputDeInstagram>
+      </div>
+      <Toaster
+        richColors
+        theme="dark"
+        position="bottom-center"
+        duration={3000}
+        closeButton
+      />
+      <Button
+        color="secondary"
+        className="text-white mt-2"
+        style={btnHeight}
+        onClick={() => {
+          setBussinessInput((prevState) => {
+            const updatedState = {
+              ...prevState,
+              owner: user.id,
+            };
+
+            return updatedState;
+          });
+          handleUpsertBussiness();
+        }}
+      >
+        Agregar Negocio
+      </Button>
+    </div>
   );
 }

@@ -21,6 +21,7 @@ import Notification from "./Notification.jsx";
 import useUserStore from "../../hooks/useStore.js";
 import Carrito from "./CarritoIcon.jsx";
 
+
 export default function Header(props) {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();

@@ -104,9 +104,9 @@ export const flex_center = {
 };
 
 export const grid_center = {
-    display: "grid",
-    placeItems: "center",
-  };
+  display: "grid",
+  placeItems: "center",
+};
 /*************Trajetas Seccion ***************/
 export const CardStyles = {
   height: "100%",
@@ -164,9 +164,9 @@ export const FontBold30px = {
   fontWeight: "bold",
 };
 export const FontBold40px = {
-    fontSize: "40px",
-    //fontWeight: "bold",
-  };
+  fontSize: "40px",
+  //fontWeight: "bold",
+};
 
 export const fontWhite = {
   color: "white",
@@ -209,7 +209,7 @@ export const Imagen100pcCover = {
   objectFit: "cover",
 };
 
-export const Imagen100pc400H= {
+export const Imagen100pc400H = {
   width: "100%",
   height: "100%",
   maxHeight: "400px",
