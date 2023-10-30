@@ -7,7 +7,7 @@ export default function TituloDeProductos(props){
         marginBottom: "30px"
     }
     return(
-        <div id="props.titulo" style={style} className="mb-2">
+        <div id={props.title} style={style} className="mb-2">
             <h2 style={FontBold30px}> {props.title}</h2>
         </div>
     );

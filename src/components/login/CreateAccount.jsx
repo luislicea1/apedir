@@ -47,7 +47,10 @@ export default function CreateAccount() {
   return (
     <div className="contenedor-pt-login">
       <div className="login-container">
-        <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
+        <div className="img-login-container">
+          <img src={ApedirLogoNegro} alt="" srcSet="" className="logo-img" />
+        </div>
+
         <form ref={form} className="login-container" onSubmit={handleSubmit}>
           <Input type="name" name="name" variant={"bordered"} label="Nombre" />
           <Input

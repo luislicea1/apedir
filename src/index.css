@@ -37,3 +37,6 @@ input[type=number] {
     position:  static;
 }
 
+li{
+    list-style: none;
+}
