@@ -17,14 +17,14 @@ module.exports = {
         colors: {
           primary: "#FFD600",
           secondary: "#5E17EB",
-          default: "#000000",
+          //default: "#000000",
         }
       },
       dark: {
         colors: {
           primary: "#5E17EB",
           secondary: "#FFD600",
-          default: "#5E17EB",
+          //default: "#5E17EB",
         }
       },
     },

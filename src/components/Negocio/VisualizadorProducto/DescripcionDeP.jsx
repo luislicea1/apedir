@@ -43,6 +43,10 @@ export default function DescripcionDeP(props){
         
     }
 
+    const handleClick = () => {
+        props.onAddToCart({ title: props.title, quantity: props.cantidad });
+      };
+
     return(
         <div style={glass} className=" backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
             <div style={center}>
@@ -52,7 +56,7 @@ export default function DescripcionDeP(props){
                 <article>{props.text}</article>
             </div>
 
-            <Button color="primary" style={btn}>Pedir</Button>
+            <Button color="primary" style={btn} onClick={handleClick}>Agregar al Carrito</Button>
         </div>
     )
 }

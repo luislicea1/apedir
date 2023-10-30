@@ -3,6 +3,7 @@ import Corazon2 from "../../Icons/Corazon/Corazon2";
 import Regalo from "../../Icons/regalo/Regalo";
 import { Card, CardBody, CardFooter, Image, Button } from "@nextui-org/react";
 import Like from "../../Like/Like";
+import { grid_center, grid_3_col } from "../../styles/styles";
 
 const stats = [
   { id: 1, name: "Seguidores", value: "44 million" },
@@ -11,18 +12,7 @@ const stats = [
 ];
 
 export default function Promo(props) {
-  const listContainer = {
-    width: "100%",
-    display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
-    gap: "20px",
-  };
-
-  const center = {
-    display: "grid",
-    placeItems: "center",
-  };
-
+  
   const margin = {
     marginTop: "50px",
     marginBottom: "30px",
@@ -37,11 +27,11 @@ export default function Promo(props) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <dl
           className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3"
-          style={listContainer}
+          style={grid_3_col}
         >
           <div
             className="mx-auto flex max-w-xs flex-col gap-y-4"
-            style={center}
+            style={grid_center}
           >
             <Card style={style}>
               <Button
@@ -64,7 +54,7 @@ export default function Promo(props) {
 
           <div
             className="mx-auto flex max-w-xs flex-col gap-y-4"
-            style={center}
+            style={grid_center}
           >
             <Card style={style}>
               <Button
@@ -87,7 +77,7 @@ export default function Promo(props) {
 
           <div
             className="mx-auto flex max-w-xs flex-col gap-y-4"
-            style={center}
+            style={grid_center}
           >
             <Like></Like>
             <dt className="text-base leading-7 text-gray-600">Les Gusta</dt>

@@ -9,6 +9,7 @@ import {
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";
 import { Link } from "react-router-dom";
+import { flex_center } from "../styles/styles";
 export default function PricingCard({
   img,
   name,
@@ -36,7 +37,7 @@ export default function PricingCard({
     marginLeft: "5px",
     marginRight: "5px",
   };
-  const liStyle = { display: "flex", alignItems: "center", gap: "5px" };
+
   return (
     <Card className="max-w-[200px] max-h-[300px]" style={{ margin: "10px" }}>
       <CardHeader className="flex gap-3" style={{ margin: "5px" }}>
@@ -49,28 +50,28 @@ export default function PricingCard({
         </div>
       </CardHeader>
       <Divider />
-      <CardBody >
+      <CardBody>
         <ul>
           {/* <div style={liStyle}>
             <li style={customText}>{bussiness_num} </li>
             <li>Negocio{bussiness_num > 1 ? "s" : ""}</li>
           </div> */}
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{front_pic}</li>
             <li> Foto de portada</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{perfil_pic}</li>
             <li>Foto de Perfil</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>1</li>
             <li>Descripción de {description} caracteres</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             {product_num === true ? (
               <CheckIcon width={20} />
             ) : (
@@ -78,7 +79,7 @@ export default function PricingCard({
             )}
             <li>Productos y Servicios</li>
           </div>
-          <div style={liStyle}>
+          <div style={flex_center}>
             {delivery === true ? (
               <CheckIcon width={20} />
             ) : (
@@ -86,12 +87,12 @@ export default function PricingCard({
             )}
             <li>Domicilio </li>
           </div>
-          <div style={liStyle}>
+          <div style={flex_center}>
             <CheckIcon width={20} />
             <li>Horario de trabajo</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{social_media}</li>
             <li>
               Red{social_media > 1 ? "es" : ""} social
@@ -99,24 +100,24 @@ export default function PricingCard({
             </li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{phone_number}</li>
             <li>Número{phone_number > 1 ? "s" : ""} de teléfono</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{email}</li>
             <li>
               Correo{email > 1 ? "s" : ""} electrónico{email > 1 ? "s" : ""}{" "}
             </li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             <li style={customText}>{gps_location}</li>
             <li>Localización por GPS</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             {event_post === true ? (
               <CheckIcon width={20} />
             ) : (
@@ -125,7 +126,7 @@ export default function PricingCard({
             <li>Posteo de eventos</li>
           </div>
 
-          <div style={liStyle}>
+          <div style={flex_center}>
             {booking === true ? (
               <CheckIcon width={20} />
             ) : (
@@ -136,21 +137,21 @@ export default function PricingCard({
 
           {name === "Premium" && (
             <div>
-              <div style={liStyle}>
+              <div style={flex_center}>
                 <CheckIcon width={20} />
                 <li>Página personalizada</li>
               </div>
 
-              <div style={liStyle}>
+              <div style={flex_center}>
                 <CheckIcon width={20} />
                 <li>Sus productos serán destacados</li>
               </div>
 
-              <div style={liStyle}>
+              <div style={flex_center}>
                 <CheckIcon width={20} />
                 <li>Sus servicios serán destacados</li>
               </div>
-              <div style={liStyle}>
+              <div style={flex_center}>
                 <CheckIcon width={20} />
                 <li>Acceso a nuevas features</li>
               </div>

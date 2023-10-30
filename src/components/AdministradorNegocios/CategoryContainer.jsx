@@ -3,14 +3,7 @@ import ProductCard from "./ProductCard";
 import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-
-const listContainer = {
-  width: "100%",
-  display: "grid",
-  marginTop: "10px",
-  gridTemplateColumns: "repeat(3,1fr)",
-  gap: "20px",
-};
+import { grid_3_col } from "../styles/styles";
 
 const CategoryContainer = ({
   category,
@@ -97,7 +90,7 @@ const CategoryContainer = ({
         </div>
       </div>
 
-      <div className="mt-2 list-container" style={listContainer}>
+      <div className="mt-2 list-container" style={grid_3_col}>
         {products.map((product, index) => (
           <ProductCard
             price={product.price}

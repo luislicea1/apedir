@@ -1,15 +1,8 @@
 import React from "react";
 import {Avatar} from "@nextui-org/react";
+import { MarginTop10, flex_center } from "../../styles/styles";
 
 export default function Logo(props) {
-
-    const styles = {
-        width: '100%',
-        paddingTop: "30px",
-        display: "flex",
-        justifyContent: "center",
-        
-    }
 
     const avatar = {
         width: "100px",
@@ -26,13 +19,11 @@ export default function Logo(props) {
         color: "red"
     }
 
-    const tituloContainer = {
-        marginTop: "10px"
-    }
+    
   return (
-    <div style={styles}>
+    <div style={flex_center}>
         <Avatar isBordered color="default" src={props.logo} style={avatar}/>
-        <div style={tituloContainer}>
+        <div style={MarginTop10}>
             {props.estado === "Abierto" ? <h2 style={green}>Abierto</h2>:<h2 style={red}>Cerrado</h2>}
             <h2>{props.nombre}</h2>
         </div>

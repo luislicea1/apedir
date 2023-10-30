@@ -15,6 +15,9 @@ import { NegocioLogo } from "./NegocioLogo.jsx";
 import Izquierda from "../../Icons/Angulo/izquierda.jsx";
 import AbiertoCerrado from "./AbiertoCerrado.jsx";
 import { useState, useEffect } from "react";
+import Carrito from "../../header/CarritoIcon.jsx";
+import Notification from "../../header/Notification.jsx";
+import { MarginLeft30 } from "../../styles/styles.jsx";
 
 export default function HeaderNegocio(props) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -41,9 +44,7 @@ export default function HeaderNegocio(props) {
   const zIndex = {
     zIndex : "4000"
   }
-  const style = {
-    marginLeft: "30px",
-  };
+  
   return (
     <>
       <Navbar style={zIndex}>
@@ -53,7 +54,7 @@ export default function HeaderNegocio(props) {
           </Link>
 
           <NegocioLogo logo={props.logo} />
-          <div className="ml-2" style={style}>
+          <div className="ml-2" style={MarginLeft30}>
             <p className="font-bold text-inherit">{props.nombre}</p>
             {props.horario === "si"?<AbiertoCerrado></AbiertoCerrado>:null}
             
@@ -62,6 +63,8 @@ export default function HeaderNegocio(props) {
         </NavbarBrand>
 
         <NavbarContent as="div" justify="end">
+          <Carrito carrito = {props.carrito}></Carrito>
+          <Notification></Notification>
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
@@ -96,29 +99,7 @@ export default function HeaderNegocio(props) {
       </Navbar>
 
 
-      {isNavbarVisible && (
-          <Navbar >
-            <NavbarContent className=" sm:flex gap-4" justify="center">
-              <NavbarItem>
-                <Link color="foreground" href="#">
-                  Features
-                </Link>
-              </NavbarItem>
-              <NavbarItem isActive>
-                <Link href="#" aria-current="page">
-                  Customers
-                </Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Link color="foreground" href="#">
-                  Integrations
-                </Link>
-              </NavbarItem>
-            </NavbarContent>
-          </Navbar>
-        )}
-        
-        {}
+      
     </>
   );
 }

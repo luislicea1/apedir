@@ -7,6 +7,7 @@ import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import { Button } from "@nextui-org/react";
 import { register } from "../../api/auth";
 import { Toaster, toast } from "sonner";
+import { btnHeight } from "../styles/styles";
 
 export default function CreateAccount() {
   const variants = ["flat", "bordered", "underlined", "faded"];
@@ -105,9 +106,10 @@ export default function CreateAccount() {
             type={isVisible ? "text" : "password"}
           />
           <Button
-            className="text-white btn-black"
-            style={btnStyle}
+            className="text-white"
+            style={btnHeight}
             type="submit"
+            color="secondary"
           >
             Create Accont
           </Button>

@@ -1,10 +1,10 @@
-import UserIcon from "../../Icons/user/UserIcon";
+
 import WhatsappIcons from "../../Icons/whatsapp/WhatsappIcon";
 import InstagramIcon from "../../Icons/Instagram/InstagramIcon";
 import TelegramIcon from "../../Icons/Telegram/Telegram";
 import Correo from "../../Icons/Correo/correo";
 import TelefonoIcon from "../../Icons/Llamada/Telefono";
-import HeartIconContainer from "../../Icons/HeartIcon/HeartIconContainer";
+import { grid_5_col } from "../../styles/styles";
 import {
   Popover,
   PopoverTrigger,
@@ -26,65 +26,9 @@ export default function IconosNegocio() {
     maxWidth: "50px",
     minWidth: "50px"
   }
-  const whatsapp = {
-    background: "#5E17EB",
-    margin: "10px",
-    height: "50px",
-    width: "50px",
-    borderRadius: "50%",
-    padding: "0",
-    fontWeight: "0",
-    lineHeight: "0",
-    maxWidth: "50px",
-    minWidth: "50px"
-  }
-  const instagram = {
-    background: "#5E17EB",
-    margin: "10px",
-    height: "50px",
-    width: "50px",
-    borderRadius: "50%",
-    padding: "0",
-    fontWeight: "0",
-    lineHeight: "0",
-    maxWidth: "50px",
-    minWidth: "50px"
-  }
-  const telegram = {
-    background:  "#5E17EB",
-    margin: "10px",
-    height: "50px",
-    width: "50px",
-    borderRadius: "50%",
-    padding: "0",
-    fontWeight: "0",
-    lineHeight: "0",
-    maxWidth: "50px",
-    minWidth: "50px"
-  }
-  const correo = {
-    background: "#5E17EB",
-    margin: "10px",
-    height: "50px",
-    width: "50px",
-    borderRadius: "50%",
-    padding: "0",
-    fontWeight: "0",
-    lineHeight: "0",
-    maxWidth: "50px",
-    minWidth: "50px"
-  }
-
-  const flex = {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "20px"
-  }
-
+  
   return (
-    <div className="mt-2" id="contactenos" style={flex}>
+    <div className="mt-2" id="contactenos" style={grid_5_col}>
       <Popover placement="bottom">
         <PopoverTrigger>
           <Button style={telefono}>

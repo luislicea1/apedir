@@ -7,21 +7,12 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import ManageProducts from "./ManageProducts";
+import { grid_1_col } from "../styles/styles";
 
 export default function CrearNegocioGratuito() {
-  const contenedor = {
-    display: "grid",
-    gridTemplateColumns: "repeat(1,1fr)",
-    gap: "10px",
-    padding: "20px",
-  };
-
-  const bg = {
-    background: "red",
-  };
 
   return (
-    <div style={contenedor}>
+    <div style={grid_1_col}>
       <div className="flex w-full flex-col">
         <Tabs aria-label="Options" disabledKeys={["productos"]} >
           <Tab key="perfil" title="Perfil">

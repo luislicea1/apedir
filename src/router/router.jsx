@@ -36,6 +36,9 @@ const LazyVisualizarProductoWrapper = lazy(() =>
 const LazyNegocioGratuitoWrapper = lazy(() =>
   import("../components/NegociosGratuitos/NegocioGratuitoWrapper")
 );
+const LazyComprasWrapper = lazy(() =>
+  import("../pages/Compras")
+);
 
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
@@ -188,6 +191,18 @@ const router = createBrowserRouter([
         }
       >
         <LazyAdministradorNegocio />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/carrito",
+    element: (
+      <Suspense
+        fallback={
+          <CircularProgress color="secondary" aria-label="Loading..." />
+        }
+      >
+        <LazyComprasWrapper/>
       </Suspense>
     ),
   },

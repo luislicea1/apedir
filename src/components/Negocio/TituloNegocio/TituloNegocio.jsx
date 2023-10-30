@@ -1,12 +1,9 @@
-
+import { FontBold40px } from "../../styles/styles";
 
 export default function TituloNegocio(props){
 
-    const styles = {
-        fontSize: "30px",
-    }
     return(
-        <h2 style={styles} className="mt-2">
+        <h2 style={FontBold40px} className="mt-2">
             {props.title}
         </h2>
     );

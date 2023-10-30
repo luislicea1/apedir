@@ -2,21 +2,15 @@ import React from "react";
 import Producto from "./Producto";
 import TituloDeProductos from "./TituloDeProductos";
 import "./productos.css";
+import { grid_3_col } from "../../styles/styles";
 
 export default function ListadoProductos(props) {
   const list = props.lista;
 
-  const listContainer = {
-    width: "100%",
-    display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
-    gap: "20px",
-  };
-
   return (
     <div>
       <TituloDeProductos title={props.title}></TituloDeProductos>
-      <div className="mt-2 list-container" style={listContainer}>
+      <div className="mt-2 list-container" style={grid_3_col}>
         {list.map((item, index) => (
           <Producto
             key={index}

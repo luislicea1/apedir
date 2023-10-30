@@ -45,18 +45,29 @@ export default function VisualizarProducto({ nombre , title, localizacion}) {
     top: "300px",
     background: "red"
   }
+  const [cantidad, setCantidad] = useState(0);
+  
+  const [carrito, setCarrito] = useState([]);
+
+  
+const handleAddToCart = (product) => {
+  setCarrito(prevCarrito => [...prevCarrito, { title: product.title, quantity: product.quantity, image: Imagen }]);
+};
 
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={sectionStyle}>
-        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"} anterior = {`/lugar/${localizacion}/${nombre}`}></HeaderNegocio>
+      
+        <HeaderNegocio logo={LogoImg} nombre={nombre} horario = {"si"} anterior = {`/lugar/${localizacion}/${nombre}`} carrito={carrito}></HeaderNegocio>
+
         
         <section  style={marginTop}>
           <ImagenVisualizador image = {Imagen}></ImagenVisualizador>
           <div style = {sectionDescription}>
-            <DescripcionDeP title={title} text = {text}></DescripcionDeP>
-            <PromoProducto title={title}></PromoProducto>
-            <OrdenarProducto></OrdenarProducto>
+          <DescripcionDeP title={title} text={text} onAddToCart={handleAddToCart} cantidad={cantidad}></DescripcionDeP>
+          <OrdenarProducto onChangeQuantity={setCantidad}></OrdenarProducto>
+         
+          <PromoProducto></PromoProducto>
           </div>
           
         </section>

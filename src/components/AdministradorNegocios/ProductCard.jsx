@@ -14,6 +14,9 @@ import PropTypes from "prop-types";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { updateAvailability } from "../../api/products";
+import { ImgCardStyle } from "../styles/styles";
+import { ImgStyle } from "../styles/styles";
+import { CardStyles2 } from "../styles/styles";
 
 export default function ProductCard({
   id,
@@ -28,24 +31,6 @@ export default function ProductCard({
   isAvalaible,
 }) {
   const [isSelected, setIsSelected] = useState(isAvalaible);
-  const CardStyles = {
-    height: "100%",
-    //minHeight: "300px",
-    maxHeight: "500px",
-  };
-  const ImgCardStyle = {
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    placeItems: "center",
-    aspectRatio: "16 / 9",
-  };
-  const ImgStyle = {
-    width: "100%",
-    height: "100%",
-    maxHeight: "400px",
-    borderRadius: "10px 10px 0 0",
-  };
 
   const changeAvailability = async () => {
     setIsSelected(!isSelected);
@@ -57,7 +42,7 @@ export default function ProductCard({
       shadow="sm"
       key={index}
       isPressable
-      style={CardStyles}
+      style={CardStyles2}
       className="producto-card"
     >
       <CardHeader style={{ display: "flex", justifyContent: "space-between" }}>
@@ -82,11 +67,13 @@ export default function ProductCard({
             </span>
           </Tooltip>
           <Tooltip color="danger" content="Eliminar producto">
-            <span className="text-lg text-danger cursor-pointer active:opacity-50"
-            onClick={() => {
-              setProductInput(productInput);
-              onProductDeleteOpen()
-            }}>
+            <span
+              className="text-lg text-danger cursor-pointer active:opacity-50"
+              onClick={() => {
+                setProductInput(productInput);
+                onProductDeleteOpen();
+              }}
+            >
               <DeleteIcon />
             </span>
           </Tooltip>

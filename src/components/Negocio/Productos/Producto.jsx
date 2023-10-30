@@ -2,6 +2,11 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import {
+  ImgCardStyle,
+  CardStyles2,
+  Imagen100pc400H,
+} from "../../styles/styles";
 
 export default function Producto({
   localizacion,
@@ -12,24 +17,7 @@ export default function Producto({
   index,
 }) {
   const navigate = useNavigate();
-  const CardStyles = {
-    height: "100%",
-    //minHeight: "300px",
-    maxHeight: "500px",
-  };
-  const ImgCardStyle = {
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    placeItems: "center",
-    aspectRatio: "16 / 9",
-  };
-  const ImgStyle = {
-    width: "100%",
-    height: "100%",
-    maxHeight: "400px",
-    borderRadius: "10px 10px 0 0",
-  };
+
   return (
     <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
       <Card
@@ -37,7 +25,7 @@ export default function Producto({
         key={index}
         isPressable
         // onPress={() => console.log("item pressed")}
-        style={CardStyles}
+        style={CardStyles2}
         className="producto-card"
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
@@ -47,7 +35,7 @@ export default function Producto({
             alt="Card background NextUI hero Image with delay"
             className="object-cover rounded-xl"
             src={img}
-            style={ImgStyle}
+            style={Imagen100pc400H}
           />
         </CardBody>
         <CardFooter className="text-small justify-between">

@@ -19,6 +19,7 @@ import { getUser } from "../../api/profile.js";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import Notification from "./Notification.jsx";
 import useUserStore from "../../hooks/useStore.js";
+import Carrito from "./CarritoIcon.jsx";
 
 export default function Header(props) {
   const [session, setSession] = useState(null);
@@ -85,6 +86,7 @@ export default function Header(props) {
       <SelectProvincia></SelectProvincia>
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
+          <Carrito></Carrito>
           <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>

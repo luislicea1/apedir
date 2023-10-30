@@ -9,15 +9,12 @@ import { Link } from "@nextui-org/react";
 import { login, signInWithGoogle } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
+import { btnHeight } from "../styles/styles";
 
 export default function Login() {
-  const variants = ["flat", "bordered", "underlined", "faded"];
+  
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-
-  const btnStyle = {
-    height: "56px",
-  };
 
   const form = useRef();
   const navigate = useNavigate();
@@ -68,7 +65,7 @@ export default function Login() {
           <Button
             color="secondary"
             className="text-white"
-            style={btnStyle}
+            style={btnHeight}
             type="submit"
           >
             LOGIN

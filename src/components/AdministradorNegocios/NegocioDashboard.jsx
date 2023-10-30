@@ -15,6 +15,7 @@ import { upsertBussiness } from "../../api/bussiness";
 import useUserStore from "../../hooks/useStore";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
+import { grid_2_col, btnHeight } from "../styles/styles";
 
 const bg = {
   display: "grid",
@@ -92,7 +93,7 @@ export default function NegocioDashboard() {
             value={bussinessInput}
             setValue={setBussinessInput}
           ></InputLocation>
-          <div style={bg}>
+          <div style={grid_2_col} className="mt-2 mb-2">
             <InputGmail
               value={bussinessInput}
               setValue={setBussinessInput}
@@ -131,7 +132,8 @@ export default function NegocioDashboard() {
           />
           <Button
             color="secondary"
-            className="text-white"
+            className="text-white mt-2"
+            style={btnHeight}
             onClick={() => {
               console.log(user);
               setBussinessInput((prevState) => {

@@ -1,23 +1,11 @@
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { CardStyles, ImgCardStyle, ImgStyle } from "../styles/styles";
 
 export default function ComponenteLugarGratis(props) {
   const navigate = useNavigate();
-  const CardStyles = {
-    height: "100%",
-    maxHeight: "400px",
-  };
-  const ImgCardStyle = {
-    height: "100%",
-    display: "grid",
-    placeItems: "center",
-  };
-  const ImgStyle = {
-    maxHeight: "300px",
-    borderRadius: "20px",
-  };
-
+  
   ComponenteLugarGratis.propTypes = {
     localizacion: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,

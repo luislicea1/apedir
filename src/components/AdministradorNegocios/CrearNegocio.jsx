@@ -6,16 +6,11 @@ import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
 import supabase from "../../api/client";
-
+import { grid_1_col } from "../styles/styles";
 import NegocioDashboard from "./NegocioDashboard";
 
 export default function CrearNegocio() {
-  const contenedor = {
-    display: "grid",
-    gridTemplateColumns: "repeat(1,1fr)",
-    gap: "10px",
-    padding: "20px",
-  };
+  
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -80,7 +75,7 @@ export default function CrearNegocio() {
   }, []);
 
   return (
-    <div style={contenedor}>
+    <div style={grid_1_col}>
       <div className="flex w-full flex-col">
         <Tabs aria-label="Options">
           <Tab key="perfil" title="Perfil">

@@ -1,18 +1,13 @@
 import React from "react";
 //import './seccion.css'
 import ComponenteLugarGratis from "./ComponenteLugarGratis";
+import { grid_3_col } from "../styles/styles";
 
 export default function ListadoDeComponentesLugarGratis(props) {
-    const listContainer = {
-        width: "100%",
-        display: "grid",
-        gridTemplateColumns: "repeat(3,1fr)",
-        gap: "20px"
-    }
-
-    const lugares = props.lugares
+    
+  const lugares = props.lugares
   return (
-    <div className="list-container" style={listContainer}>
+    <div className="list-container" style={grid_3_col}>
         {lugares.map((lugar, index) => (
         <ComponenteLugarGratis
           key={index}

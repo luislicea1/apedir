@@ -7,18 +7,10 @@ import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import LocalizacionImg from "../../../assets/img/img (1).jpg"
 import { Image } from "@nextui-org/react";
+import { fontWhite , MarginTop30} from "../../styles/styles";
 
 export default function BtnDescription(props) {
-  const white = {
-    color: "white",
-  };
-  const black = {
-    color: "white",
-  };
-  const margin = {
-    marginTop: "30px",
-  };
-
+  
   const location = {
     background: "transparent",
     height: "40px",
@@ -36,10 +28,10 @@ export default function BtnDescription(props) {
     marginTop: "30px"
   }
   return (
-    <div className="flex gap-4 items-center" style={margin}>
+    <div className="flex gap-4 items-center" style={MarginTop30}>
       {props.contact === "si" ? (
-        <Link href="#contact" style={white}>
-          <Button color="secondary" variant="shadow">
+        <Link href="#contact" style={fontWhite}>
+          <Button color="secondary" >
             <p>Contactenos</p>
             <TelefonoIcon></TelefonoIcon>
           </Button>
@@ -48,7 +40,7 @@ export default function BtnDescription(props) {
 
       {props.domicilio === "si" ? (
         <Link href="#contact" color="foreground">
-          <Button color="primary" variant="shadow">
+          <Button color="primary" >
             <p>Domicilio</p>
             <TelefonoIcon></TelefonoIcon>
           </Button>

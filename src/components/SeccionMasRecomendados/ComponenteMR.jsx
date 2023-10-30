@@ -4,6 +4,8 @@ import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
 import "./MR.css";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { grid_2_col, titleStyles , no_shadow} from "../styles/styles";
+import Like from "../Like/Like";
 
 export default function ComponenteMR(props) {
   const navigate = useNavigate();
@@ -12,39 +14,28 @@ export default function ComponenteMR(props) {
     boxShadow: "none",
     border: "none",
   };
-  const shadow = {
-    boxShadow: "none",
-    border: "none",
-  };
-  const grid = {
-    display: "grid",
-    gridTemplateColumns: "repeat(2,1fr)",
-    gap: "20px",
-  };
-  const likesDiv = {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: "20px",
-  };
-
+  
+  const padding_0 = {
+    padding: "0"
+  }
   return (
     <Link>
       <Card
         isBlurred
-        className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-        shadow="sm"
+        className="bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+        
       >
         <CardBody>
           <div
             className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center tarjetasMR"
-            style={grid}
+            style={grid_2_col }
           >
             <div
               className="relative col-span-6 md:col-span-4 img-containerMR"
               style={styles}
             >
               <img
-                style={shadow}
+                style={no_shadow}
                 alt="Album cover"
                 className="object-cover img-sinShadow"
                 height={200}
@@ -66,8 +57,8 @@ export default function ComponenteMR(props) {
                 </div>
               </div>
 
-              <div className="likes-center" style={likesDiv}>
-                <HeartIconContainer></HeartIconContainer>
+              <div className="likes-center mt-2" style={titleStyles }>
+                <Like></Like>
                 <p className="mt-2 ml-2">{props.numeroPersonas}</p>
               </div>
             </div>
@@ -77,3 +68,5 @@ export default function ComponenteMR(props) {
     </Link>
   );
 }
+
+
