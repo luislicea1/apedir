@@ -1,12 +1,10 @@
 import { Card, Input, Textarea, Button } from "@nextui-org/react";
+import { grid_1_col, btnHeight } from "../styles/styles";
 
 export default function InputsPedido() {
-    const styles = {
-        display: 'grid',
-        gap: '20px'
-    }
+    
   return (
-    <Card className="p-5" style={styles}>
+    <Card className="p-5" style={grid_1_col}>
       <Input
         type="text"
         variant="bordered"
@@ -30,7 +28,7 @@ export default function InputsPedido() {
         placeholder="Existe algun otro detalle como tocar el timbre, cuidado que hay perro, segunda planta etc que quieras añadir"
         className="col-span-12 md:col-span-6 mb-6 md:mb-0"
       />
-      <Button color="primary" className="mt-2">Realizar el Pedido</Button>
+      <Button color="primary" className="mt-2" style={btnHeight}>Realizar el Pedido</Button>
     </Card>
   );
 }

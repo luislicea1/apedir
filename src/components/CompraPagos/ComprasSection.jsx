@@ -2,6 +2,7 @@ import Imagen2 from "../../assets/comidas/comida (3).png";
 import Imagen3 from "../../assets/comidas/comida (4).png";
 import ListadoCompras from "./ListadoCompras";
 import InputsPedido from "./InputsPedido";
+import { grid_1_col } from "../styles/styles";
 
 const carrito = [
   {
@@ -18,14 +19,9 @@ const carrito = [
   },
 ];
 export default function ComprasSection() {
-  const contenedor = {
-    display: "grid",
-    gridTemplateColumns: "repeat(1,1fr)",
-    gap: "10px",
-    padding: "20px",
-  };
+  
   return (
-    <div style={contenedor}>
+    <div style={grid_1_col}>
       <ListadoCompras lista={carrito}></ListadoCompras>
       <InputsPedido></InputsPedido>
     </div>

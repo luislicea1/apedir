@@ -1,7 +1,7 @@
 import { Card } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
 import React, { useState } from "react";
-
+import { grid_2_col, grid_3_col_center , grid_4_col_center} from "../styles/styles";
 
 export default function ContenedorCompras(props) {
   const [cantidad, setCantidad] = useState(props.cantidad);
@@ -27,33 +27,23 @@ export default function ContenedorCompras(props) {
   const precio = isNaN(props.price) ? 0 : props.price;
   const precioTotal = cantidad * precio;
 
-  const grid = {
-    display: "grid",
-    gridTemplateColumns: "repeat(4,1fr)",
-    placeItems: "center",
-  };
-  const grid2 = {
-    display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
-    placeItems: "center",
-  };
+  
   const btn = {
     background: "white",
     color: "black",
     borderRadius: "50%",
-    
     width: "30px",
     height: "30px",
     display: "grid",
     placeItems: "center",
   };
   return (
-    <Card style={grid}>
+    <Card style={grid_4_col_center}>
       <div>
         <Image src={props.img}></Image>
       </div>
       <div>{props.title}</div>
-      <div style={grid2}>
+      <div style={grid_3_col_center}>
         <button style={btn} onClick={disminuir}>
           -
         </button>

@@ -66,6 +66,27 @@ export const grid_3_col = {
   gridTemplateColumns: "repeat(3,1fr)",
   gap: "20px",
 };
+export const grid_4_col = {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(4,1fr)",
+  gap: "20px",
+};
+
+export const grid_3_col_center = {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(3,1fr)",
+  gap: "20px",
+  placeItems: "center",
+};
+export const grid_4_col_center = {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(4,1fr)",
+  gap: "20px",
+  placeItems: "center",
+};
 
 export const grid_5_col = {
   width: "50%",
