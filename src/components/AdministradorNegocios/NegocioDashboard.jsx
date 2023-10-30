@@ -13,6 +13,8 @@ import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
 import { upsertBussiness } from "../../api/bussiness";
 import useUserStore from "../../hooks/useStore";
+import BussinessInputSchema from "../../schemas/bussinessInputSchema";
+import { Toaster, toast } from "sonner";
 
 const bg = {
   display: "grid",
@@ -22,7 +24,10 @@ const bg = {
 };
 
 export default function NegocioDashboard() {
+  const user = useUserStore((state) => state.user);
+
   const defaultBussinessValues = {
+    owner: "",
     name: "",
     perfil_pic: "",
     front_pic: "",
@@ -31,10 +36,10 @@ export default function NegocioDashboard() {
     province: "",
     gps_location: "",
     email: "",
-    phone_number: "",
-    whatsapp: "",
+    phone_number: 0,
+    whatsapp: 0,
     telegram_link: "",
-    local_phone: "",
+    local_phone: 0,
     facebook: "",
     instagram: "",
     threads: "",
@@ -43,12 +48,31 @@ export default function NegocioDashboard() {
     twitter: "",
   };
   const [bussinessInput, setBussinessInput] = useState(defaultBussinessValues);
-  const user = useUserStore((state) => state.user);
-
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [formError, setFormError] = useState("");
   const handleUpsertBussiness = async () => {
-    // await upsertBussiness(bussinessInput)
     
+    if (!isFormValid) {
+      toast.error(formError);
+      return;
+    }
+    
+    await upsertBussiness(bussinessInput)
+
+
   };
+  const validateForm = async () => {
+    try {
+      await BussinessInputSchema.validate(bussinessInput);
+      setIsFormValid(true);
+    } catch (error) {
+      setIsFormValid(false);
+      setFormError(error.message);
+    }
+  };
+  useEffect(() => {
+    validateForm();
+  }, [bussinessInput]);
 
   return (
     <>
@@ -98,10 +122,28 @@ export default function NegocioDashboard() {
               setValue={setBussinessInput}
             ></InputDeInstagram>
           </div>
+          <Toaster
+            richColors
+            theme="dark"
+            position="bottom-center"
+            duration={3000}
+            closeButton
+          />
           <Button
             color="secondary"
             className="text-white"
-            onClick={handleUpsertBussiness}
+            onClick={() => {
+              console.log(user);
+              setBussinessInput((prevState) => {
+                const updatedState = {
+                  ...prevState,
+                  owner: user.id,
+                };
+
+                return updatedState;
+              });
+              handleUpsertBussiness();
+            }}
           >
             Agregar Negocio
           </Button>

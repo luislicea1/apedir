@@ -90,16 +90,6 @@ const ManageProducts = ({
     }
   };
 
-  const [isCategoryFormValid, setIsCategoryFormValid] = useState(false);
-
-  const validateCategoryAdd = async () => {
-    if (categoryInput.category.trim() !== "") {
-      setIsCategoryFormValid(true);
-    } else {
-      setIsCategoryFormValid(false);
-    }
-  };
-
   const handleAddCategory = async () => {
     if (categoryInput.category.trim() === "") {
       toast.error("El nombre de la categoría no puede estar vacío");
@@ -269,21 +259,6 @@ const ManageProducts = ({
                       value={productInput}
                       setValues={setProductInput}
                     />
-
-                    {/* <Input
-                      autoFocus
-                      label="Precio"
-                      placeholder="Precio del producto"
-                      variant="bordered"
-                      type="number"
-                      value={productInput.price}
-                      onChange={(event) =>
-                        setProductInput({
-                          ...productInput,
-                          price: event.target.value,
-                        })
-                      }
-                    /> */}
 
                     <div
                       style={{
