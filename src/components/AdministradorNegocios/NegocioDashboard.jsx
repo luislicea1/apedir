@@ -11,7 +11,7 @@ import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
-import { upsertBussiness } from "../../api/bussiness";
+import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import useUserStore from "../../hooks/useStore";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
@@ -24,9 +24,12 @@ const bg = {
 };
 
 export default function NegocioDashboard() {
+  // const [user, setUser] = useState(null);
   const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
 
   const defaultBussinessValues = {
+    id: "",
     owner: "",
     name: "",
     perfil_pic: "",
@@ -36,10 +39,10 @@ export default function NegocioDashboard() {
     province: "",
     gps_location: "",
     email: "",
-    phone_number: 0,
-    whatsapp: 0,
+    phone_number: "",
+    whatsapp: "",
     telegram_link: "",
-    local_phone: 0,
+    local_phone: "",
     facebook: "",
     instagram: "",
     threads: "",
@@ -50,16 +53,21 @@ export default function NegocioDashboard() {
   const [bussinessInput, setBussinessInput] = useState(defaultBussinessValues);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
+
+  const fetchBussiness = async () => {
+    const b = await getOneBussiness("00a99456-e134-476a-a166-ba73e08f7029");
+    setBussinessInput(b);
+  };
+
   const handleUpsertBussiness = async () => {
-    
     if (!isFormValid) {
       toast.error(formError);
       return;
     }
-    
-    await upsertBussiness(bussinessInput)
 
-
+    await upsertBussiness(bussinessInput);
+    toast.success("Actualización exitosa");
+    fetchBussiness();
   };
   const validateForm = async () => {
     try {
@@ -70,6 +78,10 @@ export default function NegocioDashboard() {
       setFormError(error.message);
     }
   };
+  useEffect(() => {
+    fetchBussiness();
+  }, []);
+
   useEffect(() => {
     validateForm();
   }, [bussinessInput]);
@@ -133,7 +145,6 @@ export default function NegocioDashboard() {
             color="secondary"
             className="text-white"
             onClick={() => {
-              console.log(user);
               setBussinessInput((prevState) => {
                 const updatedState = {
                   ...prevState,

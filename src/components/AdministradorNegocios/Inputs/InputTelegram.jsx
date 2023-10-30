@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 import TelegramIcon from "../../Icons/Telegram/Telegram";
 
-export default function InputTelegram({value, setValue}) {
+export default function InputTelegram({ value, setValue }) {
   return (
     <Input
       type="tel"
@@ -10,6 +10,7 @@ export default function InputTelegram({value, setValue}) {
       variant="bordered"
       placeholder="Link de telegram o el link de tu grupo"
       labelPlacement="outside"
+      value={value.telegram_link}
       endContent={<TelegramIcon w="20px" />}
       onChange={(event) => {
         setValue({

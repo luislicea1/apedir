@@ -1,33 +1,49 @@
 import React from "react";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
-export default function SelectorProvincia() {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["Santiago de Cuba"]));
+export default function SelectorProvincia({ value, setValue }) {
+  const [selectedKeys, setSelectedKeys] = React.useState(
+    new Set([value.province !== "" ? value.province : "Santiago de Cuba"])
+  );
 
+  const handleSelectionChange = (selectedKeys) => {
+    setSelectedKeys(selectedKeys);
+    const selectedValue = Array.from(selectedKeys)[0];
+    setValue((prevState) => {
+      const updatedState = {
+        ...prevState,
+        province: selectedValue,
+      };
+
+      return updatedState;
+    });
+  };
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    
+
     [selectedKeys]
-   
   );
-  
+
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button 
-          variant="bordered" 
-          className="capitalize"
-        >
+        <Button variant="bordered" className="capitalize">
           {selectedValue}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu 
+      <DropdownMenu
         aria-label="Single selection example"
         variant="flat"
         disallowEmptySelection
         selectionMode="single"
         selectedKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
+        onSelectionChange={handleSelectionChange}
       >
         <DropdownItem key="Santiago de Cuba">Santiago de Cuba</DropdownItem>
         <DropdownItem key="Guantanamo">Guantanamo</DropdownItem>
@@ -42,7 +58,9 @@ export default function SelectorProvincia() {
         <DropdownItem key="La Habana">La Habana</DropdownItem>
         <DropdownItem key="Mayabeque">Mayabeque</DropdownItem>
         <DropdownItem key="Pinar del Rio">Pinar del Rio</DropdownItem>
-        <DropdownItem key="La Isla de la Juventud">La Isla de la Juventud</DropdownItem>
+        <DropdownItem key="La Isla de la Juventud">
+          La Isla de la Juventud
+        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

@@ -10,6 +10,7 @@ export default function InputWhatsapp({ value, setValue }) {
       variant="bordered"
       placeholder="55555555"
       labelPlacement="outside"
+      value={value.whatsapp}
       endContent={<WhatsappIcons w="20px" />}
       onChange={(event) => {
         setValue({
