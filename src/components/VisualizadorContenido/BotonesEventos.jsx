@@ -36,7 +36,7 @@ export default function BotonesEventos() {
   return (
     <div className="flex gap-4 items-center" style={margin}>
       <Link href="#"  style= {full}>
-        <Button color="secondary" variant="shadow" style={full}>
+        <Button color="secondary"  style={full}>
           <p>Contactenos</p>
           
         </Button>

@@ -18,9 +18,9 @@ export default function ComponenteLugarGratis(props) {
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
-          <small className="text-default-500">
+          {/* <small className="text-default-500">
             {props.numeroPersonas} personas les gusta este lugar
-          </small>
+          </small> */}
           <h4 className="font-bold text-large">{props.nombre}</h4>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>

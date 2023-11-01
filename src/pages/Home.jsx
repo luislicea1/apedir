@@ -12,7 +12,6 @@ export default function Home() {
     <div>
       <Header></Header>
       <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>
-      
       <SeccionMR
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}

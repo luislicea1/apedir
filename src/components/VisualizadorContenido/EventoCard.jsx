@@ -33,7 +33,7 @@ export default function EventoCard(props){
       return (
         <div style={center}>
           <Image
-            isBlurred
+            
             style={img}
             src={props.evento}
             alt="NextUI Album Cover Image with delay"

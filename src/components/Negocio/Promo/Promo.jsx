@@ -3,7 +3,7 @@ import Corazon2 from "../../Icons/Corazon/Corazon2";
 import Regalo from "../../Icons/regalo/Regalo";
 import { Card, CardBody, CardFooter, Image, Button } from "@nextui-org/react";
 import Like from "../../Like/Like";
-import { grid_center, grid_3_col } from "../../styles/styles";
+import { grid_center, grid_2_col } from "../../styles/styles";
 
 const stats = [
   { id: 1, name: "Seguidores", value: "44 million" },
@@ -27,7 +27,7 @@ export default function Promo(props) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <dl
           className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3"
-          style={grid_3_col}
+          style={grid_2_col}
         >
           <div
             className="mx-auto flex max-w-xs flex-col gap-y-4"
@@ -75,7 +75,7 @@ export default function Promo(props) {
             </dd>
           </div>
 
-          <div
+          {/* <div
             className="mx-auto flex max-w-xs flex-col gap-y-4"
             style={grid_center}
           >
@@ -84,7 +84,7 @@ export default function Promo(props) {
             <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
               {props.lesGusta}
             </dd>
-          </div>
+          </div> */}
         </dl>
       </div>
     </div>

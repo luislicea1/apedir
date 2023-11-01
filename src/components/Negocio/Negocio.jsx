@@ -13,6 +13,7 @@ import { desayuno } from "../Lugares/Comidas";
 import FooterNegocio from "./Footer/FooterNegocio";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
+import Stars from "../Stars/Stars";
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
@@ -89,6 +90,7 @@ const text =
             <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>
             <div className="p-2 m-2">
               <TituloNegocio title={nombre}></TituloNegocio>
+              <Stars w = {150}></Stars>
               <DescripcionNegocio
                 descripcion={text}
                 contact={"si"}

@@ -6,6 +6,7 @@ import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { grid_2_col, titleStyles , no_shadow} from "../styles/styles";
 import Like from "../Like/Like";
+import Stars from "../Stars/Stars";
 
 export default function ComponenteMR(props) {
   const navigate = useNavigate();
@@ -58,8 +59,9 @@ export default function ComponenteMR(props) {
               </div>
 
               <div className="likes-center mt-2" style={titleStyles }>
-                <Like></Like>
-                <p className="mt-2 ml-2">{props.numeroPersonas}</p>
+                {/* <Like></Like>
+                <p className="mt-2 ml-2">{props.numeroPersonas}</p> */}
+                <Stars w = {100} readOnly rating = {4.5}></Stars>
               </div>
             </div>
           </div>
