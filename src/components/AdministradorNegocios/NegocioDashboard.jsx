@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Card, CardBody, Button } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { Button, CircularProgress } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";
 import InputTelegram from "./Inputs/InputTelegram";
@@ -11,8 +11,8 @@ import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
+import { uploadImage } from "../../api/images";
 import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
-import useUserStore from "../../hooks/useStore";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import {
@@ -22,18 +22,13 @@ import {
   grid_center,
 } from "../styles/styles";
 
-const bg = {
-  display: "grid",
-  gridTemplateColumns: "repeat(2,1fr)",
-  gap: "10px",
-  padding: "40px 0",
-};
-
-export default function NegocioDashboard() {
+export default function NegocioDashboard({ user }) {
   // const [user, setUser] = useState(null);
-  const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
 
+  const [imageName, setImageName] = useState({
+    front_pic: "",
+    perfil_pic: "",
+  });
   const defaultBussinessValues = {
     id: "",
     owner: "",
@@ -57,12 +52,18 @@ export default function NegocioDashboard() {
     twitter: "",
   };
   const [bussinessInput, setBussinessInput] = useState(defaultBussinessValues);
+  // const user = useUserStore((state) => state.user);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
 
   const fetchBussiness = async () => {
-    const b = await getOneBussiness("00a99456-e134-476a-a166-ba73e08f7029");
-    setBussinessInput(b);
+    if (user !== null && user.id !== "") {
+      const b = await getOneBussiness(user.id);
+
+      if (b !== null && b !== undefined) {
+        setBussinessInput(b);
+      }
+    }
   };
 
   const handleUpsertBussiness = async () => {
@@ -71,36 +72,73 @@ export default function NegocioDashboard() {
       return;
     }
 
-    await upsertBussiness(bussinessInput);
+    let front_pic = "";
+
+    if (
+      bussinessInput.front_pic !== null &&
+      bussinessInput.front_pic !== ""
+    ) {
+      front_pic = await uploadImage(
+        bussinessInput.front_pic,
+        imageName.front_pic,
+        "bussiness_front"
+      );
+      front_pic = front_pic !== null ? front_pic.path : "";
+    }
+    let perfil_pic = "";
+    if (
+      bussinessInput.perfil_pic !== null &&
+      bussinessInput.perfil_pic !== ""
+    ) {
+      perfil_pic = await uploadImage(
+        bussinessInput.perfil_pic,
+        imageName.perfil_pic,
+        "bussiness_perfil"
+      );
+      perfil_pic = perfil_pic !== null ? perfil_pic.path : "";
+    }
+
+    const updatedBussinessInput = {
+      ...bussinessInput,
+      owner: user.id,
+      front_pic: front_pic,
+      perfil_pic: perfil_pic,
+    };
+
+    await upsertBussiness(updatedBussinessInput);
     toast.success("Actualización exitosa");
     fetchBussiness();
   };
-  const validateForm = async () => {
-    try {
-      await BussinessInputSchema.validate(bussinessInput);
-      setIsFormValid(true);
-    } catch (error) {
-      setIsFormValid(false);
-      setFormError(error.message);
-    }
-  };
-  useEffect(() => {
-    fetchBussiness();
-  }, []);
 
   useEffect(() => {
+    fetchBussiness();
+  }, [user]);
+
+  useEffect(() => {
+    const validateForm = async () => {
+      try {
+        await BussinessInputSchema.validate(bussinessInput);
+        setIsFormValid(true);
+      } catch (error) {
+        setIsFormValid(false);
+        setFormError(error.message);
+      }
+    };
     validateForm();
   }, [bussinessInput]);
 
-
-
   return (
-    <div >
+    <div>
       <InputTitle
         value={bussinessInput}
         setValue={setBussinessInput}
       ></InputTitle>
-      <ImageUploadButton></ImageUploadButton>
+      <ImageUploadButton
+        value={bussinessInput}
+        setValue={setBussinessInput}
+        imageName={imageName}
+        setImageName={setImageName}
+      />
       <TextAreaDescription
         value={bussinessInput}
         setValue={setBussinessInput}

@@ -13,7 +13,7 @@ export default function InputDeInstagram({ value, setValue }) {
           <span className="text-default-400 text-small"></span>
         </div>
       }
-      value={value.instagram}
+      value={value !== "" && value !== null ? value.instagram : ""}
       onChange={(event) => {
         setValue({
           ...value,

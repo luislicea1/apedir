@@ -13,15 +13,24 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+/* Ocultar scrollbar para navegadores basados en WebKit */
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
-:root{
+:root {
     --primary: "#5E17EB";
 }
 
@@ -32,11 +41,13 @@ input[type=number] {
 
 /* Ocultar barra de desplazamiento para IE, Edge y Firefox */
 .list-container {
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;  /* Firefox */
-    position:  static;
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    position: static;
 }
 
-li{
+li {
     list-style: none;
 }

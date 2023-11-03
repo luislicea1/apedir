@@ -1,18 +1,67 @@
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
+import { Button, VisuallyHidden } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
-import './input.css'
+import { resizeImage } from "../../../api/helpers/image";
+import "./input.css";
 
-function ImageUploadButton(props) {
+function ImageUploadButton({ imageName, setImageName, value, setValue }) {
   const [logoImage, setLogoImage] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
 
+  const handleImageChange = async (event, imageType) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const extension = file.name.split(".").pop();
+      const lowerCaseExtension = extension.toLowerCase();
+      const newFileName = file.name.replace(extension, lowerCaseExtension);
+
+      const resizedImage = await resizeImage(file);
+
+      if (imageType === "logo") {
+        setImageName((prevState) => {
+          const updatedState = {
+            ...prevState,
+            perfil_pic: newFileName,
+          };
+
+          return updatedState;
+        });
+        setValue((prevState) => {
+          const updatedState = {
+            ...prevState,
+            perfil_pic: resizedImage,
+          };
+
+          return updatedState;
+        });
+      } else if (imageType === "cover") {
+        setImageName((prevState) => {
+          const updatedState = {
+            ...prevState,
+            front_pic: newFileName,
+          };
+
+          return updatedState;
+        });
+
+        setValue((prevState) => {
+          const updatedState = {
+            ...prevState,
+            front_pic: resizedImage,
+          };
+          return updatedState;
+        });
+      }
+    }
+  };
+
   const handleLogoImageUpload = (event) => {
-    setLogoImage(event.target.files[0]);
+    handleImageChange(event, "logo");
   };
 
   const handleCoverImageUpload = (event) => {
-    setCoverImage(event.target.files[0]);
+    handleImageChange(event, "cover");
   };
 
   const white = {
@@ -38,15 +87,14 @@ function ImageUploadButton(props) {
     padding: "20px 0",
   };
 
-  
-
   return (
+    
     <div style={contenedorRow} className="contenedor-logos-portada">
       <div>
         <div style={contenedor}>
-          {logoImage && (
+          {value?.perfil_pic && (
             <Image
-              src={URL.createObjectURL(logoImage)}
+              src={value.perfil_pic}
               style={imagenLogo}
               alt="Logo subido"
             />
@@ -73,9 +121,9 @@ function ImageUploadButton(props) {
       <div>
         <div>
           <div style={contenedor}>
-            {coverImage && (
+            {value?.front_pic && (
               <Image
-                src={URL.createObjectURL(coverImage)}
+                src={value.front_pic}
                 style={imagenLogo}
                 alt="Portada subida"
               />

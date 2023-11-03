@@ -21,7 +21,6 @@ import Notification from "./Notification.jsx";
 import useUserStore from "../../hooks/useStore.js";
 import Carrito from "./CarritoIcon.jsx";
 
-
 export default function Header(props) {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
@@ -39,44 +38,38 @@ export default function Header(props) {
       return;
     }
   };
+  
+  useEffect(() => {
+    async function handleAuthStateChange(_event, session) {
+      
+      if (session && user === null) {
+        setSession(session);
+        const u = await getUser(session.user.email);
+        setUser(u);
 
-  async function handleAuthStateChange(event, session) {
-    if (session) {
-      setSession(session);
-      const u = await getUser(session.user.email);
-      setUser(u);
-
-      // Suscribirse a los cambios en la tabla "profiles"
-      const channel = supabase
-        .channel("schema-db-changes")
-        .on(
-          "postgres_changes",
-          {
-            event: "UPDATE",
-            schema: "public",
-            table: "profiles",
-            filter: `id=eq.${user.id}`,
-          },
-          async (payload) => {
-            setUser(payload.new);
-          }
-        )
-        .subscribe();
-      setChannel(channel);
-    } else {
-      setSession(null);
-      if (channel) {
-        channel.unsubscribe();
+        // Suscribirse a los cambios en la tabla "profiles"
+        const channel = supabase
+          .channel("schema-db-changes")
+          .on(
+            "postgres_changes",
+            {
+              event: "UPDATE",
+              schema: "public",
+              table: "profiles",
+              filter: `id=eq.${session.user.id}`,
+            },
+            (payload) => {
+              setUser(payload.new);
+            }
+          )
+          .subscribe();
+        setChannel(channel);
       }
     }
-  }
-
-  useEffect(() => {
     const authListener = supabase.auth.onAuthStateChange(
       async (event, session) => await handleAuthStateChange(event, session)
     );
-
-  }, [user]);
+  }, [session]);
 
   return (
     <Navbar isBordered disableAnimation>
