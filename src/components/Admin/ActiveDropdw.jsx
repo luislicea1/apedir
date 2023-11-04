@@ -34,7 +34,6 @@ export default function ActiveDropdw({ isActive, onChange }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="user activity selection"
         color="secondary"
         variant="shadow"
         disallowEmptySelection

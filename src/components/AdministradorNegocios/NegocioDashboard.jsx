@@ -63,6 +63,7 @@ export default function NegocioDashboard({ user }) {
       if (b !== null && b !== undefined) {
         setBussinessInput(b);
       }
+      
     }
   };
 

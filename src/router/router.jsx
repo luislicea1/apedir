@@ -36,9 +36,7 @@ const LazyVisualizarProductoWrapper = lazy(() =>
 const LazyNegocioGratuitoWrapper = lazy(() =>
   import("../components/NegociosGratuitos/NegocioGratuitoWrapper")
 );
-const LazyComprasWrapper = lazy(() =>
-  import("../pages/Compras")
-);
+const LazyComprasWrapper = lazy(() => import("../pages/Compras"));
 
 const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
 
@@ -56,7 +54,7 @@ const router = createBrowserRouter([
   {
     path: "/plans",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <PricingPage />,
       </Suspense>
     ),
@@ -65,7 +63,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <LazyLogin />
       </Suspense>
     ),
@@ -73,7 +71,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <LazyCreateAccount />
       </Suspense>
     ),
@@ -81,7 +79,7 @@ const router = createBrowserRouter([
   {
     path: "/ayuda_e_informacion",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <LazyAyudaInformacion />
       </Suspense>
     ),
@@ -105,7 +103,7 @@ const router = createBrowserRouter([
       {
         path: "/admin/",
         element: (
-          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+          <Suspense fallback={<CircularProgress />}>
             <AdminDashboard />
           </Suspense>
         ),
@@ -114,7 +112,7 @@ const router = createBrowserRouter([
         path: "/admin/plans",
 
         element: (
-          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+          <Suspense fallback={<CircularProgress />}>
             <AdminPlans />
           </Suspense>
         ),
@@ -132,7 +130,7 @@ const router = createBrowserRouter([
   {
     path: "/lugar",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <Outlet />
       </Suspense>
     ),
@@ -140,7 +138,7 @@ const router = createBrowserRouter([
       {
         path: ":localizacion/:nombre/",
         element: (
-          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+          <Suspense fallback={<CircularProgress />}>
             <LazyNegocioWrapper />
           </Suspense>
         ),
@@ -148,7 +146,7 @@ const router = createBrowserRouter([
       {
         path: ":localizacion/:nombre/producto/:title",
         element: (
-          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+          <Suspense fallback={<CircularProgress />}>
             <LazyVisualizarProductoWrapper />
           </Suspense>
         ),
@@ -158,7 +156,7 @@ const router = createBrowserRouter([
   {
     path: "/lugarGratuito",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <Outlet />
       </Suspense>
     ),
@@ -166,7 +164,7 @@ const router = createBrowserRouter([
       {
         path: ":localizacion/:nombre/",
         element: (
-          <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+          <Suspense fallback={<CircularProgress />}>
             <LazyNegocioGratuitoWrapper />
           </Suspense>
         ),
@@ -177,7 +175,7 @@ const router = createBrowserRouter([
   {
     path: "/evento/:nombre",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <LazyVerEventoWrapper />
       </Suspense>
     ),
@@ -186,30 +184,29 @@ const router = createBrowserRouter([
     path: "/administrador-negocio",
     element: (
       <Suspense
-        fallback={
-          <CircularProgress color="secondary" aria-label="Loading..." />
-        }
+        fallback={<CircularProgress color="secondary" label="Cargando..." />}
       >
         <LazyAdministradorNegocio />
       </Suspense>
     ),
   },
+ 
   {
     path: "/carrito",
     element: (
       <Suspense
         fallback={
-          <CircularProgress color="secondary" aria-label="Loading..." />
+          <CircularProgress color="secondary" />
         }
       >
-        <LazyComprasWrapper/>
+        <LazyComprasWrapper />
       </Suspense>
     ),
   },
   {
     path: "/administrador-negocio-gratuito",
     element: (
-      <Suspense fallback={<CircularProgress aria-label="Loading..." />}>
+      <Suspense fallback={<CircularProgress />}>
         <LazyAdministradorNegocioGratuito />
       </Suspense>
     ),

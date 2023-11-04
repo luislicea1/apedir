@@ -5,7 +5,7 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
-import { getOneBussiness } from "../../api/bussiness";
+// import { getOneBussiness } from "../../api/bussiness";
 import useUserStore from "../../hooks/useStore";
 import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
@@ -19,6 +19,7 @@ export default function CrearNegocio() {
 
 
   useEffect(() => {
+    
     const fetchProducts = async () => {
       const productList = await getProducts();
       setProducts(productList !== null ? productList : []);
@@ -81,7 +82,7 @@ export default function CrearNegocio() {
     <div style={grid_1_col}>
       <div className="flex w-full flex-col">
         <br />
-        <Tabs aria-label="Options" fullWidth>
+        <Tabs fullWidth>
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
@@ -89,7 +90,7 @@ export default function CrearNegocio() {
               </CardBody>
             </Card>
           </Tab>
-          <Tab key="music" title="Horario">
+          <Tab key="horario" title="Horario">
             <ResponsiveTimePickers></ResponsiveTimePickers>
           </Tab>
           <Tab key="eventos" title="Eventos">
@@ -99,7 +100,7 @@ export default function CrearNegocio() {
               </CardBody>
             </Card>
           </Tab>
-          <Tab key="videos" title="Productos">
+          <Tab key="productos" title="Productos">
             <Card>
               <CardBody>
                 <ManageProducts

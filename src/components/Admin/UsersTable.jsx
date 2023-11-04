@@ -324,7 +324,6 @@ export default function UsersTable({ users }) {
   return (
     <div style={{ width: "90%" }}>
       <Table
-        aria-label="Users table"
         isHeaderSticky
         bottomContent={bottomContent}
         bottomContentPlacement="outside"

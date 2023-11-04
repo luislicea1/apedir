@@ -37,7 +37,6 @@ export default function ConditionalDropDown({ status, onChange }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="user status selection"
         color="secondary"
         variant="shadow"
         disallowEmptySelection
