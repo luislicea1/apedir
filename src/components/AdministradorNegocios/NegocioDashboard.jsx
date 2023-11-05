@@ -11,16 +11,11 @@ import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
-import { uploadImage } from "../../api/images";
+import { removeImage, uploadImage } from "../../api/images";
 import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
-import {
-  grid_2_col,
-  btnHeight,
-  grid_1_col,
-  grid_center,
-} from "../styles/styles";
+import { grid_2_col, btnHeight } from "../styles/styles";
 
 export default function NegocioDashboard({ user }) {
   // const [user, setUser] = useState(null);
@@ -57,13 +52,18 @@ export default function NegocioDashboard({ user }) {
   const [formError, setFormError] = useState("");
 
   const fetchBussiness = async () => {
-    if (user !== null && user.id !== "") {
+    if (
+      JSON.stringify(bussinessInput) ===
+        JSON.stringify(defaultBussinessValues) &&
+      bussinessInput !== null &&
+      user.id !== ""
+    ) {
+
       const b = await getOneBussiness(user.id);
 
       if (b !== null && b !== undefined) {
         setBussinessInput(b);
       }
-      
     }
   };
 
@@ -74,11 +74,9 @@ export default function NegocioDashboard({ user }) {
     }
 
     let front_pic = "";
+    if (bussinessInput.front_pic !== null && bussinessInput.front_pic !== "") {
+      await removeImage(bussinessInput.id, "bussiness_front");
 
-    if (
-      bussinessInput.front_pic !== null &&
-      bussinessInput.front_pic !== ""
-    ) {
       front_pic = await uploadImage(
         bussinessInput.front_pic,
         imageName.front_pic,
@@ -86,11 +84,19 @@ export default function NegocioDashboard({ user }) {
       );
       front_pic = front_pic !== null ? front_pic.path : "";
     }
+
     let perfil_pic = "";
     if (
       bussinessInput.perfil_pic !== null &&
       bussinessInput.perfil_pic !== ""
     ) {
+      await removeImage(bussinessInput.id, "perfil_pic" ,"bussiness_perfil");
+
+      console.info(
+        "Perfil blob ",
+        bussinessInput.perfil_pic,
+        typeof bussinessInput.perfil_pic
+      );
       perfil_pic = await uploadImage(
         bussinessInput.perfil_pic,
         imageName.perfil_pic,
@@ -113,7 +119,7 @@ export default function NegocioDashboard({ user }) {
 
   useEffect(() => {
     fetchBussiness();
-  }, [user]);
+  });
 
   useEffect(() => {
     const validateForm = async () => {

@@ -11,6 +11,7 @@ const upsertBussiness = async (bussiness) => {
     const { data, error } = await supabase
       .from("bussiness")
       .upsert(bussinessToInsert);
+    console.log(data, error);
     return;
   }
 
@@ -23,9 +24,10 @@ const upsertBussiness = async (bussiness) => {
 
 const getImage = async (bucket, path) => {
   let { data, ef } = supabase.storage.from(bucket).getPublicUrl(path);
-  console.log(data.publicUrl);
+
   return data.publicUrl;
 };
+
 
 const getOneBussiness = async (ownerId) => {
   let { data, error } = await supabase
@@ -38,8 +40,7 @@ const getOneBussiness = async (ownerId) => {
 
   data[0].front_pic = front_pic;
   data[0].perfil_pic = perfil_pic;
-  console.log(data[0]);
   return data[0];
 };
 
-export { upsertBussiness, getOneBussiness };
+export { upsertBussiness, getOneBussiness, getImage };

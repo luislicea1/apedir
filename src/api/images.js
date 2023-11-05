@@ -12,4 +12,18 @@ const uploadImage = async (image, name, bucket) => {
   return data;
 };
 
-export { uploadImage };
+const removeImage = async (id, column, bucket) => {
+  const { data: oldData, error: oldError } = await supabase
+    .from("bussiness")
+    .select(column)
+    .eq("id", id);
+  console.log(oldData);
+  if (oldData) {
+    let { data, error } = await supabase.storage
+      .from(bucket)
+      .remove(oldData[0].image);
+    console.log(data, error);
+  }
+};
+
+export { uploadImage, removeImage };

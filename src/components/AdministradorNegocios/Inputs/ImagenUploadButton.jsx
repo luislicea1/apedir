@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { Button, VisuallyHidden } from "@nextui-org/react";
+import { useEffect } from "react";
+import { Button } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
 import { resizeImage } from "../../../api/helpers/image";
 import "./input.css";
-
+import { useState } from "react";
+import { getImage } from "../../../api/bussiness";
 function ImageUploadButton({ imageName, setImageName, value, setValue }) {
-  const [logoImage, setLogoImage] = useState(null);
-  const [coverImage, setCoverImage] = useState(null);
+  const [perfil, setPerfil] = useState(null);
+  const [front, setFront] = useState(null);
+
+  // useEffect(() => {
+  //   console.log(value.perfil_pic);
+  // }, [value]);
 
   const handleImageChange = async (event, imageType) => {
     if (event.target.files && event.target.files[0]) {
@@ -33,7 +38,7 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
             perfil_pic: resizedImage,
           };
 
-          return updatedState;
+          return { ...updatedState };
         });
       } else if (imageType === "cover") {
         setImageName((prevState) => {
@@ -53,15 +58,20 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
           return updatedState;
         });
       }
+      console.log("Resized image: ", resizedImage);
     }
   };
 
-  const handleLogoImageUpload = (event) => {
-    handleImageChange(event, "logo");
+  const handleLogoImageUpload = async (event) => {
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setPerfil(imageUrl);
+    await handleImageChange(event, "logo");
   };
 
-  const handleCoverImageUpload = (event) => {
-    handleImageChange(event, "cover");
+  const handleCoverImageUpload = async (event) => {
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setFront(imageUrl);
+    await handleImageChange(event, "cover");
   };
 
   const white = {
@@ -88,17 +98,16 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
   };
 
   return (
-    
     <div style={contenedorRow} className="contenedor-logos-portada">
       <div>
         <div style={contenedor}>
-          {value?.perfil_pic && (
-            <Image
-              src={value.perfil_pic}
-              style={imagenLogo}
-              alt="Logo subido"
-            />
-          )}
+          <Image
+            radius="lg"
+            style={imagenLogo}
+            alt="Card background NextUI hero Image with delay"
+            className="object-cover rounded-xl"
+            src={perfil || value.perfil_pic}
+          />
         </div>
         <div>
           <input
