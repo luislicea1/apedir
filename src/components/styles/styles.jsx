@@ -123,7 +123,7 @@ export const ImgCardStyle = {
   placeItems: "center",
 };
 export const ImgStyle = {
-  minHeight: "100px",
+  minHeight: "200px",
   maxHeight: "300px",
   borderRadius: "20px",
 };

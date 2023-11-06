@@ -37,11 +37,12 @@ export default function ComponenteMR(props) {
             >
               <img
                 style={no_shadow}
-                alt="Album cover"
+                alt="Logo cover"
                 className="object-cover img-sinShadow"
                 height={200}
                 shadow="md"
                 src={props.imagen}
+                fallbackSrc="https://via.placeholder.com/300x200"
                 width="100%"
               />
             </div>

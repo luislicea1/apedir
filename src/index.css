@@ -19,6 +19,7 @@ input[type=number] {
     box-sizing: border-box;
     -ms-overflow-style: none;  /* IE y Edge */
     scrollbar-width: none;  /* Firefox */
+    
 }
 
 :root{
