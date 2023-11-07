@@ -13,6 +13,8 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
   //   console.log(value.perfil_pic);
   // }, [value]);
 
+  console.log(value.front_pic)
+
   const handleImageChange = async (event, imageType) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];

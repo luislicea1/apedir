@@ -63,6 +63,7 @@ export default function NegocioDashboard({ user }) {
 
       if (b !== null && b !== undefined) {
         setBussinessInput(b);
+        console.log(b)
       }
     }
   };
@@ -136,6 +137,12 @@ export default function NegocioDashboard({ user }) {
 
   return (
     <div>
+      <Toaster
+        richColors
+        theme="dark"
+        position="bottom-center"
+        duration={3000}
+      />
       <InputTitle
         value={bussinessInput}
         setValue={setBussinessInput}
@@ -185,13 +192,7 @@ export default function NegocioDashboard({ user }) {
           setValue={setBussinessInput}
         ></InputDeInstagram>
       </div>
-      <Toaster
-        richColors
-        theme="dark"
-        position="bottom-center"
-        duration={3000}
-        closeButton
-      />
+      
       <Button
         color="secondary"
         className="text-white mt-2"
