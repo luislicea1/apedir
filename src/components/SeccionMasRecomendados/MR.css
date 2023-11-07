@@ -1,13 +1,18 @@
 .img-containerMR{
-    max-height: 200px !important;
+    width: 100% !important;
+    min-height: 200px !important;
+    max-height: 300px !important;
     max-width: fit-content;
+    object-fit: cover !important;
     display: grid;
 }
 .img-sinShadow{
     box-shadow: none !important;
     border: none !important;
     border-radius: 20px;
-    max-height: 200px !important;
+    width: 100% !important;
+    min-height: 200px !important;
+    max-height: 300px !important;
 }
 
 @media (max-width: 400px) {

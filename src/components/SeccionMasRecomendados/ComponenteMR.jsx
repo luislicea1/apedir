@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, Image, Button, Progress } from "@nextui-org/react";
+import { Card, CardBody, Image, Button, Progress, card } from "@nextui-org/react";
 import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
 import "./MR.css";
 import { Link } from "@nextui-org/react";
@@ -15,16 +15,17 @@ export default function ComponenteMR(props) {
     boxShadow: "none",
     border: "none",
   };
-  
-  const padding_0 = {
-    padding: "0"
+  const cardStyle = {
+    width: "100%"
   }
+  
+  
   return (
     <Link>
       <Card
         isBlurred
-        className="bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-        
+        className="bg-background/60 dark:bg-default-100/50 max-w-[610px] p-0"
+        style={cardStyle}
       >
         <CardBody>
           <div
@@ -39,7 +40,7 @@ export default function ComponenteMR(props) {
                 style={no_shadow}
                 alt="Logo cover"
                 className="object-cover img-sinShadow"
-                height={200}
+                //height={200}
                 shadow="md"
                 src={props.imagen}
                 fallbackSrc="https://via.placeholder.com/300x200"
