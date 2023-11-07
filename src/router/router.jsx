@@ -31,6 +31,9 @@ const LazyVerEventoWrapper = lazy(() =>
 const LazyNegocioTableWrapper = lazy(() =>
   import("../pages/Admin/AdminBussiness")
 );
+const LazyAyudaInformacionWrapper = lazy(() =>
+  import("../pages/AyudaInformacion")
+);
 const LazyVisualizarProductoWrapper = lazy(() =>
   import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
 );
@@ -136,6 +139,14 @@ const router = createBrowserRouter([
       <RequireMerchantRole>
         <h1>Welcome to protected role merchant</h1>
       </RequireMerchantRole>
+    ),
+  },
+  {
+    path: "/ayudaInformacion",
+    element: (
+      <Suspense fallback={<CircularProgress />}>
+            <LazyAyudaInformacionWrapper />
+        </Suspense>
     ),
   },
   {

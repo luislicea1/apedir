@@ -118,7 +118,10 @@ export default function Header(props) {
               <DropdownItem key="analytics" onClick={() => navigate("/plans")}>
                 Planes y Precios
               </DropdownItem>
-              <DropdownItem key="help_and_feedback">
+              <DropdownItem 
+                key="help_and_feedback"
+                onClick={() => navigate("/ayudaInformacion")}  
+              >
                 Ayuda e Información
               </DropdownItem>
               <DropdownItem key="logout" color="danger" onClick={handleLogout}>
