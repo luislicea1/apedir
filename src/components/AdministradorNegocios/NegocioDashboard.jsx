@@ -54,7 +54,7 @@ export default function NegocioDashboard({ user }) {
   const fetchBussiness = async () => {
     if (
       JSON.stringify(bussinessInput) ===
-        JSON.stringify(defaultBussinessValues) &&
+      JSON.stringify(defaultBussinessValues) &&
       bussinessInput !== null &&
       user.id !== ""
     ) {
@@ -90,7 +90,7 @@ export default function NegocioDashboard({ user }) {
       bussinessInput.perfil_pic !== null &&
       bussinessInput.perfil_pic !== ""
     ) {
-      await removeImage(bussinessInput.id, "perfil_pic" ,"bussiness_perfil");
+      await removeImage(bussinessInput.id, "perfil_pic", "bussiness_perfil");
 
       console.info(
         "Perfil blob ",
