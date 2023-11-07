@@ -13,7 +13,7 @@ export default function Home() {
       <Header></Header>
       <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>
       <SeccionMR
-        title="Lugares Recomendados"
+        title="Lugares Recomendados 2.0"
         lugares={lugaresRecomendados}
       ></SeccionMR>
       <Seccion title="Lugares" lugares={lugares} ></Seccion>
