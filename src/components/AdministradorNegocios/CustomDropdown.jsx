@@ -41,7 +41,6 @@ export default function CustomDropdown({
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="user status selection"
         color="secondary"
         variant="shadow"
         disallowEmptySelection

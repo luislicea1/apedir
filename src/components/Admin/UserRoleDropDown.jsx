@@ -37,7 +37,6 @@ export default function UserRoleDropDown({ role, onChange }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="user role selection"
         color="secondary"
         variant="shadow"
         disallowEmptySelection

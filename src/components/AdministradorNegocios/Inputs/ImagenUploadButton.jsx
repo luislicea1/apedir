@@ -1,18 +1,77 @@
-import React, { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
-import './input.css'
+import { resizeImage } from "../../../api/helpers/image";
+import "./input.css";
+import { useState } from "react";
+import { getImage } from "../../../api/bussiness";
+function ImageUploadButton({ imageName, setImageName, value, setValue }) {
+  const [perfil, setPerfil] = useState(null);
+  const [front, setFront] = useState(null);
 
-function ImageUploadButton(props) {
-  const [logoImage, setLogoImage] = useState(null);
-  const [coverImage, setCoverImage] = useState(null);
+  // useEffect(() => {
+  //   console.log(value.perfil_pic);
+  // }, [value]);
 
-  const handleLogoImageUpload = (event) => {
-    setLogoImage(event.target.files[0]);
+  const handleImageChange = async (event, imageType) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const extension = file.name.split(".").pop();
+      const lowerCaseExtension = extension.toLowerCase();
+      const newFileName = file.name.replace(extension, lowerCaseExtension);
+
+      const resizedImage = await resizeImage(file);
+
+      if (imageType === "logo") {
+        setImageName((prevState) => {
+          const updatedState = {
+            ...prevState,
+            perfil_pic: newFileName,
+          };
+
+          return updatedState;
+        });
+        setValue((prevState) => {
+          const updatedState = {
+            ...prevState,
+            perfil_pic: resizedImage,
+          };
+
+          return { ...updatedState };
+        });
+      } else if (imageType === "cover") {
+        setImageName((prevState) => {
+          const updatedState = {
+            ...prevState,
+            front_pic: newFileName,
+          };
+
+          return updatedState;
+        });
+
+        setValue((prevState) => {
+          const updatedState = {
+            ...prevState,
+            front_pic: resizedImage,
+          };
+          return updatedState;
+        });
+      }
+      console.log("Resized image: ", resizedImage);
+    }
   };
 
-  const handleCoverImageUpload = (event) => {
-    setCoverImage(event.target.files[0]);
+  const handleLogoImageUpload = async (event) => {
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setPerfil(imageUrl);
+    await handleImageChange(event, "logo");
+  };
+
+  const handleCoverImageUpload = async (event) => {
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setFront(imageUrl);
+    await handleImageChange(event, "cover");
   };
 
   const white = {
@@ -38,19 +97,17 @@ function ImageUploadButton(props) {
     padding: "20px 0",
   };
 
-  
-
   return (
     <div style={contenedorRow} className="contenedor-logos-portada">
       <div>
         <div style={contenedor}>
-          {logoImage && (
-            <Image
-              src={URL.createObjectURL(logoImage)}
-              style={imagenLogo}
-              alt="Logo subido"
-            />
-          )}
+          <Image
+            radius="lg"
+            style={imagenLogo}
+            alt="Card background NextUI hero Image with delay"
+            className="object-cover rounded-xl"
+            src={perfil || value.perfil_pic}
+          />
         </div>
         <div>
           <input
@@ -73,9 +130,9 @@ function ImageUploadButton(props) {
       <div>
         <div>
           <div style={contenedor}>
-            {coverImage && (
+            {value?.front_pic && (
               <Image
-                src={URL.createObjectURL(coverImage)}
+                src={value.front_pic}
                 style={imagenLogo}
                 alt="Portada subida"
               />

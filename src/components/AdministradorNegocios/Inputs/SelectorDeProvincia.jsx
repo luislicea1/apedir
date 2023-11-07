@@ -38,7 +38,6 @@ export default function SelectorProvincia({ value, setValue }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="Single selection example"
         variant="flat"
         disallowEmptySelection
         selectionMode="single"
