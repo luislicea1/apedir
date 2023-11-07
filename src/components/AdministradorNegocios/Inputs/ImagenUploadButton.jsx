@@ -130,13 +130,12 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
       <div>
         <div>
           <div style={contenedor}>
-            {value?.front_pic && (
-              <Image
-                src={value.front_pic}
-                style={imagenLogo}
-                alt="Portada subida"
-              />
-            )}
+            <Image radius="lg"
+              style={imagenLogo}
+              alt="Card background NextUI hero Image with delay"
+              className="object-cover rounded-xl"
+              src={front || value.front_pic} />
+
           </div>
           <input
             type="file"
