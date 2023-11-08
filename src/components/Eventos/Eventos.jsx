@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Avatar } from "@nextui-org/react";
+import {  Avatar } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default function Eventos(props) {
   return (
     <div className="" style={eventoMargin}>
       <Link onClick={() => navigate(`/evento/${props.nombre}`)}>
-        <Badge content="new" color="danger" size="lg" style={badge}>
+        
           <Avatar
             isBordered
             radius="md"
@@ -19,7 +19,7 @@ export default function Eventos(props) {
             src={props.imagen}
             style={EventoCardStyles}
           />
-        </Badge>
+        
       </Link>
     </div>
   );
