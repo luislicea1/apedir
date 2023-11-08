@@ -128,6 +128,13 @@ export const ImgStyle = {
   borderRadius: "20px",
 };
 
+export const LogoStyle = {
+  width: "272px",
+  height: "272px",
+  margin: "5px",
+  borderRadius: "10px"
+}
+
 export const no_shadow = {
   boxShadow: "none",
   border: "none",
