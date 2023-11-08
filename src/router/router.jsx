@@ -2,7 +2,7 @@ import React from 'react'
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-//import Home from "../pages/Home";
+import Home from "../pages/Home";
 
 import {
   RequireUserRole,
@@ -14,10 +14,10 @@ import NotFound from "../pages/NotFound/NotFound";
 
 // Utilizando lazy para importar los componentes diferidos
 const LazyLogin = lazy(() => import("../components/login/Login"));
-
+/*
 const LazyHome = lazy(() =>
   import("../pages/Home")
-);
+);*/
 
 const LazyCreateAccount = lazy(() =>
   import("../components/login/CreateAccount")
@@ -59,11 +59,7 @@ const PricingPage = lazy(() => import("../pages/PricingPage"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Suspense fallback={<CircularProgress />}>
-        <LazyHome />,
-      </Suspense>
-    ),
+    element: <Home></Home>
   },
 
   {
