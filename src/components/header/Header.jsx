@@ -14,8 +14,8 @@ import {
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import SelectProvincia from "./SelectProvincia.jsx";
-import supabase from "../../api/client.js";
-import { getUser } from "../../api/profile.js";
+import supabase from "../../api/client.jsx";
+import { getUser } from "../../api/profile.jsx";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import Notification from "./Notification.jsx";
 import useUserStore from "../../hooks/useStore.js";
