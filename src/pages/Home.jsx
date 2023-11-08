@@ -17,7 +17,7 @@ export default function Home() {
         lugares={lugaresRecomendados}
       ></SeccionMR>
       <Seccion title="Lugares" lugares={lugares} ></Seccion>
-      <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita>
+      {/* <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita> */}
     </div>
   );
 }
