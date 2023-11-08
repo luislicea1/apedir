@@ -1,3 +1,4 @@
+import React from "react";
 import AdminNavBar from "../../components/Admin/AdminNavBar";
 import UserTable from "../../components/Admin/UsersTable";
 import { getUsers } from "../../api/profile";

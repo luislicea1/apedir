@@ -1,3 +1,4 @@
+import React from 'react'
 import AdminNavBar from "../../components/Admin/AdminNavBar";
 import { getUsers } from "../../api/profile";
 import { useState, useEffect } from "react";

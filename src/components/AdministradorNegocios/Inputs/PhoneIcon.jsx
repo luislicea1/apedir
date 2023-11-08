@@ -1,3 +1,4 @@
+import React from 'react'
 export const PhoneIcon = (props) => (
   <svg
     fill={props.color}

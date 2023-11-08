@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputPrecio({ value, setValues }) {
