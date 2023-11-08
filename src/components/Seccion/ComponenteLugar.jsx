@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
-import { Card, CardHeader, CardBody, Image ,Link} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Link} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { CardStyles, ImgCardStyle, ImgStyle, LogoStyle } from "../styles/styles";
+import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function ComponenteLugar(props) {
  const navigate = useNavigate();
@@ -34,10 +36,11 @@ export default function ComponenteLugar(props) {
          <Stars readOnly w = {100} rating = {3.5}></Stars>
        </CardHeader>
        <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-         <Image
+         <LazyLoadImage
            alt="NextUI hero Image with delay"
            className="object-cover rounded-xl"
            src={props.imagen}
+           effect="blur"
            style={LogoStyle}
          />
        </CardBody>
