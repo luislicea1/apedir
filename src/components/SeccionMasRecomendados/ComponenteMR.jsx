@@ -36,9 +36,9 @@ export default function ComponenteMR(props) {
               className="relative col-span-6 md:col-span-4 img-containerMR"
               style={styles}
             >
-              <img
+              <Image
                 //alt="NextUI hero Image with delay"
-                //alt="NextUI hero Image"
+                alt="NextUi heroe Image"
                 className="object-cover rounded-xl"
                 src={props.imagen}
                 style={ImgStyle}

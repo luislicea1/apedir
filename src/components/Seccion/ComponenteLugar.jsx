@@ -26,7 +26,7 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w = {100} rating = {3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-          <img
+          <Image
             //alt="NextUI hero Image with delay"
             alt = "NextUI hero Image"
             className="object-cover rounded-xl"

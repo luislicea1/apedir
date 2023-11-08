@@ -16,7 +16,7 @@ export default function Home() {
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
       ></SeccionMR>
-      <Seccion title="Lugares" lugares={lugares} ></Seccion>
+      {/* <Seccion title="Lugares" lugares={lugares} ></Seccion> */}
       {/* <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita> */}
     </div>
   );
