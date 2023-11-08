@@ -19,7 +19,7 @@ export default function VerEvento({nombre}){
             width: "100%",
             maxWidth: "450px",
             display: "flex",
-            height: "100vh",
+            height: "calc(100vh - 64px)",
             flexDirection: "column",
             background: "#202632",
             position: "relative",

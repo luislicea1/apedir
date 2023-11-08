@@ -32,7 +32,7 @@ export default function ComponenteLugar(props) {
             // src={props.imagen}
             src={props.imagen}
             style={ImgStyle}
-            fallbackSrc="https://via.placeholder.com/300x200"
+            //fallbackSrc="https://via.placeholder.com/300x200"
           />
         </CardBody>
       </Card>

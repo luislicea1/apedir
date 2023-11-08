@@ -212,6 +212,8 @@ export const Imagen100pcCover = {
 export const Imagen100pc400H = {
   width: "100%",
   height: "100%",
+  minWidth: "175px",
+  minHeight: "175px",
   maxHeight: "400px",
   borderRadius: "10px 10px 0 0",
 };

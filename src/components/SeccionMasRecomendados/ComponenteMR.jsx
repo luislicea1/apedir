@@ -4,7 +4,7 @@ import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
 import "./MR.css";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { grid_2_col, titleStyles , no_shadow} from "../styles/styles";
+import { grid_2_col, titleStyles , no_shadow, ImgCardStyle, ImgStyle} from "../styles/styles";
 import Like from "../Like/Like";
 import Stars from "../Stars/Stars";
 
@@ -36,15 +36,12 @@ export default function ComponenteMR(props) {
               className="relative col-span-6 md:col-span-4 img-containerMR"
               style={styles}
             >
-              <img
-                style={no_shadow}
-                alt="Logo cover"
-                className="object-cover img-sinShadow"
-                //height={200}
-                shadow="md"
+              <Image
+                alt="NextUI hero Image with delay"
+                className="object-cover rounded-xl"
                 src={props.imagen}
-                fallbackSrc="https://via.placeholder.com/300x200"
-                width="100%"
+                style={ImgStyle}
+                //fallbackSrc="https://via.placeholder.com/300x200"
               />
             </div>
 

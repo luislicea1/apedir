@@ -32,7 +32,7 @@ export default function Producto({
           <Image
             radius="lg"
             width="100%"
-            alt="Card background NextUI hero Image with delay"
+            alt="NextUI hero Image with delay"
             className="object-cover rounded-xl"
             src={img}
             style={Imagen100pc400H}
