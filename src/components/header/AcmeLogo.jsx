@@ -2,7 +2,7 @@ import React from "react";
 
 export const AcmeLogo = (props) => (
     <a href="/">
-        <img src={props.logo} width = "60px" alt="" srcSet="" />
+        <img src={props.logo} width = "60px" height = "27.65px" alt="" srcSet="" />
     </a>
     
 );

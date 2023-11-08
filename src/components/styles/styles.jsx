@@ -134,7 +134,12 @@ export const LogoStyle = {
   margin: "5px",
   borderRadius: "10px"
 }
-
+export const ProductoStyle = {
+  width: "225px",
+  height: "175px",
+  borderRadius: "10px 10px 0 0",
+ 
+}
 export const no_shadow = {
   boxShadow: "none",
   border: "none",

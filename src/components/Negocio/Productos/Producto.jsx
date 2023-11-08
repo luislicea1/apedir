@@ -6,6 +6,7 @@ import {
   ImgCardStyle,
   CardStyles2,
   Imagen100pc400H,
+  ProductoStyle
 } from "../../styles/styles";
 
 export default function Producto({
@@ -35,7 +36,8 @@ export default function Producto({
             alt="NextUI hero Image with delay"
             className="object-cover rounded-xl"
             src={img}
-            style={Imagen100pc400H}
+            //style={Imagen100pc400H}
+            style={ProductoStyle}
           />
         </CardBody>
         <CardFooter className="text-small justify-between">
