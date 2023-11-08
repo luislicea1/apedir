@@ -12,7 +12,7 @@ export default function Eventos(props) {
     <div className="" style={eventoMargin}>
       <Link onClick={() => navigate(`/evento/${props.nombre}`)}>
         
-          <MyAvatar
+          <Avatar
             isBordered
             radius="md"
             color="danger"

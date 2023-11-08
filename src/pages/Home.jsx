@@ -11,7 +11,7 @@ export default function Home() {
     return (
     <div>
       <Header></Header>
-      <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>
+      {/* <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos> */}
       {/* <SeccionMR
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
