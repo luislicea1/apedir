@@ -7,7 +7,7 @@ export const AcmeLogo = (props) => {
 
     return (
         <Link onClick={() => navigate(`/`)}>
-            <img src={props.logo} width="60px" height="27.65px" alt="" srcSet="" />
+            <img src={props.logo} width="60px" height="27.65px" alt="apedir" />
         </Link>
     );
 };
