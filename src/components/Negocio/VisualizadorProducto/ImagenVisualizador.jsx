@@ -5,10 +5,10 @@ import "./visualizarProducto.css";
 export default function ImagenVisualizador(props) {
   const img = {
     maxHeight: "70vh",
-    width: "100%",
+    //width: "100%",
     borderRadius: "0px",
     objectFit: "contain",
-
+    width: "450px",
   };
 
   const center = {

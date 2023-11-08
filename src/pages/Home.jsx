@@ -1,9 +1,7 @@
 import React from 'react'
 import Header from "../components/header/Header";
-import Seccion from "../components/Seccion/Seccion"
-import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
-import { lugares } from '../components/Lugares/Lugares';
-import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
+//import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
+//import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
 import { lugares } from '../components/Lugares/Lugares';
 import SeccionEventos from "../components/Eventos/SeccionEventos";
 import { eventos } from "../components/Lugares/Eventos";
