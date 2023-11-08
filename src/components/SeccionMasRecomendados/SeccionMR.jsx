@@ -1,3 +1,4 @@
+import React from 'react'
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import ListadoDeComponentesMR from "./ListadoDeComponentesMR";
 
