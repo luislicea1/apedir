@@ -18,14 +18,15 @@ export default function ComponenteLugar(props) {
  };
 
  useEffect(() => {
-   if (props.imagen) {
-     const link = document.createElement('link');
-     link.rel = 'preload';
-     link.href = props.imagen;
-     link.as = 'image';
-     document.head.appendChild(link);
-   }
+  if (props.imagen) {
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = props.imagen;
+    link.as = 'image';
+    document.head.appendChild(link);
+  }
  }, [props.imagen]);
+
  
  return (
    <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
