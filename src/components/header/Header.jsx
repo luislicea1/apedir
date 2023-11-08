@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -38,38 +38,27 @@ export default function Header(props) {
       return;
     }
   };
-  
+
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
-      
+
       if (session && user === null) {
         setSession(session);
         const u = await getUser(session.user.email);
         setUser(u);
 
-        // Suscribirse a los cambios en la tabla "profiles"
-        const channel = supabase
-          .channel("schema-db-changes")
-          .on(
-            "postgres_changes",
-            {
-              event: "UPDATE",
-              schema: "public",
-              table: "profiles",
-              filter: `id=eq.${session.user.id}`,
-            },
-            (payload) => {
-              setUser(payload.new);
-            }
-          )
-          .subscribe();
-        setChannel(channel);
       }
     }
     const authListener = supabase.auth.onAuthStateChange(
-      async (event, session) => await handleAuthStateChange(event, session)
+      async (event, session) => {
+        if (!user){
+
+          await handleAuthStateChange(event, session)
+        }
+      }
     );
-  }, [session]);
+    console.log(user)
+  }, [user]);
 
   return (
     <Navbar isBordered disableAnimation>
@@ -118,9 +107,9 @@ export default function Header(props) {
               <DropdownItem key="analytics" onClick={() => navigate("/plans")}>
                 Planes y Precios
               </DropdownItem>
-              <DropdownItem 
+              <DropdownItem
                 key="help_and_feedback"
-                onClick={() => navigate("/ayudaInformacion")}  
+                onClick={() => navigate("/ayudaInformacion")}
               >
                 Ayuda e Información
               </DropdownItem>
