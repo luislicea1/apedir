@@ -7,7 +7,7 @@ export default function EventoCard(props){
         //maxHeight: "70vh",
         //height: "50vh",
         //width: "100%",
-        
+        width: "450px",
         borderRadius: "0px",
         objectFit: "fill",
      
