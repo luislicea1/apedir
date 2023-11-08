@@ -8,43 +8,36 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function ComponenteLugar(props) {
- const navigate = useNavigate();
- 
- ComponenteLugar.propTypes = {
-   localizacion: PropTypes.string.isRequired,
-   nombre: PropTypes.string.isRequired,
-   numeroPersonas: PropTypes.number.isRequired,
-   imagen: PropTypes.string.isRequired,
- };
+  const navigate = useNavigate();
+  
+  ComponenteLugar.propTypes = {
+    localizacion: PropTypes.string.isRequired,
+    nombre: PropTypes.string.isRequired,
+    numeroPersonas: PropTypes.number.isRequired,
+    imagen: PropTypes.string.isRequired,
+  };
 
- useEffect(() => {
-   if (props.imagen) {
-     const link = document.createElement('link');
-     link.rel = 'preload';
-     link.href = props.imagen;
-     link.as = 'image';
-     document.head.appendChild(link);
-   }
- }, [props.imagen]);
- 
- return (
-   <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
-     <Card className="py-4" style={CardStyles}>
-       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-         <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
-         <h2 className="font-bold text-large mb-2" style={{fontSize: "25px"}}>{props.nombre}</h2>
-         <Stars readOnly w = {100} rating = {3.5}></Stars>
-       </CardHeader>
-       <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-         <LazyLoadImage
-           alt="NextUI hero Image with delay"
-           className="object-cover rounded-xl"
-           src={props.imagen}
-           effect="blur"
-           style={LogoStyle}
-         />
-       </CardBody>
-     </Card>
-   </Link>
- );
+  return (
+    <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
+      <Card className="py-4" style={CardStyles}>
+        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+          <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
+          <h2 className="font-bold text-large mb-2" style={{fontSize: "25px"}}>{props.nombre}</h2>
+          <Stars readOnly w = {100} rating = {3.5}></Stars>
+        </CardHeader>
+        <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
+          <LazyLoadImage
+            alt="NextUI hero Image with delay"
+            className="object-cover rounded-xl"
+            src={props.imagen}
+            effect="blur"
+            style={LogoStyle}
+            delayMethod="debounce"
+            delayTime={700}
+            placeholderSrc={props.imagen}
+          />
+        </CardBody>
+      </Card>
+    </Link>
+  );
 }
