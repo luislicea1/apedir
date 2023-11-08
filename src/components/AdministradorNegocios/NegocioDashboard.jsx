@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, CircularProgress } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";

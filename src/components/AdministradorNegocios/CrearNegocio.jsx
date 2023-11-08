@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ManageProducts from "./ManageProducts";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 

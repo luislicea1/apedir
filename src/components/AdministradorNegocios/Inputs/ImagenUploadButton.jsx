@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
 import { resizeImage } from "../../../api/helpers/image";

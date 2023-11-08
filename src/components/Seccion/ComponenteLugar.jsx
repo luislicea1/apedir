@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";

@@ -1,3 +1,4 @@
+import React from 'react'
 import Header from "../components/header/Header";
 import CrearNegocio from "../components/AdministradorNegocios/CrearNegocio";
 const sectionStyle = {
