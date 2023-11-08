@@ -1,3 +1,4 @@
+import React from 'react'
 import Imagen2 from "../../assets/comidas/comida (3).png";
 import Imagen3 from "../../assets/comidas/comida (4).png";
 import ListadoCompras from "./ListadoCompras";

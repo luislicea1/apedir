@@ -1,3 +1,4 @@
+import React from 'react'
 import IconosNegocio from "../Iconos/IconosNegocio";
 export default function Contact(props) {
 

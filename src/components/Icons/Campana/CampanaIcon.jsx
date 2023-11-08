@@ -1,3 +1,4 @@
+import React from 'react'
 export default function CampanaIcon(props) {
   return (
     <svg

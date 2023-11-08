@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { horarios } from "../../Lugares/Horarios.jsx";
 
 export default function AbiertoCerrado() {
