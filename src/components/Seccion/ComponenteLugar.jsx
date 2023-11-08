@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image ,Link} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CardStyles, ImgCardStyle, ImgStyle, LogoStyle } from "../styles/styles";
@@ -16,15 +16,14 @@ export default function ComponenteLugar(props) {
   };
   
   return (
-    <a onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
+    <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          
+          <h5 className="text-tiny uppercase font-bold">{props.localizacion}</h5>
           {/* <small className="text-default-500">
             {props.numeroPersonas} personas les gusta este lugar
           </small> */}
           <h2 className="font-bold text-large">{props.nombre}</h2>
-          <h5 className="text-tiny uppercase font-bold">{props.localizacion}</h5>
           <Stars readOnly w = {100} rating = {3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
@@ -39,6 +38,6 @@ export default function ComponenteLugar(props) {
           />
         </CardBody>
       </Card>
-    </a>
+    </Link>
   );
 }
