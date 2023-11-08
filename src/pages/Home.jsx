@@ -1,9 +1,11 @@
 import React from 'react'
 import Header from "../components/header/Header";
 import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
+import { lugares } from '../components/Lugares/Lugares';
 import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
 import SeccionEventos from "../components/Eventos/SeccionEventos";
 import { eventos } from "../components/Lugares/Eventos";
+import Seccion from '../components/Seccion/Seccion';
 
 export default function Home() {
     return (
