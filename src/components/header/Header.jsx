@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -47,29 +47,18 @@ export default function Header(props) {
         const u = await getUser(session.user.email);
         setUser(u);
 
-        // Suscribirse a los cambios en la tabla "profiles"
-        // const channel = supabase
-        //   .channel("schema-db-changes")
-        //   .on(
-        //     "postgres_changes",
-        //     {
-        //       event: "UPDATE",
-        //       schema: "public",
-        //       table: "profiles",
-        //       filter: `id=eq.${session.user.id}`,
-        //     },
-        //     (payload) => {
-        //       setUser(payload.new);
-        //     }
-        //   )
-        //   .subscribe();
-        // setChannel(channel);
       }
     }
     const authListener = supabase.auth.onAuthStateChange(
-      async (event, session) => await handleAuthStateChange(event, session)
+      async (event, session) => {
+        if (!user){
+
+          await handleAuthStateChange(event, session)
+        }
+      }
     );
-  });
+    console.log(user)
+  }, [user]);
 
   return (
     <Navbar isBordered disableAnimation>
