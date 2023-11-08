@@ -53,7 +53,7 @@ export default function HeaderNegocio(props) {
             <Izquierda h={"20px"} w={"20px"}></Izquierda>
           </Link>
 
-          <NegocioLogo logo={props.logo} />
+          <NegocioLogo logo={props.logo}/>
           <div className="ml-2" style={MarginLeft30}>
             <p className="font-bold text-inherit">{props.nombre}</p>
             {props.horario === "si"?<AbiertoCerrado></AbiertoCerrado>:null}
