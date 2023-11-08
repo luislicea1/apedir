@@ -158,10 +158,10 @@ export default function NegocioDashboard({ user }) {
         setValue={setBussinessInput}
         maxChars={120}
       ></TextAreaDescription>
-      <InputLocation
+      {/* <InputLocation
         value={bussinessInput}
         setValue={setBussinessInput}
-      ></InputLocation>
+      ></InputLocation> */}
       <div style={grid_2_col} className="mt-2 mb-2">
         <InputGmail
           value={bussinessInput}
