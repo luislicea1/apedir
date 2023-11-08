@@ -19,11 +19,12 @@ export default function ComponenteLugar(props) {
     <a onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
+          
           {/* <small className="text-default-500">
             {props.numeroPersonas} personas les gusta este lugar
           </small> */}
-          <h4 className="font-bold text-large">{props.nombre}</h4>
+          <h2 className="font-bold text-large">{props.nombre}</h2>
+          <h5 className="text-tiny uppercase font-bold">{props.localizacion}</h5>
           <Stars readOnly w = {100} rating = {3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>

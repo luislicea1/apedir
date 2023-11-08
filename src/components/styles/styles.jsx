@@ -167,6 +167,9 @@ export const eventoMargin = {
 };
 export const badge = {
   width: "50px",
+  height: "30px",
+  //borderRadius: "50%",
+  fontSize: "15px"
 };
 
 /******** Fuentes ********/
