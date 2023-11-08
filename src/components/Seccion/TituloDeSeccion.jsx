@@ -1,3 +1,4 @@
+import React from 'react'
 import { titleStyles } from "../styles/styles";
 
 export default function TituloDeSeccion(props){

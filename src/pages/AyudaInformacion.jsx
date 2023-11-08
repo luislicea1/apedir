@@ -1,3 +1,4 @@
+import React from 'react'
 import Header from "../components/header/Header";
 import { grid_1_col, container, section } from "../components/styles/styles";
 import AyudaInformacionContainer from "../components/AyudaInformacion/AyudaInformacionContainer";

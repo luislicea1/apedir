@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -51,7 +51,7 @@ export default function Header(props) {
     }
     const authListener = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        if (!user){
+        if (!user) {
 
           await handleAuthStateChange(event, session)
         }
