@@ -10,11 +10,11 @@ export default function Home() {
     <div>
       <Header></Header>
       <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>
-      <SeccionMR
+      {/* <SeccionMR
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
-      ></SeccionMR>
-      {/* <Seccion title="Lugares" lugares={lugares} ></Seccion> */}
+      ></SeccionMR> */}
+      <Seccion title="Lugares" lugares={lugares} ></Seccion> 
       {/* <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita> */}
     </div>
   );

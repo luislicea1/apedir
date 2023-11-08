@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { CardStyles, ImgCardStyle, ImgStyle } from "../styles/styles";
+import { CardStyles, ImgCardStyle, ImgStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 
 export default function ComponenteLugar(props) {
@@ -32,7 +32,7 @@ export default function ComponenteLugar(props) {
             className="object-cover rounded-xl"
             // src={props.imagen}
             src={props.imagen}
-            style={ImgStyle}
+            style={LogoStyle}
             //fallbackSrc="https://via.placeholder.com/300x200"
           />
         </CardBody>

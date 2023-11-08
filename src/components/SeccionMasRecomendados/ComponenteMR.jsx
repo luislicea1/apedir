@@ -4,16 +4,17 @@ import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
 import "./MR.css";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { grid_2_col, titleStyles , no_shadow, ImgCardStyle, ImgStyle} from "../styles/styles";
+import { grid_2_col, titleStyles , no_shadow, ImgCardStyle, ImgStyle, LogoStyle} from "../styles/styles";
 import Like from "../Like/Like";
 import Stars from "../Stars/Stars";
 
 export default function ComponenteMR(props) {
   const navigate = useNavigate();
   const styles = {
-    width: "200px",
+    width: "210px",
     boxShadow: "none",
     border: "none",
+   
   };
   const cardStyle = {
     width: "100%"
@@ -41,7 +42,7 @@ export default function ComponenteMR(props) {
                 alt="NextUi heroe Image"
                 className="object-cover rounded-xl"
                 src={props.imagen}
-                style={ImgStyle}
+                style={LogoStyle}
                 //fallbackSrc="https://via.placeholder.com/300x200"
               />
             </div>
