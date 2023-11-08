@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 import PropTypes from "prop-types";
 import Imagen from "../../assets/fondo/restaurant.jpg";
 import LogoImg from "../../assets/img/img (1).png";
@@ -6,7 +8,6 @@ import HeaderNegocio from "./HeaderNegocio/HeaderNegocio";
 import DescripcionNegocio from "./Descripcion/Descripcion";
 import TituloNegocio from "./TituloNegocio/TituloNegocio";
 import ListadoProductos from "./Productos/ListadoProductos";
-import React, { useState, useEffect } from "react";
 import Promo from "./Promo/Promo";
 import { comidas } from "../Lugares/Comidas";
 import { desayuno } from "../Lugares/Comidas";

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "../components/header/Header";
 
 import { CircularProgress } from "@nextui-org/react";

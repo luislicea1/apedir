@@ -1,5 +1,5 @@
+import React from 'react'
 import { Image } from "@nextui-org/react";
-
 
 const mapa = {
     //position: "absolute",

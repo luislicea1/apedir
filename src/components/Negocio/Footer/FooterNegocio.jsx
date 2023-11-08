@@ -1,3 +1,4 @@
+import React from 'react'
 import Contact from "../Contact/Contact";
 import Logo from '../../../assets/LogoBlancoApp.png'
 import { NegocioFooterSection, ImagenFooter } from "../../styles/styles";

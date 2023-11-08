@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";

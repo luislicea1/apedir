@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, Input, Textarea, Button } from "@nextui-org/react";
 import { grid_1_col, btnHeight } from "../styles/styles";
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import UserAltIcon from "../../Icons/user/UserAltIcon";
 import Corazon2 from "../../Icons/Corazon/Corazon2";
 import Regalo from "../../Icons/regalo/Regalo";

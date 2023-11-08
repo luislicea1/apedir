@@ -1,4 +1,4 @@
-
+import React from 'react'
 import WhatsappIcons from "../../Icons/whatsapp/WhatsappIcon";
 import InstagramIcon from "../../Icons/Instagram/InstagramIcon";
 import TelegramIcon from "../../Icons/Telegram/Telegram";

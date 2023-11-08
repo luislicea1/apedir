@@ -1,3 +1,4 @@
+import React from 'react'
 import CalendarioIcon from "../Icons/Calendario/CalendarioIcon";
 import RelojIcon from "../Icons/Reloj/RelojIcon";
 

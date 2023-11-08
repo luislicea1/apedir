@@ -1,3 +1,4 @@
+import React from 'react'
 import VisualizarProducto from "./VisualizarProducto";
 import { useParams } from "react-router-dom";
 

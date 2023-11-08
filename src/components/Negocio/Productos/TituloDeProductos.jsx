@@ -1,3 +1,4 @@
+import React from 'react'
 import { FontBold30px } from "../../styles/styles";
 
 export default function TituloDeProductos(props){

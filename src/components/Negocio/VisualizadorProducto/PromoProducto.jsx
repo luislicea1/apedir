@@ -1,3 +1,4 @@
+import React from 'react'
 import Like from "../../Like/Like"
 import CampanaIcon from "../../Icons/Campana/CampanaIcon"
 import RelojIcon from "../../Icons/Reloj/RelojIcon"

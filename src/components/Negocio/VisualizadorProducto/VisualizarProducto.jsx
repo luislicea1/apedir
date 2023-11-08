@@ -1,3 +1,4 @@
+import React from 'react'
 import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
 import LogoImg from "../../../assets/img/img (1).png";
 import { useState, useEffect } from "react";
