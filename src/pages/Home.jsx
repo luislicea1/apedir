@@ -3,8 +3,8 @@ import Header from "../components/header/Header";
 //import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
 //import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
 import { lugares } from '../components/Lugares/Lugares';
-import SeccionEventos from "../components/Eventos/SeccionEventos";
-import { eventos } from "../components/Lugares/Eventos";
+//import SeccionEventos from "../components/Eventos/SeccionEventos";
+//import { eventos } from "../components/Lugares/Eventos";
 import Seccion from '../components/Seccion/Seccion';
 
 export default function Home() {
