@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ManageProducts from "./ManageProducts";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
-import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
+//import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
 // import { getOneBussiness } from "../../api/bussiness";
@@ -91,7 +91,7 @@ export default function CrearNegocio() {
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
-            <ResponsiveTimePickers></ResponsiveTimePickers>
+            {/* <ResponsiveTimePickers></ResponsiveTimePickers> */}
           </Tab>
           <Tab key="eventos" title="Eventos">
             <Card>
