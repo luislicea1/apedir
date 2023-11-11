@@ -17,18 +17,6 @@ export default function ComponenteLugar(props) {
     imagen: PropTypes.string.isRequired,
   };
 
-  useEffect(() => {
-    const loadImage = async () => {
-      const response = await window.fetch(props.imagen);
-      const blob = await response.blob();
-      const image = new Image();
-      image.src = URL.createObjectURL(blob);
-      await image.decode();
-    };
- 
-    loadImage();
-  }, [props.imagen]);
-
   return (
     <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles}>
@@ -45,8 +33,9 @@ export default function ComponenteLugar(props) {
      effect="blur"
      style={LogoStyle}
      delayMethod="debounce"
-     delayTime={700}
+     delayTime={100}
      placeholderSrc={props.imagen}
+     
    />
    <span>{props.imagen.caption}</span>
         </CardBody>
