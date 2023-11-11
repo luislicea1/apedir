@@ -2,6 +2,8 @@ import { forwardRef } from "react";
 import { useMemo } from "react";
 import React from "react";
 import { AvatarIcon, useAvatar, Image } from "@nextui-org/react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const MyAvatar = forwardRef((props, ref) => {
   const {
@@ -60,13 +62,21 @@ const MyAvatar = forwardRef((props, ref) => {
   return (
     <div {...getAvatarProps()}>
       {src && (
-        <Image
-          alt="NextUI hero Image with delay"
-          //alt = "NextUI hero Image"
-          className="object-cover rounded-xl"
-          style={{width: '140px'}}
-          {...getImageProps()}
-        />
+         <LazyLoadImage
+         alt="NextUI hero Image with delay"
+         className="object-cover rounded-xl"
+         src={props.imagen}
+         effect="blur"
+         //style={LogoStyle}
+         delayMethod="debounce"
+         delayTime={300}
+         placeholderSrc={props.imagen}
+         useIntersectionObserver={true}
+         visibleByDefault = {true}
+         {...getImageProps()}
+       />
+         
+        
       )}
       {fallback}
     </div>

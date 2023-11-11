@@ -2,7 +2,7 @@ import React from "react";
 import {  Avatar } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-//import MyAvatar from "./Avatar";
+import MyAvatar from "./Avatar";
 import { EventoCardStyles, eventoMargin, badge } from "../styles/styles";
 
 export default function Eventos(props) {
@@ -12,7 +12,7 @@ export default function Eventos(props) {
     <div className="" style={eventoMargin}>
       <Link onClick={() => navigate(`/evento/${props.nombre}`)}>
         
-          <Avatar
+          <MyAvatar
             isBordered
             radius="md"
             color="danger"
