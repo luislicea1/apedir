@@ -5,7 +5,9 @@ import Header from "../components/header/Header";
 import { lugares } from '../components/Lugares/Lugares';
 //import SeccionEventos from "../components/Eventos/SeccionEventos";
 //import { eventos } from "../components/Lugares/Eventos";
-import Seccion from '../components/Seccion/Seccion';
+//import Seccion from '../components/Seccion/Seccion';
+import { Suspense,lazy } from 'react';
+const Seccion = lazy(() => import("../components/Seccion/Seccion"))
 
 export default function Home() {
     return (
@@ -16,7 +18,10 @@ export default function Home() {
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
       ></SeccionMR> */}
-      <Seccion title="Lugares 2" lugares={lugares} ></Seccion> 
+      <Suspense>
+        <Seccion title="Lugares 2" lugares={lugares} ></Seccion> 
+      </Suspense>
+      
       {/* <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita> */}
     </div>
   );
