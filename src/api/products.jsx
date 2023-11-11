@@ -6,6 +6,7 @@ const addProduct = async (product) => {
     .from("products")
     .insert(product)
     .select();
+    console.log(data, error)
 };
 
 const updateAvailability = async (id, status) => {
@@ -57,10 +58,11 @@ const updateProduct = async (product, imageName) => {
     .select();
 };
 
-const getProducts = async () => {
+const getProducts = async (category) => {
   let { data: products, error } = await supabase
     .from("products")
     .select("*")
+    .eq("category", category)
     .order("name", { ascending: true });
 
   if (error) {

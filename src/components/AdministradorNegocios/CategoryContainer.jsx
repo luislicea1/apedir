@@ -41,9 +41,9 @@ const CategoryContainer = ({
             setProductInput((prevState) => {
               const updatedState = {
                 ...prevState,
-                category: category.category,
+                category: category.id,
               };
-
+              
               return updatedState;
             });
             onOpen();

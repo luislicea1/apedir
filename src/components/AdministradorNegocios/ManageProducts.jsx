@@ -26,17 +26,18 @@ import ModalEditCategory from "./Modals/ModalEditCategory";
 import { Toaster, toast } from "sonner";
 import InputPrecio from "./Inputs/InputPrecio";
 import ProductInputSchema from "../../schemas/productInputSchema";
-import { Schema } from "yup";
 
 const ManageProducts = ({
   products,
   setProducts,
   categories,
   setCategories,
+  bussiness,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [categoryInput, setCategoryInput] = useState({
-    bussiness: "banca",
+    bussiness: bussiness.id,
     category: "",
   });
   const {
@@ -95,12 +96,11 @@ const ManageProducts = ({
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
-    console.log(categoryInput);
 
     await addCategory(categoryInput);
 
     setCategoryInput({
-      bussiness: "banca",
+      bussiness: bussiness.id,
       category: "",
     });
   };
@@ -120,13 +120,11 @@ const ManageProducts = ({
       imageName,
       "products"
     );
-    console.log(insertedImage);
 
     const updatedProductInput = {
       ...productInput,
       image: insertedImage.path,
     };
-
     await addProduct(updatedProductInput);
 
     setProductInput({
@@ -224,7 +222,7 @@ const ManageProducts = ({
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
-                    Agregar Producto a {productInput.category}
+                    Agregar Producto
                   </ModalHeader>
                   <ModalBody>
                     <Input
@@ -307,7 +305,9 @@ const ManageProducts = ({
                       color="secondary"
                       style={{ color: "white" }}
                       onPress={() => {
+                        console.log('pressed')
                         handleAddProduct();
+                        
                         onClose();
                       }}
                       disabled={!isFormValid}

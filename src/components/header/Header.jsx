@@ -18,7 +18,7 @@ import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 import Notification from "./Notification.jsx";
-import useUserStore from "../../hooks/useStore.js";
+import { useUserStore } from "../../hooks/useStore.js";
 import Carrito from "./CarritoIcon.jsx";
 
 export default function Header(props) {
@@ -41,23 +41,20 @@ export default function Header(props) {
 
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
-
+      console.log(_event);
       if (session && user === null) {
         setSession(session);
         const u = await getUser(session.user.email);
         setUser(u);
-
       }
     }
     const authListener = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (!user) {
-
-          await handleAuthStateChange(event, session)
+          await handleAuthStateChange(event, session);
         }
       }
     );
-    console.log(user)
   }, [user]);
 
   return (

@@ -6,7 +6,7 @@ const getCategories = async (bussiness) => {
     .select("*")
     .eq("bussiness", bussiness)
     .order("category", { ascending: true });
-
+  console.log(error)
   return categories;
 };
 
@@ -15,6 +15,7 @@ const addCategory = async (category) => {
     .from("categories")
     .insert(category)
     .select();
+
   console.log(error);
   return data;
 };

@@ -5,8 +5,8 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 //import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
-// import { getOneBussiness } from "../../api/bussiness";
-import useUserStore from "../../hooks/useStore";
+import { getOneBussiness } from "../../api/bussiness";
+import { useBussinessStore, useUserStore } from "../../hooks/useStore";
 import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
 import NegocioDashboard from "./NegocioDashboard";
@@ -16,17 +16,33 @@ export default function CrearNegocio() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const user = useUserStore((state) => state.user);
-
+  const bussiness = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
 
   useEffect(() => {
-    
+    const fetchBussiness = async () => {
+      const b = await getOneBussiness(user.id);
+      setBussiness(b);
+    };
+
+    fetchBussiness();
+  }, [user]);
+
+  useEffect(() => {
     const fetchProducts = async () => {
-      const productList = await getProducts();
+      const productList = [];
+      if (categories.length > 0) {
+        categories.map(async (category) => {
+          
+          productList.push(await getProducts(category.id));
+        });
+        console.log(productList);
+      }
       setProducts(productList !== null ? productList : []);
     };
 
     const fetchCategories = async () => {
-      const categorylist = await getCategories("banca");
+      const categorylist = await getCategories(bussiness.id);
       setCategories(categorylist !== null ? categorylist : []);
     };
 
@@ -67,8 +83,8 @@ export default function CrearNegocio() {
         )
         .subscribe();
     };
-    fetchProducts();
     fetchCategories();
+    fetchProducts();
 
     return () => {
       if (productSubscription) productSubscription.unsubscribe();
@@ -76,7 +92,7 @@ export default function CrearNegocio() {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, []);
+  }, [bussiness]);
 
   return (
     <div style={grid_1_col}>
@@ -108,6 +124,7 @@ export default function CrearNegocio() {
                   setProducts={setProducts}
                   categories={categories}
                   setCategories={setCategories}
+                  bussiness={bussiness}
                 />
               </CardBody>
             </Card>

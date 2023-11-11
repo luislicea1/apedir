@@ -16,6 +16,7 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
+import { useBussinessStore } from "../../hooks/useStore";
 
 export default function NegocioDashboard({ user }) {
   // const [user, setUser] = useState(null);
@@ -51,19 +52,19 @@ export default function NegocioDashboard({ user }) {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
 
+  const bussinessStore = useBussinessStore((state) => state.bussiness);
+
   const fetchBussiness = async () => {
     if (
       JSON.stringify(bussinessInput) ===
-      JSON.stringify(defaultBussinessValues) &&
+        JSON.stringify(defaultBussinessValues) &&
       bussinessInput !== null &&
       user.id !== ""
     ) {
-
       const b = await getOneBussiness(user.id);
 
       if (b !== null && b !== undefined) {
         setBussinessInput(b);
-        console.log(b)
       }
     }
   };
@@ -75,7 +76,11 @@ export default function NegocioDashboard({ user }) {
     }
 
     let front_pic = "";
-    if (bussinessInput.front_pic !== null && bussinessInput.front_pic !== "") {
+    if (
+      bussinessInput.front_pic !== null &&
+      bussinessInput.front_pic !== "" &&
+      bussinessInput.front_pic instanceof Blob
+    ) {
       await removeImage(bussinessInput.id, "bussiness_front");
 
       front_pic = await uploadImage(
@@ -89,7 +94,8 @@ export default function NegocioDashboard({ user }) {
     let perfil_pic = "";
     if (
       bussinessInput.perfil_pic !== null &&
-      bussinessInput.perfil_pic !== ""
+      bussinessInput.perfil_pic !== "" &&
+      bussinessInput.perfil_pic instanceof Blob
     ) {
       await removeImage(bussinessInput.id, "perfil_pic", "bussiness_perfil");
 
@@ -192,7 +198,7 @@ export default function NegocioDashboard({ user }) {
           setValue={setBussinessInput}
         ></InputDeInstagram>
       </div>
-      
+
       <Button
         color="secondary"
         className="text-white mt-2"

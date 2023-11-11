@@ -5,4 +5,9 @@ const useUserStore = create((set) => ({
   setUser: (u) => set({ user: u }),
 }));
 
-export default useUserStore;
+const useBussinessStore = create((set) => ({
+  bussiness: null,
+  setBussiness: (b) => set({ bussiness: b }),
+}));
+
+export {useUserStore, useBussinessStore};

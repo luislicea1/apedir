@@ -13,8 +13,6 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
   //   console.log(value.perfil_pic);
   // }, [value]);
 
-  console.log(value.front_pic)
-
   const handleImageChange = async (event, imageType) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -60,7 +58,6 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
           return updatedState;
         });
       }
-      console.log("Resized image: ", resizedImage);
     }
   };
 
@@ -132,12 +129,13 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
       <div>
         <div>
           <div style={contenedor}>
-            <Image radius="lg"
+            <Image
+              radius="lg"
               style={imagenLogo}
               alt="Card background NextUI hero Image with delay"
               className="object-cover rounded-xl"
-              src={front || value.front_pic} />
-
+              src={front || value.front_pic}
+            />
           </div>
           <input
             type="file"
