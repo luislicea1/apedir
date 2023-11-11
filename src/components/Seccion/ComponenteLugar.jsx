@@ -17,6 +17,18 @@ export default function ComponenteLugar(props) {
     imagen: PropTypes.string.isRequired,
   };
 
+  useEffect(() => {
+    const loadImage = async () => {
+      const response = await window.fetch(props.imagen);
+      const blob = await response.blob();
+      const image = new Image();
+      image.src = URL.createObjectURL(blob);
+      await image.decode();
+    };
+ 
+    loadImage();
+  }, [props.imagen]);
+
   return (
     <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Card className="py-4" style={CardStyles}>
@@ -26,16 +38,17 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w = {100} rating = {3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-          <LazyLoadImage
-            alt="NextUI hero Image with delay"
-            className="object-cover rounded-xl"
-            src={props.imagen}
-            effect="blur"
-            style={LogoStyle}
-            delayMethod="debounce"
-            delayTime={700}
-            placeholderSrc={props.imagen}
-          />
+        <LazyLoadImage
+     alt="NextUI hero Image with delay"
+     className="object-cover rounded-xl"
+     src={props.imagen}
+     effect="blur"
+     style={LogoStyle}
+     delayMethod="debounce"
+     delayTime={700}
+     placeholderSrc={props.imagen}
+   />
+   <span>{props.imagen.caption}</span>
         </CardBody>
       </Card>
     </Link>
