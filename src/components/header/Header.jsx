@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -13,18 +13,13 @@ import {
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
-//import SelectProvincia from "./SelectProvincia.jsx";
+import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
-//import Notification from "./Notification.jsx";
+import Notification from "./Notification.jsx";
 import { useUserStore } from "../../hooks/useStore.js";
-//import Carrito from "./CarritoIcon.jsx";
-
-
-const SelectProvincia = lazy(() => import("./SelectProvincia.jsx"));
-const Notification = lazy(() => import("./Notification.jsx"));
-const Carrito = lazy(() => import("./CarritoIcon.jsx"));
+import Carrito from "./CarritoIcon.jsx";
 
 export default function Header(props) {
   const [session, setSession] = useState(null);
@@ -68,15 +63,11 @@ export default function Header(props) {
         <AcmeLogo logo={ApedirLogoNegro} />
       </NavbarBrand>
 
-      <Suspense fallback={<div>Loading...</div>}>
-       <SelectProvincia></SelectProvincia>
-     </Suspense>
+      <SelectProvincia></SelectProvincia>
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          <Suspense fallback={<div>Loading...</div>}>
-           <Carrito></Carrito>
-           <Notification />
-         </Suspense>
+          <Carrito></Carrito>
+          <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
