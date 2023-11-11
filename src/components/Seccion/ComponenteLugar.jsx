@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, CardHeader, CardBody, Link } from "@nextui-org/react"; // Asumiendo que Image y otros elementos ya están importados desde @nextui-org/react
+import { Card, CardHeader, CardBody, Link, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
@@ -17,12 +17,6 @@ export default function ComponenteLugar(props) {
     imagen: PropTypes.string.isRequired,
   };
 
-  useEffect(() => {
-    // Preload the image
-    const img = new Image();
-    img.src = props.imagen;
-  }, [props.imagen]); // Ejecutar el efecto cuando props.imagen cambie
-
   return (
     <Link
       onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
@@ -30,7 +24,10 @@ export default function ComponenteLugar(props) {
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
-          <h2 className="font-bold text-large mb-2" style={{ fontSize: "25px" }}>
+          <h2
+            className="font-bold text-large mb-2"
+            style={{ fontSize: "25px" }}
+          >
             {props.nombre}
           </h2>
           <Stars readOnly w={100} rating={3.5}></Stars>
@@ -46,7 +43,7 @@ export default function ComponenteLugar(props) {
             delayTime={300}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
-            visibleByDefault={true}
+            visibleByDefault = {true}
           />
           <span>{props.imagen.caption}</span>
         </CardBody>
@@ -54,5 +51,3 @@ export default function ComponenteLugar(props) {
     </Link>
   );
 }
-
-
