@@ -43,6 +43,7 @@ export default function ComponenteLugar(props) {
             delayTime={300}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
+            visibleByDefault = {true}
           />
           <span>{props.imagen.caption}</span>
         </CardBody>
