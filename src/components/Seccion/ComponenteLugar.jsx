@@ -33,24 +33,18 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w={100} rating={3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-          {/* <LazyLoadImage
-     alt="NextUI hero Image with delay"
-     className="object-cover rounded-xl"
-     src={props.imagen}
-     effect="blur"
-     style={LogoStyle}
-     delayMethod="debounce"
-     delayTime={300}
-     placeholderSrc={props.imagen}
-     
-   />
-   <span>{props.imagen.caption}</span> */}
-          <Image
+          <LazyLoadImage
             alt="NextUI hero Image with delay"
             className="object-cover rounded-xl"
             src={props.imagen}
+            effect="blur"
             style={LogoStyle}
-          ></Image>
+            delayMethod="debounce"
+            delayTime={300}
+            placeholderSrc={props.imagen}
+            useIntersectionObserver={true}
+          />
+          <span>{props.imagen.caption}</span>
         </CardBody>
       </Card>
     </Link>
