@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Card, CardHeader, CardBody, Link} from "@nextui-org/react";
+import React, { useEffect } from "react";
+import { Card, CardHeader, CardBody, Link, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
@@ -9,7 +9,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function ComponenteLugar(props) {
   const navigate = useNavigate();
-  
+
   ComponenteLugar.propTypes = {
     localizacion: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
@@ -18,26 +18,39 @@ export default function ComponenteLugar(props) {
   };
 
   return (
-    <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
+    <Link
+      onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
+    >
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
-          <h2 className="font-bold text-large mb-2" style={{fontSize: "25px"}}>{props.nombre}</h2>
-          <Stars readOnly w = {100} rating = {3.5}></Stars>
+          <h2
+            className="font-bold text-large mb-2"
+            style={{ fontSize: "25px" }}
+          >
+            {props.nombre}
+          </h2>
+          <Stars readOnly w={100} rating={3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-        <LazyLoadImage
+          {/* <LazyLoadImage
      alt="NextUI hero Image with delay"
      className="object-cover rounded-xl"
      src={props.imagen}
      effect="blur"
      style={LogoStyle}
      delayMethod="debounce"
-     delayTime={100}
+     delayTime={300}
      placeholderSrc={props.imagen}
      
    />
-   <span>{props.imagen.caption}</span>
+   <span>{props.imagen.caption}</span> */}
+          <Image
+            alt="NextUI hero Image with delay"
+            className="object-cover rounded-xl"
+            src={props.imagen}
+            style={LogoStyle}
+          ></Image>
         </CardBody>
       </Card>
     </Link>
