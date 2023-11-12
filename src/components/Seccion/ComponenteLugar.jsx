@@ -17,10 +17,7 @@ export default function ComponenteLugar(props) {
     numeroPersonas: PropTypes.number.isRequired,
     imagen: PropTypes.string.isRequired,
   };
-  useEffect(() => {
-    const image = new Image();
-    image.src = props.imagen;
-  }, [props.imagen]);
+  
 
   return (
     <Link
