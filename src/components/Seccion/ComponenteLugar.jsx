@@ -21,7 +21,7 @@ export default function ComponenteLugar(props) {
   return (
     <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
       <Helmet>
-        <link rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
+        <link fetchpriority="high" rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
       </Helmet>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 import Imagen from "../../assets/fondo/restaurant.jpg";
-import LogoImg from "../../assets/img/img (1).png";
+import LogoImg from "../../assets/img/img (1).webp";
 import PortadaDeNegocio from "./PortadaDeNegocio/portadaNegocio";
 import HeaderNegocio from "./HeaderNegocio/HeaderNegocio";
 import DescripcionNegocio from "./Descripcion/Descripcion";
