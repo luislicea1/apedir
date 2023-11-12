@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -7,8 +7,6 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
-
-
 
 export default function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -21,19 +19,20 @@ export default function ComponenteLugar(props) {
   };
 
   return (
-    <Link
-      onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
-    >
-      <Helmet>
-        <link
-          fetchpriority="high"
-          rel="preload"
-          href={props.imagen}
-          as="image"
-          imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
-        />
-      </Helmet>
-      
+    <Suspense>
+      <Link
+        onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
+      >
+        <Helmet>
+          <link
+            fetchpriority="high"
+            rel="preload"
+            href={props.imagen}
+            as="image"
+            imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+          />
+        </Helmet>
+
         <Card className="py-4" style={CardStyles}>
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
@@ -63,7 +62,7 @@ export default function ComponenteLugar(props) {
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
           </CardBody>
         </Card>
-      
-    </Link>
+      </Link>
+    </Suspense>
   );
 }
