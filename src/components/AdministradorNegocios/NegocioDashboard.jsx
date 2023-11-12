@@ -16,14 +16,14 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
-import { useBussinessStore } from "../../hooks/useStore";
 
-export default function NegocioDashboard({ user }) {
+export default function NegocioDashboard({ user, business }) {
   // const [user, setUser] = useState(null);
 
   const [imageName, setImageName] = useState({
     front_pic: "",
     perfil_pic: "",
+    gps_location: "",
   });
   const defaultBussinessValues = {
     id: "",
@@ -51,8 +51,6 @@ export default function NegocioDashboard({ user }) {
   // const user = useUserStore((state) => state.user);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
-
-  const bussinessStore = useBussinessStore((state) => state.bussiness);
 
   const fetchBussiness = async () => {
     if (
@@ -112,11 +110,28 @@ export default function NegocioDashboard({ user }) {
       perfil_pic = perfil_pic !== null ? perfil_pic.path : "";
     }
 
+    let gps_location = "";
+    if (
+      bussinessInput.gps_location !== null &&
+      bussinessInput.gps_location !== "" &&
+      bussinessInput.gps_location instanceof Blob
+    ) {
+      await removeImage(bussinessInput.id, "bussiness_front");
+
+      gps_location = await uploadImage(
+        bussinessInput.gps_location,
+        imageName.gps_location,
+        "bussiness_location"
+      );
+      gps_location = gps_location !== null ? gps_location.path : "";
+    }
+
     const updatedBussinessInput = {
       ...bussinessInput,
       owner: user.id,
       front_pic: front_pic,
       perfil_pic: perfil_pic,
+      gps_location: gps_location,
     };
 
     await upsertBussiness(updatedBussinessInput);
@@ -164,10 +179,11 @@ export default function NegocioDashboard({ user }) {
         setValue={setBussinessInput}
         maxChars={120}
       ></TextAreaDescription>
-      {/* <InputLocation
+      <InputLocation
         value={bussinessInput}
         setValue={setBussinessInput}
-      ></InputLocation> */}
+        setImageName={setImageName}
+      ></InputLocation>
       <div style={grid_2_col} className="mt-2 mb-2">
         <InputGmail
           value={bussinessInput}

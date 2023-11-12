@@ -9,10 +9,6 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
   const [perfil, setPerfil] = useState(null);
   const [front, setFront] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(value.perfil_pic);
-  // }, [value]);
-
   const handleImageChange = async (event, imageType) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];

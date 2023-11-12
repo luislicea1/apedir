@@ -20,6 +20,7 @@ const CategoryContainer = ({
   onCategoryEditOpenChange,
   onCategoryDeleteOpen,
 }) => {
+  console.log(products)
   return (
     <div
       style={{
@@ -93,6 +94,7 @@ const CategoryContainer = ({
 
       <div className="mt-2 list-container" style={grid_3_col}>
         {products.map((product, index) => (
+          
           <ProductCard
             price={product.price}
             key={index + 1}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { getProducts } from "../../api/products";
 import CategoryContainer from "./CategoryContainer";
 import { UploadIcon } from "../Icons/UploadIcon";
@@ -180,9 +180,11 @@ const ManageProducts = ({
         <br />
       </section>
       <Toaster richColors duration={3000} theme="dark" position="top-center" />
+
       {categories.map((category) => {
         const categoryProducts = products.filter(
-          (product) => product.category === category.category
+        
+          (product) => product.category === category.id
         );
         return (
           <CategoryContainer
@@ -305,9 +307,9 @@ const ManageProducts = ({
                       color="secondary"
                       style={{ color: "white" }}
                       onPress={() => {
-                        console.log('pressed')
+                        console.log("pressed");
                         handleAddProduct();
-                        
+
                         onClose();
                       }}
                       disabled={!isFormValid}

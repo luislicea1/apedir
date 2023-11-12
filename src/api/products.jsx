@@ -6,7 +6,7 @@ const addProduct = async (product) => {
     .from("products")
     .insert(product)
     .select();
-    console.log(data, error)
+  console.log(data, error);
 };
 
 const updateAvailability = async (id, status) => {
@@ -58,11 +58,14 @@ const updateProduct = async (product, imageName) => {
     .select();
 };
 
-const getProducts = async (category) => {
+const getProducts = async (categories) => {
+  // Extrae los ID de las categorías
+  const categoryIds = categories.map(category => category.id);
+
   let { data: products, error } = await supabase
     .from("products")
     .select("*")
-    .eq("category", category)
+    .in("category", categoryIds)
     .order("name", { ascending: true });
 
   if (error) {
@@ -86,7 +89,6 @@ const getProducts = async (category) => {
       return product;
     })
   );
-
   return productsWithPublicUrls;
 };
 

@@ -19,42 +19,64 @@ export default function CrearNegocio() {
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
+  const fetchBussiness = async () => {
+    if (user === null) return;
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+  };
   useEffect(() => {
-    const fetchBussiness = async () => {
-      const b = await getOneBussiness(user.id);
-      setBussiness(b);
-    };
-
     fetchBussiness();
   }, [user]);
 
+  // useEffect para las categorías
   useEffect(() => {
-    const fetchProducts = async () => {
-      const productList = [];
-      if (categories.length > 0) {
-        categories.map(async (category) => {
-          
-          productList.push(await getProducts(category.id));
-        });
-        console.log(productList);
-      }
-      setProducts(productList !== null ? productList : []);
-    };
-
     const fetchCategories = async () => {
+      if (bussiness === null) return;
       const categorylist = await getCategories(bussiness.id);
       setCategories(categorylist !== null ? categorylist : []);
     };
 
-    let productSubscription = null;
     let categorySubscription = null;
 
-    const timer1 = setTimeout(
-      () => (productSubscription = subscribeToProducts()),
+    const timer = setTimeout(
+      () => (categorySubscription = subscribeToCategories()),
       1000
     );
-    const timer2 = setTimeout(
-      () => (categorySubscription = subscribeToCategories()),
+
+    const subscribeToCategories = () => {
+      return supabase
+        .channel("category-channel")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "categories" },
+          () => {
+            fetchCategories();
+          }
+        )
+        .subscribe();
+    };
+
+    fetchCategories();
+
+    return () => {
+      if (categorySubscription) categorySubscription.unsubscribe();
+      clearTimeout(timer);
+    };
+  }, [bussiness]);
+
+  // useEffect para los productos
+  useEffect(() => {
+    if (categories.length === 0) return; // No intentes cargar los productos si las categorías aún no se han cargado
+
+    const fetchProducts = async () => {
+      const productList = await getProducts(categories);
+      setProducts(productList !== null ? productList : []);
+    };
+
+    let productSubscription = null;
+
+    const timer = setTimeout(
+      () => (productSubscription = subscribeToProducts()),
       1000
     );
 
@@ -71,28 +93,13 @@ export default function CrearNegocio() {
         .subscribe();
     };
 
-    const subscribeToCategories = () => {
-      return supabase
-        .channel("category-channel")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: "categories" },
-          () => {
-            fetchCategories();
-          }
-        )
-        .subscribe();
-    };
-    fetchCategories();
     fetchProducts();
 
     return () => {
       if (productSubscription) productSubscription.unsubscribe();
-      if (categorySubscription) categorySubscription.unsubscribe();
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      clearTimeout(timer);
     };
-  }, [bussiness]);
+  }, [categories]); // Este useEffect se activa cuando las categorías cambian
 
   return (
     <div style={grid_1_col}>
@@ -102,7 +109,7 @@ export default function CrearNegocio() {
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
-                <NegocioDashboard user={user} />
+                <NegocioDashboard user={user} bussiness={bussiness} />
               </CardBody>
             </Card>
           </Tab>
