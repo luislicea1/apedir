@@ -20,6 +20,9 @@ export default function ComponenteLugar(props) {
 
   return (
     <Link onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}>
+      <Helmet>
+        <link rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
+      </Helmet>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
@@ -29,27 +32,18 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w={100} rating={3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-          <Helmet>
-            <link
-              rel="preload"
-              href={props.imagen}
-              as="image"
-              imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
-            />
-          </Helmet>
           <LazyLoadImage
             alt={props.nombre}
-            className="object-cover rounded-xl"
             src={props.imagen}
             effect="blur"
-            style={LogoStyle}
+            style={{ ...LogoStyle, objectFit: "cover" }}
             delayMethod="debounce"
             delayTime={300}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
             visibleByDefault={true}
           />
-          {/* Comentario: No está claro de dónde proviene props.imagen.caption, puedes ajustarlo según tus necesidades */}
+          {/* Asegúrate de que props.imagen.caption esté definido antes de intentar mostrarlo */}
           {props.imagen.caption && <span>{props.imagen.caption}</span>}
         </CardBody>
       </Card>
