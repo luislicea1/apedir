@@ -16,13 +16,13 @@ import { useNavigate } from "react-router-dom";
 //import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
-//import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
+import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 //import Notification from "./Notification.jsx";
 import { useUserStore } from "../../hooks/useStore.js";
 //import Carrito from "./CarritoIcon.jsx";
 
 const Carrito = lazy(()=>import ("./CarritoIcon.jsx"))
-const ApedirLogoNegro = lazy(()=>import ("../../assets/ApedirLogoNegro.svg"))
+//const ApedirLogoNegro = lazy(()=>import ("../../assets/ApedirLogoNegro.svg"))
 const Notification = lazy(()=>import ("./Notification.jsx"))
 const SelectProvincia = lazy(()=>import ("./SelectProvincia.jsx"))
 

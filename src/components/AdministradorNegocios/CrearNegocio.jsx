@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 //import ManageProducts from "./ManageProducts";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
@@ -106,6 +106,8 @@ export default function CrearNegocio() {
     };
   }, [categories]); // Este useEffect se activa cuando las categorías cambian
 
+  const renderLoader = () => <p>Loading</p>;
+
   return (
     <div style={grid_1_col}>
       <div className="flex w-full flex-col">
@@ -114,17 +116,26 @@ export default function CrearNegocio() {
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
-                <NegocioDashboard user={user} bussiness={bussiness} />
+                
+                <Suspense fallback={renderLoader()}>
+                  < NegocioDashboard user={user} bussiness={bussiness} />
+                </Suspense>
               </CardBody>
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
-            <ResponsiveTimePickers></ResponsiveTimePickers>
+            
+            <Suspense fallback={renderLoader()}>
+              <ResponsiveTimePickers></ResponsiveTimePickers>
+            </Suspense>
           </Tab>
           <Tab key="eventos" title="Eventos">
             <Card>
               <CardBody>
-                <EventManagement />
+                <Suspense fallback={renderLoader()}>
+                  <EventManagement />
+                </Suspense>
+                
               </CardBody>
             </Card>
           </Tab>
@@ -138,6 +149,15 @@ export default function CrearNegocio() {
                   setCategories={setCategories}
                   bussiness={bussiness}
                 />
+                <Suspense fallback={renderLoader()}>
+                <ManageProducts
+                  products={products}
+                  setProducts={setProducts}
+                  categories={categories}
+                  setCategories={setCategories}
+                  bussiness={bussiness}
+                />
+                </Suspense>
               </CardBody>
             </Card>
           </Tab>
