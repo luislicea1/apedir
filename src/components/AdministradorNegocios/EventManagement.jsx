@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, lazy } from "react";
 import { Card, CardBody, Button, Textarea, Image } from "@nextui-org/react";
-import InputTitle from "./Inputs/InputTitle";
-import InputGmail from "./Inputs/InputGmail";
-import InputPhoneNumber from "./Inputs/InputPhoneNumber";
+//import InputTitle from "./Inputs/InputTitle";
+//import InputGmail from "./Inputs/InputGmail";
+//import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { grid_1_col, grid_2_col } from "../styles/styles";
+
+const InputTitle = lazy(()=>import ("./Inputs/InputTitle"));
+const InputGmail = lazy(()=> import("./Inputs/InputGmail"));
+const InputPhoneNumber = lazy(()=> import("./Inputs/InputPhoneNumber"));
 
 export default function EventManagement() {
   const defaultBussinessValues = {

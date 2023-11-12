@@ -1,11 +1,11 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense} from "react";
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Divider,
-  Image,
+ 
 } from "@nextui-org/react";
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";

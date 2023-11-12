@@ -1,13 +1,21 @@
-import TextAreaDescription from "./Inputs/TextAreaDescripcion";
-import InputTitle from "./Inputs/InputTitle";
-import ImageUploadButton from "./Inputs/ImagenUploadButton";
+import React ,{lazy,Suspense} from "react";
+//import TextAreaDescription from "./Inputs/TextAreaDescripcion";
+//import InputTitle from "./Inputs/InputTitle";
+//import ImageUploadButton from "./Inputs/ImagenUploadButton";
 //import InputGmail from "./Inputs/InputGmail";
-import InputLocation from "./Inputs/InputLocation";
+//import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
-import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
-import ManageProducts from "./ManageProducts";
+//import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
+//import ManageProducts from "./ManageProducts";
 import { grid_1_col } from "../styles/styles";
+
+const TextAreaDescription = lazy(()=>import ("./Inputs/TextAreaDescripcion"))
+const InputTitle = lazy(()=> import("./Inputs/InputTitle"));
+const ImageUploadButton = lazy(()=> import("./Inputs/ImagenUploadButton"));
+const InputLocation = lazy(()=> import("./Inputs/InputLocation"));
+const ResponsiveTimePickers = lazy(()=> import("./Inputs/ResponsiveTimePicker"));
+const ManageProducts = lazy(()=> import("./ManageProducts"));
 
 export default function CrearNegocioGratuito() {
 

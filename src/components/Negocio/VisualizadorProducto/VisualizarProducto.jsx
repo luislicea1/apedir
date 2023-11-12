@@ -1,14 +1,20 @@
-import React from "react";
-import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
+import React, { lazy, Suspense } from "react";
+//import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
 import LogoImg from "../../../assets/img/img (1).webp";
 import { useState, useEffect } from "react";
 import Imagen from "../../../assets/img/img (3).jpg";
 //import Imagen from "../../../assets/comidas/comida (5).png";
-import ImagenVisualizador from "./ImagenVisualizador";
+//import ImagenVisualizador from "./ImagenVisualizador";
 import "./visualizarProducto.css";
-import DescripcionDeP from "./DescripcionDeP";
-import PromoProducto from "./PromoProducto";
-import OrdenarProducto from "./OrdenarProducto";
+//import DescripcionDeP from "./DescripcionDeP";
+//import PromoProducto from "./PromoProducto";
+//import OrdenarProducto from "./OrdenarProducto";
+
+const HeaderNegocio = lazy(() => import("../HeaderNegocio/HeaderNegocio"));
+const ImagenVisualizador = lazy(() => import("./ImagenVisualizador"));
+const DescripcionDeP = lazy(() => import("./DescripcionDeP"));
+const PromoProducto = lazy(() => import("./PromoProducto"));
+const OrdenarProducto = lazy(() => import("./OrdenarProducto"));
 
 const sectionStyle = {
   width: "100%",
@@ -61,26 +67,35 @@ export default function VisualizarProducto({ nombre, title, localizacion }) {
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <div style={sectionStyle2}>
         <section style={sectionStyle}>
-          <HeaderNegocio
-            logo={LogoImg}
-            nombre={nombre}
-            horario={"si"}
-            anterior={`/lugar/${localizacion}/${nombre}`}
-            carrito={carrito}
-          ></HeaderNegocio>
+          <Suspense>
+            <HeaderNegocio
+              logo={LogoImg}
+              nombre={nombre}
+              horario={"si"}
+              anterior={`/lugar/${localizacion}/${nombre}`}
+              carrito={carrito}
+            ></HeaderNegocio>
+          </Suspense>
 
           <section style={marginTop}>
-            <ImagenVisualizador image={Imagen}></ImagenVisualizador>
-            <div style={sectionDescription}>
-              <DescripcionDeP
-                title={title}
-                text={text}
-                onAddToCart={handleAddToCart}
-                cantidad={cantidad}
-              ></DescripcionDeP>
-              <OrdenarProducto onChangeQuantity={setCantidad}></OrdenarProducto>
+            <Suspense>
+              <ImagenVisualizador image={Imagen}></ImagenVisualizador>
+            </Suspense>
 
-              <PromoProducto></PromoProducto>
+            <div style={sectionDescription}>
+              <Suspense>
+                <DescripcionDeP
+                  title={title}
+                  text={text}
+                  onAddToCart={handleAddToCart}
+                  cantidad={cantidad}
+                ></DescripcionDeP>
+                <OrdenarProducto
+                  onChangeQuantity={setCantidad}
+                ></OrdenarProducto>
+
+                <PromoProducto></PromoProducto>
+              </Suspense>
             </div>
           </section>
         </section>
