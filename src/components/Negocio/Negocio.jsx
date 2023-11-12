@@ -15,7 +15,7 @@ import FooterNegocio from "./Footer/FooterNegocio";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 import Stars from "../Stars/Stars";
-
+import { Helmet } from "react-helmet";
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
 
@@ -77,6 +77,12 @@ const text =
   
     return (
       <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+        <Helmet>
+          <meta name='description' content='pagina de promocion de negocios en cuba'/>
+          <title>{nombre}</title>
+          <link rel="icon" type="image/svg+xml" href={LogoImg} alt="logo apedir"/>
+        </Helmet>
+        
         <section style={NegocioSection}>
           <HeaderNegocio
             logo={LogoImg}

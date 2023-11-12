@@ -6,10 +6,15 @@ import { lugares } from '../components/Lugares/Lugares';
 import SeccionEventos from "../components/Eventos/SeccionEventos";
 import { eventos } from "../components/Lugares/Eventos";
 import Seccion from '../components/Seccion/Seccion';
+import { Helmet } from 'react-helmet';
 
 export default function Home() {
     return (
     <div>
+      <Helmet>
+        <meta name='description' content='pagina de promocion de negocios en cuba'/>
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
+      </Helmet>
       <Header></Header>
       <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos> 
       {/* <SeccionMR
