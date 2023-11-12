@@ -6,6 +6,7 @@ import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { Helmet } from "react-helmet";
 
 export default function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -33,6 +34,9 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w={100} rating={3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
+          <Helmet>
+            <link rel="preload" href="{props.imagen}" />
+          </Helmet>
           <LazyLoadImage
             alt="NextUI hero Image with delay"
             className="object-cover rounded-xl"
