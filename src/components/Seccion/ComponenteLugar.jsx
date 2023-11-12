@@ -1,14 +1,14 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
-//import Stars from "../Stars/Stars";
+import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 
-const Stars = lazy(() => import("../Stars/Stars"));
+
 
 export default function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function ComponenteLugar(props) {
           imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
         />
       </Helmet>
-      <Suspense>
+      
         <Card className="py-4" style={CardStyles}>
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
@@ -63,7 +63,7 @@ export default function ComponenteLugar(props) {
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
           </CardBody>
         </Card>
-      </Suspense>
+      
     </Link>
   );
 }
