@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ManageProducts from "./ManageProducts";
+import React, { useEffect, useState, lazy } from "react";
+//import ManageProducts from "./ManageProducts";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 //import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
@@ -9,8 +9,13 @@ import { getOneBussiness } from "../../api/bussiness";
 import { useBussinessStore, useUserStore } from "../../hooks/useStore";
 import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
-import NegocioDashboard from "./NegocioDashboard";
-import EventManagement from "./EventManagement";
+//import NegocioDashboard from "./NegocioDashboard";
+//import EventManagement from "./EventManagement";
+
+const ResponsiveTimePickers = lazy(()=>import ("./Inputs/ResponsiveTimePicker"))
+const NegocioDashboard = lazy(()=>import ("./NegocioDashboard"))
+const EventManagement = lazy(()=>import ("./EventManagement"))
+const ManageProducts = lazy(()=>import ("./ManageProducts"))
 
 export default function CrearNegocio() {
   const [products, setProducts] = useState([]);
@@ -114,7 +119,7 @@ export default function CrearNegocio() {
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
-            {/* <ResponsiveTimePickers></ResponsiveTimePickers> */}
+            <ResponsiveTimePickers></ResponsiveTimePickers>
           </Tab>
           <Tab key="eventos" title="Eventos">
             <Card>

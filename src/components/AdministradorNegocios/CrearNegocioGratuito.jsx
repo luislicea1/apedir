@@ -1,7 +1,7 @@
 import TextAreaDescription from "./Inputs/TextAreaDescripcion";
 import InputTitle from "./Inputs/InputTitle";
 import ImageUploadButton from "./Inputs/ImagenUploadButton";
-import InputGmail from "./Inputs/InputGmail";
+//import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
