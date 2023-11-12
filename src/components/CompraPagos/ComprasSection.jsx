@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{lazy, Suspense} from 'react'
 import Imagen2 from "../../assets/comidas/comida (3).png";
 import Imagen3 from "../../assets/comidas/comida (4).png";
-import ListadoCompras from "./ListadoCompras";
-import InputsPedido from "./InputsPedido";
+//import ListadoCompras from "./ListadoCompras";
+//import InputsPedido from "./InputsPedido";
 import { grid_1_col } from "../styles/styles";
+
+const ListadoCompras = lazy(()=>import ("./ListadoCompras"))
+const InputsPedido = lazy(()=>import ("./InputsPedido"))
+const renderLoader = () => <p>Loading</p>;
 
 const carrito = [
   {
@@ -22,9 +26,12 @@ const carrito = [
 export default function ComprasSection() {
   
   return (
+    
     <div style={grid_1_col}>
-      <ListadoCompras lista={carrito}></ListadoCompras>
-      <InputsPedido></InputsPedido>
+      <Suspense fallback={renderLoader()}>
+        <ListadoCompras lista={carrito}></ListadoCompras>
+        <InputsPedido></InputsPedido>
+      </Suspense>
     </div>
   );
 }
