@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, lazy, Suspense } from "react";
 import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -6,6 +6,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { Card } from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
+
+const renderLoader = () => <p>Loading</p>;
 
 const grid = {
   display: "grid",
@@ -17,34 +19,42 @@ const grid = {
   padding: "10px",
 };
 const gridContainer = {
-  display: 'grid',
+  display: "grid",
   gridTemplateColumns: "repeat(1,1fr)",
-  placeItems: 'center',
-  gap: "10px"
-}
+  placeItems: "center",
+  gap: "10px",
+};
 
 const diaTitle = {
   fontSize: "20px",
-  fontWeight: "bold"
-}
+  fontWeight: "bold",
+};
 
+const CardComponent = React.memo(function CardComponent({
+  dia,
+  index,
+  dias,
+  setDias,
+}) {
+  const handleCheckboxChange = useCallback(
+    (event) => {
+      setDias(
+        dias.map((d, i) =>
+          i === index ? { ...d, trabaja: event.target.checked } : d
+        )
+      );
+    },
+    [dias]
+  );
 
-const CardComponent = React.memo(function CardComponent({ dia, index, dias, setDias }) {
-  const handleCheckboxChange = useCallback((event) => {
-    setDias(
-      dias.map((d, i) =>
-        i === index ? { ...d, trabaja: event.target.checked } : d
-      )
-    );
-  }, [dias]);
-
-  const handleTimePickerChange = useCallback((newValue, key) => {
-    setDias(
-      dias.map((d, i) =>
-        i === index ? { ...d, [key]: newValue } : d
-      )
-    );
-  }, [dias]);
+  const handleTimePickerChange = useCallback(
+    (newValue, key) => {
+      setDias(
+        dias.map((d, i) => (i === index ? { ...d, [key]: newValue } : d))
+      );
+    },
+    [dias]
+  );
 
   return (
     <Card style={grid} key={index} className="card-horarios-picker">
@@ -60,28 +70,32 @@ const CardComponent = React.memo(function CardComponent({ dia, index, dias, setD
         <label htmlFor="">Trabaja</label>
       </div>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoItem label="Hora de Entrada">
-          <MobileTimePicker
-            defaultValue={dayjs("2022-04-17T15:30")}
-            onChange={(newValue) => handleTimePickerChange(newValue, 'entrada')}
-          />
-        </DemoItem>
+      <Suspense fallback={renderLoader()}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoItem label="Hora de Entrada">
+            <MobileTimePicker
+              defaultValue={dayjs("2022-04-17T15:30")}
+              onChange={(newValue) =>
+                handleTimePickerChange(newValue, "entrada")
+              }
+            />
+          </DemoItem>
 
-        <DemoItem label="Hora de Salida">
-          <MobileTimePicker
-            defaultValue={dayjs("2022-04-17T15:30")}
-            onChange={(newValue) => handleTimePickerChange(newValue, 'salida')}
-          />
-        </DemoItem>
-      </LocalizationProvider>
+          <DemoItem label="Hora de Salida">
+            <MobileTimePicker
+              defaultValue={dayjs("2022-04-17T15:30")}
+              onChange={(newValue) =>
+                handleTimePickerChange(newValue, "salida")
+              }
+            />
+          </DemoItem>
+        </LocalizationProvider>
+      </Suspense>
     </Card>
   );
 });
 
 export default function ResponsiveTimePickers() {
-
-
   const [dias, setDias] = useState([
     { dia: "Lunes", entrada: null, salida: null, trabaja: true },
     { dia: "Martes", entrada: null, salida: null, trabaja: true },
@@ -102,8 +116,6 @@ export default function ResponsiveTimePickers() {
       }
     });
   };
-
-
 
   return (
     <div style={gridContainer}>
