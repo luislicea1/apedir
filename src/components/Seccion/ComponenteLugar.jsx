@@ -23,7 +23,7 @@ export default function ComponenteLugar(props) {
       onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
     > 
       <Helmet>
-       <link rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
+       <link rel="preload" href={props.imagen} as="image" />
      </Helmet>
       
       <Card className="py-4" style={CardStyles}>
