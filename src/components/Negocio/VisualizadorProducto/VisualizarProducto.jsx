@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderNegocio from "../HeaderNegocio/HeaderNegocio";
-import LogoImg from "../../../assets/img/img (1).png";
+import LogoImg from "../../../assets/img/img (1).webp";
 import { useState, useEffect } from "react";
 import Imagen from "../../../assets/img/img (3).jpg";
 //import Imagen from "../../../assets/comidas/comida (5).png";

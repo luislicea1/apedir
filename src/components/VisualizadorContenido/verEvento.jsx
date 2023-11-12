@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import Imagen from "../../assets/fondo/restaurant.jpg";
-import LogoImg from "../../assets/img/img (1).png";
+import LogoImg from "../../assets/img/img (1).webp";
 import ImgEvento from "../../assets/img/img (1).jpg";
 import EventoCard from "./EventoCard";
 import BotonesEventos from "./BotonesEventos";

@@ -1,6 +1,6 @@
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
-import Imagen1 from "../../assets/img/img (1).png";
+import Imagen1 from "../../assets/img/img (1).webp";
 import { grid_2_col, container, section } from "../styles/styles";
 
 export default function VipComponent() {
