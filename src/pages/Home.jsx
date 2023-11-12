@@ -1,4 +1,4 @@
-import React ,{lazy}from 'react'
+import React ,{lazy, Suspense}from 'react'
 import Header from "../components/header/Header";
 //import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
 //import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
@@ -8,8 +8,9 @@ import { eventos } from "../components/Lugares/Eventos";
 import Seccion from '../components/Seccion/Seccion';
 import { Helmet } from 'react-helmet';
 
-//const Header = lazy(()=>import ('../components/header/Header'))
+const Header = lazy(()=>import ('../components/header/Header'))
 //const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
+const renderLoader = () => <p>Loading</p>;
 
 export default function Home() {
     return (
@@ -18,7 +19,10 @@ export default function Home() {
         <meta name='description' content='pagina de promocion de negocios en cuba'/>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
       </Helmet>
-      <Header></Header>
+      <Suspense fallback={renderLoader()}>
+        <Header></Header>
+      </Suspense>
+      
       {/* <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>  */}
       {/* <SeccionMR
         title="Lugares Recomendados"
