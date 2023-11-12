@@ -22,6 +22,9 @@ export default function ComponenteLugar(props) {
     <Link
       onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
     >
+      <Helmet>
+            <link rel="preload" href="{props.imagen}" />
+      </Helmet>
       <Card className="py-4" style={CardStyles}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
@@ -34,9 +37,7 @@ export default function ComponenteLugar(props) {
           <Stars readOnly w={100} rating={3.5}></Stars>
         </CardHeader>
         <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-          <Helmet>
-            <link rel="preload" href="{props.imagen}" />
-          </Helmet>
+          
           <LazyLoadImage
             alt="NextUI hero Image with delay"
             className="object-cover rounded-xl"
