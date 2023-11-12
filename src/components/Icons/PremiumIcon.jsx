@@ -1,3 +1,4 @@
+import React from "react";
 export const PremiumIcon = (props) => (
   <svg
     viewBox="0 0 24 24"
