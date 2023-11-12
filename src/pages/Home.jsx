@@ -3,13 +3,13 @@ import React ,{lazy, Suspense}from 'react'
 //import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
 //import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
 import { lugares } from '../components/Lugares/Lugares';
-import SeccionEventos from "../components/Eventos/SeccionEventos";
-import { eventos } from "../components/Lugares/Eventos";
-import Seccion from '../components/Seccion/Seccion';
+//import SeccionEventos from "../components/Eventos/SeccionEventos";
+//import { eventos } from "../components/Lugares/Eventos";
+//import Seccion from '../components/Seccion/Seccion';
 import { Helmet } from 'react-helmet';
 
 const Header = lazy(()=>import ('../components/header/Header'))
-//const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
+const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
 const renderLoader = () => <p>Loading</p>;
 
 export default function Home() {
