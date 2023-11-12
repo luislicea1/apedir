@@ -4,7 +4,6 @@ import React from "react";
 import { AvatarIcon, useAvatar, Image } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { Helmet } from "react-helmet";
 
 const MemoizedDiv = memo(function Div({ children, ...props }) {
  return <div {...props}>{children}</div>;
@@ -69,11 +68,7 @@ const MyAvatar = forwardRef((props, ref) => {
  }, [showFallback, src, fallbackComponent, name, classNames]);
 
  return (
-  <div>
-     <Helmet>
-       <link rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
-     </Helmet>
-     <MemoizedDiv {...getAvatarProps()}>
+  <MemoizedDiv {...getAvatarProps()}>
     {src && (
        <LazyLoadImage
        alt="NextUI hero Image with delay"
@@ -92,8 +87,6 @@ const MyAvatar = forwardRef((props, ref) => {
     )}
     {fallback}
   </MemoizedDiv>
-  </div>
-  
  );
 });
 

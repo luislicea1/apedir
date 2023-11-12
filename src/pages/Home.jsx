@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
       </Helmet>
       <Header></Header>
-      <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos> 
+      {/* <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>  */}
       {/* <SeccionMR
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
