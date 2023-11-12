@@ -17,13 +17,17 @@ export default function ComponenteLugar(props) {
     numeroPersonas: PropTypes.number.isRequired,
     imagen: PropTypes.string.isRequired,
   };
+  useEffect(() => {
+    const image = new Image();
+    image.src = props.imagen;
+  }, [props.imagen]);
 
   return (
     <Link
       onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
     > 
       <Helmet>
-       <link rel="preload" href={props.imagen} as="image" />
+       <link rel="preload" href={props.imagen} as="image" imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"/>
      </Helmet>
       
       <Card className="py-4" style={CardStyles}>
