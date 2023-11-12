@@ -132,7 +132,8 @@ export const LogoStyle = {
   width: "272px",
   height: "272px",
   margin: "5px",
-  borderRadius: "10px"
+  borderRadius: "10px",
+  background: "gray"
 }
 export const ProductoStyle = {
   width: "225px",
