@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 //import Header from "../components/header/Header";
 //import CrearNegocioGratuito from "../components/AdministradorNegocios/CrearNegocioGratuito";
 import React, { Suspense, lazy } from "react";
@@ -7,7 +7,6 @@ const Header = lazy(() => import("../components/header/Header"));
 const CrearNegocioGratuito = lazy(() =>
   import("../components/AdministradorNegocios/CrearNegocioGratuito")
 );
-const renderLoader = () => <p>Loading</p>;
 
 const sectionStyle = {
   width: "100%",

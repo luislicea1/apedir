@@ -1,7 +1,5 @@
 import React, { lazy, Suspense } from "react";
 //import Header from "../components/header/Header";
-
-import { CircularProgress } from "@nextui-org/react";
 //import ComprasSection from "../components/CompraPagos/ComprasSection";
 
 const sectionStyle = {
