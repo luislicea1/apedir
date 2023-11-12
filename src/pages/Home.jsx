@@ -1,5 +1,5 @@
 import React ,{lazy, Suspense}from 'react'
-import Header from "../components/header/Header";
+//import Header from "../components/header/Header";
 //import SeccionMR from "../components/SeccionMasRecomendados/SeccionMR";
 //import { lugaresRecomendados } from "../components/Lugares/LugaresRecomendados";
 import { lugares } from '../components/Lugares/Lugares';
