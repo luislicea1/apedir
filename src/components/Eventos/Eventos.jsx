@@ -3,7 +3,7 @@ import {  Avatar } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import MyAvatar from "./Avatar";
-import { EventoCardStyles, eventoMargin, badge } from "../styles/styles";
+import { EventoCardStyles, eventoMargin } from "../styles/styles";
 
 export default function Eventos(props) {
   const navigate = useNavigate();
