@@ -26,20 +26,29 @@ export default function CrearNegocioGratuito() {
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
-                <InputTitle></InputTitle>
-                <ImageUploadButton></ImageUploadButton>
-                <TextAreaDescription></TextAreaDescription>
-                <InputLocation></InputLocation>
+                <Suspense>
+                  <InputTitle></InputTitle>
+                  <ImageUploadButton></ImageUploadButton>
+                  <TextAreaDescription></TextAreaDescription>
+                  <InputLocation></InputLocation>
+                </Suspense>
+                
               </CardBody>
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
-                <ResponsiveTimePickers></ResponsiveTimePickers>         
+            <Suspense>
+              <ResponsiveTimePickers></ResponsiveTimePickers>         
+            </Suspense>
+                
           </Tab>
           <Tab key="productos" title="Productos">
             <Card>
               <CardBody>
-                <ManageProducts/>
+                <Suspense>
+                  <ManageProducts/>
+                </Suspense>
+                
               </CardBody>
             </Card>
           </Tab>
