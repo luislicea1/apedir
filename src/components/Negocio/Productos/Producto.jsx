@@ -1,5 +1,8 @@
 import React from 'react'
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter} from "@nextui-org/react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { Helmet } from "react-helmet";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -22,6 +25,15 @@ export default function Producto({
 
   return (
     <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
+      <Helmet>
+          <link
+            fetchpriority="high"
+            rel="preload"
+            href={img}
+            as="image"
+            imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+          />
+        </Helmet>
       <Card
         shadow="sm"
         key={index}
@@ -31,15 +43,18 @@ export default function Producto({
         className="producto-card"
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
-          <Image
-            radius="lg"
-            width="100%"
-            alt="NextUI hero Image with delay"
-            className="object-cover rounded-xl"
-            src={img}
-            //style={Imagen100pc400H}
-            style={ProductoStyle}
-          />
+          
+           <LazyLoadImage
+              alt={title}
+              src={img}
+              effect="blur"
+              style={{ ...ProductoStyle, objectFit: "cover" }}
+              delayMethod="debounce"
+              delayTime={300}
+              placeholderSrc={img}
+              useIntersectionObserver={true}
+              visibleByDefault={true}
+            />
         </CardBody>
         <CardFooter className="text-small justify-between">
           <b>{title}</b>

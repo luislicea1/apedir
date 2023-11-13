@@ -74,3 +74,4 @@ function ComponenteLugar(props) {
 export default React.memo(ComponenteLugar, (prevProps, nextProps)=>{
   return prevProps.imagen ==nextProps.imagen
 })
+

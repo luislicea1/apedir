@@ -13,14 +13,14 @@ import { comidas } from "../Lugares/Comidas";
 import { desayuno } from "../Lugares/Comidas";
 //import FooterNegocio from "./Footer/FooterNegocio";
 import { NegocioSection } from "../styles/styles";
-//import Navegacion from "./HeaderNegocio/Navegacion";
+import Navegacion from "./HeaderNegocio/Navegacion";
 //import Stars from "../Stars/Stars";
 import { Helmet } from "react-helmet";
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
 
 const Stars = lazy(() => import("../Stars/Stars"));
-const Navegacion = lazy(() => import("./HeaderNegocio/Navegacion"));
+//const Navegacion = lazy(() => import("./HeaderNegocio/Navegacion"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
 const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
