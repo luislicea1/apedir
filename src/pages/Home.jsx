@@ -6,22 +6,22 @@ import { lugares } from '../components/Lugares/Lugares';
 //import SeccionEventos from "../components/Eventos/SeccionEventos";
 //import { eventos } from "../components/Lugares/Eventos";
 //import Seccion from '../components/Seccion/Seccion';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 
 
-const Header = React.memo(lazy(()=>import ('../components/header/Header')));
+// const Header = React.memo(lazy(()=>import ('../components/header/Header')));
 const Seccion = React.memo(lazy(()=> import('../components/Seccion/Seccion')));
 
 export default function Home() {
     return (
     <div>
-      <Helmet>
+      {/* <Helmet>
         <meta name='description' content='pagina de promocion de negocios en cuba'/>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
       </Helmet>
       <Suspense>
         <Header></Header>
-      </Suspense>
+      </Suspense> */}
       
       {/* <SeccionEventos title = {"Eventos"} eventos = {eventos}></SeccionEventos>  */}
       {/* <SeccionMR
