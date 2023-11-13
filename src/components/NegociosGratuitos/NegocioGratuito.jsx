@@ -1,5 +1,5 @@
 //import PropTypes from "prop-types";
-import Imagen from "../../assets/fondo/restaurant.jpg";
+import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
 //import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 //import PortadaDeNegocio from "../Negocio/PortadaDeNegocio/portadaNegocio";
