@@ -1,4 +1,4 @@
-import React from "react";
+import React,{lazy} from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -12,12 +12,17 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import { NegocioLogo } from "./NegocioLogo.jsx";
-import Izquierda from "../../Icons/Angulo/izquierda.jsx";
-import AbiertoCerrado from "./AbiertoCerrado.jsx";
+//import Izquierda from "../../Icons/Angulo/izquierda.jsx";
+//import AbiertoCerrado from "./AbiertoCerrado.jsx";
 import { useState, useEffect } from "react";
-import Carrito from "../../header/CarritoIcon.jsx";
-import Notification from "../../header/Notification.jsx";
+//import Carrito from "../../header/CarritoIcon.jsx";
+//import Notification from "../../header/Notification.jsx";
 import { MarginLeft30 } from "../../styles/styles.jsx";
+
+const AbiertoCerrado = lazy(()=>import ("./AbiertoCerrado.jsx"))
+const Carrito = lazy(()=> import("../../header/CarritoIcon.jsx"));
+const Notification = lazy(()=> import("../../header/Notification.jsx"));
+const Izquierda = lazy(()=> import("../../Icons/Angulo/izquierda.jsx"));
 
 export default function HeaderNegocio(props) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);

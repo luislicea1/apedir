@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@nextui-org/react";
 import TelefonoIcon from "../../Icons/Llamada/Telefono";
 import { Link } from "@nextui-org/react";
-import Like from "../../Like/Like";
 import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import LocalizacionImg from "../../../assets/img/img (1).jpg"

@@ -3,13 +3,13 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow">
   <title>apedir - Sitio para mostrar los negocios en Cuba</title>
   <meta name="description" content="Descubre los negocios en Cuba con apedir. Crea tu negocio con apedir en Cuba.">
- 
-
+  <link fetchpriority="high" rel="preload" href="image" href="/src/assets/ApedirLogoNegro.svg" as="image">
+  <link  fetchpriority="high" rel="preload" href="image" href="/src/assets//img/img (2).png" as="image">
   <style>
     @tailwind base;
     @tailwind components;
@@ -40,6 +40,7 @@
       -ms-overflow-style: none;
       /* IE y Edge */
       scrollbar-width: none;
+      font-family: sans-serif !important;
       /* Firefox */
     }
 

@@ -1,10 +1,11 @@
+import React, { Suspense} from "react";
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Divider,
-  Image,
+ 
 } from "@nextui-org/react";
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";
@@ -39,147 +40,149 @@ export default function PricingCard({
   };
 
   return (
-    <Card className="max-w-[200px] max-h-[300px]" style={{ margin: "10px" }}>
-      <CardHeader className="flex gap-3" style={{ margin: "5px" }}>
-        {img}
-        {/* <Image alt="plan logo"  height={40} radius="sm" src={img} width={40} style={{color: "#9353d3"}}/> */}
-        <div className="flex flex-col">
-          <p className="text-large font-bold">
-            {name} ${price}
-          </p>
-        </div>
-      </CardHeader>
-      <Divider />
-      <CardBody>
-        <ul>
-          {/* <div style={liStyle}>
+    <Suspense>
+      <Card className="max-w-[200px] max-h-[300px]" style={{ margin: "10px" }}>
+        <CardHeader className="flex gap-3" style={{ margin: "5px" }}>
+          {img}
+          {/* <Image alt="plan logo"  height={40} radius="sm" src={img} width={40} style={{color: "#9353d3"}}/> */}
+          <div className="flex flex-col">
+            <p className="text-large font-bold">
+              {name} ${price}
+            </p>
+          </div>
+        </CardHeader>
+        <Divider />
+        <CardBody>
+          <ul>
+            {/* <div style={liStyle}>
             <li style={customText}>{bussiness_num} </li>
             <li>Negocio{bussiness_num > 1 ? "s" : ""}</li>
           </div> */}
-          <div style={flex_center}>
-            <li style={customText}>{front_pic}</li>
-            <li> Foto de portada</li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>{perfil_pic}</li>
-            <li>Foto de Perfil</li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>1</li>
-            <li>Descripción de {description} caracteres</li>
-          </div>
-
-          <div style={flex_center}>
-            {product_num === true ? (
-              <CheckIcon width={20} />
-            ) : (
-              <DeniedIcon width={20} />
-            )}
-            <li>Productos y Servicios</li>
-          </div>
-          <div style={flex_center}>
-            {delivery === true ? (
-              <CheckIcon width={20} />
-            ) : (
-              <DeniedIcon width={20} />
-            )}
-            <li>Domicilio </li>
-          </div>
-          <div style={flex_center}>
-            <CheckIcon width={20} />
-            <li>Horario de trabajo</li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>{social_media}</li>
-            <li>
-              Red{social_media > 1 ? "es" : ""} social
-              {social_media > 1 ? "es" : ""}
-            </li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>{phone_number}</li>
-            <li>Número{phone_number > 1 ? "s" : ""} de teléfono</li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>{email}</li>
-            <li>
-              Correo{email > 1 ? "s" : ""} electrónico{email > 1 ? "s" : ""}{" "}
-            </li>
-          </div>
-
-          <div style={flex_center}>
-            <li style={customText}>{gps_location}</li>
-            <li>Localización por GPS</li>
-          </div>
-
-          <div style={flex_center}>
-            {event_post === true ? (
-              <CheckIcon width={20} />
-            ) : (
-              <DeniedIcon width={20} />
-            )}
-            <li>Posteo de eventos</li>
-          </div>
-
-          <div style={flex_center}>
-            {booking === true ? (
-              <CheckIcon width={20} />
-            ) : (
-              <DeniedIcon width={20} />
-            )}
-            <li>Reservaciones</li>
-          </div>
-
-          {name === "Premium" && (
-            <div>
-              <div style={flex_center}>
-                <CheckIcon width={20} />
-                <li>Página personalizada</li>
-              </div>
-
-              <div style={flex_center}>
-                <CheckIcon width={20} />
-                <li>Sus productos serán destacados</li>
-              </div>
-
-              <div style={flex_center}>
-                <CheckIcon width={20} />
-                <li>Sus servicios serán destacados</li>
-              </div>
-              <div style={flex_center}>
-                <CheckIcon width={20} />
-                <li>Acceso a nuevas features</li>
-              </div>
+            <div style={flex_center}>
+              <li style={customText}>{front_pic}</li>
+              <li> Foto de portada</li>
             </div>
-          )}
-        </ul>
-      </CardBody>
-      <Divider />
-      <CardFooter
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "5px",
-          marginBottom: "5px",
-        }}
-      >
-        <Link
+
+            <div style={flex_center}>
+              <li style={customText}>{perfil_pic}</li>
+              <li>Foto de Perfil</li>
+            </div>
+
+            <div style={flex_center}>
+              <li style={customText}>1</li>
+              <li>Descripción de {description} caracteres</li>
+            </div>
+
+            <div style={flex_center}>
+              {product_num === true ? (
+                <CheckIcon width={20} />
+              ) : (
+                <DeniedIcon width={20} />
+              )}
+              <li>Productos y Servicios</li>
+            </div>
+            <div style={flex_center}>
+              {delivery === true ? (
+                <CheckIcon width={20} />
+              ) : (
+                <DeniedIcon width={20} />
+              )}
+              <li>Domicilio </li>
+            </div>
+            <div style={flex_center}>
+              <CheckIcon width={20} />
+              <li>Horario de trabajo</li>
+            </div>
+
+            <div style={flex_center}>
+              <li style={customText}>{social_media}</li>
+              <li>
+                Red{social_media > 1 ? "es" : ""} social
+                {social_media > 1 ? "es" : ""}
+              </li>
+            </div>
+
+            <div style={flex_center}>
+              <li style={customText}>{phone_number}</li>
+              <li>Número{phone_number > 1 ? "s" : ""} de teléfono</li>
+            </div>
+
+            <div style={flex_center}>
+              <li style={customText}>{email}</li>
+              <li>
+                Correo{email > 1 ? "s" : ""} electrónico{email > 1 ? "s" : ""}{" "}
+              </li>
+            </div>
+
+            <div style={flex_center}>
+              <li style={customText}>{gps_location}</li>
+              <li>Localización por GPS</li>
+            </div>
+
+            <div style={flex_center}>
+              {event_post === true ? (
+                <CheckIcon width={20} />
+              ) : (
+                <DeniedIcon width={20} />
+              )}
+              <li>Posteo de eventos</li>
+            </div>
+
+            <div style={flex_center}>
+              {booking === true ? (
+                <CheckIcon width={20} />
+              ) : (
+                <DeniedIcon width={20} />
+              )}
+              <li>Reservaciones</li>
+            </div>
+
+            {name === "Premium" && (
+              <div>
+                <div style={flex_center}>
+                  <CheckIcon width={20} />
+                  <li>Página personalizada</li>
+                </div>
+
+                <div style={flex_center}>
+                  <CheckIcon width={20} />
+                  <li>Sus productos serán destacados</li>
+                </div>
+
+                <div style={flex_center}>
+                  <CheckIcon width={20} />
+                  <li>Sus servicios serán destacados</li>
+                </div>
+                <div style={flex_center}>
+                  <CheckIcon width={20} />
+                  <li>Acceso a nuevas features</li>
+                </div>
+              </div>
+            )}
+          </ul>
+        </CardBody>
+        <Divider />
+        <CardFooter
           style={{
-            padding: "10px 20px",
-            backgroundColor: "#5E17EB",
-            color: "white",
-            fontWeight: "bold",
-            borderRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          Comprar ahora
-        </Link>
-      </CardFooter>
-    </Card>
+          <Link
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#5E17EB",
+              color: "white",
+              fontWeight: "bold",
+              borderRadius: "10px",
+            }}
+          >
+            Comprar ahora
+          </Link>
+        </CardFooter>
+      </Card>
+    </Suspense>
   );
 }

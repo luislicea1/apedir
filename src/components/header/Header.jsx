@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , lazy} from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -13,13 +13,19 @@ import {
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
-import SelectProvincia from "./SelectProvincia.jsx";
+//import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
-import Notification from "./Notification.jsx";
+//import Notification from "./Notification.jsx";
 import { useUserStore } from "../../hooks/useStore.js";
-import Carrito from "./CarritoIcon.jsx";
+//import Carrito from "./CarritoIcon.jsx";
+
+const Carrito = lazy(()=>import ("./CarritoIcon.jsx"))
+//const ApedirLogoNegro = lazy(()=>import ("../../assets/ApedirLogoNegro.svg"))
+const Notification = lazy(()=>import ("./Notification.jsx"))
+const SelectProvincia = lazy(()=>import ("./SelectProvincia.jsx"))
+
 
 export default function Header(props) {
   const [session, setSession] = useState(null);

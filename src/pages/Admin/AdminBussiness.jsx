@@ -1,9 +1,13 @@
-import React from 'react'
-import AdminNavBar from "../../components/Admin/AdminNavBar";
+import React, { lazy, Suspense } from "react";
+//import AdminNavBar from "../../components/Admin/AdminNavBar";
 import { getUsers } from "../../api/profile";
 import { useState, useEffect } from "react";
 import supabase from "../../api/client";
-import NegocioTable from "../../components/Admin/NegocioTable";
+//import NegocioTable from "../../components/Admin/NegocioTable";
+
+const NegocioTable = lazy(() => import("../../components/Admin/NegocioTable"));
+const AdminNavBar = lazy(() => import("../../components/Admin/AdminNavBar"));
+const renderLoader = () => <p>Loading</p>;
 
 export default function AdminBussiness() {
   const [users, setUsers] = useState([]);
@@ -31,10 +35,11 @@ export default function AdminBussiness() {
 
   return (
     <>
-      <AdminNavBar />
-      
+      <Suspense fallback={renderLoader()}>
+        <AdminNavBar />
+
         <NegocioTable></NegocioTable>
-     
+      </Suspense>
     </>
   );
 }

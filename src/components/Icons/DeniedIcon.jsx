@@ -1,3 +1,4 @@
+import React from "react";
 export default function DeniedIcon({ width }) {
   return (
     <img

@@ -1,9 +1,13 @@
-import React from "react";
-import AdminNavBar from "../../components/Admin/AdminNavBar";
-import UserTable from "../../components/Admin/UsersTable";
+import React, { lazy, Suspense } from "react";
+//import AdminNavBar from "../../components/Admin/AdminNavBar";
+//import UserTable from "../../components/Admin/UsersTable";
 import { getUsers } from "../../api/profile";
 import { useState, useEffect } from "react";
 import supabase from "../../api/client";
+
+const UserTable = lazy(() => import("../../components/Admin/UsersTable"));
+const AdminNavBar = lazy(() => import("../../components/Admin/AdminNavBar"));
+const renderLoader = () => <p>Loading</p>;
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
@@ -31,7 +35,10 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <AdminNavBar />
+      <Suspense fallback={renderLoader()}>
+        <AdminNavBar />
+      </Suspense>
+
       <div
         className="flex justify-center items-center"
         style={{
@@ -42,7 +49,9 @@ export default function AdminDashboard() {
           width: "100%",
         }}
       >
-        <UserTable users={users} />
+        <Suspense fallback={renderLoader()}>
+          <UserTable users={users} />
+        </Suspense>
       </div>
     </>
   );

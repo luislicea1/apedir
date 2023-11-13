@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
-import AdminNavBar from "../../components/Admin/AdminNavBar";
-import PlansTable from "../../components/Admin/PlansTable";
+import React, { useState, useEffect,lazy,Suspense } from "react";
+//import AdminNavBar from "../../components/Admin/AdminNavBar";
+//import PlansTable from "../../components/Admin/PlansTable";
 import { getPlans } from "../../api/plans";
 import supabase from "../../api/client";
+
+const PlansTable = lazy(() => import("../../components/Admin/PlansTable"));
+const AdminNavBar = lazy(() => import("../../components/Admin/AdminNavBar"));
+const renderLoader = () => <p>Loading</p>;
+
 export default function AdminPlans() {
   const [plans, setPlans] = useState([]);
 
@@ -22,7 +27,7 @@ export default function AdminPlans() {
   useEffect(() => {
     const fetchPlans = async () => {
       const data = await getPlans();
-      if (data === null) setPlans([])
+      if (data === null) setPlans([]);
       else setPlans(data);
     };
     fetchPlans();
@@ -30,7 +35,10 @@ export default function AdminPlans() {
 
   return (
     <div>
-      <AdminNavBar />
+      <Suspense fallback={renderLoader()}>
+        <AdminNavBar />
+      </Suspense>
+
       <div
         className="flex justify-center items-center"
         style={{
@@ -41,7 +49,9 @@ export default function AdminPlans() {
           width: "100%",
         }}
       >
-        <PlansTable plans={plans} />
+        <Suspense fallback={renderLoader()}>
+          <PlansTable plans={plans} />
+        </Suspense>
       </div>
     </div>
   );

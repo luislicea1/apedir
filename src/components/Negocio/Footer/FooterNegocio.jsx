@@ -1,6 +1,6 @@
 import React from 'react'
 import Contact from "../Contact/Contact";
-import Logo from '../../../assets/LogoBlancoApp.png'
+import Logo from '../../../assets/LogoBlancoApp.webp'
 import { NegocioFooterSection, ImagenFooter } from "../../styles/styles";
 
 export default function FooterNegocio(props) {

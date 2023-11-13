@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, CardBody, Image, Button, Progress, card } from "@nextui-org/react";
-import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
+import { Card, CardBody, Image} from "@nextui-org/react";
+//import HeartIconContainer from "../Icons/HeartIcon/HeartIconContainer";
 import "./MR.css";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { grid_2_col, titleStyles , no_shadow, ImgCardStyle, ImgStyle, LogoStyle} from "../styles/styles";
+import { grid_2_col, titleStyles ,LogoStyle} from "../styles/styles";
 import Like from "../Like/Like";
 import Stars from "../Stars/Stars";
 
