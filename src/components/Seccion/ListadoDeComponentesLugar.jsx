@@ -27,7 +27,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { grid_3_col } from "../styles/styles";
 import "./seccion.css";
 
-//const ComponenteLugar = lazy(()=>("./ComponenteLugar"))
 const ComponenteLugar = lazy(()=>import ("./ComponenteLugar"))
 
 const ListadoDeComponentesLugar = ({ lugares }) => {
@@ -36,7 +35,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
 
   useEffect(() => {
     // Cargar los primeros 6 elementos al inicio
-    const initialItems = lugares.slice(0, 6);
+    const initialItems = lugares.slice(0, 3);
     setItems(initialItems);
 
     // Desactivar la carga si no hay más elementos
@@ -85,4 +84,3 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
 export default ListadoDeComponentesLugar;
 
 
-<div className="list-container" style={grid_3_col}></div>
