@@ -20,4 +20,4 @@ export default function SkeletonCard() {
       </div>
     </Card>
   );
-}
+} 

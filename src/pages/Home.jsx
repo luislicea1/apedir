@@ -10,7 +10,6 @@ import { Helmet } from 'react-helmet';
 
 const Header = lazy(()=>import ('../components/header/Header'))
 const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
-const renderLoader = () => <p>Loading</p>;
 
 export default function Home() {
     return (
@@ -19,7 +18,7 @@ export default function Home() {
         <meta name='description' content='pagina de promocion de negocios en cuba'/>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" alt="logo apedir"/>
       </Helmet>
-      <Suspense fallback={renderLoader()}>
+      <Suspense>
         <Header></Header>
       </Suspense>
       
@@ -28,7 +27,7 @@ export default function Home() {
         title="Lugares Recomendados"
         lugares={lugaresRecomendados}
       ></SeccionMR> */}
-      <Suspense fallback={renderLoader()}>
+      <Suspense>
         <Seccion title="Lugares 2" lugares={lugares} ></Seccion> 
       </Suspense>
       

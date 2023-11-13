@@ -7,6 +7,7 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
+import SkeletonCard from "../Skeleton/SkeletonCard";
 
 export default function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function ComponenteLugar(props) {
   };
 
   return (
-    <Suspense>
+    <Suspense fallback = {SkeletonCard}>
       <Link
         onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
       >
