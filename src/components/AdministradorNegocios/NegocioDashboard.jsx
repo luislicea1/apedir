@@ -116,7 +116,7 @@ export default function NegocioDashboard({ user, business }) {
       bussinessInput.gps_location !== "" &&
       bussinessInput.gps_location instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "bussiness_front");
+      await removeImage(bussinessInput.id, "bussiness_location");
 
       gps_location = await uploadImage(
         bussinessInput.gps_location,
