@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 //import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
-import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
+//import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
 //import Notification from "./Notification.jsx";
 import { useUserStore } from "../../hooks/useStore.js";
 //import Carrito from "./CarritoIcon.jsx";
@@ -66,7 +66,7 @@ export default function Header(props) {
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
-        <AcmeLogo logo={ApedirLogoNegro} />
+        <AcmeLogo />
       </NavbarBrand>
 
       <SelectProvincia></SelectProvincia>
