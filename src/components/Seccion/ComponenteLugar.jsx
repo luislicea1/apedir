@@ -9,7 +9,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 
 
-export default function ComponenteLugar(props) {
+function ComponenteLugar(props) {
   const navigate = useNavigate();
 
   ComponenteLugar.propTypes = {
@@ -70,3 +70,7 @@ export default function ComponenteLugar(props) {
     </Suspense>
   );
 }
+
+export default React.memo(ComponenteLugar, (prevProps, nextProps)=>{
+  return prevProps.imagen ==nextProps.imagen
+})
