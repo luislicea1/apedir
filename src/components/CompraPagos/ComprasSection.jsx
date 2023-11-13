@@ -1,6 +1,6 @@
 import React,{lazy, Suspense} from 'react'
-import Imagen2 from "../../assets/comidas/comida (3).png";
-import Imagen3 from "../../assets/comidas/comida (4).png";
+import Imagen2 from "../../assets/comidas/comida (3).webp";
+import Imagen3 from "../../assets/comidas/comida (4).webp";
 //import ListadoCompras from "./ListadoCompras";
 //import InputsPedido from "./InputsPedido";
 import { grid_1_col } from "../styles/styles";
