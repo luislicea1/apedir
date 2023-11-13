@@ -35,7 +35,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
 
   useEffect(() => {
     // Cargar los primeros 6 elementos al inicio
-    const initialItems = lugares.slice(0, 3);
+    const initialItems = lugares.slice(0, 6);
     setItems(initialItems);
 
     // Desactivar la carga si no hay más elementos

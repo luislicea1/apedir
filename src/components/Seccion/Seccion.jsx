@@ -1,8 +1,10 @@
-import React from 'react'
-import TituloDeSeccion from "./TituloDeSeccion";
-import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
-import ComponenteLugar from "./ComponenteLugar";
+import React,{lazy} from 'react'
+//import TituloDeSeccion from "./TituloDeSeccion";
+//import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
 import {container,section} from "../styles/styles"
+
+const TituloDeSeccion = lazy(()=>import ("./TituloDeSeccion"))
+const ListadoDeComponentesLugar = lazy(()=> import("./ListadoDeComponentesLugar"));
 
 export default function Seccion(props){
     
