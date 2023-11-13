@@ -51,8 +51,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
         setHasMore(false);
       }
     }, 1500);
-   };
-   
+  };
 
   return (
     <InfiniteScroll
@@ -63,7 +62,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
     >
       <div className="list-container" style={grid_3_col}>
         {items.map((lugar, index) => (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense>
             <ComponenteLugar
               key={index}
               nombre={lugar.nombre}

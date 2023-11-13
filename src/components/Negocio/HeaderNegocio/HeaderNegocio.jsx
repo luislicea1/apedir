@@ -19,6 +19,11 @@ import Carrito from "../../header/CarritoIcon.jsx";
 import Notification from "../../header/Notification.jsx";
 import { MarginLeft30 } from "../../styles/styles.jsx";
 
+const AbiertoCerrado = lazy(()=>import ("./AbiertoCerrado.jsx"))
+const Carrito = lazy(()=> import("../../header/CarritoIcon.jsx"));
+const Notification = lazy(()=> import("../../header/Notification.jsx"));
+const Izquierda = lazy(()=> import("../../Icons/Angulo/izquierda.jsx"));
+
 export default function HeaderNegocio(props) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
