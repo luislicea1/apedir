@@ -21,11 +21,14 @@
 // }
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,lazy } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ComponenteLugar from "./ComponenteLugar";
+//import ComponenteLugar from "./ComponenteLugar";
 import { grid_3_col } from "../styles/styles";
 import "./seccion.css";
+
+//const ComponenteLugar = lazy(()=>("./ComponenteLugar"))
+const ComponenteLugar = lazy(()=>import ("./ComponenteLugar"))
 
 const ListadoDeComponentesLugar = ({ lugares }) => {
   const [items, setItems] = useState([]);
