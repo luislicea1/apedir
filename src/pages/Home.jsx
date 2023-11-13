@@ -9,8 +9,8 @@ import { lugares } from '../components/Lugares/Lugares';
 import { Helmet } from 'react-helmet';
 
 
-const Header = lazy(()=>import ('../components/header/Header'))
-const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
+const Header = React.memo(lazy(()=>import ('../components/header/Header')));
+const Seccion = React.memo(lazy(()=> import('../components/Seccion/Seccion')));
 
 export default function Home() {
     return (
