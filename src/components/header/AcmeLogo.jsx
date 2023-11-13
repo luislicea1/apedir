@@ -6,7 +6,7 @@ export const AcmeLogo = () => {
   const navigate = useNavigate();
 
   return (
-    <Link onClick={() => navigate(`/`)}>
+    <Link onClick={() => navigate(`/`)} aria-label="Home">
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
