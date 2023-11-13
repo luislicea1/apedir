@@ -8,6 +8,7 @@ import { lugares } from '../components/Lugares/Lugares';
 //import Seccion from '../components/Seccion/Seccion';
 import { Helmet } from 'react-helmet';
 
+
 const Header = lazy(()=>import ('../components/header/Header'))
 const Seccion = lazy(()=> import('../components/Seccion/Seccion'));
 
@@ -30,6 +31,7 @@ export default function Home() {
       <Suspense>
         <Seccion title="Lugares 2" lugares={lugares} ></Seccion> 
       </Suspense>
+      
       
       {/* <SeccionGratuita title="Otros Lugares" lugares={lugares} ></SeccionGratuita> */}
     </div>
