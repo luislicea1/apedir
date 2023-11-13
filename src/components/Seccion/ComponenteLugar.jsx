@@ -7,7 +7,7 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
-import { Image } from "antd";
+import { Image } from "@nextui-org/react";
 
 
 function ComponenteLugar(props) {
