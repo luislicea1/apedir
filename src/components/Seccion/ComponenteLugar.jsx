@@ -19,8 +19,6 @@ function ComponenteLugar(props) {
     imagen: PropTypes.string.isRequired,
   };
 
-  
-
   return (
     <Suspense>
       <Link
