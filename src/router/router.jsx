@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
 import { lazy, Suspense } from "react";
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
+import Page from "../pages/Page";
+import AyudaInformacion from "../pages/AyudaInformacion";
 
 import {
   RequireUserRole,
@@ -13,6 +15,7 @@ import { CircularProgress } from "@nextui-org/react";
 import NotFound from "../pages/NotFound/NotFound";
 
 // Utilizando lazy para importar los componentes diferidos
+const LazyPage = lazy(() => import("../pages/Page"));
 const LazyLogin = lazy(() => import("../components/login/Login"));
 /*
 const LazyHome = lazy(() =>
@@ -59,7 +62,12 @@ const PricingPage = lazy(() => import("../pages/PricingPage"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>
+    element: (
+      <Page>
+        <Home />
+      </Page>
+    ),
+    // element: <Home></Home>
   },
 
   {
@@ -91,7 +99,9 @@ const router = createBrowserRouter([
     path: "/ayuda_e_informacion",
     element: (
       <Suspense fallback={<CircularProgress />}>
-        <LazyAyudaInformacion />
+        <LazyPage>
+          <AyudaInformacion />
+        </LazyPage>
       </Suspense>
     ),
   },
@@ -150,9 +160,11 @@ const router = createBrowserRouter([
   {
     path: "/ayudaInformacion",
     element: (
-      <Suspense fallback={<CircularProgress />}>
-            <LazyAyudaInformacionWrapper />
+      <Page>
+        <Suspense fallback={<CircularProgress />}>
+          <LazyAyudaInformacionWrapper />
         </Suspense>
+      </Page>
     ),
   },
   {
@@ -218,20 +230,16 @@ const router = createBrowserRouter([
       </Suspense>
     ),
   },
- 
+
   {
     path: "/carrito",
     element: (
-      <Suspense
-        fallback={
-          <CircularProgress color="secondary" />
-        }
-      >
+      <Suspense fallback={<CircularProgress color="secondary" />}>
         <LazyComprasWrapper />
       </Suspense>
     ),
   },
-  
+
   {
     path: "/administrador-negocio-gratuito",
     element: (

@@ -3,7 +3,7 @@ import React, { lazy, Suspense } from "react";
 import { container, section } from "../components/styles/styles";
 //import AyudaInformacionContainer from "../components/AyudaInformacion/AyudaInformacionContainer";
 
-const Header = lazy(() => import("../components/header/Header"));
+// const Header = lazy(() => import("../components/header/Header"));
 const AyudaInformacionContainer = lazy(() =>
   import("../components/AyudaInformacion/AyudaInformacionContainer")
 );
@@ -11,10 +11,10 @@ const renderLoader = () => <p>Loading</p>;
 
 export default function AyudaInformacion() {
   return (
-    <div>
-      <Suspense>
-        <Header />
-      </Suspense>
+    // <div>
+    //   <Suspense>
+    //     <Header />
+    //   </Suspense>
 
       <div
         style={container}
@@ -26,6 +26,6 @@ export default function AyudaInformacion() {
           </Suspense>
         </section>
       </div>
-    </div>
+    // </div>
   );
 }
