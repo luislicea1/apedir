@@ -50,7 +50,7 @@ function ComponenteLugar(props) {
             <Stars readOnly w={100} rating={3.5}></Stars>
           </CardHeader>
           <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-            {/* <LazyLoadImage
+            <LazyLoadImage
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
@@ -62,16 +62,17 @@ function ComponenteLugar(props) {
               visibleByDefault={true}
             />
             
-            {props.imagen.caption && <span>{props.imagen.caption}</span>} */}
-            <Image
+            {props.imagen.caption && <span>{props.imagen.caption}</span>} 
+            {/* <Image
               alt="NextUI hero Image with delay"
               src={props.imagen}
               style={LogoStyle}
               loading="lazy"
               skeleton={true}
-            >
+              /
+            > */}
 
-            </Image>
+            
           </CardBody>
         </Card>
       </Link>
