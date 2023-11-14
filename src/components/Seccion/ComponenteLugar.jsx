@@ -43,7 +43,7 @@ function ComponenteLugar(props) {
             </p>
             <h2
               className="font-bold text-large mb-2"
-              style={{ fontSize: "25px" }}
+              style={{ fontSize: "1em" }}
             >
               {props.nombre}
             </h2>
@@ -54,7 +54,7 @@ function ComponenteLugar(props) {
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "contain" }}
+              style={{ ...LogoStyle, objectFit: "contain", height: props.heigth }}
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={props.imagen}

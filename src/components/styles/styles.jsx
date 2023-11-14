@@ -110,7 +110,7 @@ export const grid_center = {
 /*************Trajetas Seccion ***************/
 export const CardStyles = {
   height: "100%",
-  minWidth: "200px",
+  //minWidth: "200px",
   width: "100%",
   maxHeight: "400px",
 };
