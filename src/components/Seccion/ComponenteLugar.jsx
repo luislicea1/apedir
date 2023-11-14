@@ -7,6 +7,7 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
+import './seccion.css'
 
 
 function ComponenteLugar(props) {
@@ -53,15 +54,26 @@ function ComponenteLugar(props) {
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "cover" }}
+              style={{ ...LogoStyle, objectFit: "contain" }}
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}
+              className="lazyLoad"
             />
-            {/* Asegúrate de que props.imagen.caption esté definido antes de intentar mostrarlo */}
-            {props.imagen.caption && <span>{props.imagen.caption}</span>}
+            
+            {props.imagen.caption && <span>{props.imagen.caption}</span>} 
+            {/* <Image
+              alt="NextUI hero Image with delay"
+              src={props.imagen}
+              style={LogoStyle}
+              loading="lazy"
+              skeleton={true}
+              /
+            > */}
+
+            
           </CardBody>
         </Card>
       </Link>

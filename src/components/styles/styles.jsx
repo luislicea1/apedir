@@ -110,6 +110,8 @@ export const grid_center = {
 /*************Trajetas Seccion ***************/
 export const CardStyles = {
   height: "100%",
+  minWidth: "200px",
+  width: "100%",
   maxHeight: "400px",
 };
 
@@ -133,7 +135,7 @@ export const LogoStyle = {
   height: "272px",
   margin: "5px",
   borderRadius: "10px",
-  background: "gray"
+ 
 }
 export const ProductoStyle = {
   width: "225px",
