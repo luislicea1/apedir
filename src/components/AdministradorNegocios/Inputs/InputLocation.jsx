@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function InputLocation({ setImageName, value, setValue }) {
   const [locationImage, setLocationImage] = useState(null);
 
+  console.log(value.gps_location);
   const handleImageUpload = async (event) => {
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setLocationImage(imageUrl);
@@ -95,13 +96,11 @@ export default function InputLocation({ setImageName, value, setValue }) {
       <div>
         <div>
           <div style={contenedor}>
-            {locationImage && (
-              <Image
-                src={locationImage || value.gps_location}
-                style={imagenLogo}
-                alt="localizacion del negocio"
-              />
-            )}
+            <Image
+              src={locationImage || value.gps_location}
+              style={imagenLogo}
+              alt="localizacion del negocio"
+            />
           </div>
           <input
             type="file"

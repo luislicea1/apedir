@@ -2,16 +2,12 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 //import ManageProducts from "./ManageProducts";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
-//import ResponsiveTimePickers from "./Inputs/ResponsiveTimePicker";
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
 import { getOneBussiness } from "../../api/bussiness";
 import { useBussinessStore, useUserStore } from "../../hooks/useStore";
 import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
-//import NegocioDashboard from "./NegocioDashboard";
-//import EventManagement from "./EventManagement";
-
 const ResponsiveTimePickers = lazy(() =>
   import("./Inputs/ResponsiveTimePicker")
 );
@@ -141,13 +137,6 @@ export default function CrearNegocio() {
           <Tab key="productos" title="Productos">
             <Card>
               <CardBody>
-                <ManageProducts
-                  products={products}
-                  setProducts={setProducts}
-                  categories={categories}
-                  setCategories={setCategories}
-                  bussiness={bussiness}
-                />
                 <Suspense fallback={renderLoader()}>
                   <ManageProducts
                     products={products}

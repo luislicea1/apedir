@@ -183,7 +183,6 @@ const ManageProducts = ({
 
       {categories.map((category) => {
         const categoryProducts = products.filter(
-        
           (product) => product.category === category.id
         );
         return (
@@ -292,6 +291,7 @@ const ManageProducts = ({
                           <UploadIcon width={30} />
                           <input
                             type="file"
+                            accept="image/*"
                             style={{ display: "none" }}
                             onChange={handleImageChange}
                           />
@@ -309,7 +309,6 @@ const ManageProducts = ({
                       onPress={() => {
                         console.log("pressed");
                         handleAddProduct();
-
                         onClose();
                       }}
                       disabled={!isFormValid}
