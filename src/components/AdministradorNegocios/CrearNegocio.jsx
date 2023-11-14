@@ -137,13 +137,6 @@ export default function CrearNegocio() {
           <Tab key="productos" title="Productos">
             <Card>
               <CardBody>
-                <ManageProducts
-                  products={products}
-                  setProducts={setProducts}
-                  categories={categories}
-                  setCategories={setCategories}
-                  bussiness={bussiness}
-                />
                 <Suspense fallback={renderLoader()}>
                   <ManageProducts
                     products={products}
