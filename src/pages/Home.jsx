@@ -22,7 +22,7 @@ export default function Home() {
       </Helmet>
 
       <Suspense>
-        <Seccion title="Lugares 2" lugares={lugares}></Seccion>
+        <Seccion title="Lugares" lugares={lugares}></Seccion>
       </Suspense>
     </div>
   );
