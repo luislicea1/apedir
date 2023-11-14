@@ -8,26 +8,18 @@ const sectionStyle = {
   gridTemplateColumns: "repeat(1,1fr)",
 };
 
-const Header = lazy(() => import("../components/header/Header"));
 const CrearNegocio = lazy(() =>
   import("../components/AdministradorNegocios/CrearNegocio")
 );
-const renderLoader = () => <p>Loading</p>;
 
 export default function AdministradorNegocio() {
   return (
-    <div>
-      <Suspense>
-        <Header />
-      </Suspense>
-
-      <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-        <section style={sectionStyle}>
-          <Suspense>
-            <CrearNegocio />
-          </Suspense>
-        </section>
-      </div>
+    <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+      <section style={sectionStyle}>
+        <Suspense>
+          <CrearNegocio />
+        </Suspense>
+      </section>
     </div>
   );
 }

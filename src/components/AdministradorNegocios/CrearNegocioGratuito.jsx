@@ -22,7 +22,7 @@ export default function CrearNegocioGratuito() {
   return (
     <div style={grid_1_col}>
       <div className="flex w-full flex-col">
-        <Tabs aria-label="Options" disabledKeys={["productos"]} >
+        <Tabs disabledKeys={["productos"]} >
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>

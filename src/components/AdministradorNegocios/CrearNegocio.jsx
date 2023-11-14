@@ -12,10 +12,12 @@ import { grid_1_col } from "../styles/styles";
 //import NegocioDashboard from "./NegocioDashboard";
 //import EventManagement from "./EventManagement";
 
-const ResponsiveTimePickers = lazy(()=>import ("./Inputs/ResponsiveTimePicker"))
-const NegocioDashboard = lazy(()=>import ("./NegocioDashboard"))
-const EventManagement = lazy(()=>import ("./EventManagement"))
-const ManageProducts = lazy(()=>import ("./ManageProducts"))
+const ResponsiveTimePickers = lazy(() =>
+  import("./Inputs/ResponsiveTimePicker")
+);
+const NegocioDashboard = lazy(() => import("./NegocioDashboard"));
+const EventManagement = lazy(() => import("./EventManagement"));
+const ManageProducts = lazy(() => import("./ManageProducts"));
 
 export default function CrearNegocio() {
   const [products, setProducts] = useState([]);
@@ -116,15 +118,13 @@ export default function CrearNegocio() {
           <Tab key="perfil" title="Perfil">
             <Card>
               <CardBody>
-                
                 <Suspense fallback={renderLoader()}>
-                  < NegocioDashboard user={user} bussiness={bussiness} />
+                  <NegocioDashboard user={user} bussiness={bussiness} />
                 </Suspense>
               </CardBody>
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
-            
             <Suspense fallback={renderLoader()}>
               <ResponsiveTimePickers></ResponsiveTimePickers>
             </Suspense>
@@ -135,7 +135,6 @@ export default function CrearNegocio() {
                 <Suspense fallback={renderLoader()}>
                   <EventManagement />
                 </Suspense>
-                
               </CardBody>
             </Card>
           </Tab>
@@ -150,13 +149,13 @@ export default function CrearNegocio() {
                   bussiness={bussiness}
                 />
                 <Suspense fallback={renderLoader()}>
-                <ManageProducts
-                  products={products}
-                  setProducts={setProducts}
-                  categories={categories}
-                  setCategories={setCategories}
-                  bussiness={bussiness}
-                />
+                  <ManageProducts
+                    products={products}
+                    setProducts={setProducts}
+                    categories={categories}
+                    setCategories={setCategories}
+                    bussiness={bussiness}
+                  />
                 </Suspense>
               </CardBody>
             </Card>

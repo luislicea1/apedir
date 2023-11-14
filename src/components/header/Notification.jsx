@@ -43,7 +43,7 @@ export default function Notification() {
                     </Badge>
                 </div>
             </DropdownTrigger>
-            <DropdownMenu aria-label="Dynamic Actions" items={items}>
+            <DropdownMenu items={items}>
                 {(item) => (
                     <DropdownItem
                         key={item.key}

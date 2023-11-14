@@ -209,7 +209,7 @@ export default function NegocioTable() {
 
         />
         <Table
-          aria-label="Example table with client side pagination"
+        aria-label="Bussiness Table"
           bottomContent={
             <div className="flex w-full justify-center">
               <Pagination

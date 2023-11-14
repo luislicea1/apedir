@@ -1,12 +1,10 @@
-import React, { useState, useEffect,lazy,Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 //import AdminNavBar from "../../components/Admin/AdminNavBar";
 //import PlansTable from "../../components/Admin/PlansTable";
 import { getPlans } from "../../api/plans";
 import supabase from "../../api/client";
 
 const PlansTable = lazy(() => import("../../components/Admin/PlansTable"));
-const AdminNavBar = lazy(() => import("../../components/Admin/AdminNavBar"));
-const renderLoader = () => <p>Loading</p>;
 
 export default function AdminPlans() {
   const [plans, setPlans] = useState([]);
@@ -34,25 +32,17 @@ export default function AdminPlans() {
   }, [channelA]); // users quitado de las dependencias
 
   return (
-    <div>
-      <Suspense fallback={renderLoader()}>
-        <AdminNavBar />
-      </Suspense>
-
-      <div
-        className="flex justify-center items-center"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "40px",
-          width: "100%",
-        }}
-      >
-        <Suspense fallback={renderLoader()}>
-          <PlansTable plans={plans} />
-        </Suspense>
-      </div>
+    <div
+      className="flex justify-center items-center"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "40px",
+        width: "100%",
+      }}
+    >
+      <PlansTable plans={plans} />
     </div>
   );
 }

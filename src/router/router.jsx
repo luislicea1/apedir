@@ -17,10 +17,6 @@ import NotFound from "../pages/NotFound/NotFound";
 // Utilizando lazy para importar los componentes diferidos
 const LazyPage = lazy(() => import("../pages/Page"));
 const LazyLogin = lazy(() => import("../components/login/Login"));
-/*
-const LazyHome = lazy(() =>
-  import("../pages/Home")
-);*/
 
 const LazyCreateAccount = lazy(() =>
   import("../components/login/CreateAccount")
@@ -52,9 +48,8 @@ const LazyNegocioGratuitoWrapper = lazy(() =>
 );
 const LazyComprasWrapper = lazy(() => import("../pages/Compras"));
 
-const LazyAyudaInformacion = lazy(() => import("../pages/AyudaInformacion"));
+const AdminTabs = lazy(() => import("../components/Admin/AdminTabs"));
 
-const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
 const AdminPlans = lazy(() => import("../pages/Admin/AdminPlans"));
 
 const PricingPage = lazy(() => import("../pages/PricingPage"));
@@ -67,15 +62,16 @@ const router = createBrowserRouter([
         <Home />
       </Page>
     ),
-    // element: <Home></Home>
   },
 
   {
     path: "/plans",
     element: (
-      <Suspense fallback={<CircularProgress />}>
-        <PricingPage />,
-      </Suspense>
+      <Page>
+        <Suspense fallback={<CircularProgress />}>
+          <PricingPage />,
+        </Suspense>
+      </Page>
     ),
   },
 
@@ -116,16 +112,18 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <RequireAdminRole>
-        <Outlet />
-      </RequireAdminRole>
+      <Page>
+        <RequireAdminRole>
+          <Outlet />
+        </RequireAdminRole>
+      </Page>
     ),
     children: [
       {
         path: "/admin/",
         element: (
           <Suspense fallback={<CircularProgress />}>
-            <AdminDashboard />
+            <AdminTabs />
           </Suspense>
         ),
       },
@@ -223,11 +221,13 @@ const router = createBrowserRouter([
   {
     path: "/administrador-negocio",
     element: (
-      <Suspense
-        fallback={<CircularProgress color="secondary" label="Cargando..." />}
-      >
-        <LazyAdministradorNegocio />
-      </Suspense>
+      <Page>
+        <Suspense
+          fallback={<CircularProgress color="secondary" label="Cargando..." />}
+        >
+          <LazyAdministradorNegocio />
+        </Suspense>
+      </Page>
     ),
   },
 

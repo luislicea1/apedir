@@ -62,7 +62,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
     >
       <div className="list-container" style={grid_3_col}>
         {items.map((lugar, index) => (
-          <Suspense>
+          <Suspense  key={index} >
             <ComponenteLugar
               key={index}
               nombre={lugar.nombre}
