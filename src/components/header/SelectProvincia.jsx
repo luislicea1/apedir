@@ -17,8 +17,11 @@ export default function SelectProvincia() {
         <Button 
           variant="bordered" 
           className="capitalize"
+          style={{width: "150px", paddingLeft: "10px"}}
         >
+          <p  style={{width: "100%", display: 'flex'}}>
           {selectedValue}
+          </p>
         </Button>
       </DropdownTrigger>
       <DropdownMenu 
@@ -27,6 +30,7 @@ export default function SelectProvincia() {
         selectionMode="single"
         selectedKeys={selectedKeys}
         onSelectionChange={setSelectedKeys}
+        style={{padding: "20px"}}
       >
         <DropdownItem key="Santiago de Cuba">Santiago de Cuba</DropdownItem>
         <DropdownItem key="Guantanamo">Guantanamo</DropdownItem>

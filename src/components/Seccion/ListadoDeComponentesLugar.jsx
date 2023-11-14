@@ -48,7 +48,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
    hasMore={hasMore}
    loader={isLoading ? <h4>Loading...</h4> : null}
  >
-   <div className="list-container" style={{gap:"10px", display: 'grid', gridTemplateColumns: windowWidth < 713 ? '1fr 1fr' : '1fr 1fr 1fr' }}>
+   <div className="list-container" style={{gap:"10px", display: 'grid', gridTemplateColumns: windowWidth < 380 ? '1fr' : windowWidth < 713 ? '1fr 1fr' : '1fr 1fr 1fr' }}>
      {items.map((lugar, index) => (
        <Suspense>
          <ComponenteLugar
