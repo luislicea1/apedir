@@ -18,7 +18,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
 
  window.addEventListener('resize', handleResize);
 
- const initialItems = lugares.slice(0, windowWidth < 713 ? 6 : 6);
+ const initialItems = lugares.slice(0, windowWidth < 380 ? 4: windowWidth < 713 ? 6 : 6);
  setItems(initialItems);
  if (lugares.length <= initialItems.length) {
    setHasMore(false);
@@ -32,7 +32,7 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
  const fetchMoreData = () => {
  setIsLoading(true);
  setTimeout(() => {
-   const nextItems = lugares.slice(items.length, items.length + (windowWidth < 713 ? 2 : 3));
+   const nextItems = lugares.slice(items.length, items.length + (windowWidth < 380 ? 4: windowWidth < 713 ? 6 : 6));
    setItems([...items, ...nextItems]);
    setIsLoading(false);
    if (items.length + nextItems.length >= lugares.length) {

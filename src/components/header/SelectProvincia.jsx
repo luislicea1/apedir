@@ -17,7 +17,7 @@ export default function SelectProvincia() {
         <Button 
           variant="bordered" 
           className="capitalize"
-          style={{width: "150px", paddingLeft: "10px"}}
+          style={{ paddingLeft: "10px"}}
         >
           <p  style={{width: "100%", display: 'flex'}}>
           {selectedValue}
