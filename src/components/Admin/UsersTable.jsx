@@ -469,7 +469,6 @@ export default function UsersTable({ users }) {
                         <ActiveDropdw
                           isActive={selectedUser.isActive}
                           onChange={(value) => {
-                            console.log(value);
                             setEditedUser({
                               ...editedUser,
                               isActive: value === "active" ? true : false,

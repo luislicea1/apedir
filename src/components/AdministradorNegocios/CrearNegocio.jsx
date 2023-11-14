@@ -129,7 +129,7 @@ export default function CrearNegocio() {
             <Card>
               <CardBody>
                 <Suspense fallback={renderLoader()}>
-                  <EventManagement />
+                  <EventManagement bussinessId={bussiness?.id} />
                 </Suspense>
               </CardBody>
             </Card>

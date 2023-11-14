@@ -17,9 +17,9 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
       const lowerCaseExtension = extension.toLowerCase();
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
-      const resizedImage = await resizeImage(file);
-
       if (imageType === "logo") {
+        const resizedImage = await resizeImage(file, 210, 210);
+
         setImageName((prevState) => {
           const updatedState = {
             ...prevState,
@@ -37,6 +37,8 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
           return { ...updatedState };
         });
       } else if (imageType === "cover") {
+        const resizedImage = await resizeImage(file, 735, 500);
+
         setImageName((prevState) => {
           const updatedState = {
             ...prevState,

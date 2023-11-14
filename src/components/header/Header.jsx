@@ -1,4 +1,5 @@
-import React, { useEffect, useState , lazy} from "react";
+import React, { useEffect, useState, lazy } from "react";
+import { useHref } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -11,23 +12,24 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
+import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
+import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
+import Izquierda from "../Icons/Angulo/izquierda";
+import { MarginLeft30 } from "../styles/styles";
+
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
-//import SelectProvincia from "./SelectProvincia.jsx";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
-//import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
-//import Notification from "./Notification.jsx";
-import { useUserStore } from "../../hooks/useStore.js";
-//import Carrito from "./CarritoIcon.jsx";
+import { useUserStore } from "../../hooks/useStore";
 
-const Carrito = lazy(()=>import ("./CarritoIcon.jsx"))
-//const ApedirLogoNegro = lazy(()=>import ("../../assets/ApedirLogoNegro.svg"))
-const Notification = lazy(()=>import ("./Notification.jsx"))
-const SelectProvincia = lazy(()=>import ("./SelectProvincia.jsx"))
-
+const Carrito = lazy(() => import("./CarritoIcon.jsx"));
+const Notification = lazy(() => import("./Notification.jsx"));
+const SelectProvincia = lazy(() => import("./SelectProvincia.jsx"));
 
 export default function Header(props) {
+  const history = useHref();
+  const [isBussiness, setIsBussiness] = useState(false);
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
   // const [user, setUser] = useState(null);
@@ -36,6 +38,35 @@ export default function Header(props) {
 
   const [channel, setChannel] = useState(null);
 
+  useEffect(() => {
+    const path = history.split("/");
+    if (path.includes("lugar")) setIsBussiness(true);
+  }, [history]);
+
+  const [isScrollVisible, setIsScrollVisible] = useState(false);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const firstProductListPosition = document
+        .querySelector(".first-product-list")
+        .getBoundingClientRect().top;
+      if (window.pageYOffset >= firstProductListPosition) {
+        setIsScrollVisible(true);
+      } else {
+        setIsScrollVisible(false);
+      }
+    };
+
+    if (isBussiness) {
+      window.addEventListener("scroll", checkScrollPosition);
+    } else {
+      window.removeEventListener("scroll", checkScrollPosition);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, [isBussiness]);
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
 
@@ -47,7 +78,7 @@ export default function Header(props) {
 
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
-      console.log(_event)
+
       if (session && user === null) {
         setSession(session);
         const u = await getUser(session.user.email);
@@ -66,7 +97,21 @@ export default function Header(props) {
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
-        <AcmeLogo />
+        {isBussiness ? (
+          <>
+            <Link href="/">
+              <Izquierda h={"20px"} w={"20px"} />
+            </Link>
+
+            <NegocioLogo logo={props.logo} />
+            <div className="ml-2" style={MarginLeft30}>
+              <p className="font-bold text-inherit">{props.nombre}</p>
+              {props.horario === "si" ? <AbiertoCerrado /> : null}
+            </div>
+          </>
+        ) : (
+          <AcmeLogo />
+        )}
       </NavbarBrand>
 
       <SelectProvincia></SelectProvincia>
@@ -89,26 +134,38 @@ export default function Header(props) {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="menu principal" variant="flat">
-              <DropdownItem aria-label="info" key="profile" className="h-14 gap-4">
+              <DropdownItem
+                aria-label="info"
+                key="profile"
+                className="h-14 gap-4"
+              >
                 <p className="font-semibold">{user?.email}</p>
                 <p className="font-semibold">Plan: PREMIUM</p>
               </DropdownItem>
 
               {user?.role === "user" ? (
-                <DropdownItem aria-label="settings" key="settings">Crear negocio</DropdownItem>
+                <DropdownItem aria-label="settings" key="settings">
+                  Crear negocio
+                </DropdownItem>
               ) : (
-                <DropdownItem aria-label="settings" key="settings">Ver negocio</DropdownItem>
+                <DropdownItem aria-label="settings" key="settings" onClick={() => navigate("/administrador-negocio")}>
+                  Ver negocio
+                </DropdownItem>
               )}
               {user?.role === "admin" && (
                 <DropdownItem
-                aria-label="panel"
+                  aria-label="panel"
                   key="panel"
                   onClick={() => navigate("/admin/")}
                 >
                   Panel de Administración
                 </DropdownItem>
               )}
-              <DropdownItem aria-label="analytics" key="analytics" onClick={() => navigate("/plans")}>
+              <DropdownItem
+                aria-label="analytics"
+                key="analytics"
+                onClick={() => navigate("/plans")}
+              >
                 Planes y Precios
               </DropdownItem>
               <DropdownItem
@@ -117,7 +174,12 @@ export default function Header(props) {
               >
                 Ayuda e Información
               </DropdownItem>
-              <DropdownItem aria-label="logout" key="logout" color="danger" onClick={handleLogout}>
+              <DropdownItem
+                aria-label="logout"
+                key="logout"
+                color="danger"
+                onClick={handleLogout}
+              >
                 Log Out
               </DropdownItem>
             </DropdownMenu>

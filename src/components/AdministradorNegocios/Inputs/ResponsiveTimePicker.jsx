@@ -131,12 +131,11 @@ export default function ResponsiveTimePickers() {
 
 import React, { useState, useCallback, lazy, Suspense } from "react";
 import dayjs from "dayjs";
-import { TimePicker } from 'antd';
+import { TimePicker } from "antd";
 import { Card } from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
 
-
-const format = 'HH:mm';
+const format = "HH:mm";
 
 const renderLoader = () => <p>Loading</p>;
 
@@ -202,9 +201,14 @@ const CardComponent = React.memo(function CardComponent({
       </div>
 
       <Suspense fallback={renderLoader()}>
-        
-        <TimePicker defaultValue={dayjs('12:00', format)} format={format}></TimePicker>
-        <TimePicker defaultValue={dayjs('12:00', format)} format={format}></TimePicker>
+        <TimePicker
+          defaultValue={dayjs("12:00", format)}
+          format={format}
+        ></TimePicker>
+        <TimePicker
+          defaultValue={dayjs("12:00", format)}
+          format={format}
+        ></TimePicker>
       </Suspense>
     </Card>
   );
@@ -235,7 +239,13 @@ export default function ResponsiveTimePickers() {
   return (
     <div style={gridContainer}>
       {dias.map((dia, index) => (
-        <CardComponent dia={dia} index={index} dias={dias} setDias={setDias} />
+        <CardComponent
+          key={index}
+          dia={dia}
+          index={index}
+          dias={dias}
+          setDias={setDias}
+        />
       ))}
       <button onClick={handleClick}>Mostrar horarios</button>
     </div>

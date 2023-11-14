@@ -102,7 +102,7 @@ export default function PlansTable({ plans }) {
   const [planToDelete, setPlanToDelete] = React.useState(null);
 
   const handleDeletePlan = async (plan) => {
-    console.log("Id ", plan);
+  
     setPlanToDelete(plan);
     //
     onOpen();

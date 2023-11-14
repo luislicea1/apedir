@@ -11,14 +11,13 @@ const upsertBussiness = async (bussiness) => {
     const { data, error } = await supabase
       .from("bussiness")
       .upsert(bussinessToInsert);
-    console.log(data, error);
+    console.log(error);
     return;
   }
 
   const { data, error } = await supabase
     .from("bussiness")
     .insert(bussinessToInsert);
-  console.log({ data });
   console.log({ error });
 };
 
@@ -80,7 +79,6 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
       };
     })
   );
-  console.log(businessesWithImages);
   // Actualiza el estado con los nuevos elementos
   setBussiness((prevBusinesses) => [
     ...prevBusinesses,

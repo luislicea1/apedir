@@ -168,9 +168,11 @@ const router = createBrowserRouter([
   {
     path: "/lugar",
     element: (
-      <Suspense fallback={<CircularProgress />}>
-        <Outlet />
-      </Suspense>
+      <Page>
+        <Suspense fallback={<CircularProgress />}>
+          <Outlet />
+        </Suspense>
+      </Page>
     ),
     children: [
       {

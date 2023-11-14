@@ -98,11 +98,6 @@ export default function NegocioDashboard({ user, business }) {
     ) {
       await removeImage(bussinessInput.id, "perfil_pic", "bussiness_perfil");
 
-      console.info(
-        "Perfil blob ",
-        bussinessInput.perfil_pic,
-        typeof bussinessInput.perfil_pic
-      );
       perfil_pic = await uploadImage(
         bussinessInput.perfil_pic,
         imageName.perfil_pic,

@@ -7,7 +7,6 @@ import { useState } from "react";
 export default function InputLocation({ setImageName, value, setValue }) {
   const [locationImage, setLocationImage] = useState(null);
 
-  console.log(value.gps_location);
   const handleImageUpload = async (event) => {
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setLocationImage(imageUrl);
@@ -18,7 +17,7 @@ export default function InputLocation({ setImageName, value, setValue }) {
       const lowerCaseExtension = extension.toLowerCase();
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
-      const resizedImage = await resizeImage(file);
+      const resizedImage = await resizeImage(file, 200, 200);
 
       setImageName((prevState) => {
         const updatedState = {

@@ -7,6 +7,11 @@ import NegocioTable from "../../components/Admin/NegocioTable";
 export default function AdminBussiness() {
   const [users, setUsers] = useState([]);
 
+  const fetchUsers = async () => {
+    const data = await getUsers();
+    setUsers(data);
+  };
+
   const channelA = supabase
     .channel("schema-db-changes")
     .on(
@@ -15,16 +20,11 @@ export default function AdminBussiness() {
         event: "*",
         schema: "profiles",
       },
-      (payload) => console.log(payload)
+      (payload) => fetchUsers()
     )
     .subscribe();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const data = await getUsers();
-      setUsers(data);
-    };
-
     fetchUsers();
   }, [channelA]); // users quitado de las dependencias
 

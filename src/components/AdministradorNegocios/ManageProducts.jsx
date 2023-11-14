@@ -154,7 +154,7 @@ const ManageProducts = ({
       setImageName(newFileName);
 
       // Llama a la función resizeImage pasándole el archivo de imagen
-      const resizedImage = await resizeImage(file); // Usa el archivo que guardaste
+      const resizedImage = await resizeImage(file, 220, 175); // Usa el archivo que guardaste
 
       // Usa el resultado de resizeImage para actualizar el estado del producto
       setProductInput((prevState) => {
@@ -307,7 +307,6 @@ const ManageProducts = ({
                       color="secondary"
                       style={{ color: "white" }}
                       onPress={() => {
-                        console.log("pressed");
                         handleAddProduct();
                         onClose();
                       }}
