@@ -1,34 +1,22 @@
 import React, { useEffect, useState, lazy } from "react";
 import { Button} from "@nextui-org/react";
-//import InputDeFaceBook from "./Inputs/InputDeFaceBook";
-//import InputDeInstagram from "./Inputs/InputDeInstagram";
-//import InputTelegram from "./Inputs/InputTelegram";
-//import InputWhatsapp from "./Inputs/InputWhatsapp";
-//import TextAreaDescription from "./Inputs/TextAreaDescripcion";
-//import InputTitle from "./Inputs/InputTitle";
-//import ImageUploadButton from "./Inputs/ImagenUploadButton";
-//import InputGmail from "./Inputs/InputGmail";
-// InputLocation from "./Inputs/InputLocation";
-//import InputPhoneNumber from "./Inputs/InputPhoneNumber";
-//import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
+import InputDeFaceBook from "./Inputs/InputDeFaceBook";
+import InputDeInstagram from "./Inputs/InputDeInstagram";
+import InputTelegram from "./Inputs/InputTelegram";
+import InputWhatsapp from "./Inputs/InputWhatsapp";
+import TextAreaDescription from "./Inputs/TextAreaDescripcion";
+import InputTitle from "./Inputs/InputTitle";
+import ImageUploadButton from "./Inputs/ImagenUploadButton";
+import InputGmail from "./Inputs/InputGmail";
+import InputLocation from "./Inputs/InputLocation";
+import InputPhoneNumber from "./Inputs/InputPhoneNumber";
+import InputTelefonoLocalNumber from "./Inputs/InputTelefonoLocal";
 import { removeImage, uploadImage } from "../../api/images";
 import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
-//import BussinessInputSchema from "../../schemas/bussinessInputSchema";
+import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
 
-const InputDeFaceBook = lazy(()=>import ("./Inputs/InputDeFaceBook"));
-const InputDeInstagram = lazy(()=> import("./Inputs/InputDeInstagram"));
-const InputTelegram = lazy(()=> import("./Inputs/InputTelegram"));
-const InputWhatsapp = lazy(()=> import("./Inputs/InputWhatsapp"));
-const TextAreaDescription = lazy(()=> import("./Inputs/TextAreaDescripcion"));
-const InputTitle = lazy(()=> import("./Inputs/InputTitle"));
-const ImageUploadButton = lazy(()=> import("./Inputs/ImagenUploadButton"));
-const InputGmail = lazy(()=> import("./Inputs/InputGmail"));
-const InputLocation = lazy(()=> import("./Inputs/InputLocation"));
-const InputPhoneNumber = lazy(()=> import("./Inputs/InputPhoneNumber"));
-const InputTelefonoLocalNumber = lazy(()=> import("./Inputs/InputTelefonoLocal"));
-const BussinessInputSchema = lazy(()=> import("../../schemas/bussinessInputSchema"));
 
 export default function NegocioDashboard({ user, business }) {
   // const [user, setUser] = useState(null);
