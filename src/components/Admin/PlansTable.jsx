@@ -218,7 +218,7 @@ export default function PlansTable({ plans }) {
   return (
     <div style={{ width: "90%" }}>
       <Table
-        aria-label="plans table"
+      aria-label="Plans table"
         isHeaderSticky
         bottomContentPlacement="outside"
         classNames={{

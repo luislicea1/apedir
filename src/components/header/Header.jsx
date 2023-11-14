@@ -88,26 +88,27 @@ export default function Header(props) {
                 src={session.user?.user_metadata?.avatar_url}
               />
             </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-4">
+            <DropdownMenu aria-label="menu principal" variant="flat">
+              <DropdownItem aria-label="info" key="profile" className="h-14 gap-4">
                 <p className="font-semibold">{user?.email}</p>
                 <p className="font-semibold">Plan: PREMIUM</p>
               </DropdownItem>
 
               {user?.role === "user" ? (
-                <DropdownItem key="settings">Crear negocio</DropdownItem>
+                <DropdownItem aria-label="settings" key="settings">Crear negocio</DropdownItem>
               ) : (
-                <DropdownItem key="settings">Ver negocio</DropdownItem>
+                <DropdownItem aria-label="settings" key="settings">Ver negocio</DropdownItem>
               )}
               {user?.role === "admin" && (
                 <DropdownItem
-                  key="analytics"
-                  onClick={() => navigate("/admin")}
+                aria-label="panel"
+                  key="panel"
+                  onClick={() => navigate("/admin/")}
                 >
                   Panel de Administración
                 </DropdownItem>
               )}
-              <DropdownItem key="analytics" onClick={() => navigate("/plans")}>
+              <DropdownItem aria-label="analytics" key="analytics" onClick={() => navigate("/plans")}>
                 Planes y Precios
               </DropdownItem>
               <DropdownItem
@@ -116,7 +117,7 @@ export default function Header(props) {
               >
                 Ayuda e Información
               </DropdownItem>
-              <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+              <DropdownItem aria-label="logout" key="logout" color="danger" onClick={handleLogout}>
                 Log Out
               </DropdownItem>
             </DropdownMenu>

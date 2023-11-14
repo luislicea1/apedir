@@ -22,7 +22,6 @@ export default function SelectProvincia() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu 
-        aria-label="Single selection example"
         variant="flat"
         disallowEmptySelection
         selectionMode="single"

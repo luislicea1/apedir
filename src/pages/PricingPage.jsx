@@ -1,14 +1,10 @@
 import React, { lazy, Suspense } from "react";
-//import Header from "../components/header/Header";
-//import PricingCard from "../components/PricingCard/PricingCard";
 import { GratisIcon } from "../components/Icons/GratisIcon";
 import { BasicIcon } from "../components/Icons/BasicIcon";
 import { PremiumIcon } from "../components/Icons/PremiumIcon";
 import TituloDeSeccion from "../components/Seccion/TituloDeSeccion";
 
-const Header = lazy(() => import("../components/header/Header"));
 const PricingCard = lazy(() => import("../components/PricingCard/PricingCard"));
-const renderLoader = () => <p>Loading</p>;
 
 const containerStyle = {
   display: "flex",
@@ -37,11 +33,7 @@ const cardStyle = {
 
 export default function PricingPage() {
   return (
-    <div>
-      <Suspense>
-        <Header />
-      </Suspense>
-
+    <>
       <div
         style={{ display: "flex", justifyContent: "center", margin: "20px" }}
       >
@@ -116,6 +108,6 @@ export default function PricingPage() {
           />
         </Suspense>
       </div>
-    </div>
+    </>
   );
 }

@@ -34,8 +34,6 @@ export default function Carrito({ carrito }) {
           </div>
         </DropdownTrigger>
         <DropdownMenu
-          aria-label="Action event example"
-          
           className="no-hover"
         >
           {carrito.map((product, index) => (
