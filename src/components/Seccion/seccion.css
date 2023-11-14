@@ -2,9 +2,20 @@
   padding: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .list-container {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .list-container-recomend{
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  
+}
+
+
+@media (max-width: 713px) {
+  .list-container {
+    grid-template-columns: repeat(1, 1fr) !important;
   }
   .list-container-recomend{
     grid-template-columns: repeat(1, 1fr) !important;
@@ -19,6 +30,9 @@
   .list-container-recomend{
     grid-template-columns: repeat(1, 1fr) !important;
     
+  }
+  .lazyLoad{
+
   }
 }
 

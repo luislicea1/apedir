@@ -7,7 +7,7 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
-import { Image } from "@nextui-org/react";
+import './seccion.css'
 
 
 function ComponenteLugar(props) {
@@ -54,12 +54,13 @@ function ComponenteLugar(props) {
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "cover" }}
+              style={{ ...LogoStyle, objectFit: "contain" }}
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}
+              className="lazyLoad"
             />
             
             {props.imagen.caption && <span>{props.imagen.caption}</span>} 
