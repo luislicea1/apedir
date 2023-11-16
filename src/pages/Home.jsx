@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 // const Header = React.memo(lazy(()=>import ('../components/header/Header')));
 const Seccion = React.memo(lazy(() => import("../components/Seccion/Seccion")));
 
+
 export default function Home() {
   return (
     <div>
@@ -23,9 +24,9 @@ export default function Home() {
 
       <Prueba></Prueba>
 
-      <Suspense>
+      {/* <Suspense>
         <Seccion title="Lugares" lugares={lugares}></Seccion>
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }

@@ -1,32 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Prueba = () => {
   const [bussinesses, setBussinesses] = useState([]);
-  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  //const [page, setPage] = useState(0);
+  //const [offset, setOffset] = useState(0);
+  //const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const elementRef = useRef(null);
+
+  function onInterseccion(entries) {
+    const firstEntry = entries[0];
+    if (firstEntry.isIntersecting && hasMore) {
+      fetchMoreData();
+    }
+  }
 
   useEffect(() => {
-    loadMoreBussiness(offset, setOffset, setBussinesses);
-    
-  }, [offset]);
+    const observer = new IntersectionObserver(onInterseccion);
+    if (observer && elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [bussinesses]);
+
+  async function fetchMoreData() {
+    const response = await loadMoreBussiness(offset, setOffset, setBussinesses);
+    const data = await response.json();
+    if (data.bussiness.length == 0) {
+      setHasMore(false);
+    } else {
+      setBussinesses((prevBussiness) => [...prevBussiness, ...data.business]);
+      setPage((prevPage) => prevPage + 1);
+    }
+  }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-      {bussinesses.map((bussiness) => (
-        <div key={bussiness.id}>
+     
+    <>
+      {bussinesses.map((item) => (
+        <div key={item.id}>
           <ComponenteLugar
-            imagen={bussiness.perfil_pic}
-            localizacion={bussiness.province}
-            nombre={bussiness.name}
+            imagen={item.perfil_pic}
+            localizacion={item.province}
+            nombre={item.name}
           ></ComponenteLugar>
         </div>
       ))}
-      <button onClick={() => setOffset(offset + 10)}>
-        Cargar más negocios
-      </button>
-    </div>
+      {hasMore && (
+        <div ref={elementRef} style={{ textAlign: "center" }}>
+          Loading
+        </div>
+      )}
+    </>
   );
 };
 

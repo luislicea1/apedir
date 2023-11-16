@@ -67,3 +67,6 @@ const ListadoDeComponentesLugar = ({ lugares }) => {
 };
 
 export default ListadoDeComponentesLugar;
+
+
+

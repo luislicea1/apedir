@@ -51,7 +51,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
   const { data, error } = await supabase
     .from("bussiness")
     .select("*")
-    .range(offset, offset + 9);
+    .range(offset, offset + 10);
 
   if (error) {
     console.error(error);
