@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { loadMoreBussiness } from "../../api/bussiness";
+import { loadMoreBussiness, fetchAllBussiness } from "../../api/bussiness";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
 
 const Prueba = () => {
@@ -8,9 +8,15 @@ const Prueba = () => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    loadMoreBussiness(offset, setOffset, setBussinesses);
-    
-  }, [offset]);
+    const fetchBussinesses = async () => {
+      const bussinessList = await fetchAllBussiness();
+      setBussinesses(bussinessList);
+    };
+    if (bussinesses.length === 0) fetchBussinesses();
+    console.log(bussinesses);
+
+    // loadMoreBussiness(offset, setOffset, setBussinesses);
+  }, []);
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>

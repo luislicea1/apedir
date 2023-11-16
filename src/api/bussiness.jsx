@@ -1,4 +1,5 @@
 import supabase from "./client";
+import { getStarsFromBussiness } from "./starsRate";
 
 const upsertBussiness = async (bussiness) => {
   let bussinessToInsert = Object.keys(bussiness).reduce((acc, key) => {
@@ -57,14 +58,13 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     console.error(error);
     return;
   }
-  console.log(data.length);
   if (data.length === 0) {
-    setOffset(offset + 10);
     return;
   }
   // Obtener imágenes asociadas a cada negocio
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
+      const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
@@ -77,6 +77,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
 
       return {
         ...business,
+        stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -97,4 +98,48 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
   setOffset(offset + 10);
 };
 
-export { upsertBussiness, getOneBussiness, getImage, loadMoreBussiness };
+const fetchAllBussiness = async () => {
+  const { data, error } = await supabase.from("bussiness").select("*");
+  console.log(data)
+  if (error) {
+    console.error(error);
+    return;
+  }
+  if (data.length === 0) {
+    return;
+  }
+  // Obtener imágenes asociadas a cada negocio
+  const businessesWithImages = await Promise.all(
+    data.map(async (business) => {
+      // const stars = await getStarsFromBussiness(business.id);
+      const front_pic = await getImage("bussiness_front", business.front_pic);
+      const perfil_pic = await getImage(
+        "bussiness_perfil",
+        business.perfil_pic
+      );
+      const gps_location = await getImage(
+        "bussiness_location",
+        business.gps_location
+      );
+
+      return {
+        ...business,
+        // stars,
+        front_pic,
+        perfil_pic,
+        gps_location,
+      };
+    })
+  );
+  console.log(businessesWithImages)
+  // Actualiza el estado con los nuevos elementos
+  return businessesWithImages;
+};
+
+export {
+  upsertBussiness,
+  getOneBussiness,
+  getImage,
+  loadMoreBussiness,
+  fetchAllBussiness,
+};
