@@ -7,8 +7,7 @@ import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
-import './seccion.css'
-
+import "./seccion.css";
 
 function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ function ComponenteLugar(props) {
 
         <Card className="py-4" style={CardStyles}>
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
             </p>
@@ -54,7 +52,11 @@ function ComponenteLugar(props) {
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "contain", height: props.heigth }}
+              style={{
+                ...LogoStyle,
+                objectFit: "contain",
+                height: props.heigth,
+              }}
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={props.imagen}
@@ -62,8 +64,8 @@ function ComponenteLugar(props) {
               visibleByDefault={true}
               className="lazyLoad"
             />
-            
-            {props.imagen.caption && <span>{props.imagen.caption}</span>} 
+
+            {props.imagen.caption && <span>{props.imagen.caption}</span>}
             {/* <Image
               alt="NextUI hero Image with delay"
               src={props.imagen}
@@ -72,8 +74,6 @@ function ComponenteLugar(props) {
               skeleton={true}
               /
             > */}
-
-            
           </CardBody>
         </Card>
       </Link>
@@ -81,7 +81,6 @@ function ComponenteLugar(props) {
   );
 }
 
-export default React.memo(ComponenteLugar, (prevProps, nextProps)=>{
-  return prevProps.imagen ==nextProps.imagen
-})
-
+export default React.memo(ComponenteLugar, (prevProps, nextProps) => {
+  return prevProps.imagen == nextProps.imagen;
+});

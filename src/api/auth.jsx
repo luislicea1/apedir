@@ -1,9 +1,11 @@
 import supabase from "./client";
 
 async function signInWithGoogle() {
-  await supabase.auth.signInWithOAuth({
+  const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
   });
+  console.log(data)
+  console.log(error)
 }
 
 async function login(email, password) {

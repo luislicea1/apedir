@@ -22,11 +22,11 @@ export default function Home() {
         />
       </Helmet>
 
-      <Prueba></Prueba>
+      {/* <Prueba></Prueba> */}
 
-      {/* <Suspense>
+       <Suspense>
         <Seccion title="Lugares" lugares={lugares}></Seccion>
-      </Suspense> */}
+      </Suspense> 
     </div>
   );
 }
