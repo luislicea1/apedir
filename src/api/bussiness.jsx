@@ -85,6 +85,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     ...businessesWithImages,
   ]);
 
+  
   // Incrementa el desplazamiento
   setOffset(offset + 10);
 };

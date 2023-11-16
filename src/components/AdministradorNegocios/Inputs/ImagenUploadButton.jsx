@@ -18,7 +18,7 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
       if (imageType === "logo") {
-        const resizedImage = await resizeImage(file, 210, 210);
+        const resizedImage = await resizeImage(file, 272, 272);
 
         setImageName((prevState) => {
           const updatedState = {
