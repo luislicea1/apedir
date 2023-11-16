@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef,lazy } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness, fetchAllBussiness } from "../../api/bussiness";
@@ -54,6 +55,8 @@ const ListadoDeComponentesLugar = () => {
             imagen={item.perfil_pic}
             localizacion={item.province}
             nombre={item.name}
+            numeroPersonas={item.numeroPersonas}
+            heigth={windowWidth < 713 ? '100px':"272px"}
           ></ComponenteLugar>
         </div>
       ))}
@@ -67,5 +70,4 @@ const ListadoDeComponentesLugar = () => {
  };
  
  export default ListadoDeComponentesLugar;
-
 
