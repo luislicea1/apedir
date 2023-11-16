@@ -20,7 +20,7 @@ const CategoryContainer = ({
   onCategoryEditOpenChange,
   onCategoryDeleteOpen,
 }) => {
-  console.log(products)
+  
   return (
     <div
       style={{

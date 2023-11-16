@@ -34,7 +34,7 @@ export default function SelectorProvincia({ value, setValue }) {
     <Dropdown aria-label="menu de provincias dropdown">
       <DropdownTrigger aria-label="trigger menu provincias">
         <Button variant="bordered" className="capitalize">
-          {selectedValue}
+          {value.province !== null ? value.province : selectedValue}
         </Button>
       </DropdownTrigger>
       <DropdownMenu

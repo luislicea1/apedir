@@ -38,7 +38,6 @@ export default function Producto({
         shadow="sm"
         key={index}
         isPressable
-        // onPress={() => console.log("item pressed")}
         style={CardStyles2}
         className="producto-card"
       >

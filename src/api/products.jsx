@@ -6,7 +6,7 @@ const addProduct = async (product) => {
     .from("products")
     .insert(product)
     .select();
-  console.log(data, error);
+  console.log(error);
 };
 
 const updateAvailability = async (id, status) => {
@@ -28,7 +28,7 @@ const updateProduct = async (product, imageName) => {
       console.error("Error al obtener el valor antiguo: ", oldError);
       return;
     }
-    console.log(oldData[0].image);
+    
     await supabase.storage.from("products").remove(oldData[0].image);
   }
 
