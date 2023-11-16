@@ -3,6 +3,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
+import Header from "../header/Header";
 //import PortadaDeNegocio from "./PortadaDeNegocio/portadaNegocio";
 //import HeaderNegocio from "./HeaderNegocio/HeaderNegocio";
 //import DescripcionNegocio from "./Descripcion/Descripcion";
@@ -101,16 +102,13 @@ export default function Negocio({ nombre, localizacion }) {
           alt="logo apedir"
         />
       </Helmet>
-
-      <section style={NegocioSection}>
-        <Suspense fallback={renderLoader()}>
-          <HeaderNegocio
+        <section style={NegocioSection}>
+          <Header
             logo={LogoImg}
             nombre={nombre}
             horario={"si"}
             anterior={"/"}
-          ></HeaderNegocio>
-        </Suspense>
+          />
 
         {isNavbarVisible && <Navegacion links={links} />}
 

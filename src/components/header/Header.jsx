@@ -78,21 +78,20 @@ export default function Header(props) {
 
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
-
-      if (session && user === null) {
+      console.log(_event);
+      if (session) {
         setSession(session);
         const u = await getUser(session.user.email);
         setUser(u);
       }
     }
-    const authListener = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (!user) {
-          await handleAuthStateChange(event, session);
-        }
-      }
-    );
-  }, [user, setUser]);
+  
+    const authListener = supabase.auth.onAuthStateChange(handleAuthStateChange);
+  
+    return () => {
+      authListener.data.subscription.unsubscribe();
+    };
+  }, [setUser]);
 
   return (
     <Navbar isBordered disableAnimation>
@@ -114,7 +113,8 @@ export default function Header(props) {
         )}
       </NavbarBrand>
 
-      <SelectProvincia></SelectProvincia>
+      {!isBussiness && <SelectProvincia></SelectProvincia>}
+
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           <Carrito></Carrito>
@@ -148,7 +148,11 @@ export default function Header(props) {
                   Crear negocio
                 </DropdownItem>
               ) : (
-                <DropdownItem aria-label="settings" key="settings" onClick={() => navigate("/administrador-negocio")}>
+                <DropdownItem
+                  aria-label="settings"
+                  key="settings"
+                  onClick={() => navigate("/administrador-negocio")}
+                >
                   Ver negocio
                 </DropdownItem>
               )}
