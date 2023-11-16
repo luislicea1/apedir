@@ -1,3 +1,4 @@
+import { getImage } from "./bussiness";
 import supabase from "./client";
 const upsertEvent = async (event) => {
   let eventToInsert = Object.keys(event).reduce((acc, key) => {
@@ -16,4 +17,24 @@ const upsertEvent = async (event) => {
   console.log({ error });
 };
 
-export { upsertEvent };
+const getEventsfromBussiness = async (bussinessId) => {
+  let { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .eq("bussiness", bussinessId);
+
+  console.log(error);
+  const eventsWithImages = await Promise.all(
+    data.map(async (event) => {
+      const image = await getImage("bussiness_event", event.image);
+      return {
+        ...event,
+        image,
+      };
+    })
+  );
+
+  return eventsWithImages;
+};
+
+export { upsertEvent, getEventsfromBussiness };

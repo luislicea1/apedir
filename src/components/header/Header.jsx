@@ -78,7 +78,6 @@ export default function Header(props) {
 
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
-      console.log(_event);
       if (session) {
         setSession(session);
         const u = await getUser(session.user.email);

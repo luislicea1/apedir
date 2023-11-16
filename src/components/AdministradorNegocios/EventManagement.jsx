@@ -1,163 +1,36 @@
-import React, { useState, lazy } from "react";
-import { Button, Textarea, Image, Input } from "@nextui-org/react";
-import { grid_1_col, grid_2_col } from "../styles/styles";
-import { resizeImage } from "../../api/helpers/image";
-import { removeImage, uploadImage } from "../../api/images";
-import { upsertEvent } from "../../api/events";
-import { toast, Toaster } from "sonner";
+import React, { useState, useEffect } from "react";
 
-const InputTitle = lazy(() => import("./Inputs/InputTitle"));
-const InputGmail = lazy(() => import("./Inputs/InputGmail"));
-const InputPhoneNumber = lazy(() => import("./Inputs/InputPhoneNumber"));
+import { Tab, Tabs, Card, CardBody } from "@nextui-org/react";
+import { getEventsfromBussiness } from "../../api/events";
+
+import EventCard from "./EventCard";
 
 export default function EventManagement({ bussinessId }) {
-  const [imageName, setImageName] = useState("");
-  const [image, setImage] = useState(null);
-
-  const defaultEventValues = {
-    id: "",
-    bussiness: "",
-    name: "",
-    image: "",
-    description: "",
-    email: "",
-    phone_number: "",
-  };
-
-  const [eventInput, setEventInput] = useState(defaultEventValues);
-
-  const handleAddEvent = async () => {
-    setEventInput((prevState) => {
-      const updatedState = {
-        ...prevState,
-        bussiness: bussinessId,
-      };
-      return updatedState;
-    });
-
-    let eventImage = "";
-    if (
-      eventInput.image !== null &&
-      (eventInput.image !== "") & (eventInput.image instanceof Blob)
-    ) {
-      await removeImage(eventInput.image, "bussiness_event");
-      eventImage = await uploadImage(
-        eventInput.image,
-        imageName,
-        "bussiness_event"
-      );
-      eventImage = eventImage !== null ? eventImage.path : "";
-    }
-    const updatedEvent = {
-      ...eventInput,
-      bussiness: bussinessId,
-      image: eventImage,
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    const fetchEvent = async () => {
+      const events = await getEventsfromBussiness(bussinessId);
+      setEvents(events);
     };
-    await upsertEvent(updatedEvent);
-    toast.success("Evento actualizado satisfactoriamente");
-  };
+    if (bussinessId !== null) fetchEvent();
+  }, [bussinessId]);
 
-  const handleImageChange = async (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setImage(URL.createObjectURL(file));
-
-      const extension = file.name.split(".").pop();
-      const lowerCaseExtension = extension.toLowerCase();
-      const newFileName = file.name.replace(extension, lowerCaseExtension);
-
-      const resizedImage = await resizeImage(file, 272, 272);
-
-      setImageName(newFileName);
-      setEventInput((prevState) => {
-        const updatedState = {
-          ...prevState,
-          image: resizedImage,
-        };
-        return updatedState;
-      });
-    }
-  };
   return (
     <div>
-      <br />
-      <Input
-        type="text"
-        label="Nombre del evento"
-        variant="bordered"
-        placeholder="Escribe el nombre del evento"
-        labelPlacement="outside"
-        value={eventInput.name}
-        onChange={(event) => {
-          setEventInput({
-            ...eventInput,
-            name: event.target.value,
-          });
-        }}
-      />
-      <div>
-        <input
-          type="file"
-          id="logoImageUpload"
-          accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
-        <br />
-        <div style={grid_1_col}>
-          <Image
-            width={272}
-            height={272}
-            alt="Imagen del evento"
-            src={image || eventInput.image}
-          />
-        </div>
-
-        <Button
-          style={{ color: "white" }}
-          // style={white}
-          color={"secondary"}
-          onClick={() => document.getElementById("logoImageUpload").click()}
-          className="mt-2"
-        >
-          Subir foto del evento
-        </Button>
-        <br />
-        <br />
-        <Textarea
-          label="Descripción"
-          labelPlacement="outside"
-          style={{ width: "300px", height: "230px" }}
-          placeholder="Escribe la descripción del evento"
-          variant="bordered"
-          value={eventInput.description}
-          onChange={(event) => {
-            setEventInput({
-              ...eventInput,
-              description: event.target.value,
-            });
-          }}
-        />
-      </div>
-
-      <br />
-
-      <div style={grid_2_col} className="mt-2 mb-2">
-        <InputGmail value={eventInput} setValue={setEventInput}></InputGmail>
-        <InputPhoneNumber
-          value={eventInput}
-          setValue={setEventInput}
-        ></InputPhoneNumber>
-      </div>
-      <br />
-      <Button
-        color="secondary"
-        className="text-white mt-2"
-        onClick={handleAddEvent}
-      >
-        Agregar Evento
-      </Button>
-      <Toaster richColors duration={300} position="bottom-center" />
+      <Card>
+        {events.length > 0 && (
+          <Tabs aria-label="seleccion de eventos" fullWidth>
+            <Tab key="create" title="Crear Evento">
+              <EventCard bussinessId={bussinessId} />
+            </Tab>
+            {events.map((item) => (
+              <Tab key={item.id} title={item.name}>
+                <EventCard event={item} />
+              </Tab>
+            ))}
+          </Tabs>
+        )}
+      </Card>
     </div>
   );
 }
