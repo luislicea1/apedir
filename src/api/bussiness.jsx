@@ -57,7 +57,11 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     console.error(error);
     return;
   }
-
+  console.log(data.length);
+  if (data.length === 0) {
+    setOffset(offset + 10);
+    return;
+  }
   // Obtener imágenes asociadas a cada negocio
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
@@ -80,12 +84,15 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     })
   );
   // Actualiza el estado con los nuevos elementos
-  setBussiness((prevBusinesses) => [
-    ...prevBusinesses,
-    ...businessesWithImages,
-  ]);
+  setBussiness((prevBusinesses) => {
+    const newBusinesses = businessesWithImages.filter((business) => {
+      return !prevBusinesses.find(
+        (prevBusiness) => prevBusiness.id === business.id
+      );
+    });
 
-  
+    return [...prevBusinesses, ...newBusinesses];
+  });
   // Incrementa el desplazamiento
   setOffset(offset + 10);
 };
