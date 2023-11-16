@@ -121,7 +121,6 @@ export default function UsersTable({ users }) {
 
   const handleEditClick = async () => {
     await updateProfile(editedUser);
-    console.log(editedUser);
 
     setEditedUser({
       id: "",
