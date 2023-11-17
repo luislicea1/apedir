@@ -1,37 +1,51 @@
 import React from "react";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
 
+import { useProvinceStore } from "../../hooks/useStore";
 export default function SelectProvincia() {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["Santiago de Cuba"]));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["Todas"]));
 
+  // const province = useProvinceStore((state) => state.province);
+  const setProvince = useProvinceStore((state) => state.setProvince);
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    
+
     [selectedKeys]
-   
   );
-  
+
+  const handleSelectionChange = (selectedKeys) => {
+    setSelectedKeys(selectedKeys);
+    const selectedValue = Array.from(selectedKeys)[0];
+    console.log(selectedValue);
+    setProvince(selectedValue);
+  };
+
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button 
-          variant="bordered" 
+        <Button
+          variant="bordered"
           className="capitalize"
-          style={{ paddingLeft: "10px"}}
+          style={{ paddingLeft: "10px" }}
         >
-          <p  style={{width: "100%", display: 'flex'}}>
-          {selectedValue}
-          </p>
+          <p style={{ width: "100%", display: "flex" }}>{selectedValue}</p>
         </Button>
       </DropdownTrigger>
-      <DropdownMenu 
+      <DropdownMenu
         variant="flat"
         disallowEmptySelection
         selectionMode="single"
         selectedKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
-        style={{padding: "20px"}}
+        onSelectionChange={handleSelectionChange}
+        style={{ padding: "20px" }}
       >
+        <DropdownItem key="todas">Todas</DropdownItem>
         <DropdownItem key="Santiago de Cuba">Santiago de Cuba</DropdownItem>
         <DropdownItem key="Guantanamo">Guantanamo</DropdownItem>
         <DropdownItem key="Granma">Granma</DropdownItem>
@@ -45,7 +59,9 @@ export default function SelectProvincia() {
         <DropdownItem key="La Habana">La Habana</DropdownItem>
         <DropdownItem key="Mayabeque">Mayabeque</DropdownItem>
         <DropdownItem key="Pinar del Rio">Pinar del Rio</DropdownItem>
-        <DropdownItem key="La Isla de la Juventud">La Isla de la Juventud</DropdownItem>
+        <DropdownItem key="La Isla de la Juventud">
+          La Isla de la Juventud
+        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );

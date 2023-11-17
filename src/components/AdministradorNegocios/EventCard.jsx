@@ -42,7 +42,6 @@ export default function EventCard({ bussinessId, event }) {
 
   const handleDelete = async () => {
     await deleteEvent(event.id);
-    
   };
 
   const handleAddEvent = async () => {
@@ -203,7 +202,12 @@ export default function EventCard({ bussinessId, event }) {
           )}
         </ModalContent>
       </Modal>
-      <Toaster richColors duration={300} position="bottom-center" />
+      <Toaster
+        richColors
+        duration={300}
+        position="bottom-center"
+        theme="dark"
+      />
     </div>
   );
 }
