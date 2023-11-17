@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect, useRef,lazy } from "react";
 import { useInView } from "react-intersection-observer";
-import { loadMoreBussiness, fetchAllBussiness } from "../../api/bussiness";
-
+import { loadMoreBussiness} from "../../api/bussiness";
+import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
 
 // Importar ComponenteLugar de manera diferida
-const ComponenteLugar = React.memo(lazy(() => import("./ComponenteLugar")));
+//const ComponenteLugar = React.memo(lazy(() => import("./ComponenteLugar")));
 
 const ListadoDeComponentesLugar = () => {
   const [bussinesses, setBussinesses] = useState([]);

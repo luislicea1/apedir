@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+/*import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness, fetchAllBussiness } from "../../api/bussiness";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
@@ -61,4 +61,4 @@ const Prueba = () => {
  );
 };
 
-export default Prueba;
+export default Prueba;*/

@@ -23,8 +23,6 @@ export default function Home() {
         />
       </Helmet>
 
-      {/* <Prueba></Prueba> */}
-
        <Suspense>
         <Seccion title="Lugares" lugares={lugares}></Seccion>
       </Suspense> 
