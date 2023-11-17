@@ -2,6 +2,20 @@
   padding: 10px;
 }
 
+.div-x-scroll-animation h2{
+  width: 300%;
+  animation: slide 5s infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+ }
+ 
+
  @media (max-width: 900px) {
   /* .list-container {
     grid-template-columns: repeat(2, 1fr) !important;
