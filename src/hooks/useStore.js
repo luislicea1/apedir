@@ -10,4 +10,8 @@ const useBussinessStore = create((set) => ({
   setBussiness: (b) => set({ bussiness: b }),
 }));
 
-export {useUserStore, useBussinessStore};
+const useProvinceStore = create((set) => ({
+  province: "todas",
+  setProvince: (p) => set({ province: p }),
+}));
+export { useUserStore, useBussinessStore, useProvinceStore };

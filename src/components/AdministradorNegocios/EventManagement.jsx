@@ -5,56 +5,51 @@ import { getEventsfromBussiness } from "../../api/events";
 
 import EventCard from "./EventCard";
 
-
-
-
 export default function EventManagement({ bussinessId }) {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      if (bussinessId === null) return;
+      const eventList = await getEventsfromBussiness(bussinessId);
+      setEvents(eventList !== null ? eventList : []);
+    };
+
+    let eventSubscription = null;
+
+    const timer = setTimeout(
+      () => (eventSubscription = subscribeToEvents()),
+      1000
+    );
+
+    const subscribeToEvents = () => {
+      return supabase
+        .channel("event-channel")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "events" },
+          () => {
+            fetchEvents();
+          }
+        )
+        .subscribe();
+    };
+
+    fetchEvents();
+
+    return () => {
+      if (eventSubscription) eventSubscription.unsubscribe();
+      clearTimeout(timer);
+    };
+  }, [events]);
 
   // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     if (bussinessId === null) return;
-  //     const categorylist = await getCategories(bussiness.id);
-  //     setCategories(categorylist !== null ? categorylist : []);
+  //   const fetchEvent = async () => {
+  //     const events = await getEventsfromBussiness(bussinessId);
+  //     setEvents(events);
   //   };
-
-  //   let categorySubscription = null;
-
-  //   const timer = setTimeout(
-  //     () => (categorySubscription = subscribeToCategories()),
-  //     1000
-  //   );
-
-  //   const subscribeToCategories = () => {
-  //     return supabase
-  //       .channel("category-channel")
-  //       .on(
-  //         "postgres_changes",
-  //         { event: "*", schema: "public", table: "categories" },
-  //         () => {
-  //           fetchCategories();
-  //         }
-  //       )
-  //       .subscribe();
-  //   };
-
-  //   fetchCategories();
-
-  //   return () => {
-  //     if (categorySubscription) categorySubscription.unsubscribe();
-  //     clearTimeout(timer);
-  //   };
-  // }, []);
-
-
-
-  const [events, setEvents] = useState([]);
-  useEffect(() => {
-    const fetchEvent = async () => {
-      const events = await getEventsfromBussiness(bussinessId);
-      setEvents(events);
-    };
-    if (bussinessId !== null) fetchEvent();
-  }, [bussinessId]);
+  //   if (bussinessId !== null) fetchEvent();
+  // }, [bussinessId]);
 
   return (
     <div>

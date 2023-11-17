@@ -6,6 +6,7 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
+import { useProvinceStore } from "../../../hooks/useStore";
 
 export default function SelectorProvincia({ value, setValue }) {
   const [selectedKeys, setSelectedKeys] = React.useState(
@@ -13,8 +14,10 @@ export default function SelectorProvincia({ value, setValue }) {
   );
 
   const handleSelectionChange = (selectedKeys) => {
+    console.log(selectedKeys);
     setSelectedKeys(selectedKeys);
     const selectedValue = Array.from(selectedKeys)[0];
+
     setValue((prevState) => {
       const updatedState = {
         ...prevState,
@@ -24,11 +27,6 @@ export default function SelectorProvincia({ value, setValue }) {
       return updatedState;
     });
   };
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-
-    [selectedKeys]
-  );
 
   return (
     <Dropdown aria-label="menu de provincias dropdown">

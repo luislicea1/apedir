@@ -84,9 +84,9 @@ export default function Header(props) {
         setUser(u);
       }
     }
-  
+
     const authListener = supabase.auth.onAuthStateChange(handleAuthStateChange);
-  
+
     return () => {
       authListener.data.subscription.unsubscribe();
     };
@@ -112,7 +112,7 @@ export default function Header(props) {
         )}
       </NavbarBrand>
 
-      {!isBussiness && <SelectProvincia></SelectProvincia>}
+      {!isBussiness && <SelectProvincia />}
 
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>

@@ -1,31 +1,32 @@
-
-import React, { useState, useEffect, useRef,lazy } from "react";
+import React, { useState, useEffect, useRef, lazy } from "react";
 import { useInView } from "react-intersection-observer";
-import { loadMoreBussiness} from "../../api/bussiness";
+import { loadMoreBussiness } from "../../api/bussiness";
 import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
+import { useProvinceStore } from "../../hooks/useStore";
 
 // Importar ComponenteLugar de manera diferida
 //const ComponenteLugar = React.memo(lazy(() => import("./ComponenteLugar")));
 
 const ListadoDeComponentesLugar = () => {
   const [bussinesses, setBussinesses] = useState([]);
+  const province = useProvinceStore((state) => state.province);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
- 
+  const [filtredBussinesses, setFiltredBussinesses] = useState([]);
   const { ref, inView } = useInView({
     threshold: 0,
   });
- 
+
   useEffect(() => {
     if (inView) {
       fetchMoreData();
     }
   }, [inView]);
- 
+
   async function fetchMoreData() {
     const response = await loadMoreBussiness(offset, setOffset, setBussinesses);
     if (response.length === 0) {
@@ -34,40 +35,57 @@ const ListadoDeComponentesLugar = () => {
       setPage((prevPage) => prevPage + 1);
     }
   }
- 
+  useEffect(() => {
+    if (province !== "todas") {
+      const filtred = bussinesses.filter(
+        (value) => value.province === province
+      );
+      setFiltredBussinesses(filtred);
+    } else {
+      setFiltredBussinesses(bussinesses);
+    }
+  }, [bussinesses, province]);
+
   useEffect(() => {
     fetchMoreData();
-  }, []);
- 
+  }, [province]);
+
   useEffect(() => {
-   const handleResize = () => setWindowWidth(window.innerWidth);
-   window.addEventListener('resize', handleResize);
-   return () => {
-     window.removeEventListener('resize', handleResize);
-   };
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
- 
+
   return (
-   <div className="list-container" style={{gap:"10px", display: 'grid', gridTemplateColumns: windowWidth < 380 ? '1fr' : windowWidth < 713 ? '1fr 1fr' : '1fr 1fr 1fr' }}>
-      {bussinesses.map((item) => (
+    <div
+      className="list-container"
+      style={{
+        gap: "10px",
+        display: "grid",
+        gridTemplateColumns:
+          windowWidth < 380
+            ? "1fr"
+            : windowWidth < 713
+            ? "1fr 1fr"
+            : "1fr 1fr 1fr",
+      }}
+    >
+      {filtredBussinesses.map((item) => (
         <div key={item.id}>
           <ComponenteLugar
             imagen={item.perfil_pic}
             localizacion={item.province}
             nombre={item.name}
             numeroPersonas={item.numeroPersonas}
-            heigth={windowWidth < 713 ? '150px':"272px"}
+            heigth={windowWidth < 713 ? "150px" : "272px"}
           ></ComponenteLugar>
         </div>
       ))}
-      {hasMore && (
-        <div ref={ref} style={{ textAlign: "center" }}>
-         
-        </div>
-      )}
+      {hasMore && <div ref={ref} style={{ textAlign: "center" }}></div>}
     </div>
   );
- };
- 
- export default ListadoDeComponentesLugar;
+};
 
+export default ListadoDeComponentesLugar;
