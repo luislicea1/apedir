@@ -123,7 +123,8 @@ export const ImgCardStyle = {
   height: "100%",
   display: "grid",
   placeItems: "center",
-  borderRadius: "10px"
+  borderRadius: "10px",
+  padding: "10px"
 };
 export const ImgStyle = {
   minHeight: "200px",
@@ -132,10 +133,10 @@ export const ImgStyle = {
 };
 
 export const LogoStyle = {
-  //width: "272px",
-  //height: "272px",
-  width: "100%",
-  height: "100%",
+  width: "282px",
+  aspectRatio: "1 / 1",
+  //width: "100%",
+  //height: "100%",
   
   //margin: "5px",
   borderRadius: "10px",
