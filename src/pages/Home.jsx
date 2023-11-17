@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { lazy , Suspense } from "react";
 import { lugares } from "../components/Lugares/Lugares";
 //import Prueba from "../components/prueba/Card1";
 import { Helmet } from "react-helmet";
