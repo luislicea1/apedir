@@ -52,7 +52,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
   const { data, error } = await supabase
     .from("bussiness")
     .select("*")
-    .range(offset, offset + 9);
+    .range(offset, offset + 5);
 
   if (error) {
     console.error(error);
@@ -95,7 +95,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     return [...prevBusinesses, ...newBusinesses];
   });
   // Incrementa el desplazamiento
-  setOffset(offset + 10);
+  setOffset(offset + 3);
 };
 
 const fetchAllBussiness = async () => {

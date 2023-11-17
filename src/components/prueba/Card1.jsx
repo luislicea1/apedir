@@ -1,39 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness, fetchAllBussiness } from "../../api/bussiness";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
 
 const Prueba = () => {
-  const [bussinesses, setBussinesses] = useState([]);
-  const [offset, setOffset] = useState(0);
+ const [bussinesses, setBussinesses] = useState([]);
+ const [hasMore, setHasMore] = useState(true);
+ const [page, setPage] = useState(0);
+ const [offset, setOffset] = useState(0);
+ const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const fetchBussinesses = async () => {
-      const bussinessList = await fetchAllBussiness();
-      setBussinesses(bussinessList);
-    };
-    if (bussinesses.length === 0) fetchBussinesses();
-    console.log(bussinesses);
+ const { ref, inView } = useInView({
+   threshold: 0,
+ });
 
-    // loadMoreBussiness(offset, setOffset, setBussinesses);
-  }, []);
+ useEffect(() => {
+   if (inView) {
+     fetchMoreData();
+   }
+ }, [inView]);
 
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
-      {bussinesses.map((bussiness) => (
-        <div key={bussiness.id}>
-          <ComponenteLugar
-            imagen={bussiness.perfil_pic}
-            localizacion={bussiness.province}
-            nombre={bussiness.name}
-          ></ComponenteLugar>
-        </div>
-      ))}
-      <button onClick={() => setOffset(offset + 10)}>
-        Cargar más negocios
-      </button>
-    </div>
-  );
+ async function fetchMoreData() {
+   const response = await loadMoreBussiness(offset, setOffset, setBussinesses);
+   if (response.length === 0) {
+     setHasMore(false);
+   } else {
+     setPage((prevPage) => prevPage + 1);
+   }
+ }
+
+ useEffect(() => {
+   fetchMoreData();
+ }, []);
+
+ useEffect(() => {
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+ }, []);
+
+ return (
+  <div className="list-container" style={{gap:"10px", display: 'grid', gridTemplateColumns: windowWidth < 380 ? '1fr' : windowWidth < 713 ? '1fr 1fr' : '1fr 1fr 1fr' }}>
+     {bussinesses.map((item) => (
+       <div key={item.id}>
+         <ComponenteLugar
+           imagen={item.perfil_pic}
+           localizacion={item.province}
+           nombre={item.name}
+         ></ComponenteLugar>
+       </div>
+     ))}
+     {hasMore && (
+       <div ref={ref} style={{ textAlign: "center" }}>
+        
+       </div>
+     )}
+   </div>
+ );
 };
 
 export default Prueba;

@@ -89,7 +89,7 @@ export default function Negocio({ nombre, localizacion }) {
 
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-      <Helmet>
+      {/* <Helmet>
         <meta
           name="description"
           content="pagina de promocion de negocios en cuba"
@@ -101,7 +101,7 @@ export default function Negocio({ nombre, localizacion }) {
           href={LogoImg}
           alt="logo apedir"
         />
-      </Helmet>
+      </Helmet> */}
         <section style={NegocioSection}>
           <Header
             logo={LogoImg}
