@@ -85,15 +85,15 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
     })
   );
   // Actualiza el estado con los nuevos elementos
-    setBussiness((prevBusinesses) => {
-      const newBusinesses = businessesWithImages.filter((business) => {
-        return !prevBusinesses.find(
-          (prevBusiness) => prevBusiness.id === business.id
-        );
-      });
-
-      return [...prevBusinesses, ...newBusinesses];
+  setBussiness((prevBusinesses) => {
+    const newBusinesses = businessesWithImages.filter((business) => {
+      return !prevBusinesses.find(
+        (prevBusiness) => prevBusiness.id === business.id
+      );
     });
+
+    return [...prevBusinesses, ...newBusinesses];
+  });
   // Incrementa el desplazamiento
   setOffset(offset + 3);
 };
@@ -239,4 +239,5 @@ export {
   fetchAllBussiness,
   fetchBussinessPerProvince,
   fetchBussinessPerName,
+  fetchBussinessPerURL,
 };
