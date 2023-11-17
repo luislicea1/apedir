@@ -17,6 +17,8 @@ import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 //import Stars from "../Stars/Stars";
 import { Helmet } from "react-helmet";
+//import { fetchBussinessPerUrl } from "../../api/bussiness";
+
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
 
@@ -32,7 +34,7 @@ const PortadaDeNegocio = lazy(() => import("./PortadaDeNegocio/portadaNegocio"))
 
 const renderLoader = () => <p>Loading</p>;
 
-export default function Negocio({ nombre, localizacion }) {
+export default function Negocio({ url}) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   useEffect(() => {
@@ -105,7 +107,7 @@ export default function Negocio({ nombre, localizacion }) {
         <section style={NegocioSection}>
           <Header
             logo={LogoImg}
-            nombre={nombre}
+            nombre={"nombre"}
             horario={"si"}
             anterior={"/"}
           />
@@ -116,7 +118,7 @@ export default function Negocio({ nombre, localizacion }) {
           <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>
           <div className="p-2 m-2">
             <Suspense fallback={renderLoader()}>
-              <TituloNegocio title={nombre}></TituloNegocio>
+              <TituloNegocio title={"nombre"}></TituloNegocio>
               <Stars w={150}></Stars>
               <DescripcionNegocio
                 descripcion={text}
@@ -134,8 +136,8 @@ export default function Negocio({ nombre, localizacion }) {
               <ListadoProductos
                 id="Desayuno"
                 title="Desayuno"
-                nombre={nombre}
-                localizacion={localizacion}
+                nombre={"nombre"}
+                localizacion={"localizacion"}
                 lista={desayuno}
               ></ListadoProductos>
               <ListadoProductos
@@ -147,7 +149,7 @@ export default function Negocio({ nombre, localizacion }) {
           </div>
         </section>
         <Suspense fallback={renderLoader()}>
-          <FooterNegocio title={nombre}></FooterNegocio>
+          <FooterNegocio title={"nombre"}></FooterNegocio>
         </Suspense>
       </section>
     </div>
@@ -155,6 +157,6 @@ export default function Negocio({ nombre, localizacion }) {
 }
 
 Negocio.propTypes = {
-  nombre: PropTypes.string.isRequired,
-  localizacion: PropTypes.string.isRequired,
+  //nombre: PropTypes.string.isRequired,
+  //localizacion: PropTypes.string.isRequired,
 };

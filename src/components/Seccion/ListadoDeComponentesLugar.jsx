@@ -79,6 +79,7 @@ const ListadoDeComponentesLugar = () => {
             localizacion={item.province}
             nombre={item.name}
             numeroPersonas={item.numeroPersonas}
+            url={item.value_url}
             heigth={windowWidth < 713 ? "150px" : "272px"}
           ></ComponenteLugar>
         </div>

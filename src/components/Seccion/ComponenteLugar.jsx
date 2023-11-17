@@ -22,7 +22,8 @@ function ComponenteLugar(props) {
   return (
     <Suspense>
       <Link
-        onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
+        //onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
+        onClick={() => navigate(`/lugar/${props.url}`)}
       >
         <Helmet>
           <link

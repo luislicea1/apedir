@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Negocio from "./Negocio";
 
 const NegocioWrapper = () => {
-  const { nombre,localizacion,numeroPersonas } = useParams();
+  const { url} = useParams();
   
 
   
@@ -11,7 +11,7 @@ const NegocioWrapper = () => {
     
   };
 
-  return <Negocio nombre={nombre} localizacion={localizacion} numeroPersonas={numeroPersonas} {...propsAdicionales} />;
+  return <Negocio url={url} />;
 };
 
 export default NegocioWrapper;

@@ -174,7 +174,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: ":localizacion/:nombre/",
+        path: ":url",
         element: (
           <Suspense fallback={<CircularProgress />}>
             <LazyNegocioWrapper />
@@ -182,7 +182,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: ":localizacion/:nombre/producto/:title",
+        path: ":url/producto/:title",
         element: (
           <Suspense fallback={<CircularProgress />}>
             <LazyVisualizarProductoWrapper />
