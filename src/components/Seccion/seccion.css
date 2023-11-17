@@ -1,7 +1,16 @@
 .list-container{
   padding: 10px;
 }
-
+.titulo-card-negocio-panntalla-principal{
+  /*max-width: 20ch;*/
+  
+  font-size: 1rem;
+  font-weight: bold;
+  /*
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;*/
+}
 .div-x-scroll-animation h2{
   width: 300%;
   animation: slide 5s infinite;
@@ -32,17 +41,29 @@
   /* .lazyLoad{
     height: 150px !important;
   } */
-} 
-/*
-@media (max-width: 480px) {
-  .list-container {
-    grid-template-columns: 1fr !important;
-    
+  .titulo-card-negocio-panntalla-principal{
+    max-width: 20ch;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   }
-  .list-container-recomend{
-    grid-template-columns: repeat(1, 1fr) !important;
-    
+} 
+
+@media (max-width: 550px) {
+  .titulo-card-negocio-panntalla-principal{
+    max-width: 15ch;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   }
   
-}*/
+}
 
+@media (max-width: 377px) {
+  .titulo-card-negocio-panntalla-principal{
+    max-width: none;
+    white-space:inherit;
+  
+  }
+  
+}

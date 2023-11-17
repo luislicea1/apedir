@@ -134,7 +134,7 @@ export default function Negocio({ url}) {
           <div className="p-2 m-2">
             <Suspense fallback={renderLoader()}>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
-              <Stars w={150}></Stars>
+              <Stars w={100}></Stars>
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
