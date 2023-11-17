@@ -168,11 +168,44 @@ const fetchBussinessPerProvince = async (province) => {
   return businessesWithImages;
 };
 
+const fetchBussinessPerName = async (name) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("name", name);
+  if (error) return;
+
+  const businessesWithImages = await Promise.all(
+    data.map(async (business) => {
+      // const stars = await getStarsFromBussiness(business.id);
+      const front_pic = await getImage("bussiness_front", business.front_pic);
+      const perfil_pic = await getImage(
+        "bussiness_perfil",
+        business.perfil_pic
+      );
+      const gps_location = await getImage(
+        "bussiness_location",
+        business.gps_location
+      );
+
+      return {
+        ...business,
+        // stars,
+        front_pic,
+        perfil_pic,
+        gps_location,
+      };
+    })
+  );
+  return businessesWithImages;
+};
+
 export {
   upsertBussiness,
   getOneBussiness,
   getImage,
   loadMoreBussiness,
   fetchAllBussiness,
-  fetchBussinessPerProvince
+  fetchBussinessPerProvince,
+  fetchBussinessPerName,
 };
