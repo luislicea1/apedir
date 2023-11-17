@@ -55,7 +55,8 @@ function ComponenteLugar(props) {
               style={{
                 ...LogoStyle,
                 objectFit: "contain",
-                height: props.heigth,
+                //height: props.heigth,
+                //width: props.heigth,
               }}
               delayMethod="debounce"
               delayTime={300}

@@ -56,7 +56,7 @@ const ListadoDeComponentesLugar = () => {
             localizacion={item.province}
             nombre={item.name}
             numeroPersonas={item.numeroPersonas}
-            heigth={windowWidth < 713 ? '100px':"272px"}
+            heigth={windowWidth < 713 ? '150px':"272px"}
           ></ComponenteLugar>
         </div>
       ))}
