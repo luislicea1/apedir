@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import { Button, Textarea, Image, Input } from "@nextui-org/react";
+import {
+  Button,
+  Textarea,
+  Image,
+  Input,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+} from "@nextui-org/react";
 import { grid_1_col, grid_2_col } from "../styles/styles";
 import { resizeImage } from "../../api/helpers/image";
 import { removeImage, uploadImage } from "../../api/images";
 import { toast, Toaster } from "sonner";
 import InputGmail from "./Inputs/InputGmail";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
-import { upsertEvent } from "../../api/events";
+import { deleteEvent, upsertEvent } from "../../api/events";
+import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 
 export default function EventCard({ bussinessId, event }) {
-  console.log(event);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [imageName, setImageName] = useState("");
   const [image, setImage] = useState(null);
   const defaultEventValues = {
@@ -26,6 +39,11 @@ export default function EventCard({ bussinessId, event }) {
   const [eventInput, setEventInput] = useState(
     event !== null && event !== undefined ? event : defaultEventValues
   );
+
+  const handleDelete = async () => {
+    await deleteEvent(event.id);
+    
+  };
 
   const handleAddEvent = async () => {
     let eventImage = "";
@@ -72,6 +90,20 @@ export default function EventCard({ bussinessId, event }) {
   };
   return (
     <div style={{ padding: "5px" }}>
+      {event && (
+        <section
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <span className="text-danger" onClick={onOpen}>
+            <DeleteIcon />
+          </span>
+        </section>
+      )}
+
       <br />
       <Input
         type="text"
@@ -149,6 +181,28 @@ export default function EventCard({ bussinessId, event }) {
       >
         Agregar Evento
       </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Eliminar {event.name}
+              </ModalHeader>
+              <ModalBody>
+                <p>Si eliminas este evento no podrás recuperarlo.</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onClick={onClose}>
+                  cerrar
+                </Button>
+                <Button color="primary" onClick={handleDelete}>
+                  Eliminar
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <Toaster richColors duration={300} position="bottom-center" />
     </div>
   );

@@ -37,4 +37,9 @@ const getEventsfromBussiness = async (bussinessId) => {
   return eventsWithImages;
 };
 
-export { upsertEvent, getEventsfromBussiness };
+const deleteEvent = async (eventId) => {
+  console.log(eventId);
+  await supabase.from("events").delete().eq("id", eventId);
+};
+
+export { upsertEvent, getEventsfromBussiness, deleteEvent };
