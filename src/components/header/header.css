@@ -1,0 +1,34 @@
+.titulo-negocio-header {
+    max-width: 50ch;
+  }
+@media (max-width: 1200px) {
+    .titulo-negocio-header {
+    max-width: 50ch;
+  }
+}
+@media (max-width: 900px) {
+    .titulo-negocio-header {
+    max-width: 35ch;
+  }
+}
+    @media (max-width: 600px) {
+        .titulo-negocio-header {
+        max-width: 25ch;
+       
+      }
+    }
+
+    @media (max-width: 470px) {
+        .titulo-negocio-header {
+        max-width: 15ch;
+       
+      }
+    }
+    
+    @media (max-width: 380px) {
+        .titulo-negocio-header {
+        max-width: 10ch;
+       
+      }
+    }
+    

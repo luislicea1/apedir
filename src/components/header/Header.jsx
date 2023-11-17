@@ -1,4 +1,5 @@
 import React, { useEffect, useState, lazy } from "react";
+import './header.css'
 import { useHref } from "react-router-dom";
 import {
   Navbar,
@@ -92,6 +93,8 @@ export default function Header(props) {
     };
   }, [setUser]);
 
+  
+
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
@@ -102,8 +105,20 @@ export default function Header(props) {
             </Link>
 
             <NegocioLogo logo={props.logo} />
+
             <div className="ml-2" style={MarginLeft30}>
-              <p className="font-bold text-inherit">{props.nombre}</p>
+              <p
+                className="font-bold text-inherit titulo-negocio-header"
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  
+                }}
+              >
+                {props.nombre}
+              </p>
+              
               {props.horario === "si" ? <AbiertoCerrado /> : null}
             </div>
           </>

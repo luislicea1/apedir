@@ -228,7 +228,7 @@ const fetchBussinessPerURL = async (valueUrl) => {
       };
     })
   );
-  return businessesWithImages;
+  return businessesWithImages[0];
 };
 
 export {

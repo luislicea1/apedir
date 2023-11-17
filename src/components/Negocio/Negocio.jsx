@@ -17,7 +17,7 @@ import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 //import Stars from "../Stars/Stars";
 import { Helmet } from "react-helmet";
-//import { fetchBussinessPerUrl } from "../../api/bussiness";
+import { fetchBussinessPerURL } from "../../api/bussiness";
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
@@ -29,13 +29,26 @@ const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
-const HeaderNegocio = lazy(() => import("./HeaderNegocio/HeaderNegocio"));
 const PortadaDeNegocio = lazy(() => import("./PortadaDeNegocio/portadaNegocio"));
 
 const renderLoader = () => <p>Loading</p>;
 
 export default function Negocio({ url}) {
+  
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+
+  const [bussiness, setBussiness] = useState(null);
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const bussinessData = await fetchBussinessPerURL(url);
+      setBussiness(bussinessData);
+    };
+ 
+    fetchData();
+  }, [url]);
+ 
 
   useEffect(() => {
     const checkScrollPosition = () => {
@@ -90,7 +103,9 @@ export default function Negocio({ url}) {
   ];
 
   return (
-    <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+
+    bussiness ? (
+      <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       {/* <Helmet>
         <meta
           name="description"
@@ -102,12 +117,12 @@ export default function Negocio({ url}) {
           type="image/svg+xml"
           href={LogoImg}
           alt="logo apedir"
-        />
+        />dame 
       </Helmet> */}
         <section style={NegocioSection}>
           <Header
-            logo={LogoImg}
-            nombre={"nombre"}
+            logo={bussiness.perfil_pic}
+            nombre={bussiness.name}
             horario={"si"}
             anterior={"/"}
           />
@@ -115,13 +130,13 @@ export default function Negocio({ url}) {
         {isNavbarVisible && <Navegacion links={links} />}
 
         <section className="section" style={NegocioSection}>
-          <PortadaDeNegocio imagenPortada={Imagen}></PortadaDeNegocio>
+          <PortadaDeNegocio imagenPortada={bussiness.front_pic}></PortadaDeNegocio>
           <div className="p-2 m-2">
             <Suspense fallback={renderLoader()}>
-              <TituloNegocio title={"nombre"}></TituloNegocio>
+              <TituloNegocio title={bussiness.name}></TituloNegocio>
               <Stars w={150}></Stars>
               <DescripcionNegocio
-                descripcion={text}
+                descripcion={bussiness.description}
                 contact={"si"}
                 domicilio={"si"}
                 localizacion={"si"}
@@ -153,6 +168,9 @@ export default function Negocio({ url}) {
         </Suspense>
       </section>
     </div>
+    ):(
+      <>loading</>
+    )
   );
 }
 
