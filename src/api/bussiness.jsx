@@ -100,7 +100,7 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
 
 const fetchAllBussiness = async () => {
   const { data, error } = await supabase.from("bussiness").select("*");
-  console.log(data)
+  console.log(data);
   if (error) {
     console.error(error);
     return;
@@ -131,8 +131,40 @@ const fetchAllBussiness = async () => {
       };
     })
   );
-  console.log(businessesWithImages)
+  console.log(businessesWithImages);
   // Actualiza el estado con los nuevos elementos
+  return businessesWithImages;
+};
+
+const fetchBussinessPerProvince = async (province) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("province", province);
+  if (error) return;
+
+  const businessesWithImages = await Promise.all(
+    data.map(async (business) => {
+      // const stars = await getStarsFromBussiness(business.id);
+      const front_pic = await getImage("bussiness_front", business.front_pic);
+      const perfil_pic = await getImage(
+        "bussiness_perfil",
+        business.perfil_pic
+      );
+      const gps_location = await getImage(
+        "bussiness_location",
+        business.gps_location
+      );
+
+      return {
+        ...business,
+        // stars,
+        front_pic,
+        perfil_pic,
+        gps_location,
+      };
+    })
+  );
   return businessesWithImages;
 };
 
@@ -142,4 +174,5 @@ export {
   getImage,
   loadMoreBussiness,
   fetchAllBussiness,
+  fetchBussinessPerProvince
 };
