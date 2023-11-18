@@ -1,7 +1,12 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-//import ManageProducts from "./ManageProducts";
+import React, {
+  useEffect,
+  useState,
+  lazy,
+  Suspense,
+  memo,
+  useMemo,
+} from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-
 import { getProducts } from "../../api/products";
 import { getCategories } from "../../api/categories";
 import { getOneBussiness } from "../../api/bussiness";
@@ -11,7 +16,7 @@ import { grid_1_col } from "../styles/styles";
 const ResponsiveTimePickers = lazy(() =>
   import("./Inputs/ResponsiveTimePicker")
 );
-const NegocioDashboard = lazy(() => import("./NegocioDashboard"));
+const NegocioDashboard = memo(lazy(() => import("./NegocioDashboard")));
 const EventManagement = lazy(() => import("./EventManagement"));
 const ManageProducts = lazy(() => import("./ManageProducts"));
 
@@ -24,14 +29,16 @@ export default function CrearNegocio() {
 
   const fetchBussiness = async () => {
     if (user === null) return;
+
     const b = await getOneBussiness(user.id);
     setBussiness(b);
+
   };
+
   useEffect(() => {
     fetchBussiness();
   }, [user]);
 
-  // useEffect para las categorías
   useEffect(() => {
     const fetchCategories = async () => {
       if (bussiness === null) return;
@@ -67,9 +74,8 @@ export default function CrearNegocio() {
     };
   }, [bussiness]);
 
-  // useEffect para los productos
   useEffect(() => {
-    if (categories.length === 0) return; // No intentes cargar los productos si las categorías aún no se han cargado
+    if (categories.length === 0) return;
 
     const fetchProducts = async () => {
       const productList = await getProducts(categories);
@@ -102,9 +108,37 @@ export default function CrearNegocio() {
       if (productSubscription) productSubscription.unsubscribe();
       clearTimeout(timer);
     };
-  }, [categories]); // Este useEffect se activa cuando las categorías cambian
+  }, [categories]);
 
   const renderLoader = () => <p>Loading</p>;
+
+  const memoizedNegocioDashboard = useMemo(
+    () => <NegocioDashboard user={user} bussiness={bussiness} />,
+    [user, JSON.stringify(bussiness)]
+  );
+
+  const memoizedResponsiveTimePickers = useMemo(
+    () => <ResponsiveTimePickers />,
+    []
+  );
+
+  const memoizedEventManagement = useMemo(
+    () => <EventManagement bussinessId={bussiness?.id} />,
+    [bussiness]
+  );
+
+  const memoizedManageProducts = useMemo(
+    () => (
+      <ManageProducts
+        products={products}
+        setProducts={setProducts}
+        categories={categories}
+        setCategories={setCategories}
+        bussiness={bussiness}
+      />
+    ),
+    [products, setProducts, categories, setCategories, bussiness]
+  );
 
   return (
     <div style={grid_1_col}>
@@ -113,40 +147,22 @@ export default function CrearNegocio() {
         <Tabs fullWidth>
           <Tab key="perfil" title="Perfil">
             <Card>
-              <CardBody>
-                <Suspense fallback={renderLoader()}>
-                  <NegocioDashboard user={user} bussiness={bussiness} />
-                </Suspense>
-              </CardBody>
+              <CardBody>{memoizedNegocioDashboard}</CardBody>
             </Card>
           </Tab>
           <Tab key="horario" title="Horario">
             <Suspense fallback={renderLoader()}>
-              <ResponsiveTimePickers></ResponsiveTimePickers>
+              {memoizedResponsiveTimePickers}
             </Suspense>
           </Tab>
           <Tab key="eventos" title="Eventos">
             <Card>
-              <CardBody>
-                <Suspense fallback={renderLoader()}>
-                  <EventManagement bussinessId={bussiness?.id} />
-                </Suspense>
-              </CardBody>
+              <CardBody>{memoizedEventManagement}</CardBody>
             </Card>
           </Tab>
           <Tab key="productos" title="Productos">
             <Card>
-              <CardBody>
-                <Suspense fallback={renderLoader()}>
-                  <ManageProducts
-                    products={products}
-                    setProducts={setProducts}
-                    categories={categories}
-                    setCategories={setCategories}
-                    bussiness={bussiness}
-                  />
-                </Suspense>
-              </CardBody>
+              <CardBody>{memoizedManageProducts}</CardBody>
             </Card>
           </Tab>
         </Tabs>

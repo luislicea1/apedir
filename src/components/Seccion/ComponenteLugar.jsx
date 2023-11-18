@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -12,12 +12,6 @@ import "./seccion.css";
 function ComponenteLugar(props) {
   const navigate = useNavigate();
 
-  ComponenteLugar.propTypes = {
-    localizacion: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    numeroPersonas: PropTypes.number.isRequired,
-    imagen: PropTypes.string.isRequired,
-  };
 
   return (
     <Suspense>
@@ -40,14 +34,14 @@ function ComponenteLugar(props) {
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
             </p>
-            
+
             <h2
               className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
               style={{}}
             >
               {props.nombre}
             </h2>
-            <Stars readOnly w={100} rating={3.5}></Stars>
+            {/* <Stars readOnly w={100} rating={3.5}></Stars> */}
           </CardHeader>
           <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
             <LazyLoadImage
@@ -61,7 +55,7 @@ function ComponenteLugar(props) {
                 //width: props.heigth,
               }}
               delayMethod="debounce"
-              delayTime={300}
+              delayTime={100}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}
@@ -69,14 +63,6 @@ function ComponenteLugar(props) {
             />
 
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
-            {/* <Image
-              alt="NextUI hero Image with delay"
-              src={props.imagen}
-              style={LogoStyle}
-              loading="lazy"
-              skeleton={true}
-              /
-            > */}
           </CardBody>
         </Card>
       </Link>

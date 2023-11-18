@@ -19,7 +19,7 @@ export default function ListadoProductos(props) {
         img={item.image}
         price={item.price}
         currency={item.currency}
-        title={item.title}
+        title={item.name}
         nombre={props.nombre}
         localizacion={props.localizacion}
       ></ProductoMemo>

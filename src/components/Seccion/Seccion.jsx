@@ -6,16 +6,6 @@ import { container, section } from "../styles/styles";
 // import { loadMoreBussiness } from "../../api/bussiness";
 
 export default function Seccion(props) {
-  // const [bussiness, setBussiness] = useState([]);
-  // const [offset, setOffset] = useState(1);
-
-  // useEffect(() => {
-  //   const fetchValues = async () => {
-  //     await loadMoreBussiness(offset, setOffset, setBussiness);
-  //   };
-  //   fetchValues();
-  // }, [bussiness]);
-
   return (
     <div
       style={container}

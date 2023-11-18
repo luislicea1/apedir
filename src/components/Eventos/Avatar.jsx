@@ -70,7 +70,7 @@ const MyAvatar = forwardRef((props, ref) => {
  return (
   <MemoizedDiv {...getAvatarProps()}>
     {src && (
-       <LazyLoadImage
+       <
        alt="NextUI hero Image with delay"
        className="object-cover rounded-xl"
        src={props.imagen}

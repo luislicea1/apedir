@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputTitle({ value, setValue }) {
@@ -9,7 +9,7 @@ export default function InputTitle({ value, setValue }) {
       label="Nombre"
       placeholder="Escriba el nombre de su negocio"
       labelPlacement="outside"
-      value={value.name}
+      value={value}
       onChange={(event) => {
         setValue({
           ...value,

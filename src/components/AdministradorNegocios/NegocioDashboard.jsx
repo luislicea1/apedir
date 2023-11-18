@@ -1,11 +1,10 @@
-import React, { useEffect, useState, lazy } from "react";
-import { Button} from "@nextui-org/react";
+import React, { useEffect, useState, memo, useMemo } from "react";
+import { Button } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";
 import InputTelegram from "./Inputs/InputTelegram";
 import InputWhatsapp from "./Inputs/InputWhatsapp";
 import TextAreaDescription from "./Inputs/TextAreaDescripcion";
-import InputTitle from "./Inputs/InputTitle";
 import ImageUploadButton from "./Inputs/ImagenUploadButton";
 import InputGmail from "./Inputs/InputGmail";
 import InputLocation from "./Inputs/InputLocation";
@@ -17,6 +16,7 @@ import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
 
+import InputTitle from "./Inputs/InputTitle";
 
 export default function NegocioDashboard({ user, business }) {
   // const [user, setUser] = useState(null);
@@ -48,7 +48,20 @@ export default function NegocioDashboard({ user, business }) {
     youtube: "",
     twitter: "",
   };
-  const [bussinessInput, setBussinessInput] = useState(defaultBussinessValues);
+
+  const memoizedBussinessInput = useMemo(() => {
+    return business === null || business === undefined
+      ? defaultBussinessValues
+      : Object.entries(business).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            ...(value !== null && value !== undefined ? { [key]: value } : {}),
+          }),
+          {}
+        );
+  }, [business]);
+
+  const [bussinessInput, setBussinessInput] = useState(memoizedBussinessInput);
   // const user = useUserStore((state) => state.user);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
@@ -58,6 +71,7 @@ export default function NegocioDashboard({ user, business }) {
       JSON.stringify(bussinessInput) ===
         JSON.stringify(defaultBussinessValues) &&
       bussinessInput !== null &&
+      user !== null &&
       user.id !== ""
     ) {
       const b = await getOneBussiness(user.id);
@@ -67,6 +81,10 @@ export default function NegocioDashboard({ user, business }) {
       }
     }
   };
+
+  useEffect(() => {
+    fetchBussiness();
+  }, [user]);
 
   const handleUpsertBussiness = async () => {
     if (!isFormValid) {
@@ -136,10 +154,6 @@ export default function NegocioDashboard({ user, business }) {
   };
 
   useEffect(() => {
-    fetchBussiness();
-  });
-
-  useEffect(() => {
     const validateForm = async () => {
       try {
         await BussinessInputSchema.validate(bussinessInput);
@@ -161,7 +175,7 @@ export default function NegocioDashboard({ user, business }) {
         duration={3000}
       />
       <InputTitle
-        value={bussinessInput}
+        value={bussinessInput.name}
         setValue={setBussinessInput}
       ></InputTitle>
       <ImageUploadButton
