@@ -4,12 +4,11 @@ import TelefonoIcon from "../../Icons/Llamada/Telefono";
 import { Link } from "@nextui-org/react";
 import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import LocalizacionImg from "../../../assets/img/img (1).jpg"
+import LocalizacionImg from "../../../assets/img/img (1).jpg";
 import { Image } from "@nextui-org/react";
-import { fontWhite , MarginTop30} from "../../styles/styles";
+import { fontWhite, MarginTop30 } from "../../styles/styles";
 
 export default function BtnDescription(props) {
-  
   const location = {
     background: "transparent",
     height: "40px",
@@ -24,13 +23,13 @@ export default function BtnDescription(props) {
 
   const imagenLocalizacion = {
     maxWidth: "300px",
-    marginTop: "30px"
-  }
+    marginTop: "30px",
+  };
   return (
     <div className="flex gap-4 items-center" style={MarginTop30}>
       {props.contact === "si" ? (
         <Link href="#contact" style={fontWhite}>
-          <Button color="secondary" >
+          <Button color="secondary">
             <p>Contactenos</p>
             <TelefonoIcon></TelefonoIcon>
           </Button>
@@ -39,14 +38,14 @@ export default function BtnDescription(props) {
 
       {props.domicilio === "si" ? (
         <Link href="#contact" color="foreground">
-          <Button color="primary" >
+          <Button color="primary">
             <p>Domicilio</p>
             <TelefonoIcon></TelefonoIcon>
           </Button>
         </Link>
       ) : null}
 
-      {props.localizacion === "si" ? (
+      {props.localizacion !== undefined ? (
         <Popover placement="bottom">
           <PopoverTrigger>
             <Button color="secondary" style={location}>
@@ -57,15 +56,18 @@ export default function BtnDescription(props) {
             <div className="px-1 py-2">
               <div className="text-small font-bold">Direccion</div>
               <div className="text-tiny">
-                Edificio 64 casa 14 entre Corona y Paseo Plaza de Marte
-                <Image  isZoomed src={LocalizacionImg} alt="" style={imagenLocalizacion}/>
+                {props.localizacion}
+                <Image
+                  isZoomed
+                  src={props.gps_location}
+                  alt=""
+                  style={imagenLocalizacion}
+                />
               </div>
             </div>
           </PopoverContent>
         </Popover>
       ) : null}
-
-      
     </div>
   );
 }

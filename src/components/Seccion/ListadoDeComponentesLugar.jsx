@@ -77,6 +77,7 @@ const ListadoDeComponentesLugar = () => {
           <ComponenteLugar
             imagen={item.perfil_pic}
             localizacion={item.province}
+            gps_location={item.gps_location}
             nombre={item.name}
             numeroPersonas={item.numeroPersonas}
             url={item.value_url}

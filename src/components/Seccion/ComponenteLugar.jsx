@@ -40,11 +40,10 @@ function ComponenteLugar(props) {
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
             </p>
+            
             <h2
               className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
-              style={{
-                
-              }}
+              style={{}}
             >
               {props.nombre}
             </h2>

@@ -18,6 +18,8 @@ import Navegacion from "./HeaderNegocio/Navegacion";
 //import Stars from "../Stars/Stars";
 import { Helmet } from "react-helmet";
 import { fetchBussinessPerURL } from "../../api/bussiness";
+import { getCategories } from "../../api/categories";
+import { getProducts } from "../../api/products";
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
@@ -29,26 +31,44 @@ const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
-const PortadaDeNegocio = lazy(() => import("./PortadaDeNegocio/portadaNegocio"));
+const PortadaDeNegocio = lazy(() =>
+  import("./PortadaDeNegocio/portadaNegocio")
+);
 
 const renderLoader = () => <p>Loading</p>;
 
-export default function Negocio({ url}) {
-  
+export default function Negocio({ url }) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   const [bussiness, setBussiness] = useState(null);
-  
-
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(url);
       setBussiness(bussinessData);
     };
- 
+
     fetchData();
   }, [url]);
- 
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoryList = await getCategories(bussiness.id);
+      setCategories(categoryList);
+    };
+    fetchCategories();
+    if (categories.length > 0) setIsNavbarVisible(true);
+  }, [bussiness]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productList = await getProducts(categories);
+      setProducts(productList !== null ? productList : []);
+    };
+    fetchProducts();
+    console.log(products[0])
+  }, [categories]);
 
   useEffect(() => {
     const checkScrollPosition = () => {
@@ -69,43 +89,41 @@ export default function Negocio({ url}) {
     };
   }, []);
 
-  const links = [
-    {
-      nombre: "Desayuno",
-    },
-    {
-      nombre: "Almuerzo",
-    },
-    {
-      nombre: "Comidas",
-    },
-    {
-      nombre: "Pizza",
-    },
-    {
-      nombre: "Postres",
-    },
-    {
-      nombre: "Desayuno",
-    },
-    {
-      nombre: "Almuerzo",
-    },
-    {
-      nombre: "Comida",
-    },
-    {
-      nombre: "Pizza",
-    },
-    {
-      nombre: "Postres",
-    },
-  ];
+  // const links = [
+  //   {
+  //     nombre: "Desayuno",
+  //   },
+  //   {
+  //     nombre: "Almuerzo",
+  //   },
+  //   {
+  //     nombre: "Comidas",
+  //   },
+  //   {
+  //     nombre: "Pizza",
+  //   },
+  //   {
+  //     nombre: "Postres",
+  //   },
+  //   {
+  //     nombre: "Desayuno",
+  //   },
+  //   {
+  //     nombre: "Almuerzo",
+  //   },
+  //   {
+  //     nombre: "Comida",
+  //   },
+  //   {
+  //     nombre: "Pizza",
+  //   },
+  //   {
+  //     nombre: "Postres",
+  //   },
+  // ];
 
-  return (
-
-    bussiness ? (
-      <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+  return bussiness ? (
+    <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       {/* <Helmet>
         <meta
           name="description"
@@ -119,18 +137,18 @@ export default function Negocio({ url}) {
           alt="logo apedir"
         />dame 
       </Helmet> */}
-        <section style={NegocioSection}>
-          <Header
-            logo={bussiness.perfil_pic}
-            nombre={bussiness.name}
-            horario={"si"}
-            anterior={"/"}
-          />
-
-        {isNavbarVisible && <Navegacion links={links} />}
-
+      <section style={NegocioSection}>
+        <Header
+          logo={bussiness.perfil_pic}
+          nombre={bussiness.name}
+          horario={"si"}
+          anterior={"/"}
+        />
+        {isNavbarVisible && <Navegacion links={categories} />}
         <section className="section" style={NegocioSection}>
-          <PortadaDeNegocio imagenPortada={bussiness.front_pic}></PortadaDeNegocio>
+          <PortadaDeNegocio
+            imagenPortada={bussiness.front_pic}
+          ></PortadaDeNegocio>
           <div className="p-2 m-2">
             <Suspense fallback={renderLoader()}>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
@@ -139,7 +157,8 @@ export default function Negocio({ url}) {
                 descripcion={bussiness.description}
                 contact={"si"}
                 domicilio={"si"}
-                localizacion={"si"}
+                localizacion={bussiness.address}
+                gps_location={bussiness.gps_location}
                 like={"si"}
               ></DescripcionNegocio>
 
@@ -148,31 +167,34 @@ export default function Negocio({ url}) {
 
             <div className="first-product-list"></div>
             <Suspense fallback={renderLoader()}>
-              <ListadoProductos
-                id="Desayuno"
-                title="Desayuno"
-                nombre={"nombre"}
-                localizacion={"localizacion"}
-                lista={desayuno}
-              ></ListadoProductos>
-              <ListadoProductos
-                id="Comidas"
-                title="Comidas"
-                lista={comidas}
-              ></ListadoProductos>
+              {categories.map((category, idx) => {
+                const categoryProducts = products.filter(
+                  (product) => product.category === category.id
+                );
+                return (
+                  <ListadoProductos
+                    id={idx}
+                    title={category.category}
+                    nombre={category.category}
+                    localizacion={category.category}
+                    lista={categoryProducts}
+                  ></ListadoProductos>
+                );
+              })}
             </Suspense>
           </div>
         </section>
         <Suspense fallback={renderLoader()}>
-          <FooterNegocio title={"nombre"} imagen={bussiness.perfil_pic} url={url}></FooterNegocio>
+          <FooterNegocio
+            title={"nombre"}
+            imagen={bussiness.perfil_pic}
+            url={url}
+          ></FooterNegocio>
         </Suspense>
-
-        
       </section>
     </div>
-    ):(
-      <>loading</>
-    )
+  ) : (
+    <>loading</>
   );
 }
 

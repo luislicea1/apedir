@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardBody, CardFooter} from "@nextui-org/react";
+import React from "react";
+import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
@@ -10,7 +10,7 @@ import {
   ImgCardStyle,
   CardStyles2,
   Imagen100pc400H,
-  ProductoStyle
+  ProductoStyle,
 } from "../../styles/styles";
 
 export default function Producto({
@@ -20,20 +20,21 @@ export default function Producto({
   img,
   price,
   index,
+  currency,
 }) {
   const navigate = useNavigate();
 
   return (
     <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
       <Helmet>
-          <link
-            fetchpriority="high"
-            rel="preload"
-            href={img}
-            as="image"
-            imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
-          />
-        </Helmet>
+        <link
+          fetchpriority="high"
+          rel="preload"
+          href={img}
+          as="image"
+          imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+        />
+      </Helmet>
       <Card
         shadow="sm"
         key={index}
@@ -42,22 +43,23 @@ export default function Producto({
         className="producto-card"
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
-          
-           <LazyLoadImage
-              alt={title}
-              src={img}
-              effect="blur"
-              style={{ ...ProductoStyle, objectFit: "cover" }}
-              delayMethod="debounce"
-              delayTime={300}
-              placeholderSrc={img}
-              useIntersectionObserver={true}
-              visibleByDefault={true}
-            />
+          <LazyLoadImage
+            alt={title}
+            src={img}
+            effect="blur"
+            style={{ ...ProductoStyle, objectFit: "cover" }}
+            delayMethod="debounce"
+            delayTime={300}
+            placeholderSrc={img}
+            useIntersectionObserver={true}
+            visibleByDefault={true}
+          />
         </CardBody>
         <CardFooter className="text-small justify-between">
           <b>{title}</b>
-          <p className="text-default-500">{price}</p>
+          <p className="text-default-500">
+            {price} {currency}
+          </p>
         </CardFooter>
       </Card>
     </Link>
