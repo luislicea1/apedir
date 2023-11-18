@@ -34,9 +34,9 @@ export default function ImagenVisualizador(props) {
 
   return (
     <div style={center}>
-      <Image
+      <img
         
-        style={img}
+        style={{...img, zIndex: "90"}}
         src={props.image}
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
