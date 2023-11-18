@@ -1,5 +1,6 @@
 import React, { useEffect, useState, lazy } from "react";
-import './header.css'
+import "./header.css";
+import { Link as LinkReact} from "react-router-dom";
 import { useHref } from "react-router-dom";
 import {
   Navbar,
@@ -36,8 +37,6 @@ export default function Header(props) {
   // const [user, setUser] = useState(null);
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
-
-  const [channel, setChannel] = useState(null);
 
   useEffect(() => {
     const path = history.split("/");
@@ -93,16 +92,16 @@ export default function Header(props) {
     };
   }, [setUser]);
 
-  
-
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
         {isBussiness ? (
           <>
-            <Link href="/">
+            {/* <Link href="/"> */}
+            {/* </Link> */}
+            <LinkReact to="/">
               <Izquierda h={"20px"} w={"20px"} />
-            </Link>
+            </LinkReact>
 
             <NegocioLogo logo={props.logo} />
 
@@ -113,12 +112,11 @@ export default function Header(props) {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  
                 }}
               >
                 {props.nombre}
               </p>
-              
+
               {props.horario === "si" ? <AbiertoCerrado /> : null}
             </div>
           </>

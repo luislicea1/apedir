@@ -47,7 +47,12 @@ const getOneBussiness = async (ownerId) => {
   return data[0];
 };
 
-const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
+const loadMoreBussiness = async (
+  offset,
+  setOffset,
+  bussinesses,
+  setBussiness
+) => {
   // Carga los elementos desde Supabase usando la paginación
   const { data, error } = await supabase
     .from("bussiness")
@@ -84,16 +89,20 @@ const loadMoreBussiness = async (offset, setOffset, setBussiness) => {
       };
     })
   );
-  // Actualiza el estado con los nuevos elementos
-  setBussiness((prevBusinesses) => {
+  if (bussinesses !== null && bussinesses.length > 0) {
     const newBusinesses = businessesWithImages.filter((business) => {
-      return !prevBusinesses.find(
+      return !bussinesses.find(
         (prevBusiness) => prevBusiness.id === business.id
       );
     });
 
-    return [...prevBusinesses, ...newBusinesses];
-  });
+    // Combinar los negocios existentes con los nuevos
+    const finalBusinesses = [...bussinesses, ...newBusinesses];
+    // Actualiza el estado con los nuevos elementos
+    setBussiness(finalBusinesses);
+  } else {
+    setBussiness(businessesWithImages);
+  }
   // Incrementa el desplazamiento
   setOffset(offset + 3);
 };
