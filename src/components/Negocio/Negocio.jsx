@@ -57,7 +57,9 @@ export default function Negocio({ url }) {
       const categoryList = await getCategories(bussiness.id);
       setCategories(categoryList);
     };
-    fetchCategories();
+    console.log(bussiness);
+    if (bussiness !== null && bussiness !== undefined && bussiness?.id)
+      fetchCategories();
     if (categories.length > 0) setIsNavbarVisible(true);
   }, [bussiness]);
 
@@ -67,7 +69,6 @@ export default function Negocio({ url }) {
       setProducts(productList !== null ? productList : []);
     };
     fetchProducts();
-    console.log(products[0])
   }, [categories]);
 
   useEffect(() => {
@@ -88,39 +89,6 @@ export default function Negocio({ url }) {
       window.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
-
-  // const links = [
-  //   {
-  //     nombre: "Desayuno",
-  //   },
-  //   {
-  //     nombre: "Almuerzo",
-  //   },
-  //   {
-  //     nombre: "Comidas",
-  //   },
-  //   {
-  //     nombre: "Pizza",
-  //   },
-  //   {
-  //     nombre: "Postres",
-  //   },
-  //   {
-  //     nombre: "Desayuno",
-  //   },
-  //   {
-  //     nombre: "Almuerzo",
-  //   },
-  //   {
-  //     nombre: "Comida",
-  //   },
-  //   {
-  //     nombre: "Pizza",
-  //   },
-  //   {
-  //     nombre: "Postres",
-  //   },
-  // ];
 
   return bussiness ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
@@ -174,6 +142,7 @@ export default function Negocio({ url }) {
                 return (
                   <ListadoProductos
                     id={idx}
+                    key={idx}
                     title={category.category}
                     nombre={category.category}
                     localizacion={category.category}

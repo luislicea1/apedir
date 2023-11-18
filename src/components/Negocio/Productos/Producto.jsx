@@ -69,8 +69,7 @@ export default function Producto({
 Producto.propTypes = {
   localizacion: PropTypes.string.isRequired,
   nombre: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };

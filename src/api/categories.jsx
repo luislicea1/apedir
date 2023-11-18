@@ -6,8 +6,7 @@ const getCategories = async (bussiness) => {
     .select("*")
     .eq("bussiness", bussiness)
     .order("category", { ascending: true });
-  console.log(categories);
-  console.log(error);
+  console.log(error !== null || error !== undefined ? error : "");
   return categories;
 };
 

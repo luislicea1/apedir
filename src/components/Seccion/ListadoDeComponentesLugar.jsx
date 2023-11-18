@@ -29,7 +29,7 @@ const ListadoDeComponentesLugar = () => {
 
   async function fetchMoreData() {
     const response = await loadMoreBussiness(offset, setOffset, setBussinesses);
-    if (response.length === 0) {
+    if (response?.length === 0) {
       setHasMore(false);
     } else {
       setPage((prevPage) => prevPage + 1);
