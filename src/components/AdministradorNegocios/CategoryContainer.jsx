@@ -6,6 +6,7 @@ import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { grid_3_col } from "../styles/styles";
 
+
 const CategoryContainer = ({
   category,
   products,

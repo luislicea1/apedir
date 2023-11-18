@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -12,12 +12,6 @@ import "./seccion.css";
 function ComponenteLugar(props) {
   const navigate = useNavigate();
 
-  ComponenteLugar.propTypes = {
-    localizacion: PropTypes.string.isRequired,
-    nombre: PropTypes.string.isRequired,
-    numeroPersonas: PropTypes.number.isRequired,
-    imagen: PropTypes.string.isRequired,
-  };
 
   return (
     <Suspense>
@@ -40,7 +34,7 @@ function ComponenteLugar(props) {
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
             </p>
-            
+
             <h2
               className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
               style={{}}
@@ -69,7 +63,6 @@ function ComponenteLugar(props) {
             />
 
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
-
           </CardBody>
         </Card>
       </Link>
