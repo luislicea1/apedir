@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../components/header/Header";
 
-export default function Page({ children }) {
+export default memo(function Page({ children }) {
   return (
     <div>
       <Helmet>
@@ -21,4 +21,4 @@ export default function Page({ children }) {
       {children}
     </div>
   );
-}
+});

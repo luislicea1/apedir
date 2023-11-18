@@ -61,7 +61,7 @@ function ComponenteLugar(props) {
                 //width: props.heigth,
               }}
               delayMethod="debounce"
-              delayTime={300}
+              delayTime={100}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}
@@ -69,14 +69,7 @@ function ComponenteLugar(props) {
             />
 
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
-            {/* <Image
-              alt="NextUI hero Image with delay"
-              src={props.imagen}
-              style={LogoStyle}
-              loading="lazy"
-              skeleton={true}
-              /
-            > */}
+
           </CardBody>
         </Card>
       </Link>

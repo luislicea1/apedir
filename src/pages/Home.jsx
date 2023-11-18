@@ -6,7 +6,7 @@ import Seccion from "../components/Seccion/Seccion";
 // const Header = React.memo(lazy(()=>import ('../components/header/Header')));
 // const Seccion = memo(lazy(() => import("../components/Seccion/Seccion")));
 
-export default memo(function Home() {
+export default function Home() {
   return (
     <div>
       <Helmet>
@@ -21,8 +21,7 @@ export default memo(function Home() {
           alt="logo apedir"
         />
       </Helmet>
-
       <Seccion title="Lugares" lugares={lugares}></Seccion>
     </div>
   );
-});
+};
