@@ -26,7 +26,7 @@ import ImagenVisualizador from "../VisualizadorProducto/ImagenVisualizador";
 import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
 import OrdenarProducto from "../VisualizadorProducto/OrdenarProducto";
 import PromoProducto from "../VisualizadorProducto/PromoProducto";
-import './productos.css'
+import "./productos.css";
 
 export default function Producto({
   localizacion,
@@ -36,7 +36,7 @@ export default function Producto({
   price,
   index,
   currency,
-  onChangeCarrito
+  onChangeCarrito,
 }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -47,12 +47,14 @@ export default function Producto({
 
   const handleAddToCart = (product) => {
     setCarrito((prevCarrito) => {
-     const newCarrito = [...prevCarrito, { title: product.title, quantity: product.quantity, image: img }];
-     onChangeCarrito(newCarrito)
-     return newCarrito;
+      const newCarrito = [
+        ...prevCarrito,
+        { title: product.title, quantity: product.quantity, image: img },
+      ];
+      onChangeCarrito(newCarrito);
+      return newCarrito;
     });
-   };
-   
+  };
 
   const sectionStyle2 = {
     width: "100%",
@@ -60,7 +62,7 @@ export default function Producto({
     height: "100vh",
     background: "#0F0D13",
   };
-  
+
   return (
     <div>
       <Helmet>
@@ -112,14 +114,44 @@ export default function Producto({
             isOpen={isOpen}
             onOpenChange={onOpenChange}
             size="full"
-            style={{ padding: "0px", background: "#0F0D13" }}
+            style={{
+              padding: "0px",
+              background: "#0F0D13",
+              position: "relative",
+            }}
           >
-            <ModalContent style={{ padding: "0px" }}>
+            <ModalContent style={{ padding: "0px", position: " relative" }}>
               {(onClose) => (
-                <>
-                  <ModalBody style={{ padding: "0px", width: "100vw", display: "grid", placeItems: "center" }}>
-                    <div style={sectionStyle2}>
+                <div>
+                  <ModalBody
+                    style={{
+                      padding: "0px",
+                      width: "100vw",
+                      display: "grid",
+                      placeItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <div style={{...sectionStyle2,position: "relative"}}>
                       <ImagenVisualizador image={img}></ImagenVisualizador>
+                      <Button
+                        color="danger"
+                        variant="light"
+                        onPress={onClose}
+                        style={{
+                          position: "absolute",
+                          top: "0",
+                          right: "0",
+                          zIndex: "100",
+                          width: "30px",
+                          minWidth: "30px",
+                          height: "30px",
+                          background: "white",
+                          color: "black",
+                        }}
+                      >
+                        x
+                      </Button>
                     </div>
 
                     <div className="sectionDescription ">
@@ -136,16 +168,7 @@ export default function Producto({
                       <PromoProducto></PromoProducto>
                     </div>
                   </ModalBody>
-
-                  <ModalFooter>
-                    <Button color="danger" variant="light" onPress={onClose} style={{position: "absolute", top: "0", right: "0" , zIndex: "100", width: "30px" ,minWidth: "30px", height: "30px" ,background: "white", color: "black"}}>
-                      x
-                    </Button>
-                    <Button color="primary" onPress={onClose}>
-                      Action
-                    </Button>
-                  </ModalFooter>
-                </>
+                </div>
               )}
             </ModalContent>
           </Modal>
