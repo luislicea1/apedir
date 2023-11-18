@@ -148,6 +148,7 @@ export default function Producto({
                           height: "30px",
                           background: "white",
                           color: "black",
+                          border: "1px solid black"
                         }}
                       >
                         x
