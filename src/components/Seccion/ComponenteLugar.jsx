@@ -47,7 +47,7 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            <Stars readOnly w={100} rating={3.5}></Stars>
+            {/* <Stars readOnly w={100} rating={3.5}></Stars> */}
           </CardHeader>
           <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
             <LazyLoadImage
