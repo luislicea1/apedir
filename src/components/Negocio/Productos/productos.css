@@ -1,6 +1,7 @@
 @media (max-width: 768px) {
     .list-container {
       grid-template-columns: repeat(2, 1fr) !important;
+      
     }
 }
   

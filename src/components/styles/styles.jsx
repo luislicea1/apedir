@@ -133,7 +133,7 @@ export const ImgCardStyle = {
   display: "grid",
   placeItems: "center",
   borderRadius: "10px",
-  padding: "10px"
+  /*padding: "10px"*/
 };
 export const ImgStyle = {
   minHeight: "200px",

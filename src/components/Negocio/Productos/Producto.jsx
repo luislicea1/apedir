@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import {
   ImgCardStyle,
   CardStyles2,
@@ -23,9 +24,48 @@ export default function Producto({
   currency,
 }) {
   const navigate = useNavigate();
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
-    <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
+    // <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
+    //   <Helmet>
+    //     <link
+    //       fetchpriority="high"
+    //       rel="preload"
+    //       href={img}
+    //       as="image"
+    //       imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+    //     />
+    //   </Helmet>
+    //   <Card
+    //     shadow="sm"
+    //     key={index}
+    //     isPressable
+    //     style={CardStyles2}
+    //     className="producto-card"
+    //   >
+    //     <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
+    //       <LazyLoadImage
+    //         alt={title}
+    //         src={img}
+    //         effect="blur"
+    //         style={{ ...ProductoStyle, objectFit: "cover" }}
+    //         delayMethod="debounce"
+    //         delayTime={300}
+    //         placeholderSrc={img}
+    //         useIntersectionObserver={true}
+    //         visibleByDefault={true}
+    //       />
+    //     </CardBody>
+    //     <CardFooter className="text-small justify-between">
+    //       <b>{title}</b>
+    //       <p className="text-default-500">
+    //         {price} {currency}
+    //       </p>
+    //     </CardFooter>
+    //   </Card>
+    // </Link>
+    <div >
       <Helmet>
         <link
           fetchpriority="high"
@@ -56,13 +96,15 @@ export default function Producto({
           />
         </CardBody>
         <CardFooter className="text-small justify-between">
-          <b>{title}</b>
+
+          <p>{title}</p>
+          
           <p className="text-default-500">
             {price} {currency}
           </p>
         </CardFooter>
       </Card>
-    </Link>
+    </div>
   );
 }
 
