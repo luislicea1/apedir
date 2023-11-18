@@ -35,7 +35,7 @@ export default function ImagenVisualizador(props) {
   return (
     <div style={center}>
       <Image
-        isBlurred
+        
         style={img}
         src={props.image}
         alt="NextUI Album Cover Image with delay"
