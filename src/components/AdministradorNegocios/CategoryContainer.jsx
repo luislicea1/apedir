@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState , useEffect} from "react";
 import { Tooltip } from "@nextui-org/react";
 import ProductCard from "./ProductCard";
 import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { grid_3_col } from "../styles/styles";
-
+import { grid_3_col, grid_1_col } from "../styles/styles";
 
 const CategoryContainer = ({
   category,
@@ -21,7 +20,13 @@ const CategoryContainer = ({
   onCategoryEditOpenChange,
   onCategoryDeleteOpen,
 }) => {
-  
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       style={{
@@ -45,7 +50,6 @@ const CategoryContainer = ({
                 ...prevState,
                 category: category.id,
               };
-              
               return updatedState;
             });
             onOpen();
@@ -93,9 +97,12 @@ const CategoryContainer = ({
         </div>
       </div>
 
-      <div className="mt-2 list-container" style={grid_3_col}>
+      <div
+        className="mt-2 list-container"
+        style={windowWidth < 800 ? grid_1_col : grid_3_col}
+      >
+        {/* <div className="mt-2 list-container" style={grid_3_col }> */}
         {products.map((product, index) => (
-          
           <ProductCard
             price={product.price}
             key={index + 1}
@@ -116,4 +123,5 @@ const CategoryContainer = ({
     </div>
   );
 };
+
 export default CategoryContainer;

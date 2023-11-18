@@ -1,7 +1,11 @@
-import React, { lazy, useState, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import TituloDeSeccion from "./TituloDeSeccion";
-import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
 import { container, section } from "../styles/styles";
+import { CircularProgress } from "@nextui-org/react";
+// import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
+const ListadoDeComponentesLugar = lazy(() =>
+  import("./ListadoDeComponentesLugar")
+);
 
 // import { loadMoreBussiness } from "../../api/bussiness";
 
@@ -13,9 +17,11 @@ export default function Seccion(props) {
     >
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={props.title}></TituloDeSeccion>
-        <ListadoDeComponentesLugar
-          lugares={props.lugares}
-        ></ListadoDeComponentesLugar>
+        <Suspense fallback={<CircularProgress />}>
+          <ListadoDeComponentesLugar
+            lugares={props.lugares}
+          ></ListadoDeComponentesLugar>
+        </Suspense>
       </section>
     </div>
   );
