@@ -59,6 +59,13 @@ export const grid_2_col = {
   gridTemplateColumns: "repeat(2,1fr)",
   gap: "20px",
 };
+export const grid_2_col_center = {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(2,1fr)",
+  gap: "20px",
+  placeItems: "center"
+};
 
 export const grid_3_col = {
   width: "100%",

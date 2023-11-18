@@ -164,8 +164,10 @@ export default function Negocio({ url}) {
           </div>
         </section>
         <Suspense fallback={renderLoader()}>
-          <FooterNegocio title={"nombre"}></FooterNegocio>
+          <FooterNegocio title={"nombre"} imagen={bussiness.perfil_pic} url={url}></FooterNegocio>
         </Suspense>
+
+        
       </section>
     </div>
     ):(

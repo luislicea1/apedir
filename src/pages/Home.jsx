@@ -25,6 +25,8 @@ export default function Home() {
        <Suspense>
         <Seccion title="Lugares" lugares={lugares}></Seccion>
       </Suspense>
+      
+      
     </div>
   );
 }
