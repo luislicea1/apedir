@@ -44,6 +44,7 @@ export const PortadaDeNegocioStyles = {
   placeItems: "center",
   background: "#ECECEE",
   position: "relative",
+  overflow: "hidden"
 };
 
 /***********GRID FLEX************************************* */

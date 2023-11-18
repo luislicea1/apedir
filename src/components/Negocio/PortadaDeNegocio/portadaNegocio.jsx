@@ -28,7 +28,7 @@ export default function PortadaDeNegocio(props) {
               useIntersectionObserver={true}
               visibleByDefault={true}
             />
-      <div style={Degradado1}></div>
+      {/* <div style={Degradado1}></div> */}
     </div>
   );
 }
