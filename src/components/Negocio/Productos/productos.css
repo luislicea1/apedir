@@ -1,9 +1,23 @@
-@media (max-width: 768px) {
-    .list-container {
-      grid-template-columns: repeat(2, 1fr) !important;
-      
-    }
+
+  
+  
+.sectionDescription {
+  width: 450px;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+};
+
+
+
+
+@media screen and (max-width: 450px) {
+  .sectionDescription {
+    width: 100%;
+    padding: 40px;
+    
+  };
 }
-  
-  
-  
+

@@ -75,6 +75,14 @@ export default memo(function Negocio({ url }) {
    };
  }, []);
 
+ const [carrito, setCarrito] = useState([]);
+  
+ const handleAddToCart = (product) => {
+  setCarrito(product);
+ };
+
+ console.log(carrito)
+
  return bussiness ? (
    <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
      <section style={NegocioSection}>
@@ -83,6 +91,7 @@ export default memo(function Negocio({ url }) {
          nombre={bussiness.name}
          horario={"si"}
          anterior={"/"}
+         carrito = {carrito}
        />
        {isNavbarVisible && <Navegacion links={categories} />}
        <section className="section" style={NegocioSection}>
@@ -119,6 +128,7 @@ export default memo(function Negocio({ url }) {
                   nombre={category.category}
                   localizacion={category.category}
                   lista={categoryProducts}
+                  onChangeCarrito = {handleAddToCart}
                 ></ListadoProductos>
                );
              })}

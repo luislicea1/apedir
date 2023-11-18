@@ -129,7 +129,7 @@ export default function Header(props) {
 
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          <Carrito></Carrito>
+          <Carrito carrito = {props.carrito}></Carrito>
           <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>

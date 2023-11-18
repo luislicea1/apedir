@@ -9,6 +9,7 @@ export default function OrdenarProducto(props) {
     props.onChangeQuantity(newQuantity);
   };
 
+  
   const disminuir = () => {
     if (cantidad > 0) {
       const newQuantity = cantidad - 1;
