@@ -42,7 +42,7 @@ export default function ImagenVisualizador(props) {
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />
-      <div className="bgtransparent" style={{zIndex: "90"}}></div>
+      <div className="bgtransparent" style={{zIndex: "91"}}></div>
     </div>
   );
 }
