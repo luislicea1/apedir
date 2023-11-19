@@ -140,8 +140,8 @@ export default function Producto({
                         onPress={onClose}
                         style={{
                           position: "absolute",
-                          top: "10px",
-                          right: "10px",
+                          top: "30px",
+                          left: "30px",
                           zIndex: "100",
                           width: "30px",
                           minWidth: "30px",

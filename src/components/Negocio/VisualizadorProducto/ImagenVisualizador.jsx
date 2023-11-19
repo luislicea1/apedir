@@ -4,7 +4,7 @@ import "./visualizarProducto.css";
 
 export default function ImagenVisualizador(props) {
   const img = {
-    height: "50vh",
+    height: "55vh",
     maxHeight: "70vh",
     //width: "100%",
     borderRadius: "0px",
