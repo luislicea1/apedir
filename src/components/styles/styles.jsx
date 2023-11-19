@@ -196,8 +196,8 @@ export const badge = {
 
 /******** Fuentes ********/
 
-export const FontBold30px = {
-  fontSize: "30px",
+export const FontBold20px = {
+  fontSize: "20px",
   fontWeight: "bold",
 };
 export const FontBold40px = {
