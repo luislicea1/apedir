@@ -23,7 +23,7 @@ export default function PortadaDeNegocio(props) {
               effect="blur"
               style={{ ...Imagen100pcCover, objectFit: "cover" }}
               delayMethod="debounce"
-              delayTime={300}
+              delayTime={100}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}

@@ -35,6 +35,7 @@ export default function Producto({
   img,
   price,
   index,
+  description,
   currency,
   onChangeCarrito,
 }) {

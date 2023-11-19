@@ -29,6 +29,7 @@ export default function ListadoProductos(props) {
         currency={item.currency}
         title={item.name}
         nombre={props.nombre}
+        description={item.description}
         localizacion={props.localizacion}
         onChangeCarrito = {handleAddToCart}
       ></ProductoMemo>

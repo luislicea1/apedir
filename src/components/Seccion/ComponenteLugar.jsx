@@ -55,7 +55,7 @@ function ComponenteLugar(props) {
                 //width: props.heigth,
               }}
               delayMethod="debounce"
-              delayTime={100}
+              // delayTime={100}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               visibleByDefault={true}
