@@ -153,6 +153,7 @@ export default memo(function Negocio({ url }) {
       </section>
     </div>
   ) : (
-    <LoaderCompletePage />
+    // <LoaderCompletePage />
+    <></>
   );
 });

@@ -13,6 +13,7 @@ import {
   RequireMerchantRole,
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
+import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 // Utilizando lazy para importar los componentes diferidos
@@ -158,15 +159,15 @@ const router = createBrowserRouter([
   {
     path: "/lugar",
     element: (
-      <Suspense fallback={<CircularProgress />}>
+      
         <Outlet />
-      </Suspense>
+      
     ),
     children: [
       {
         path: ":url",
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <LazyNegocioWrapper />
           </Suspense>
         ),
