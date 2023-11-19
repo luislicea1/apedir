@@ -134,25 +134,7 @@ export default function Producto({
                   >
                     <div style={{...sectionStyle2,position: "relative"}}>
                       <ImagenVisualizador image={img}></ImagenVisualizador>
-                      <Button
-                        color="danger"
-                        variant="light"
-                        onPress={onClose}
-                        style={{
-                          position: "absolute",
-                          top: "30px",
-                          left: "30px",
-                          zIndex: "100",
-                          width: "30px",
-                          minWidth: "30px",
-                          height: "30px",
-                          background: "white",
-                          color: "black",
-                          border: "1px solid black"
-                        }}
-                      >
-                        x
-                      </Button>
+                     
                     </div>
 
                     <div className="sectionDescription ">
@@ -161,6 +143,7 @@ export default function Producto({
                         text={title}
                         onAddToCart={handleAddToCart}
                         cantidad={cantidad}
+                        onClose={onClose}
                       ></DescripcionDeP>
                       <OrdenarProducto
                         onChangeQuantity={setCantidad}
