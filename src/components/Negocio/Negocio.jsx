@@ -6,6 +6,7 @@ import Navegacion from "./HeaderNegocio/Navegacion";
 import { fetchBussinessPerURL } from "../../api/bussiness";
 import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
+import LoaderCompletePage from "../Loader/LoaderCompletePage";
 
 const text =
  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
@@ -145,6 +146,6 @@ export default memo(function Negocio({ url }) {
       </section>
     </div>
   ) : (
-    <>loading</>
+    <LoaderCompletePage/>
   );
 })

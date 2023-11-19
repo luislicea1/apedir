@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
+import Loader from "../Loader/Loader";
 
 // import ComponenteLugar from "./ComponenteLugar";
 const ComponenteLugar = lazy(() => import("./ComponenteLugar"));
@@ -106,7 +107,9 @@ const ListadoDeComponentesLugar = () => {
             ></ComponenteLugar>
           </div>
         ))}
-      {hasMore && <div ref={ref} style={{ textAlign: "center" }}></div>}
+      {hasMore && <div ref={ref} style={{ textAlign: "center" }}>
+          <Loader></Loader>
+        </div>}
     </div>
   );
 };

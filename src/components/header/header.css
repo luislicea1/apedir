@@ -1,14 +1,14 @@
 .titulo-negocio-header {
-    max-width: 50ch;
+    max-width: 40ch;
   }
 @media (max-width: 1200px) {
     .titulo-negocio-header {
-    max-width: 50ch;
+    max-width: 40ch;
   }
 }
 @media (max-width: 900px) {
     .titulo-negocio-header {
-    max-width: 35ch;
+    max-width: 32ch;
   }
 }
     @media (max-width: 600px) {
@@ -17,17 +17,30 @@
        
       }
     }
+    @media (max-width: 525px) {
+      .titulo-negocio-header {
+      max-width: 20ch;
+     
+    }
+  }
 
-    @media (max-width: 470px) {
+    @media (max-width: 475px) {
         .titulo-negocio-header {
         max-width: 15ch;
        
       }
     }
+
+    @media (max-width: 440px) {
+      .titulo-negocio-header {
+      max-width: 10ch;
+     
+    }
+  }
     
-    @media (max-width: 380px) {
+    @media (max-width: 390px) {
         .titulo-negocio-header {
-        max-width: 10ch;
+        max-width: 5ch;
        
       }
     }
