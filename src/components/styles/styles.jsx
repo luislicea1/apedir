@@ -125,15 +125,18 @@ export const CardStyles = {
 };
 
 export const CardStyles2 = {
+  width: "100%",
   height: "100%",
-  maxHeight: "500px",
+  maxHeight: "550px",
+  paddingBottom: "10px"
 };
 export const ImgCardStyle = {
+  width: "100%",
   height: "100%",
   display: "grid",
   placeItems: "center",
   borderRadius: "10px",
-  padding: "10px"
+  /*padding: "10px"*/
 };
 export const ImgStyle = {
   minHeight: "200px",
@@ -152,8 +155,10 @@ export const LogoStyle = {
  
 }
 export const ProductoStyle = {
-  width: "225px",
-  height: "175px",
+  width: "100%",
+  ///width: "225px",
+  //height: "175px",
+  aspectRatio: "1/1",
   borderRadius: "10px 10px 0 0",
  
 }

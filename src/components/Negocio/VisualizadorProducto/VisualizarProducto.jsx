@@ -63,6 +63,7 @@ export default function VisualizarProducto({ nombre, title, localizacion }) {
     ]);
   };
 
+
   return (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <div style={sectionStyle2}>

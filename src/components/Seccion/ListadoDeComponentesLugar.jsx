@@ -83,8 +83,9 @@ const ListadoDeComponentesLugar = () => {
       style={{
         gap: "10px",
         display: "grid",
+        placeItems: "center",
         gridTemplateColumns:
-          windowWidth < 380
+          windowWidth < 390
             ? "1fr"
             : windowWidth < 713
             ? "1fr 1fr"

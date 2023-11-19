@@ -4,10 +4,11 @@ import "./visualizarProducto.css";
 
 export default function ImagenVisualizador(props) {
   const img = {
+    height: "55vh",
     maxHeight: "70vh",
     //width: "100%",
     borderRadius: "0px",
-    objectFit: "contain",
+    objectFit: "cover",
     width: "450px",
   };
 
@@ -34,14 +35,14 @@ export default function ImagenVisualizador(props) {
 
   return (
     <div style={center}>
-      <Image
-        isBlurred
-        style={img}
+      <img
+        
+        style={{...img, zIndex: "90"}}
         src={props.image}
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />
-      <div className="bgtransparent"></div>
+      <div className="bgtransparent" style={{zIndex: "91"}}></div>
     </div>
   );
 }

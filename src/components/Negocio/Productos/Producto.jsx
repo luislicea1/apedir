@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -7,11 +7,26 @@ import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import {
   ImgCardStyle,
   CardStyles2,
   Imagen100pc400H,
   ProductoStyle,
 } from "../../styles/styles";
+
+import ImagenVisualizador from "../VisualizadorProducto/ImagenVisualizador";
+import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
+import OrdenarProducto from "../VisualizadorProducto/OrdenarProducto";
+import PromoProducto from "../VisualizadorProducto/PromoProducto";
+import "./productos.css";
 
 export default function Producto({
   localizacion,
@@ -22,11 +37,35 @@ export default function Producto({
   index,
   description,
   currency,
+  onChangeCarrito,
 }) {
   const navigate = useNavigate();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [cantidad, setCantidad] = useState(0);
+
+  const [carrito, setCarrito] = useState([]);
+
+  const handleAddToCart = (product) => {
+    setCarrito((prevCarrito) => {
+      const newCarrito = [
+        ...prevCarrito,
+        { title: product.title, quantity: product.quantity, image: img },
+      ];
+      onChangeCarrito(newCarrito);
+      return newCarrito;
+    });
+  };
+
+  const sectionStyle2 = {
+    width: "100%",
+    maxWidth: "450px",
+    height: "100vh",
+    background: "#0F0D13",
+  };
 
   return (
-    <Link href={`/lugar/${localizacion}/${nombre}/producto/${title}`}>
+    <div>
       <Helmet>
         <link
           fetchpriority="high"
@@ -56,14 +95,71 @@ export default function Producto({
             visibleByDefault={true}
           />
         </CardBody>
-        <CardFooter className="text-small justify-between">
-          <b>{title}</b>
+        <CardFooter
+          className="text-small justify-between"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            height: "100%",
+          }}
+        >
+          <div style={{ gridColumn: "span 2" }}>
+            <b>{title}</b>
+          </div>
+
           <p className="text-default-500">
             {price} {currency}
           </p>
+          <Button onPress={onOpen}>View</Button>
+          <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            size="full"
+            style={{
+              padding: "0px",
+              background: "#0F0D13",
+              position: "relative",
+            }}
+          >
+            <ModalContent style={{ padding: "0px", position: " relative" }}>
+              {(onClose) => (
+                <div>
+                  <ModalBody
+                    style={{
+                      padding: "0px",
+                      width: "100vw",
+                      display: "grid",
+                      placeItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <div style={{...sectionStyle2,position: "relative"}}>
+                      <ImagenVisualizador image={img}></ImagenVisualizador>
+                     
+                    </div>
+
+                    <div className="sectionDescription ">
+                      <DescripcionDeP
+                        title={title}
+                        text={title}
+                        onAddToCart={handleAddToCart}
+                        cantidad={cantidad}
+                        onClose={onClose}
+                      ></DescripcionDeP>
+                      <OrdenarProducto
+                        onChangeQuantity={setCantidad}
+                      ></OrdenarProducto>
+
+                      <PromoProducto></PromoProducto>
+                    </div>
+                  </ModalBody>
+                </div>
+              )}
+            </ModalContent>
+          </Modal>
         </CardFooter>
       </Card>
-    </Link>
+    </div>
   );
 }
 
