@@ -10,8 +10,11 @@ import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
 
-// import ComponenteLugar from "./ComponenteLugar";
-const ComponenteLugar = lazy(() => import("./ComponenteLugar"));
+const ComponenteLugar = lazy(() =>
+  import("./ComponenteLugar").catch((error) => {
+    console.error("Error loading ComponenteLugar:", error);
+  })
+);
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
@@ -61,6 +64,7 @@ const ListadoDeComponentesLugar = () => {
       }
     } catch (error) {
       console.error("Error fetching more data:", error);
+    } finally {
     }
   };
 

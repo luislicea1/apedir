@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 import Page from "../pages/Page";
-import AyudaInformacion from "../pages/AyudaInformacion";
+// import AyudaInformacion from "../pages/AyudaInformacion";
 
 
 import {
@@ -13,10 +13,9 @@ import {
   RequireMerchantRole,
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
-import NotFound from "../pages/NotFound/NotFound";
 
+const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 // Utilizando lazy para importar los componentes diferidos
-const LazyPage = lazy(() => import("../pages/Page"));
 const LazyLogin = lazy(() => import("../components/login/Login"));
 
 const LazyCreateAccount = lazy(() =>
@@ -89,16 +88,6 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<CircularProgress />}>
         <LazyCreateAccount />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/ayuda_e_informacion",
-    element: (
-      <Suspense fallback={<CircularProgress />}>
-        <LazyPage>
-          <AyudaInformacion />
-        </LazyPage>
       </Suspense>
     ),
   },

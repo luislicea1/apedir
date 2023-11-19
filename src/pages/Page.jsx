@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Helmet } from "react-helmet";
-import Header from "../components/header/Header";
+// import Header from "../components/header/Header";
+const Header = React.lazy(() => import("../components/header/Header"));
 
 export default memo(function Page({ children }) {
   return (

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, lazy } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import "./header.css";
-import { Link as LinkReact} from "react-router-dom";
+import { Link as LinkReact } from "react-router-dom";
 import { useHref } from "react-router-dom";
 import {
   Navbar,
@@ -129,7 +129,9 @@ export default function Header(props) {
 
       {session !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          <Carrito carrito = {props.carrito}></Carrito>
+          <Suspense fallback={<div></div>}>
+            <Carrito carrito={props.carrito}></Carrito>
+          </Suspense>
           <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>

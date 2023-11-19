@@ -1,5 +1,5 @@
 import supabase from "./client";
-import { getStarsFromBussiness } from "./starsRate";
+// import { getStarsFromBussiness } from "./starsRate";
 
 const upsertBussiness = async (bussiness) => {
   let bussinessToInsert = Object.keys(bussiness).reduce((acc, key) => {
@@ -69,7 +69,7 @@ const loadMoreBussiness = async (
   // Obtener imágenes asociadas a cada negocio
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
-      const stars = await getStarsFromBussiness(business.id);
+      // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
@@ -82,7 +82,7 @@ const loadMoreBussiness = async (
 
       return {
         ...business,
-        stars,
+        // stars,
         front_pic,
         perfil_pic,
         gps_location,

@@ -1,10 +1,6 @@
-import React, { lazy, Suspense, memo } from "react";
 import { lugares } from "../components/Lugares/Lugares";
-//import Prueba from "../components/prueba/Card1";
 import { Helmet } from "react-helmet";
 import Seccion from "../components/Seccion/Seccion";
-// const Header = React.memo(lazy(()=>import ('../components/header/Header')));
-// const Seccion = memo(lazy(() => import("../components/Seccion/Seccion")));
 
 export default function Home() {
   return (
@@ -24,4 +20,4 @@ export default function Home() {
       <Seccion title="Lugares" lugares={lugares}></Seccion>
     </div>
   );
-};
+}
