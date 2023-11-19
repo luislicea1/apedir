@@ -138,7 +138,7 @@ export default memo(function Negocio({ url }) {
        </section>
         <Suspense fallback={renderLoader()}>
           <FooterNegocio
-            title={"nombre"}
+            title={bussiness.name}
             imagen={bussiness.perfil_pic}
             url={url}
           ></FooterNegocio>
