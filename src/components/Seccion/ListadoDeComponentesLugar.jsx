@@ -8,7 +8,9 @@ import React, {
 } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
-import ComponenteLugar from "./ComponenteLugar";
+
+// import ComponenteLugar from "./ComponenteLugar";
+const ComponenteLugar = lazy(() => import("./ComponenteLugar"));
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
@@ -39,16 +41,25 @@ const ListadoDeComponentesLugar = () => {
   }, [bussinesses, province]);
 
   const fetchMoreData = async () => {
-    const response = await loadMoreBussiness(
-      offset,
-      setOffset,
-      bussinesses,
-      setBussinesses
-    );
-    if (response !== null && response !== undefined && response.length === 0) {
-      setHasMore(false);
-    } else {
-      setPage((prevPage) => prevPage + 1);
+    try {
+      const response = await loadMoreBussiness(
+        offset,
+        setOffset,
+        bussinesses,
+        setBussinesses
+      );
+
+      if (
+        response !== null &&
+        response !== undefined &&
+        response.length === 0
+      ) {
+        setHasMore(false);
+      } else {
+        setPage((prevPage) => prevPage + 1);
+      }
+    } catch (error) {
+      console.error("Error fetching more data:", error);
     }
   };
 

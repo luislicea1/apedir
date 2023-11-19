@@ -2,10 +2,7 @@ import React, { lazy, Suspense } from "react";
 import TituloDeSeccion from "./TituloDeSeccion";
 import { container, section } from "../styles/styles";
 import { CircularProgress } from "@nextui-org/react";
-// import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
-const ListadoDeComponentesLugar = lazy(() =>
-  import("./ListadoDeComponentesLugar")
-);
+import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
 
 // import { loadMoreBussiness } from "../../api/bussiness";
 

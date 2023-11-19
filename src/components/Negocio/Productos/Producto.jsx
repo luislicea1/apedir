@@ -20,6 +20,7 @@ export default function Producto({
   img,
   price,
   index,
+  description,
   currency,
 }) {
   const navigate = useNavigate();
