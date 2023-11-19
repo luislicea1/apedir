@@ -140,7 +140,7 @@ export default function Producto({
                     <div className="sectionDescription ">
                       <DescripcionDeP
                         title={title}
-                        text={title}
+                        text={description}
                         onAddToCart={handleAddToCart}
                         cantidad={cantidad}
                         onClose={onClose}
