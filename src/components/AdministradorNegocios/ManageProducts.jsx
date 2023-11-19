@@ -26,14 +26,14 @@ import ModalEditCategory from "./Modals/ModalEditCategory";
 import { Toaster, toast } from "sonner";
 import InputPrecio from "./Inputs/InputPrecio";
 import ProductInputSchema from "../../schemas/productInputSchema";
+import { getCategories } from "../../api/categories";
 
 const ManageProducts = ({
-  products,
-  setProducts,
-  categories,
-  setCategories,
   bussiness,
 }) => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [categoryInput, setCategoryInput] = useState({
@@ -168,7 +168,25 @@ const ManageProducts = ({
     }
   };
 
-  // useEffect(() => {}, [productInput.description]);
+  const fetchCategories = async () => {
+    if (bussiness === null) return;
+    const categorylist = await getCategories(bussiness.id);
+    setCategories(categorylist !== null ? categorylist : []);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, [bussiness]);
+
+  const fetchProducts = async () => {
+    const productList = await getProducts(categories);
+    setProducts(productList !== null ? productList : []);
+  };
+
+  useEffect(() => {
+    if (categories.length < 1) return;
+    fetchProducts();
+  }, [categories]);
 
   useEffect(() => {
     validateForm();

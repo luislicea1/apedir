@@ -6,12 +6,10 @@ import React, {
   memo,
   useMemo,
 } from "react";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import { getProducts } from "../../api/products";
-import { getCategories } from "../../api/categories";
+import { Link } from "react-router-dom";
+import { Tabs, Tab, Card, CardBody, Chip } from "@nextui-org/react";
 import { getOneBussiness } from "../../api/bussiness";
 import { useBussinessStore, useUserStore } from "../../hooks/useStore";
-import supabase from "../../api/client";
 import { grid_1_col } from "../styles/styles";
 const ResponsiveTimePickers = lazy(() =>
   import("./Inputs/ResponsiveTimePicker")
@@ -21,11 +19,11 @@ const EventManagement = lazy(() => import("./EventManagement"));
 const ManageProducts = lazy(() => import("./ManageProducts"));
 
 export default function CrearNegocio() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const [selected, setSelected] = useState("perfil");
 
   const fetchBussiness = async () => {
     if (user === null) return;
@@ -38,133 +36,64 @@ export default function CrearNegocio() {
     fetchBussiness();
   }, [user]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      if (bussiness === null) return;
-      const categorylist = await getCategories(bussiness.id);
-      setCategories(categorylist !== null ? categorylist : []);
-    };
-
-    let categorySubscription = null;
-
-    const timer = setTimeout(
-      () => (categorySubscription = subscribeToCategories()),
-      1000
-    );
-
-    const subscribeToCategories = () => {
-      return supabase
-        .channel("category-channel")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: "categories" },
-          () => {
-            fetchCategories();
-          }
-        )
-        .subscribe();
-    };
-
-    fetchCategories();
-
-    return () => {
-      if (categorySubscription) categorySubscription.unsubscribe();
-      clearTimeout(timer);
-    };
-  }, [bussiness]);
-
-  useEffect(() => {
-    if (categories.length === 0) return;
-
-    const fetchProducts = async () => {
-      const productList = await getProducts(categories);
-      setProducts(productList !== null ? productList : []);
-    };
-
-    let productSubscription = null;
-
-    const timer = setTimeout(
-      () => (productSubscription = subscribeToProducts()),
-      1000
-    );
-
-    const subscribeToProducts = () => {
-      return supabase
-        .channel("products-channel")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: "products" },
-          () => {
-            fetchProducts();
-          }
-        )
-        .subscribe();
-    };
-
-    fetchProducts();
-
-    return () => {
-      if (productSubscription) productSubscription.unsubscribe();
-      clearTimeout(timer);
-    };
-  }, [categories]);
-
   const renderLoader = () => <p>Loading</p>;
 
-  const memoizedNegocioDashboard = useMemo(
-    () => <NegocioDashboard user={user} bussiness={bussiness} />,
-    [user, JSON.stringify(bussiness)]
-  );
-
-  const memoizedResponsiveTimePickers = useMemo(
-    () => <ResponsiveTimePickers />,
-    []
-  );
-
-  const memoizedEventManagement = useMemo(
-    () => <EventManagement bussinessId={bussiness?.id} />,
-    [bussiness]
-  );
-
-  const memoizedManageProducts = useMemo(
-    () => (
-      <ManageProducts
-        products={products}
-        setProducts={setProducts}
-        categories={categories}
-        setCategories={setCategories}
-        bussiness={bussiness}
-      />
-    ),
-    [products, setProducts, categories, setCategories, bussiness]
-  );
+  const renderTabContent = () => {
+    switch (selected) {
+      case "perfil":
+        return <NegocioDashboard user={user} bussiness={bussiness} />;
+      case "horario":
+        return (
+          <Suspense fallback={renderLoader()}>
+            <ResponsiveTimePickers />
+          </Suspense>
+        );
+      case "eventos":
+        return <EventManagement bussinessId={bussiness?.id} />;
+      case "productos":
+        return <ManageProducts bussiness={bussiness} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div style={grid_1_col}>
       <div className="flex w-full flex-col">
         <br />
-        <Tabs fullWidth>
-          <Tab key="perfil" title="Perfil">
-            <Card>
-              <CardBody>{memoizedNegocioDashboard}</CardBody>
-            </Card>
-          </Tab>
-          <Tab key="horario" title="Horario">
-            <Suspense fallback={renderLoader()}>
-              {memoizedResponsiveTimePickers}
-            </Suspense>
-          </Tab>
-          <Tab key="eventos" title="Eventos">
-            <Card>
-              <CardBody>{memoizedEventManagement}</CardBody>
-            </Card>
-          </Tab>
-          <Tab key="productos" title="Productos">
-            <Card>
-              <CardBody>{memoizedManageProducts}</CardBody>
-            </Card>
-          </Tab>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            color: "white",
+            justifyContent: "space-between",
+          }}
+        >
+          <Chip color="secondary" radius="sm">
+            Secondary
+          </Chip>
+          <Chip color="secondary" radius="sm">
+            Secondary
+          </Chip>
+          <Chip color="secondary" radius="sm">
+            Secondary
+          </Chip>
+        </div>
+        <Tabs
+          fullWidth
+          selectedKey={selected}
+          onSelectionChange={setSelected}
+          // value={activeTab}
+          // onChange={(index) => setActiveTab(index)}
+        >
+          <Tab key="perfil" title="Perfil" />
+          <Tab key="horario" title="Horario" />
+          <Tab key="eventos" title="Eventos" />
+          <Tab key="productos" title="Productos" />
         </Tabs>
+        <Card>
+          <CardBody>{renderTabContent()}</CardBody>
+        </Card>
       </div>
     </div>
   );
