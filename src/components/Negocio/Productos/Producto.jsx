@@ -76,89 +76,98 @@ export default function Producto({
         />
       </Helmet>
       <Card
-        shadow="sm"
-        key={index}
-        isPressable
-        style={CardStyles2}
-        className="producto-card"
-      >
-        <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
-          <LazyLoadImage
-            alt={title}
-            src={img}
-            effect="blur"
-            style={{ ...ProductoStyle, objectFit: "cover" }}
-            delayMethod="debounce"
-            delayTime={300}
-            placeholderSrc={img}
-            useIntersectionObserver={true}
-            visibleByDefault={true}
-          />
-        </CardBody>
-        <CardFooter
-          className="text-small justify-between"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            height: "100%",
-          }}
-        >
-          <div style={{ gridColumn: "span 2" }}>
-            <b>{title}</b>
-          </div>
+ shadow="sm"
+ key={index}
+ isPressable
+ style={CardStyles2}
+ className="producto-card"
+ onClick={onOpen} // Agrega esta línea
+>
+ <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
+   <LazyLoadImage
+     alt={title}
+     src={img}
+     effect="blur"
+     style={{ ...ProductoStyle, objectFit: "cover" }}
+     delayMethod="debounce"
+     delayTime={300}
+     placeholderSrc={img}
+     useIntersectionObserver={true}
+     visibleByDefault={true}
+   />
+ </CardBody>
+ <CardFooter
+   className="text-small justify-between"
+   style={{
+     display: "grid",
+     gridTemplateColumns: "1fr 1fr",
+     height: "100%",
+   }}
+ >
+   <div style={{ gridColumn: "span 2", marginBottom: "20px" }}>
+     <b
+       style={{
+         fontSize: "20px",
+       }}
+     >
+       {title}
+     </b>
+   </div>
+   <div style={{gridColumn: "span 2"}}>
+     <p className="text-default-500"> 
+       {price} {currency}
+     </p>
+   </div>
 
-          <p className="text-default-500">
-            {price} {currency}
-          </p>
-          <Button onPress={onOpen}>View</Button>
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            size="full"
-            style={{
-              padding: "0px",
-              background: "#0F0D13",
-              position: "relative",
-            }}
-          >
-            <ModalContent style={{ padding: "0px", position: " relative" }}>
-              {(onClose) => (
-                <div>
-                  <ModalBody
-                    style={{
-                      padding: "0px",
-                      width: "100vw",
-                      display: "grid",
-                      placeItems: "center",
-                      position: "relative",
-                    }}
-                  >
-                    <div style={{...sectionStyle2,position: "relative"}}>
-                      <ImagenVisualizador image={img}></ImagenVisualizador>
-                     
-                    </div>
+   {/* <Button onPress={onOpen}>View</Button> */}
+   <Modal
+     isOpen={isOpen}
+     onOpenChange={onOpenChange}
+     size="full"
+     style={{
+       padding: "0px",
+       background: "#0F0D13",
+       position: "relative",
+     }}
+   >
+     <ModalContent style={{ padding: "0px", position: " relative" }}>
+       {(onClose) => (
+         <div>
+           <ModalBody
+             style={{
+               padding: "0px",
+               width: "100vw",
+               display: "grid",
+               placeItems: "center",
+               position: "relative",
+             }}
+           >
+             <div style={{ ...sectionStyle2, position: "relative" }}>
+               <ImagenVisualizador image={img}></ImagenVisualizador>
+             </div>
 
-                    <div className="sectionDescription ">
-                      <DescripcionDeP
-                        title={title}
-                        text={description}
-                        onAddToCart={handleAddToCart}
-                        cantidad={cantidad}
-                        onClose={onClose}
-                      ></DescripcionDeP>
-                      <OrdenarProducto
-                        onChangeQuantity={setCantidad}
-                      ></OrdenarProducto>
+             <div className="sectionDescription ">
+               <DescripcionDeP
+                title={title}
+                text={description}
+                onAddToCart={handleAddToCart}
+                cantidad={cantidad}
+                onClose={onClose}
+               ></DescripcionDeP>
+               <OrdenarProducto
+                onChangeQuantity={setCantidad}
+               ></OrdenarProducto>
 
-                      <PromoProducto></PromoProducto>
-                    </div>
-                  </ModalBody>
-                </div>
-              )}
-            </ModalContent>
-          </Modal>
-        </CardFooter>
-      </Card>
+               <PromoProducto></PromoProducto>
+             </div>
+           </ModalBody>
+         </div>
+       )}
+     </ModalContent>
+   </Modal>
+ </CardFooter>
+</Card>
+
     </div>
   );
 }

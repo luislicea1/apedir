@@ -52,7 +52,17 @@ export default function DescripcionDeP(props) {
       className=" backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
     >
       <div style={center}>
-        <h2 style={title}>{props.title}</h2>
+        <h2
+          style={{
+            ...title,
+            maxWidth: "20ch",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {props.title}
+        </h2>
       </div>
       <div style={centertext}>
         <article>{props.text}</article>
@@ -67,13 +77,13 @@ export default function DescripcionDeP(props) {
           Agregar al Carrito
         </Button>
         <Button
-          color="secondary"
-          //variant="light"
+          color="primary"
+          variant="bordered"
           onPress={props.onClose} // Usando la función onClose aquí
           style={{
             zIndex: "100",
             width: "100%",
-            color: "white",
+            //color: "white",
           }}
         >
           Volver
