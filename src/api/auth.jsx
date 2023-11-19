@@ -4,8 +4,8 @@ async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
   });
-  console.log(data)
-  console.log(error)
+  console.log(data);
+  console.log(error);
 }
 
 async function login(email, password) {
@@ -19,15 +19,6 @@ async function login(email, password) {
       const message = "Email o contraseña incorrectos";
       return { message: message, isValid: false };
     } else {
-      await supabase
-        .from("profiles")
-        .update([
-          {
-            isActive: true,
-          },
-        ])
-        .eq("id", data.user.id)
-        .select();
       return { session: data.session, message: "Login Exitoso", isValid: true };
     }
   } catch (error) {
@@ -73,7 +64,7 @@ async function register(
             last_name: last_name,
             phone_number: phone,
             email: email,
-            isActive: false,
+            isActive: true,
           },
         ])
         .eq("id", data.user.id)
@@ -102,7 +93,7 @@ const getUserRole = async () => {
     .eq("email", data.session.user.email);
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return null;
   }
   if (profiles[0] !== null && profiles[0] !== undefined) {

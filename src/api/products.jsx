@@ -18,7 +18,7 @@ const updateAvailability = async (id, status) => {
 };
 
 const updateProduct = async (product, imageName) => {
-  if (imageName !== "") {
+  if (imageName.length > 0 && product.image instanceof Blob) {
     const { data: oldData, error: oldError } = await supabase
       .from("products")
       .select("image")
@@ -28,18 +28,24 @@ const updateProduct = async (product, imageName) => {
       console.error("Error al obtener el valor antiguo: ", oldError);
       return;
     }
-    
-    await supabase.storage.from("products").remove(oldData[0].image);
+    console.log({ oldData });
+    if (oldData[0].image)
+      await supabase.storage.from("products").remove(oldData[0].image);
   }
 
   let updatedProduct = Object.keys(product).reduce((acc, key) => {
-    if (product[key] !== null && product[key] !== "") {
+    if (
+      product[key] !== null &&
+      product[key] !== "" &&
+      key !== "image" &&
+      product["image"] instanceof Blob === false
+    ) {
       acc[key] = product[key];
     }
     return acc;
   }, {});
 
-  if (updatedProduct.image) {
+  if (product.image instanceof Blob) {
     let img;
     try {
       img = await uploadImage(product.image, imageName, "products");
@@ -55,12 +61,14 @@ const updateProduct = async (product, imageName) => {
     .from("products")
     .update(updatedProduct)
     .eq("id", product.id)
-    .select();
+    .select("*");
+
+  console.log(error);
 };
 
 const getProducts = async (categories) => {
   // Extrae los ID de las categorías
-  const categoryIds = categories.map(category => category.id);
+  const categoryIds = categories.map((category) => category.id);
 
   let { data: products, error } = await supabase
     .from("products")

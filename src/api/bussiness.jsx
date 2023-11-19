@@ -57,6 +57,7 @@ const loadMoreBussiness = async (
   const { data, error } = await supabase
     .from("bussiness")
     .select("*")
+    // .eq("isActive", true)
     .range(offset, offset + 5);
 
   if (error) {

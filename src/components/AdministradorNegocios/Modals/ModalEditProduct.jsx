@@ -27,7 +27,18 @@ export default function ModalEditProduct({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEditProduct = async () => {
+    console.log({ productInput }, { imageName });
     await updateProduct(productInput, imageName);
+    setImageName("")
+    setProductInput({
+      name: "",
+      price: "",
+      currency: "CUP",
+      description: "",
+      image: "",
+      category: "",
+      isAvalaible: true,
+    });
   };
 
   return (
@@ -47,6 +58,7 @@ export default function ModalEditProduct({
                 <Input
                   autoFocus
                   required
+                  maxLength={30}
                   label="Nombre"
                   placeholder="Escribe el nombre del producto"
                   variant="bordered"
@@ -58,9 +70,11 @@ export default function ModalEditProduct({
                     })
                   }
                 />
+                <p>{productInput.name.length} / 30</p>
 
                 <Textarea
                   autoFocus
+                  maxLength={120}
                   label="Descripción"
                   required
                   placeholder="Escribe la descripción del producto"
@@ -73,6 +87,7 @@ export default function ModalEditProduct({
                     })
                   }
                 />
+                <p>{productInput.description.length} / 120</p>
                 <Input
                   autoFocus
                   required

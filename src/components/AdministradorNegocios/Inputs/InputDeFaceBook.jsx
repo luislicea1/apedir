@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputDeFaceBook({ value, setValue }) {
@@ -14,7 +14,11 @@ export default function InputDeFaceBook({ value, setValue }) {
           <span className="text-default-400 text-small"></span>
         </div>
       }
-      value={value.facebook}
+      value={
+        value.facebook !== null && value.facebook !== undefined
+          ? value.facebook
+          : ""
+      }
       onChange={(event) => {
         setValue({
           ...value,

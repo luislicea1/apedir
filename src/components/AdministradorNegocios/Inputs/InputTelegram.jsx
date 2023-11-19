@@ -10,7 +10,11 @@ export default function InputTelegram({ value, setValue }) {
       variant="bordered"
       placeholder="Link de telegram o el link de tu grupo"
       labelPlacement="outside"
-      value={value.telegram_link}
+      value={
+        value.telegram_link !== null && value.telegram_link !== undefined
+          ? value.telegram_link
+          : ""
+      }
       endContent={<TelegramIcon w="20px" />}
       onChange={(event) => {
         setValue({

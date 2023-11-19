@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputDeInstagram({ value, setValue }) {
@@ -14,7 +14,11 @@ export default function InputDeInstagram({ value, setValue }) {
           <span className="text-default-400 text-small"></span>
         </div>
       }
-      value={value !== "" && value !== null ? value.instagram : ""}
+      value={
+        value.instagram !== undefined && value.instagram !== null
+          ? value.instagram
+          : ""
+      }
       onChange={(event) => {
         setValue({
           ...value,

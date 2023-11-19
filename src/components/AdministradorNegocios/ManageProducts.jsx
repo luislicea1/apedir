@@ -168,6 +168,8 @@ const ManageProducts = ({
     }
   };
 
+  // useEffect(() => {}, [productInput.description]);
+
   useEffect(() => {
     validateForm();
   }, [productInput]);
@@ -242,6 +244,7 @@ const ManageProducts = ({
 
                     <Textarea
                       autoFocus
+                      maxLength={120}
                       label="Descripción"
                       placeholder="Escribe la descripción del producto"
                       variant="bordered"
@@ -253,6 +256,7 @@ const ManageProducts = ({
                         })
                       }
                     />
+                    <p>{productInput.description.length} / 120</p>
 
                     <InputPrecio
                       value={productInput}

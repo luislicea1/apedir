@@ -32,7 +32,6 @@ export default function CrearNegocio() {
 
     const b = await getOneBussiness(user.id);
     setBussiness(b);
-
   };
 
   useEffect(() => {

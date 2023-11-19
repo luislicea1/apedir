@@ -64,15 +64,15 @@ const ListadoDeComponentesLugar = () => {
       }
     } catch (error) {
       console.error("Error fetching more data:", error);
-    } finally {
     }
   };
 
   useEffect(() => {
-    if (inView) {
+    if (inView && hasMore) {
       fetchMoreData();
     }
-  }, [inView]);
+   }, [inView, hasMore]);
+   
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -111,9 +111,11 @@ const ListadoDeComponentesLugar = () => {
             ></ComponenteLugar>
           </div>
         ))}
-      {hasMore && <div ref={ref} style={{ textAlign: "center" }}>
+      {hasMore && (
+        <div ref={ref} style={{ textAlign: "center" }}>
           <Loader></Loader>
-        </div>}
+        </div>
+      )}
     </div>
   );
 };

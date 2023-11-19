@@ -4,6 +4,7 @@ import { Tab, Tabs, Card, CardBody } from "@nextui-org/react";
 import { getEventsfromBussiness } from "../../api/events";
 
 import EventCard from "./EventCard";
+import supabase from "../../api/client";
 
 export default function EventManagement({ bussinessId }) {
   const [events, setEvents] = useState([]);
@@ -42,15 +43,7 @@ export default function EventManagement({ bussinessId }) {
       clearTimeout(timer);
     };
   }, [events]);
-
-  // useEffect(() => {
-  //   const fetchEvent = async () => {
-  //     const events = await getEventsfromBussiness(bussinessId);
-  //     setEvents(events);
-  //   };
-  //   if (bussinessId !== null) fetchEvent();
-  // }, [bussinessId]);
-
+  
   return (
     <div>
       <Card>
