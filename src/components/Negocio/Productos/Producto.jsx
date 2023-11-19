@@ -110,7 +110,9 @@ export default function Producto({
           <p className="text-default-500">
             {price} {currency}
           </p>
-          <Button onPress={onOpen}>View</Button>
+          <Link color="warning" onClick={onOpen}>
+            Ver
+          </Link>
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
@@ -133,9 +135,8 @@ export default function Producto({
                       position: "relative",
                     }}
                   >
-                    <div style={{...sectionStyle2,position: "relative"}}>
+                    <div style={{ ...sectionStyle2, position: "relative" }}>
                       <ImagenVisualizador image={img}></ImagenVisualizador>
-                     
                     </div>
 
                     <div className="sectionDescription ">

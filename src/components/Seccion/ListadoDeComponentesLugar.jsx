@@ -8,9 +8,14 @@ import React, {
 } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
-
+import { CircularProgress } from "@nextui-org/react";
 // import ComponenteLugar from "./ComponenteLugar";
-const ComponenteLugar = lazy(() => import("./ComponenteLugar"));
+// const ComponenteLugar = lazy(() => import("./ComponenteLugar"));
+const ComponenteLugar = lazy(() =>
+  import("./ComponenteLugar").catch((error) => {
+    console.error("Error loading ComponenteLugar:", error);
+  })
+);
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
@@ -26,6 +31,7 @@ const ListadoDeComponentesLugar = () => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -41,6 +47,7 @@ const ListadoDeComponentesLugar = () => {
   }, [bussinesses, province]);
 
   const fetchMoreData = async () => {
+    setIsLoading(true);
     try {
       const response = await loadMoreBussiness(
         offset,
@@ -60,6 +67,8 @@ const ListadoDeComponentesLugar = () => {
       }
     } catch (error) {
       console.error("Error fetching more data:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,6 +115,11 @@ const ListadoDeComponentesLugar = () => {
             ></ComponenteLugar>
           </div>
         ))}
+      {isLoading && (
+        <div className="w-full flex items-center">
+          <CircularProgress label="Cargando nuevos negocios..." />
+        </div>
+      )}
       {hasMore && <div ref={ref} style={{ textAlign: "center" }}></div>}
     </div>
   );

@@ -14,11 +14,7 @@ export default function Seccion(props) {
     >
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={props.title}></TituloDeSeccion>
-        <Suspense fallback={<CircularProgress />}>
-          <ListadoDeComponentesLugar
-            lugares={props.lugares}
-          ></ListadoDeComponentesLugar>
-        </Suspense>
+        <ListadoDeComponentesLugar />
       </section>
     </div>
   );
