@@ -7,12 +7,14 @@ export default function Contact(props) {
         marginTop: "30px", 
         display: "grid",
         placeItems: "center",
-        color: "white"
+        color: "white",
+        padding: "20px"
 
     }
     const fuente = {
         fontSize: "30px",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        textAlign: "center"
     }
 
   return (
