@@ -6,7 +6,6 @@ import Home from "../pages/Home";
 import Page from "../pages/Page";
 // import AyudaInformacion from "../pages/AyudaInformacion";
 
-
 import {
   RequireUserRole,
   RequireAdminRole,
@@ -25,9 +24,30 @@ const LazyCreateAccount = lazy(() =>
 const LazyNegocioWrapper = lazy(() =>
   import("../components/Negocio/NegocioWrapper")
 );
+// const LazyAdministradorNegocio = lazy(() =>
+//   import("../pages/AdministradorNegocio")
+// );
+
 const LazyAdministradorNegocio = lazy(() =>
-  import("../pages/AdministradorNegocio")
+  import("../components/AdministradorNegocios/CrearNegocio")
 );
+
+const LazyNegocioDashboard = lazy(() =>
+  import("../components/AdministradorNegocios/NegocioDashboard")
+);
+
+const ResponsiveTimePickers = lazy(() =>
+  import("../components/AdministradorNegocios/Inputs/ResponsiveTimePicker")
+);
+
+const LazyEventManagement = lazy(() =>
+  import("../components/AdministradorNegocios/EventManagement")
+);
+
+const LazyProductsManagement = lazy(() =>
+  import("../components/AdministradorNegocios/ManageProducts")
+);
+
 const LazyAdministradorNegocioGratuito = lazy(() =>
   import("../pages/AdministradorNegocioGratuito")
 );
@@ -158,11 +178,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/lugar",
-    element: (
-      
-        <Outlet />
-      
-    ),
+    element: <Outlet />,
     children: [
       {
         path: ":url",
@@ -210,16 +226,54 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/administrador-negocio",
+    path: "/administrador-negocio/",
     element: (
       <Page>
         <Suspense
           fallback={<CircularProgress color="secondary" label="Cargando..." />}
         >
-          <LazyAdministradorNegocio />
+          <LazyAdministradorNegocio>
+            <Outlet />
+          </LazyAdministradorNegocio>
         </Suspense>
       </Page>
     ),
+    children: [
+      {
+        path: "perfil",
+        element: <LazyNegocioDashboard />,
+      },
+      {
+        path: "horarios",
+        element: <ResponsiveTimePickers />,
+      },
+      {
+        path: "eventos",
+        element: <LazyEventManagement />,
+      },
+      {
+        path: "productos",
+        element: <LazyProductsManagement />,
+      },
+      // {
+      //   path: "/administrador-negocio/",
+      //   element: <LazyAdministradorNegocio />,
+      // },
+      // {
+      //   path: "/",
+      //   element: (
+      //     <Page>
+      //       <Suspense
+      //         fallback={
+      //           <CircularProgress color="secondary" label="Cargando..." />
+      //         }
+      //       >
+      //         <LazyAdministradorNegocio />
+      //       </Suspense>
+      //     </Page>
+      //   ),
+      // },
+    ],
   },
 
   {

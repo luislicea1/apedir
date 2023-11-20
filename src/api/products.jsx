@@ -66,21 +66,32 @@ const updateProduct = async (product, imageName) => {
   console.log(error);
 };
 
-const getProducts = async (categories) => {
+const getProducts = async (categories, isAvalaible) => {
   // Extrae los ID de las categorías
+
   const categoryIds = categories.map((category) => category.id);
+  let data, error;
 
-  let { data: products, error } = await supabase
-    .from("products")
-    .select("*")
-    .in("category", categoryIds)
-    .order("name", { ascending: true });
-
-  if (error) {
-    console.error("Error getting products:", error);
-    return [];
+  if (isAvalaible !== undefined && isAvalaible !== null) {
+    ({ data, error } = await supabase
+      .from("products")
+      .select("*")
+      .in("category", categoryIds)
+      .eq("isAvalaible", true)
+      .order("name", { ascending: true }));
+  } else {
+    ({ data, error } = await supabase
+      .from("products")
+      .select("*")
+      .in("category", categoryIds)
+      .order("name", { ascending: true }));
   }
 
+  if (error) {
+    console.error("Error getting products: ", error);
+    return [];
+  }
+  const products = data;
   // Obtén la URL pública de cada imagen
   const productsWithPublicUrls = await Promise.all(
     products.map(async (product) => {

@@ -18,12 +18,13 @@ import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
 import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
 import Izquierda from "../Icons/Angulo/izquierda";
 import { MarginLeft30 } from "../styles/styles";
-
+import { useBussinessStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
+import { getOneBussiness } from "../../api/bussiness";
 
 const Carrito = lazy(() => import("./CarritoIcon.jsx"));
 const Notification = lazy(() => import("./Notification.jsx"));
@@ -91,6 +92,20 @@ export default function Header(props) {
       authListener.data.subscription.unsubscribe();
     };
   }, [setUser]);
+
+  const business = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const fetchBussiness = async () => {
+    if (user === null) return;
+
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+  };
+
+  useEffect(() => {
+    fetchBussiness();
+  }, [user, business]);
 
   return (
     <Navbar isBordered disableAnimation>
@@ -165,7 +180,7 @@ export default function Header(props) {
                 <DropdownItem
                   aria-label="settings"
                   key="settings"
-                  onClick={() => navigate("/administrador-negocio")}
+                  onClick={() => navigate("/administrador-negocio/perfil")}
                 >
                   Ver negocio
                 </DropdownItem>

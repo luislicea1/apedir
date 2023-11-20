@@ -2,17 +2,33 @@ import React, { useState, useEffect } from "react";
 
 import { Tab, Tabs, Card, CardBody } from "@nextui-org/react";
 import { getEventsfromBussiness } from "../../api/events";
+import { useBussinessStore, useUserStore } from "../../hooks/useStore";
+import { getOneBussiness } from "../../api/bussiness";
 
 import EventCard from "./EventCard";
 import supabase from "../../api/client";
 
-export default function EventManagement({ bussinessId }) {
+export default function EventManagement() {
+  const user = useUserStore((state) => state.user);
+  const bussiness = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const fetchBussiness = async () => {
+    if (user === null ) return;
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+  };
+
+  useEffect(() => {
+    if (bussiness === null) fetchBussiness();
+  }, [user, bussiness]);
+
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (bussinessId === null) return;
-      const eventList = await getEventsfromBussiness(bussinessId);
+      if (bussiness === null) return;
+      const eventList = await getEventsfromBussiness(bussiness.id);
       setEvents(eventList !== null ? eventList : []);
     };
 
@@ -43,13 +59,13 @@ export default function EventManagement({ bussinessId }) {
       clearTimeout(timer);
     };
   }, [events]);
-  
+
   return (
     <div>
       <Card>
         <Tabs aria-label="seleccion de eventos" fullWidth>
           <Tab key="create" title="Crear Evento">
-            <EventCard bussinessId={bussinessId} />
+            <EventCard bussinessId={bussiness.id} />
           </Tab>
           {events.map((item) => (
             <Tab key={item.id} title={item.name}>

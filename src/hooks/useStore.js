@@ -20,4 +20,21 @@ const useBussinessList = create((set) => ({
   setBussinesses: (b) => set({ bussinesses: b }),
 }));
 
-export { useUserStore, useBussinessStore, useProvinceStore, useBussinessList };
+const useCategoriesList = create((set) => ({
+  categories: null,
+  setCategories: (c) => set({ categories: c }),
+}));
+
+const useProductsList = create((set) => ({
+  products: null,
+  setProducts: (p) => set({ products: p }),
+}));
+
+export {
+  useUserStore,
+  useBussinessStore,
+  useProvinceStore,
+  useBussinessList,
+  useCategoriesList,
+  useProductsList,
+};
