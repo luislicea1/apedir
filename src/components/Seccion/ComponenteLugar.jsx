@@ -48,22 +48,25 @@ function ComponenteLugar(props) {
             {/* <Stars readOnly w={100} rating={3.5}></Stars> */}
           </CardHeader>
           <CardBody className="overflow-visible py-2" style={ImgCardStyle} ref={ref}>
-            {inView ?  <LazyLoadImage
-              alt={props.nombre}
-              src={props.imagen}
-              effect="blur"
-              style={{
-                ...LogoStyle,
-                objectFit: "contain",
-                //height: props.heigth,
-                //width: props.heigth,
-              }}
-              delayMethod="debounce"
-              // delayTime={100}
-              placeholderSrc={props.imagen}
-              useIntersectionObserver={true}
-              visibleByDefault={true}
-              className="lazyLoad"></LazyLoadImage>
+            {inView ?  
+              // <LazyLoadImage
+              // alt={props.nombre}
+              // src={props.imagen}
+              // effect="blur"
+              // style={{
+              //   ...LogoStyle,
+              //   objectFit: "contain",
+              //   //height: props.heigth,
+              //   //width: props.heigth,
+              // }}
+              // delayMethod="debounce"
+              // // delayTime={100}
+              // placeholderSrc={props.imagen}
+              // useIntersectionObserver={true}
+              // visibleByDefault={true}
+              // className="lazyLoad"></LazyLoadImage>
+
+              <img src={props.imagen} alt={props.nombre} style={{...LogoStyle, objectFit: "contain"}} />
               
               : 
               
