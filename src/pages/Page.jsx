@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 // import Header from "../components/header/Header";
 const Header = React.lazy(() => import("../components/header/Header"));
 

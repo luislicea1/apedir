@@ -15,11 +15,26 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
+import { useUserStore, useBussinessStore } from "../../hooks/useStore";
 
 import InputTitle from "./Inputs/InputTitle";
 
-export default function NegocioDashboard({ user, business }) {
+export default function NegocioDashboard() {
   // const [user, setUser] = useState(null);
+  const user = useUserStore((state) => state.user);
+  const business = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const fetchBussiness = async () => {
+    if (user === null) return;
+
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+  };
+
+  useEffect(() => {
+    fetchBussiness();
+  }, [user, business]);
 
   const [imageName, setImageName] = useState({
     front_pic: "",
@@ -66,25 +81,21 @@ export default function NegocioDashboard({ user, business }) {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
 
-  const fetchBussiness = async () => {
-    if (
-      JSON.stringify(bussinessInput) ===
-        JSON.stringify(defaultBussinessValues) &&
-      bussinessInput !== null &&
-      user !== null &&
-      user.id !== ""
-    ) {
-      const b = await getOneBussiness(user.id);
+  // const fetchBussiness = async () => {
+  //   if (
+  //     JSON.stringify(bussinessInput) ===
+  //       JSON.stringify(defaultBussinessValues) &&
+  //     bussinessInput !== null &&
+  //     user !== null &&
+  //     user.id !== ""
+  //   ) {
+  //     const b = await getOneBussiness(user.id);
 
-      if (b !== null && b !== undefined) {
-        setBussinessInput(b);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchBussiness();
-  }, [user]);
+  //     if (b !== null && b !== undefined) {
+  //       setBussinessInput(b);
+  //     }
+  //   }
+  // };
 
   const handleUpsertBussiness = async () => {
     if (!isFormValid) {

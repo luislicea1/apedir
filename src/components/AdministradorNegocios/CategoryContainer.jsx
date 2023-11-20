@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Tooltip } from "@nextui-org/react";
 import ProductCard from "./ProductCard";
 import { Button } from "@nextui-org/react";
@@ -6,7 +6,7 @@ import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { grid_3_col, grid_1_col } from "../styles/styles";
 
-const CategoryContainer = ({
+export default function CategoryContainer({
   category,
   products,
   onOpen,
@@ -19,7 +19,7 @@ const CategoryContainer = ({
   onCategoryEditOpen,
   onCategoryEditOpenChange,
   onCategoryDeleteOpen,
-}) => {
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -122,6 +122,4 @@ const CategoryContainer = ({
       </div>
     </div>
   );
-};
-
-export default CategoryContainer;
+}

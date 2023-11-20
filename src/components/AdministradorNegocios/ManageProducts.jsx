@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useSyncExternalStore } from "react";
+import React, { useEffect, useState } from "react";
 import { getProducts } from "../../api/products";
 import CategoryContainer from "./CategoryContainer";
 import { UploadIcon } from "../Icons/UploadIcon";
@@ -26,18 +26,54 @@ import ModalEditCategory from "./Modals/ModalEditCategory";
 import { Toaster, toast } from "sonner";
 import InputPrecio from "./Inputs/InputPrecio";
 import ProductInputSchema from "../../schemas/productInputSchema";
+import { getCategories } from "../../api/categories";
+import {
+  useBussinessStore,
+  useCategoriesList,
+  useProductsList,
+  useUserStore,
+} from "../../hooks/useStore";
+import { getOneBussiness } from "../../api/bussiness";
 
-const ManageProducts = ({
-  products,
-  setProducts,
-  categories,
-  setCategories,
-  bussiness,
-}) => {
+export default function ManageProducts() {
+  const user = useUserStore((state) => state.user);
+
+  const bussiness = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const categoriesGlobal = useCategoriesList((state) => state.categories);
+  const setCategoriesGlobal = useCategoriesList((state) => state.setCategories);
+  const productsGlobal = useProductsList((state) => state.products);
+  const setProductsGlobal = useProductsList((state) => state.setProducts);
+
+  const [products, setProducts] = useState(
+    productsGlobal !== null ? productsGlobal : []
+  );
+  const [categories, setCategories] = useState(
+    categoriesGlobal !== null ? categoriesGlobal : []
+  );
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const fetchBussiness = async () => {
+    if (user === null) return;
+
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+    setCategoryInput((prev) => {
+      const newCat = {
+        ...prev,
+        bussiness: b.id,
+      };
+      return newCat;
+    });
+  };
+
+  useEffect(() => {
+    if (bussiness === null) fetchBussiness();
+  }, [user, bussiness]);
 
   const [categoryInput, setCategoryInput] = useState({
-    bussiness: bussiness.id,
+    bussiness: "",
     category: "",
   });
   const {
@@ -82,6 +118,34 @@ const ManageProducts = ({
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const fetchCategories = async () => {
+    if (bussiness === null) return;
+    const categorylist = await getCategories(bussiness.id);
+    setCategories(categorylist !== null ? categorylist : []);
+    setCategoriesGlobal(categorylist);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, [bussiness]);
+
+  const fetchProducts = async () => {
+    const productList = await getProducts(categories);
+    setProducts(productList !== null ? productList : []);
+    setProductsGlobal(productList);
+  };
+
+  useEffect(() => {
+    if (categories.length < 1) return;
+    fetchProducts();
+  }, [categories]);
+
+  useEffect(() => {
+    validateForm();
+  }, [productInput]);
+  // Recuperar los productos y las categorías
+
   const validateForm = async () => {
     try {
       await ProductInputSchema.validate(productInput);
@@ -96,13 +160,13 @@ const ManageProducts = ({
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
-
     await addCategory(categoryInput);
 
     setCategoryInput({
       bussiness: bussiness.id,
       category: "",
     });
+    await fetchCategories();
   };
 
   const handleAddProduct = async () => {
@@ -136,6 +200,7 @@ const ManageProducts = ({
       category: "",
       isAvalaible: true,
     });
+    await fetchProducts();
   };
 
   const handleImageChange = async (event) => {
@@ -167,13 +232,6 @@ const ManageProducts = ({
       });
     }
   };
-
-  // useEffect(() => {}, [productInput.description]);
-
-  useEffect(() => {
-    validateForm();
-  }, [productInput]);
-  // Recuperar los productos y las categorías
 
   return (
     <div>
@@ -406,5 +464,4 @@ const ManageProducts = ({
       </label>
     </div>
   );
-};
-export default ManageProducts;
+}

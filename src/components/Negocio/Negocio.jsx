@@ -58,7 +58,7 @@ export default memo(function Negocio({ url }) {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productList = await getProducts(categories);
+      const productList = await getProducts(categories, true);
       setProducts(productList !== null ? productList : []);
     };
     if (categories.length > 0) fetchProducts();
@@ -88,8 +88,6 @@ export default memo(function Negocio({ url }) {
   const handleAddToCart = (product) => {
     setCarrito(product);
   };
-
-  console.log(carrito);
 
   return bussiness ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
@@ -129,15 +127,17 @@ export default memo(function Negocio({ url }) {
                   (product) => product.category === category.id
                 );
                 return (
-                  <ListadoProductos
-                    id={idx}
-                    key={idx}
-                    title={category.category}
-                    nombre={category.category}
-                    localizacion={category.category}
-                    lista={categoryProducts}
-                    onChangeCarrito={handleAddToCart}
-                  ></ListadoProductos>
+                  categoryProducts.length > 0 && (
+                    <ListadoProductos
+                      id={idx}
+                      key={idx}
+                      title={category.category}
+                      nombre={category.category}
+                      localizacion={category.category}
+                      lista={categoryProducts}
+                      onChangeCarrito={handleAddToCart}
+                    ></ListadoProductos>
+                  )
                 );
               })}
             </Suspense>
