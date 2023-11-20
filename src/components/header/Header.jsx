@@ -93,7 +93,7 @@ export default function Header(props) {
     };
   }, [setUser]);
 
-  const business = useBussinessStore((state) => state.bussiness);
+  // const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
   const fetchBussiness = async () => {
@@ -101,11 +101,12 @@ export default function Header(props) {
 
     const b = await getOneBussiness(user.id);
     setBussiness(b);
+    console.log(b);
   };
 
   useEffect(() => {
     fetchBussiness();
-  }, [user, business]);
+  }, [user]);
 
   return (
     <Navbar isBordered disableAnimation>

@@ -255,24 +255,6 @@ const router = createBrowserRouter([
         path: "productos",
         element: <LazyProductsManagement />,
       },
-      // {
-      //   path: "/administrador-negocio/",
-      //   element: <LazyAdministradorNegocio />,
-      // },
-      // {
-      //   path: "/",
-      //   element: (
-      //     <Page>
-      //       <Suspense
-      //         fallback={
-      //           <CircularProgress color="secondary" label="Cargando..." />
-      //         }
-      //       >
-      //         <LazyAdministradorNegocio />
-      //       </Suspense>
-      //     </Page>
-      //   ),
-      // },
     ],
   },
 
