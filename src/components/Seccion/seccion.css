@@ -21,9 +21,9 @@
   border-radius: 10px;
   height: 270px;
   width: 270px;
-  object-fit: contain;
-  max-width: 270px;
-  min-width: 180px;
+  /*object-fit: contain;*/
+  /*max-width: 270px;
+  /*min-width: 180px;*/
 }
 @keyframes slide {
   0% {
@@ -47,9 +47,9 @@
     
     height: 270px;
     width: 250px;
-    object-fit: contain;
+    /*object-fit: contain;
     max-width: 270px;
-    min-width: 180px;
+    min-width: 180px;*/
   }
 }
 
@@ -59,7 +59,7 @@
     
     height: 270px;
     width: 26vw;
-    object-fit: contain;
+    /*object-fit: contain;*/
     
   }
 }
@@ -67,20 +67,20 @@
 
 @media (max-width: 713px) {
   
-  /* .lazyLoad{
+   .lazyLoad{
     height: 150px !important;
-  } */
+  } 
   .titulo-card-negocio-panntalla-principal{
-    max-width: 20ch;
+     max-width: 20ch;
     white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; 
   }
   .esqueleton-seccion-card{
     
     height: 270px;
     width: 43vw;
-    object-fit: contain;
+    /*object-fit: contain;*/
     
   }
 } 
@@ -99,10 +99,13 @@
 
 @media (max-width: 550px) {
   .titulo-card-negocio-panntalla-principal{
-    max-width: 15ch;
+      max-width: 15ch;
     white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;  
+  } 
+  .lazyLoad{
+    height: 100px !important;
   } 
   .list-container{
     gap: "0px" !important;
@@ -116,12 +119,20 @@
   
   .esqueleton-seccion-card{
     
-    height: 180px;
-    width: 70vw;
-    
-    
+   height: 140px;
+    /* width: 140px */
+    width: 30vw;
   }
 } 
+@media (max-width: 400px) {
+  .titulo-card-negocio-panntalla-principal{
+    max-width: 10ch;
+   
+  }
+  
+}
+
+
 
 @media (max-width: 377px) {
   .titulo-card-negocio-panntalla-principal{

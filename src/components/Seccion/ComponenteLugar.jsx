@@ -9,6 +9,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
+import { Skeleton } from "@nextui-org/react";
 
 function ComponenteLugar(props) {
   const navigate = useNavigate();
@@ -66,8 +67,8 @@ function ComponenteLugar(props) {
               // visibleByDefault={true}
               // className="lazyLoad"></LazyLoadImage>
 
-              <img src={props.imagen} alt={props.nombre} loading = "lazy" style={{...LogoStyle, objectFit: "contain"}} />
-              
+              <img src={props.imagen} alt={props.nombre} className = "lazyload" loading = "lazy" style={{...LogoStyle, objectFit: "contain"}} />
+              // <Skeleton></Skeleton>
               : 
               
               <div className= "esqueleton-seccion-card" ></div>}

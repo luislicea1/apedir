@@ -3,7 +3,7 @@ import React, {
   useEffect,
   //useCallback,
   useMemo,
-  //useRef,
+  useRef,
   lazy,
 } from "react";
 import { useInView } from "react-intersection-observer";
@@ -19,6 +19,8 @@ const ComponenteLugar = lazy(() =>
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
+// Importar ComponenteLugar de manera diferida
+//const ComponenteLugar = React.memo(lazy(() => import("./ComponenteLugar")));
 
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);

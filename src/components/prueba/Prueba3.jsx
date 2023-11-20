@@ -4,6 +4,7 @@ import { fetchAllBussiness } from "../../api/bussiness";
 import "../Seccion/seccion.css";
 import "../Seccion/seccion.css"
 
+
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
 const ComponenteLugar = React.lazy(() =>
@@ -46,7 +47,7 @@ const Prueba3 = () => {
       display: "grid",
       placeItems: "center",
       gridTemplateColumns:
-        windowWidth < 485
+        windowWidth < 371
           ? "1fr"
           : windowWidth < 713
           ? "1fr 1fr"
