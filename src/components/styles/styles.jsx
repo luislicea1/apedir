@@ -121,7 +121,7 @@ export const CardStyles = {
   //minWidth: "200px",
   width: "100%",
   //maxHeight: "400px",
-  //padding: "10px"
+  padding: "2px"
 };
 
 export const CardStyles2 = {

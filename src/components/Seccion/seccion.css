@@ -15,6 +15,16 @@
   width: 300%;
   animation: slide 5s infinite;
 }
+
+.esqueleton-seccion-card{
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  height: 270px;
+  width: 270px;
+  object-fit: contain;
+  max-width: 270px;
+  min-width: 180px;
+}
 @keyframes slide {
   0% {
     transform: translateX(100%);
@@ -25,7 +35,7 @@
  }
  
 
- @media (max-width: 900px) {
+ @media (max-width: 970px) {
   /* .list-container {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -33,6 +43,25 @@
     grid-template-columns: repeat(1, 1fr) !important;
   }
    */
+   .esqueleton-seccion-card{
+    
+    height: 270px;
+    width: 250px;
+    object-fit: contain;
+    max-width: 270px;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 917px) {
+  
+   .esqueleton-seccion-card{
+    
+    height: 270px;
+    width: 26vw;
+    object-fit: contain;
+    
+  }
 }
 
 
@@ -47,6 +76,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
   }
+  .esqueleton-seccion-card{
+    
+    height: 270px;
+    width: 43vw;
+    object-fit: contain;
+    
+  }
+} 
+
+@media (max-width: 660px) {
+  
+  
+  .esqueleton-seccion-card{
+    
+    height: 270px;
+    width: 37vw;
+    object-fit: contain;
+    
+  }
 } 
 
 @media (max-width: 550px) {
@@ -55,12 +103,25 @@
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  }
+  } 
   .list-container{
     gap: "0px" !important;
   }
   
+  
 }
+
+
+@media (max-width: 485px) {
+  
+  .esqueleton-seccion-card{
+    
+    height: 180px;
+    width: 70vw;
+    object-fit: contain;
+    
+  }
+} 
 
 @media (max-width: 377px) {
   .titulo-card-negocio-panntalla-principal{
