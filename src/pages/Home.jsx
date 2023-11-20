@@ -1,6 +1,8 @@
 import { lugares } from "../components/Lugares/Lugares";
 import { Helmet } from "react-helmet";
 import Seccion from "../components/Seccion/Seccion";
+import Prueba2 from "../components/prueba/Prueba2";
+import Prueba3 from "../components/prueba/Prueba3";
 
 export default function Home() {
   return (
@@ -17,7 +19,8 @@ export default function Home() {
           alt="logo apedir"
         />
       </Helmet>
-      <Seccion title="Lugares" lugares={lugares}></Seccion>
+      {/* <Seccion title="Lugares" lugares={lugares}></Seccion> */}
+      <Prueba3 title = "lugares" lugares = {lugares}></Prueba3>
     </div>
   );
 }

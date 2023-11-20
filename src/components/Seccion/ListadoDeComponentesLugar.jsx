@@ -1,9 +1,9 @@
 import React, {
   useState,
   useEffect,
-  useCallback,
+  //useCallback,
   useMemo,
-  useRef,
+  //useRef,
   lazy,
 } from "react";
 import { useInView } from "react-intersection-observer";

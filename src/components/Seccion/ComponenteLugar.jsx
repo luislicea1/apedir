@@ -8,13 +8,17 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
+import { useInView } from "react-intersection-observer";
 
 function ComponenteLugar(props) {
   const navigate = useNavigate();
-
+  const {ref,inView} = useInView({
+    threshold: 0.7,
+    triggerOnce: true
+  });
 
   return (
-    <Suspense>
+    <>
       <Link
         //onClick={() => navigate(`/lugar/${props.localizacion}/${props.nombre}`)}
         onClick={() => navigate(`/lugar/${props.url}`)}
@@ -29,7 +33,7 @@ function ComponenteLugar(props) {
           />
         </Helmet>
 
-        <Card className="py-4" style={CardStyles}>
+        <Card className="py-4" style={CardStyles} >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
@@ -43,8 +47,9 @@ function ComponenteLugar(props) {
             </h2>
             {/* <Stars readOnly w={100} rating={3.5}></Stars> */}
           </CardHeader>
-          <CardBody className="overflow-visible py-2" style={ImgCardStyle}>
-            <LazyLoadImage
+          <CardBody className="overflow-visible py-2" style={ImgCardStyle} ref={ref}>
+            {inView ?  <img src={props.imagen}></img> : <div style={{background: "black", borderRadius: "10px", height: "270px" , width: "270px"}}></div>}
+            {/* <LazyLoadImage
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
@@ -60,13 +65,13 @@ function ComponenteLugar(props) {
               useIntersectionObserver={true}
               visibleByDefault={true}
               className="lazyLoad"
-            />
+            /> */}
 
             {props.imagen.caption && <span>{props.imagen.caption}</span>}
           </CardBody>
         </Card>
       </Link>
-    </Suspense>
+    </>
   );
 }
 

@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     path: "/plans",
     element: (
       <Page>
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<LoaderCompletePage />}>
           <PricingPage />,
         </Suspense>
       </Page>
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <LazyLogin />
       </Suspense>
     ),
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <LazyCreateAccount />
       </Suspense>
     ),
@@ -113,7 +113,7 @@ const router = createBrowserRouter([
       {
         path: "/admin/",
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <AdminTabs />
           </Suspense>
         ),
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
         path: "/admin/plans",
 
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <AdminPlans />
           </Suspense>
         ),
@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         path: "/admin/businesses",
 
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <LazyNegocioTableWrapper />
           </Suspense>
         ),
@@ -150,7 +150,7 @@ const router = createBrowserRouter([
     path: "/ayudaInformacion",
     element: (
       <Page>
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<LoaderCompletePage />}>
           <LazyAyudaInformacionWrapper />
         </Suspense>
       </Page>
@@ -175,7 +175,7 @@ const router = createBrowserRouter([
       {
         path: ":url/producto/:title",
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <LazyVisualizarProductoWrapper />
           </Suspense>
         ),
@@ -185,7 +185,7 @@ const router = createBrowserRouter([
   {
     path: "/lugarGratuito",
     element: (
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <Outlet />
       </Suspense>
     ),
@@ -193,7 +193,7 @@ const router = createBrowserRouter([
       {
         path: ":localizacion/:nombre/",
         element: (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<LoaderCompletePage />}>
             <LazyNegocioGratuitoWrapper />
           </Suspense>
         ),
@@ -204,7 +204,7 @@ const router = createBrowserRouter([
   {
     path: "/evento/:nombre",
     element: (
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <LazyVerEventoWrapper />
       </Suspense>
     ),
@@ -214,7 +214,7 @@ const router = createBrowserRouter([
     element: (
       <Page>
         <Suspense
-          fallback={<CircularProgress color="secondary" label="Cargando..." />}
+          fallback={<LoaderCompletePage/>}
         >
           <LazyAdministradorNegocio />
         </Suspense>
@@ -225,7 +225,7 @@ const router = createBrowserRouter([
   {
     path: "/carrito",
     element: (
-      <Suspense fallback={<CircularProgress color="secondary" />}>
+      <Suspense fallback={<LoaderCompletePage color="secondary" />}>
         <LazyComprasWrapper />
       </Suspense>
     ),
