@@ -1,7 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import TituloDeSeccion from "./TituloDeSeccion";
 import { container, section } from "../styles/styles";
-import { CircularProgress } from "@nextui-org/react";
+//import { CircularProgress } from "@nextui-org/react";
 import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
 
 // import { loadMoreBussiness } from "../../api/bussiness";
