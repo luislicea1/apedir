@@ -66,7 +66,7 @@ function ComponenteLugar(props) {
               // visibleByDefault={true}
               // className="lazyLoad"></LazyLoadImage>
 
-              <img src={props.imagen} alt={props.nombre} style={{...LogoStyle, objectFit: "contain"}} />
+              <img src={props.imagen} alt={props.nombre} loading = "lazy" style={{...LogoStyle, objectFit: "contain"}} />
               
               : 
               
