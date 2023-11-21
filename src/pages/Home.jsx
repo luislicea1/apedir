@@ -19,7 +19,7 @@ export default function Home() {
         />
       </Helmet>
       <Seccion title="Lugares" lugares={lugares}></Seccion>
-     
+      {/* <div className="invisible-seccion" style={{width: "100vw", height: "30vh", background: ""}}></div> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { fetchAllBussiness } from "../../api/bussiness";
 import "../Seccion/seccion.css";
-import "../Seccion/seccion.css"
+//import "../Seccion/seccion.css"
 
 
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";

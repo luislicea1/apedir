@@ -3,7 +3,8 @@ import TituloDeSeccion from "./TituloDeSeccion";
 import { container, section } from "../styles/styles";
 //import { CircularProgress } from "@nextui-org/react";
 import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
-import Prueba3 from "../prueba/Prueba3";
+//import Prueba3 from "../prueba/Prueba3";
+//import BusinessPage from "../prueba/Prueba4";
 
 // import { loadMoreBussiness } from "../../api/bussiness";
 
@@ -15,8 +16,9 @@ export default function Seccion(props) {
     >
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={props.title}></TituloDeSeccion>
-        {/* <ListadoDeComponentesLugar /> */}
-        <Prueba3></Prueba3>
+        <ListadoDeComponentesLugar /> 
+       
+        {/* <Prueba3></Prueba3> */}
       </section>
     </div>
   );

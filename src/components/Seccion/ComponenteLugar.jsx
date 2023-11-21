@@ -34,7 +34,7 @@ function ComponenteLugar(props) {
           />
         </Helmet>
 
-        <Card className="py-4" style={CardStyles} >
+        <Card className="py-4" style={{...CardStyles, margin: "5px 5px 5px 5px"}} >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
