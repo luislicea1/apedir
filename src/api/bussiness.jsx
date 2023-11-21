@@ -58,7 +58,7 @@ const loadMoreBussiness = async (
     .from("bussiness")
     .select("*")
     // .eq("isActive", true)
-    .range(offset, offset + 5);
+    .range(offset, offset + 19);
 
   if (error) {
     console.error(error);
@@ -105,7 +105,7 @@ const loadMoreBussiness = async (
     setBussiness(businessesWithImages);
   }
   // Incrementa el desplazamiento
-  setOffset(offset + 3);
+  setOffset(offset + 19);
 };
 
 const fetchAllBussiness = async () => {

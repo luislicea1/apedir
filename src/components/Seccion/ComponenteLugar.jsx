@@ -30,7 +30,7 @@ function ComponenteLugar(props) {
             rel="preload"
             href={props.imagen}
             as="image"
-            imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+            // imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
           />
         </Helmet>
 
