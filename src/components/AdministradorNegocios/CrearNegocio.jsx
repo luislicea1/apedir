@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {Card, CardBody, Chip } from "@nextui-org/react";
+import { Card, CardBody, Chip } from "@nextui-org/react";
 
 export default function CrearNegocio({ children }) {
   const sectionStyle = {
@@ -9,6 +9,12 @@ export default function CrearNegocio({ children }) {
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
   };
+
+  const linkColor = {
+    margin: "10px 20px",
+    
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={sectionStyle}>
@@ -18,13 +24,21 @@ export default function CrearNegocio({ children }) {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              margin: "20px 30px",
+              margin: "0px 20px",
             }}
           >
-            <Link to="/administrador-negocio/perfil">Perfil</Link>
-            <Link to="/administrador-negocio/horarios">Horario</Link>
-            <Link to="/administrador-negocio/eventos">Eventos</Link>
-            <Link to="/administrador-negocio/productos">Productos</Link>
+            <Link to="/administrador-negocio/perfil" style={linkColor}>
+              Perfil
+            </Link>
+            <Link to="/administrador-negocio/horarios" style={linkColor}>
+              Horario
+            </Link>
+            <Link to="/administrador-negocio/eventos" style={linkColor}>
+              Eventos
+            </Link>
+            <Link to="/administrador-negocio/productos" style={linkColor}>
+              Productos
+            </Link>
           </div>
           <Card>
             <CardBody>{children}</CardBody>

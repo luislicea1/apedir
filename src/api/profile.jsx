@@ -1,3 +1,4 @@
+import { banUser } from "./auth";
 import supabase from "./client";
 
 const getRole = async (email) => {
@@ -45,6 +46,10 @@ const updateProfile = async (profile) => {
     }
     return acc;
   }, {});
+  console.log(profile);
+  if (!updatedProfile.isActive) {
+    await banUser(profile.id);
+  }
 
   const { data, error } = await supabase
     .from("profiles")
