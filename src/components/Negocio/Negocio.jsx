@@ -15,9 +15,6 @@ import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 
-const text =
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
-
 const Stars = lazy(() => import("../Stars/Stars"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
 const Promo = lazy(() => import("./Promo/Promo"));
@@ -37,32 +34,62 @@ export default memo(function Negocio({ url }) {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
-  const fetchData = useCallback(async () => {
-    const bussinessData = await fetchBussinessPerURL(url);
-    setBussiness(bussinessData);
-  }, [url]);
-
   useEffect(() => {
+    const fetchData = async () => {
+      const bussinessData = await fetchBussinessPerURL(url);
+      setBussiness(bussinessData);
+
+      if (
+        bussinessData !== null &&
+        bussinessData !== undefined &&
+        bussinessData?.id
+      ) {
+        const categoryList = await getCategories(bussinessData.id);
+        const productList = await getProducts(categoryList, true);
+        const nonEmptyCategories = categoryList.filter((category) =>
+          productList.some((product) => product.category === category.id)
+        );
+
+        setCategories(nonEmptyCategories);
+        setProducts(productList !== null ? productList : []);
+
+        if (nonEmptyCategories.length > 0) setIsNavbarVisible(true);
+      }
+    };
+
     fetchData();
   }, [url]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const categoryList = await getCategories(bussiness.id);
-      setCategories(categoryList);
-    };
-    if (bussiness !== null && bussiness !== undefined && bussiness?.id)
-      fetchCategories();
-    if (categories.length > 0) setIsNavbarVisible(true);
-  }, [bussiness]);
+  // const fetchData = useCallback(async () => {
+  //   const bussinessData = await fetchBussinessPerURL(url);
+  //   setBussiness(bussinessData);
+  // }, [url]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productList = await getProducts(categories, true);
-      setProducts(productList !== null ? productList : []);
-    };
-    if (categories.length > 0) fetchProducts();
-  }, [categories]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [url]);
+
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const categoryList = await getCategories(bussiness.id);
+  //     setCategories(categoryList);
+  //   };
+  //   if (bussiness !== null && bussiness !== undefined && bussiness?.id)
+  //     fetchCategories();
+  //   if (categories.length > 0) setIsNavbarVisible(true);
+  // }, [bussiness]);
+
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     const productList = await getProducts(categories, true);
+  //     const nonEmptyCategories = categories.filter(category =>
+  //       productList.some(product => product.category === category.id)
+  //     );
+  //     setCategories(nonEmptyCategories);
+  //     setProducts(productList !== null ? productList : []);
+  //   };
+  //   if (categories.length > 0) fetchProducts();
+  // }, [categories]);
 
   useEffect(() => {
     const checkScrollPosition = () => {

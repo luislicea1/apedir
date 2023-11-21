@@ -1,4 +1,5 @@
 import supabase from "./client";
+import { getUser } from "./profile";
 
 async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -8,13 +9,23 @@ async function signInWithGoogle() {
   console.log(error);
 }
 
+async function banUser(id, active) {
+  const { data, error } = await supabase.auth.admin.updateUserById(id, {
+    ban_duration: active ? "none" : "876600h", // 100 years
+  });
+
+  console.log(error);
+}
+
 async function login(email, password) {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
-
+    const user = await getUser(data.session.user.email);
+    if (!user.isActive)
+      return { message: "Este usuario se encuentra baneado", isValid: false };
     if (error) {
       const message = "Email o contraseña incorrectos";
       return { message: message, isValid: false };
@@ -101,4 +112,4 @@ const getUserRole = async () => {
   }
 };
 
-export { signInWithGoogle, login, register, getUserRole };
+export { signInWithGoogle, login, register, getUserRole, banUser };

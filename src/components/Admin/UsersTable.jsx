@@ -32,10 +32,9 @@ const roleColorMap = {
   user: "success",
   merchant: "warning",
 };
-
 const statusOptions = [
   { name: "Activo", uid: "active" },
-  { name: "Inactivo", uid: "inactive" },
+  { name: "Baneado", uid: "inactive" },
 ];
 
 const columns = [
@@ -176,7 +175,7 @@ export default function UsersTable({ users }) {
             size="sm"
             variant="flat"
           >
-            {user.isActive ? "Activo" : "Inactivo"}
+            {user.isActive ? "Activo" : "Baneado"}
           </Chip>
         );
       case "actions":

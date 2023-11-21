@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 import Page from "../pages/Page";
 // import AyudaInformacion from "../pages/AyudaInformacion";
+import { Navigate } from "react-router-dom";
 
 import {
   RequireUserRole,
@@ -229,11 +230,10 @@ const router = createBrowserRouter([
     path: "/administrador-negocio/",
     element: (
       <Page>
-        <Suspense
-          fallback={<LoaderCompletePage/>}
-        >
+        <Suspense fallback={<LoaderCompletePage />}>
           <LazyAdministradorNegocio>
             <Outlet />
+            <Navigate to="/administrador-negocio/perfil" />
           </LazyAdministradorNegocio>
         </Suspense>
       </Page>

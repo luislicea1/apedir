@@ -38,7 +38,6 @@ export default function Header(props) {
   // const [user, setUser] = useState(null);
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
-
   useEffect(() => {
     const path = history.split("/");
     if (path.includes("lugar")) setIsBussiness(true);
@@ -79,6 +78,7 @@ export default function Header(props) {
 
   useEffect(() => {
     async function handleAuthStateChange(_event, session) {
+      console.log(session);
       if (session) {
         setSession(session);
         const u = await getUser(session.user.email);
@@ -91,7 +91,7 @@ export default function Header(props) {
     return () => {
       authListener.data.subscription.unsubscribe();
     };
-  }, [setUser]);
+  }, []);
 
   // const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
@@ -101,7 +101,6 @@ export default function Header(props) {
 
     const b = await getOneBussiness(user.id);
     setBussiness(b);
-    console.log(b);
   };
 
   useEffect(() => {
@@ -113,8 +112,6 @@ export default function Header(props) {
       <NavbarBrand>
         {isBussiness ? (
           <>
-            {/* <Link href="/"> */}
-            {/* </Link> */}
             <LinkReact to="/">
               <Izquierda h={"20px"} w={"20px"} />
             </LinkReact>
@@ -143,7 +140,7 @@ export default function Header(props) {
 
       {!isBussiness && <SelectProvincia />}
 
-      {session !== null ? (
+      {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           <Suspense fallback={<div></div>}>
             <Carrito carrito={props.carrito}></Carrito>

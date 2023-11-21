@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-// import Header from "../components/header/Header";
-const Header = React.lazy(() => import("../components/header/Header"));
+import Header from "../components/header/Header";
+// const Header = React.lazy(() => import("../components/header/Header"));
 
 export default memo(function Page({ children }) {
   return (
@@ -12,10 +12,10 @@ export default memo(function Page({ children }) {
           name="description"
           content="pagina de promocion de negocios en cuba"
         />
-        <link
+        <Link
           rel="icon"
           type="image/svg+xml"
-          href="/logo.svg"
+          to="/logo.svg"
           alt="logo apedir"
         />
       </Helmet>
