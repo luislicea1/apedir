@@ -132,7 +132,7 @@ export default memo(function Negocio({ url }) {
             imagenPortada={bussiness.front_pic}
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
-            <Suspense fallback={renderLoader()}>
+            <div>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
               <Stars w={100}></Stars>
               <DescripcionNegocio
@@ -145,10 +145,10 @@ export default memo(function Negocio({ url }) {
               ></DescripcionNegocio>
 
               <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
-            </Suspense>
+            </div>
 
             <div className="first-product-list"></div>
-            <Suspense fallback={renderLoader()}>
+            <div>
               {categories.map((category, idx) => {
                 const categoryProducts = products.filter(
                   (product) => product.category === category.id
@@ -167,20 +167,20 @@ export default memo(function Negocio({ url }) {
                   )
                 );
               })}
-            </Suspense>
+            </div>
           </div>
         </section>
-        <Suspense fallback={renderLoader()}>
+        <div>
           <FooterNegocio
             title={bussiness.name}
             imagen={bussiness.perfil_pic}
             url={url}
           ></FooterNegocio>
-        </Suspense>
+        </div>
       </section>
     </div>
   ) : (
-    // <LoaderCompletePage />
-    <></>
+    <LoaderCompletePage />
+    
   );
 });

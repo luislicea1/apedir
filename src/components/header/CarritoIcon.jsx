@@ -1,7 +1,8 @@
 import React from "react";
 import { Badge } from "@nextui-org/react";
-import { CartIcon } from "../Icons/CartIcon/CartIcon";
+//import { CartIcon } from "../Icons/CartIcon/CartIcon";
 import { grid_3_col , btn100pc} from "../styles/styles";
+import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
 import {
   Dropdown,
   DropdownTrigger,
@@ -29,7 +30,7 @@ export default function Carrito({ carrito }) {
               isInvisible={isInvisible}
               shape="circle"
             >
-              <CartIcon size={30} />
+              <LogoCarritoNegro w={30} />
             </Badge>
           </div>
         </DropdownTrigger>

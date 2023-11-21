@@ -41,7 +41,7 @@ export default function ListadoProductos(props) {
     <>
       <TituloDeProductos title={props.title}></TituloDeProductos>
       
-      <div className="mt-2 list-container" style={grid_3_col}>
+      <div className="mt-2 list-container-products" style={grid_3_col}>
         {list.map(renderProducto)}
       </div>
     </>
