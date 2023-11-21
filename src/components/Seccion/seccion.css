@@ -79,11 +79,24 @@
   .esqueleton-seccion-card{
     
     height: 270px;
-    width: 43vw;
+    width: 40vw;
     /*object-fit: contain;*/
     
   }
 } 
+
+@media (max-width: 700px) {
+  
+  
+  .esqueleton-seccion-card{
+    
+    height: 270px;
+    width: 37vw;
+   
+    
+  }
+} 
+
 
 @media (max-width: 660px) {
   
@@ -140,5 +153,15 @@
     white-space:inherit;
   
   }
+  
+}
+
+@media (max-width: 377px) {
+  .esqueleton-seccion-card{
+    
+    height: 140px;
+     /* width: 140px */
+     width: 70vw;
+   }
   
 }
