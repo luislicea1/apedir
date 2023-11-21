@@ -9,6 +9,7 @@ import React, {
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
+import SkeletonCard from "../Skeleton/SkeletonCard";
 
 const ComponenteLugar = lazy(() =>
   import("./ComponenteLugar").catch((error) => {
@@ -123,7 +124,7 @@ const ListadoDeComponentesLugar = () => {
         ))}
       {hasMore && (
         <div ref={ref} style={{ textAlign: "center" }}>
-          <Loader></Loader>
+         
         </div>
       )}
     </div>

@@ -72,7 +72,7 @@ export default function Producto({
           rel="preload"
           href={img}
           as="image"
-          imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
+          //imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
         />
       </Helmet>
       <Card
