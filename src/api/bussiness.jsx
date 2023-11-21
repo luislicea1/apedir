@@ -103,9 +103,11 @@ const loadMoreBussiness = async (
     setBussiness(finalBusinesses);
   } else {
     setBussiness(businessesWithImages);
+    
   }
   // Incrementa el desplazamiento
   setOffset(offset + 19);
+  return businessesWithImages.length>0 ? true :  false
 };
 
 const fetchAllBussiness = async () => {

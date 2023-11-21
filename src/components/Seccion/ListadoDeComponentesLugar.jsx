@@ -9,7 +9,6 @@ import React, {
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
-import SkeletonCard from "../Skeleton/SkeletonCard";
 
 const ComponenteLugar = lazy(() =>
   import("./ComponenteLugar").catch((error) => {
@@ -52,11 +51,7 @@ const ListadoDeComponentesLugar = () => {
         setBussinesses
       );
 
-      if (
-        response !== null &&
-        response !== undefined &&
-        response.length === 0
-      ) {
+      if (!response) {
         setHasMore(false);
       } else {
         setPage((prevPage) => prevPage + 1);
@@ -124,7 +119,7 @@ const ListadoDeComponentesLugar = () => {
         ))}
       {hasMore && (
         <div ref={ref} style={{ textAlign: "center" }}>
-         
+          <Loader></Loader>
         </div>
       )}
     </div>
