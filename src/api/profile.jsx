@@ -46,9 +46,8 @@ const updateProfile = async (profile) => {
     }
     return acc;
   }, {});
-  console.log(profile);
-  if (!updatedProfile.isActive) {
-    await banUser(profile.id);
+  if ("isActive" in updatedProfile) {
+    await banUser(profile.id, updatedProfile.isActive);
   }
 
   const { data, error } = await supabase
@@ -56,6 +55,7 @@ const updateProfile = async (profile) => {
     .update(updatedProfile)
     .eq("id", profile.id)
     .select();
+  console.log(error);
 };
 
 const deleteProfile = async (id) => {

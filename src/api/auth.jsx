@@ -23,11 +23,11 @@ async function login(email, password) {
       email: email,
       password: password,
     });
+    console.log(data, error);
     const user = await getUser(data.session.user.email);
-    if (!user.isActive)
-      return { message: "Este usuario se encuentra baneado", isValid: false };
     if (error) {
-      const message = "Email o contraseña incorrectos";
+      const message =
+        "Email o contraseña incorrectos, si las credenciales son correctas entonces usted se encuentra banead@";
       return { message: message, isValid: false };
     } else {
       return { session: data.session, message: "Login Exitoso", isValid: true };

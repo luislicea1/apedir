@@ -19,9 +19,6 @@ const ComponenteLugar = lazy(() =>
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
-// Importar ComponenteLugar de manera diferida
-//const ComponenteLugar = React.memo(lazy(() => import("./ComponenteLugar")));
-
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
   const setBussinesses = useBussinessList((state) => state.setBussinesses);
@@ -30,6 +27,7 @@ const ListadoDeComponentesLugar = () => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(true);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -64,15 +62,23 @@ const ListadoDeComponentesLugar = () => {
       }
     } catch (error) {
       console.error("Error fetching more data:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchMoreData();
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (inView && hasMore) {
       fetchMoreData();
     }
-   }, [inView, hasMore]);
-   
+  }, [inView, hasMore]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -81,6 +87,10 @@ const ListadoDeComponentesLugar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div
