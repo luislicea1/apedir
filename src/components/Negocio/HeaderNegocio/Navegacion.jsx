@@ -49,7 +49,7 @@ export default function Navegacion(props) {
   if (props.links) {
     links = props.links;
   }
-  return (
+  return links !== null ? (
     <div style={navegacion}>
       <nav className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
         <div className="flex z-40 w-full h-auto data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
@@ -64,5 +64,5 @@ export default function Navegacion(props) {
         </div>
       </nav>
     </div>
-  );
+  ) : null;
 }

@@ -1,12 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  lazy,
-  Suspense,
-  useCallback,
-  memo,
-} from "react";
+import React, { useState, useEffect, lazy, useRef } from "react";
 
+import { useHref } from "react-router-dom";
 import Header from "../header/Header";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
@@ -24,29 +18,43 @@ const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
 const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")
 );
-
-const renderLoader = () => <p>Loading</p>;
-
-export default memo(function Negocio({ url }) {
+export default function Negocio() {
+  const history = useHref();
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
-
   const [bussiness, setBussiness] = useState(null);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const bussinessData = await fetchBussinessPerURL(url);
-      setBussiness(bussinessData);
+    window.scrollTo(0, 0);
+  }, []);
 
-      if (
-        bussinessData !== null &&
-        bussinessData !== undefined &&
-        bussinessData?.id
-      ) {
-        const categoryList = await getCategories(bussinessData.id);
-        const productList = await getProducts(categoryList, true);
-        const nonEmptyCategories = categoryList.filter((category) =>
+  useEffect(() => {
+    const path = history.split("/");
+    const fetchData = async () => {
+      const bussinessData = await fetchBussinessPerURL(path[2]);
+      setBussiness(bussinessData);
+    };
+
+    fetchData();
+  }, [history]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      if (bussiness !== null && bussiness !== undefined && bussiness?.id) {
+        const categoryList = await getCategories(bussiness.id);
+        setCategories(categoryList);
+      }
+    };
+
+    fetchCategories();
+  }, [bussiness]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      if (categories.length > 0) {
+        const productList = await getProducts(categories, true);
+        const nonEmptyCategories = categories.filter((category) =>
           productList.some((product) => product.category === category.id)
         );
 
@@ -57,49 +65,20 @@ export default memo(function Negocio({ url }) {
       }
     };
 
-    fetchData();
-  }, [url]);
-
-  // const fetchData = useCallback(async () => {
-  //   const bussinessData = await fetchBussinessPerURL(url);
-  //   setBussiness(bussinessData);
-  // }, [url]);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [url]);
-
-  // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     const categoryList = await getCategories(bussiness.id);
-  //     setCategories(categoryList);
-  //   };
-  //   if (bussiness !== null && bussiness !== undefined && bussiness?.id)
-  //     fetchCategories();
-  //   if (categories.length > 0) setIsNavbarVisible(true);
-  // }, [bussiness]);
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const productList = await getProducts(categories, true);
-  //     const nonEmptyCategories = categories.filter(category =>
-  //       productList.some(product => product.category === category.id)
-  //     );
-  //     setCategories(nonEmptyCategories);
-  //     setProducts(productList !== null ? productList : []);
-  //   };
-  //   if (categories.length > 0) fetchProducts();
-  // }, [categories]);
+    fetchProducts();
+  }, [categories]);
 
   useEffect(() => {
     const checkScrollPosition = () => {
-      const firstProductListPosition = document
-        .querySelector(".first-product-list")
-        .getBoundingClientRect().top;
-      if (window.pageYOffset >= firstProductListPosition) {
-        setIsNavbarVisible(true);
-      } else {
-        setIsNavbarVisible(false);
+      const firstProductList = document.querySelector(".first-product-list");
+      if (firstProductList) {
+        const firstProductListPosition =
+          firstProductList.getBoundingClientRect().top;
+        if (window.pageYOffset >= firstProductListPosition) {
+          setIsNavbarVisible(true);
+        } else {
+          setIsNavbarVisible(false);
+        }
       }
     };
 
@@ -116,16 +95,16 @@ export default memo(function Negocio({ url }) {
     setCarrito(product);
   };
 
-  return bussiness ? (
+  return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={NegocioSection}>
-        <Header
+        {/* <Header
           logo={bussiness.perfil_pic}
           nombre={bussiness.name}
           horario={"si"}
           anterior={"/"}
           carrito={carrito}
-        />
+        /> */}
         {isNavbarVisible && <Navegacion links={categories} />}
         <section className="section" style={NegocioSection}>
           <PortadaDeNegocio
@@ -174,13 +153,12 @@ export default memo(function Negocio({ url }) {
           <FooterNegocio
             title={bussiness.name}
             imagen={bussiness.perfil_pic}
-            url={url}
+            url={history}
           ></FooterNegocio>
         </div>
       </section>
     </div>
   ) : (
     <LoaderCompletePage />
-    
   );
-});
+}

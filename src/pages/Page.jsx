@@ -1,10 +1,9 @@
-import React, { memo } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
 import Header from "../components/header/Header";
 // const Header = React.lazy(() => import("../components/header/Header"));
 
-export default memo(function Page({ children }) {
+export default function Page({ children }) {
   return (
     <div>
       <Helmet>
@@ -12,10 +11,10 @@ export default memo(function Page({ children }) {
           name="description"
           content="pagina de promocion de negocios en cuba"
         />
-        <Link
+        <link
           rel="icon"
           type="image/svg+xml"
-          to="/logo.svg"
+          href="/logo.svg"
           alt="logo apedir"
         />
       </Helmet>
@@ -23,4 +22,4 @@ export default memo(function Page({ children }) {
       {children}
     </div>
   );
-});
+}

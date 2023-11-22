@@ -20,21 +20,26 @@ import { useUserStore, useBussinessStore } from "../../hooks/useStore";
 import InputTitle from "./Inputs/InputTitle";
 
 export default function NegocioDashboard() {
-  // const [user, setUser] = useState(null);
   const user = useUserStore((state) => state.user);
   const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
   const fetchBussiness = async () => {
-    if (user === null) return;
+    try {
+      if (user === null) return;
 
-    const b = await getOneBussiness(user.id);
-    setBussiness(b);
+      if (business === null) {
+        const b = await getOneBussiness(user.id);
+        setBussiness(b);
+      }
+    } catch (error) {
+      console.error("Error fetching business:", error);
+    }
   };
 
   useEffect(() => {
-    fetchBussiness();
-  }, [user, business]);
+    if (business === null) fetchBussiness();
+  }, [user]);
 
   const [imageName, setImageName] = useState({
     front_pic: "",
@@ -64,38 +69,11 @@ export default function NegocioDashboard() {
     twitter: "",
   };
 
-  const memoizedBussinessInput = useMemo(() => {
-    return business === null || business === undefined
-      ? defaultBussinessValues
-      : Object.entries(business).reduce(
-          (acc, [key, value]) => ({
-            ...acc,
-            ...(value !== null && value !== undefined ? { [key]: value } : {}),
-          }),
-          {}
-        );
-  }, [business]);
-
-  const [bussinessInput, setBussinessInput] = useState(memoizedBussinessInput);
-  // const user = useUserStore((state) => state.user);
+  const [bussinessInput, setBussinessInput] = useState(
+    business !== null ? business : defaultBussinessValues
+  );
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
-
-  // const fetchBussiness = async () => {
-  //   if (
-  //     JSON.stringify(bussinessInput) ===
-  //       JSON.stringify(defaultBussinessValues) &&
-  //     bussinessInput !== null &&
-  //     user !== null &&
-  //     user.id !== ""
-  //   ) {
-  //     const b = await getOneBussiness(user.id);
-
-  //     if (b !== null && b !== undefined) {
-  //       setBussinessInput(b);
-  //     }
-  //   }
-  // };
 
   const handleUpsertBussiness = async () => {
     if (!isFormValid) {

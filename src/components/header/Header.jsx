@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import "./header.css";
 import { Link as LinkReact } from "react-router-dom";
 import { useHref } from "react-router-dom";
@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
-import { getOneBussiness } from "../../api/bussiness";
+import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
 
 const Carrito = lazy(() => import("./CarritoIcon.jsx"));
 const Notification = lazy(() => import("./Notification.jsx"));
@@ -34,39 +34,27 @@ export default function Header(props) {
   const history = useHref();
   const [isBussiness, setIsBussiness] = useState(false);
   const [session, setSession] = useState(null);
+  const [selectedBussiness, setSelectedBussiness] = useState(null);
   const navigate = useNavigate();
-  // const [user, setUser] = useState(null);
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+
   useEffect(() => {
     const path = history.split("/");
-    if (path.includes("lugar")) setIsBussiness(true);
+    const fetchData = async () => {
+      const bussinessData = await fetchBussinessPerURL(path[2]);
+      setSelectedBussiness(bussinessData);
+    };
+
+    if (path.includes("lugar")) {
+      fetchData();
+      setIsBussiness(true);
+    } else {
+      setSelectedBussiness(null);
+      setIsBussiness(false);
+    }
   }, [history]);
 
-  const [isScrollVisible, setIsScrollVisible] = useState(false);
-
-  useEffect(() => {
-    const checkScrollPosition = () => {
-      const firstProductListPosition = document
-        .querySelector(".first-product-list")
-        .getBoundingClientRect().top;
-      if (window.pageYOffset >= firstProductListPosition) {
-        setIsScrollVisible(true);
-      } else {
-        setIsScrollVisible(false);
-      }
-    };
-
-    if (isBussiness) {
-      window.addEventListener("scroll", checkScrollPosition);
-    } else {
-      window.removeEventListener("scroll", checkScrollPosition);
-    }
-
-    return () => {
-      window.removeEventListener("scroll", checkScrollPosition);
-    };
-  }, [isBussiness]);
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
 
@@ -92,7 +80,6 @@ export default function Header(props) {
     };
   }, []);
 
-  // const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
   const fetchBussiness = async () => {
@@ -109,13 +96,13 @@ export default function Header(props) {
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
-        {isBussiness ? (
+        {isBussiness && selectedBussiness !== null ? (
           <>
             <LinkReact to="/">
               <Izquierda h={"20px"} w={"20px"} />
             </LinkReact>
 
-            <NegocioLogo logo={props.logo} />
+            <NegocioLogo logo={selectedBussiness.perfil_pic} />
 
             <div className="ml-2" style={MarginLeft30}>
               <p
@@ -126,10 +113,9 @@ export default function Header(props) {
                   textOverflow: "ellipsis",
                 }}
               >
-                {props.nombre}
+                {selectedBussiness.name}
               </p>
-
-              {props.horario === "si" ? <AbiertoCerrado /> : null}
+              <AbiertoCerrado />
             </div>
           </>
         ) : (
@@ -137,14 +123,22 @@ export default function Header(props) {
         )}
       </NavbarBrand>
 
-      {!isBussiness && <SelectProvincia />}
+      {!isBussiness && (
+        <React.Suspense fallback={<div></div>}>
+          <SelectProvincia />
+        </React.Suspense>
+      )}
 
       {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          <Suspense fallback={<div></div>}>
-            <Carrito carrito={props.carrito}></Carrito>
-          </Suspense>
-          <Notification />
+          {isBussiness && (
+            <React.Suspense fallback={<div></div>}>
+              <Carrito carrito={[]}></Carrito>
+            </React.Suspense>
+          )}
+          <React.Suspense fallback={<div></div>}>
+            <Notification />
+          </React.Suspense>
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar

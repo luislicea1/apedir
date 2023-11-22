@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "@nextui-org/react";
 //import { CartIcon } from "../Icons/CartIcon/CartIcon";
-import { grid_3_col , btn100pc} from "../styles/styles";
+import { grid_3_col, btn100pc } from "../styles/styles";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
 import {
   Dropdown,
@@ -15,14 +15,13 @@ import {
 export default function Carrito({ carrito }) {
   const [isInvisible, setIsInvisible] = React.useState(false);
 
-  
   if (!carrito) {
     return null;
   }
   return (
     <div className="mt-2">
-      <Dropdown>
-        <DropdownTrigger>
+      <Dropdown aria-label="carrito">
+        <DropdownTrigger aria-label="carrito">
           <div>
             <Badge
               color="danger"
@@ -34,9 +33,7 @@ export default function Carrito({ carrito }) {
             </Badge>
           </div>
         </DropdownTrigger>
-        <DropdownMenu
-          className="no-hover"
-        >
+        <DropdownMenu aria-label="carrito" className="no-hover">
           {carrito.map((product, index) => (
             <DropdownItem key={index}>
               <div style={grid_3_col}>
@@ -46,7 +43,7 @@ export default function Carrito({ carrito }) {
               </div>
             </DropdownItem>
           ))}
-          <DropdownItem>
+          <DropdownItem aria-label="carrito">
             <a href="/carrito">
               <Button color="primary" style={btn100pc}>
                 Comprar

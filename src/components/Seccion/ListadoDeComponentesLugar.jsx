@@ -9,12 +9,13 @@ import React, {
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
+import ComponenteLugar from "./ComponenteLugar";
 
-const ComponenteLugar = lazy(() =>
-  import("./ComponenteLugar").catch((error) => {
-    console.error("Error loading ComponenteLugar:", error);
-  })
-);
+// const ComponenteLugar = lazy(() =>
+//   import("./ComponenteLugar").catch((error) => {
+//     console.error("Error loading ComponenteLugar:", error);
+//   })
+// );
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
@@ -64,10 +65,11 @@ const ListadoDeComponentesLugar = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchMoreData();
+    const fetchData = () => {
+      fetchMoreData();
     };
     fetchData();
+    
   }, []);
 
   useEffect(() => {

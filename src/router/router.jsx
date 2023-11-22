@@ -16,18 +16,13 @@ import { CircularProgress } from "@nextui-org/react";
 import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
-// Utilizando lazy para importar los componentes diferidos
+
 const LazyLogin = lazy(() => import("../components/login/Login"));
 
 const LazyCreateAccount = lazy(() =>
   import("../components/login/CreateAccount")
 );
-const LazyNegocioWrapper = lazy(() =>
-  import("../components/Negocio/NegocioWrapper")
-);
-// const LazyAdministradorNegocio = lazy(() =>
-//   import("../pages/AdministradorNegocio")
-// );
+const LazyNegocioWrapper = lazy(() => import("../components/Negocio/Negocio"));
 
 const LazyAdministradorNegocio = lazy(() =>
   import("../components/AdministradorNegocios/CrearNegocio")
@@ -85,7 +80,6 @@ const router = createBrowserRouter([
       </Page>
     ),
   },
-
   {
     path: "/plans",
     element: (
@@ -179,7 +173,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/lugar",
-    element: <Outlet />,
+    element: (
+      <Page>
+        <Outlet />
+      </Page>
+    ),
     children: [
       {
         path: ":url",
@@ -233,8 +231,8 @@ const router = createBrowserRouter([
         <Suspense fallback={<LoaderCompletePage />}>
           <LazyAdministradorNegocio>
             <Outlet />
-            <Navigate to="/administrador-negocio/perfil" />
           </LazyAdministradorNegocio>
+          {/* <Navigate to="/administrador-negocio/perfil" /> */}
         </Suspense>
       </Page>
     ),

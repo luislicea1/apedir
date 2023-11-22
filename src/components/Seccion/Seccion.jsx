@@ -3,10 +3,7 @@ import TituloDeSeccion from "./TituloDeSeccion";
 import { container, section } from "../styles/styles";
 //import { CircularProgress } from "@nextui-org/react";
 import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
-//import Prueba3 from "../prueba/Prueba3";
 
-
-// import { loadMoreBussiness } from "../../api/bussiness";
 
 export default function Seccion(props) {
   return (

@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, Chip } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 
 export default function CrearNegocio({ children }) {
   const sectionStyle = {
     width: "100%",
-    maxWidth: "1000px",
+    maxWidth: "900px",
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
+  
   };
 
   const linkColor = {

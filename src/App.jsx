@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { RouterProvider } from "react-router-dom";
@@ -6,11 +6,11 @@ import router from "./router/router";
 
 function App() {
   return (
-    <Suspense>
+    <React.StrictMode>
       <NextUIProvider>
         <RouterProvider router={router} />
       </NextUIProvider>
-    </Suspense>
+    </React.StrictMode>
   );
 }
 
