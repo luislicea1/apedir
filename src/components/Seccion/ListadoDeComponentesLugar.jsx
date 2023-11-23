@@ -97,10 +97,11 @@ const ListadoDeComponentesLugar = () => {
         gap: "10px",
         display: "grid",
         placeItems: "center",
+        alignContent: "stretch",
         gridTemplateColumns:
-          windowWidth < 390
+          windowWidth < 380
             ? "1fr"
-            : windowWidth < 713
+            : windowWidth < 720
             ? "1fr 1fr"
             : "1fr 1fr 1fr",
       }}
