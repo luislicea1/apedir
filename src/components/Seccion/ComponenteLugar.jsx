@@ -4,7 +4,7 @@ import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
-// import Stars from "../Stars/Stars";
+import Stars from "../Stars/Stars";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
@@ -48,7 +48,7 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            {/* <Stars readOnly w={100} rating={3.5}></Stars> */}
+            <Stars readOnly w={100} rating={3.5} />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2"

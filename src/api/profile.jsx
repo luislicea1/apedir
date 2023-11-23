@@ -62,4 +62,40 @@ const deleteProfile = async (id) => {
   const { error } = await supabase.from("profiles").delete().eq("id", id);
 };
 
-export { getRole, getUser, getUsers, updateProfile, deleteProfile };
+const getProfileStars = async (userId) => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("star_ratings")
+    .eq("id", userId)
+    .single();
+
+  if (error) return;
+  return data.star_ratings;
+};
+
+const updateProfileStars = async (user, bussiness, stars) => {
+  const starsRating = [
+    {
+      bussiness: bussiness,
+      stars: stars,
+    },
+  ];
+
+  const { data, err } = await supabase
+    .from("profiles")
+    .update({ star_ratings: starsRating })
+    .eq("id", user);
+  if (err) console.log(err);
+
+  console.log(data);
+};
+
+export {
+  getRole,
+  getUser,
+  getUsers,
+  updateProfile,
+  deleteProfile,
+  updateProfileStars,
+  getProfileStars,
+};

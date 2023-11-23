@@ -1,15 +1,16 @@
 import React, { useState, useEffect, lazy, useRef } from "react";
 
 import { useHref } from "react-router-dom";
-import Header from "../header/Header";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 import { fetchBussinessPerURL } from "../../api/bussiness";
 import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
+import { useUserStore } from "../../hooks/useStore";
 
-const Stars = lazy(() => import("../Stars/Stars"));
+import Stars from "../Stars/Stars";
+// const Stars = lazy(() => import("../Stars/Stars"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
 const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
@@ -24,7 +25,7 @@ export default function Negocio() {
   const [bussiness, setBussiness] = useState(null);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-
+  const user = useUserStore((state) => state.user);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -112,8 +113,10 @@ export default function Negocio() {
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
             <div>
-              <TituloNegocio title={bussiness.name}></TituloNegocio>
-              <Stars w={100}></Stars>
+              <TituloNegocio title={bussiness.name} />
+
+              <Stars w={100} bussiness={bussiness.id} user={user.id} />
+
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
