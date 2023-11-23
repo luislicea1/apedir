@@ -5,12 +5,21 @@ import "./productos.css";
 import "./responsive.css"
 import { grid_3_col } from "../../styles/styles";
 
+
 // Envolviendo el componente Producto con React.memo
 const ProductoMemo = memo(Producto);
 
 export default function ListadoProductos(props) {
   const list = props.lista;
   const [carrito, setCarrito] = useState([]);
+  //const [lastViewedTitle, setLastViewedTitle] = useState([]);
+  
+
+  const changeTitle = (title) =>{
+    //setLastViewedTitle(title);
+    //alert(title)
+    props.onChangeTitle(title);
+  }
   
   const handleAddToCart = (carrito) => {
     carrito = carrito
@@ -37,9 +46,12 @@ export default function ListadoProductos(props) {
     [props.nombre, props.localizacion]
   );
   
+   
+  
   return (
     <>
-      <TituloDeProductos title={props.title}></TituloDeProductos>
+     <TituloDeProductos title={props.title} onChangeTitle={changeTitle}></TituloDeProductos>
+
       
       <div className="mt-2 list-container-products" style={grid_3_col}>
         {list.map(renderProducto)}

@@ -34,7 +34,7 @@ function ComponenteLugar(props) {
       </Helmet>
       <Link to={`/lugar/${props.url}`}>
         <Card
-          className="py-4"
+          className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}
         >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

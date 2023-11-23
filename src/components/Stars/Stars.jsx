@@ -6,13 +6,10 @@ import { addStars } from "../../api/starsRate";
 
 export default function Stars(props) {
   
-  const [rating, setRating] = useState(props.rating || 0);
-
-  useEffect(() => {
-    if (rating !== null && rating !== 0) {
-      addStars(rating, props.user, props.bussiness);
-    }
-  }, [rating]);
+  async function handleChangeStars(rate) {
+    console.log(rate);
+    await addStars(rate, props.user, props.bussiness);
+  }
 
   const itemStyles = {
     itemShapes: RoundedStar,
@@ -20,14 +17,19 @@ export default function Stars(props) {
     inactiveFillColor: "gray",
   };
 
-  const floatValue = 1.44;
   const width = props.w;
 
   return (
     <Rating
       style={{ maxWidth: width }}
-      value={rating}
-      onChange={setRating}
+      value={props.rating}
+      onChange={(event) => {
+        props.setRating((prevRating) => {
+          const newRating = event;
+          handleChangeStars(newRating);
+          return newRating;
+        });
+      }}
       {...(props.readOnly ? { readOnly: true } : {})}
       itemStyles={itemStyles}
     />

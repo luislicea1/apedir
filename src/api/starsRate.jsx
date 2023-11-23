@@ -4,6 +4,7 @@ import { getProfileStars, updateProfileStars } from "./profile";
 const addStars = async (stars, user, bussiness) => {
   let starRating = await getStarsFromBussiness(bussiness);
 
+  console.log(starRating)
   if (starRating === null) {
     starRating = {
       bussiness: bussiness,
@@ -23,10 +24,7 @@ const addStars = async (stars, user, bussiness) => {
     .upsert(starRating)
     .eq("bussiness", bussiness);
 
-  if (error) {
-    console.log(error);
-    return;
-  }
+  console.log(error);
 
   await updateProfileStars(user, bussiness, stars);
 };

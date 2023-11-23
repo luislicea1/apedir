@@ -136,6 +136,8 @@ export const ImgCardStyle = {
   display: "grid",
   placeItems: "center",
   borderRadius: "10px",
+  // justifyItems: "stretch",
+  // alignContent: "stretch"
   /*padding: "10px"*/
 };
 export const ImgStyle = {

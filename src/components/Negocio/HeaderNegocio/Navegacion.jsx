@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 
 export default function Navegacion(props) {
   const listContainer = useRef(null);
-
+  const lastViewedTitle = props.lastViewedTitle;
+  
   useEffect(() => {
     const handleScroll = (e) => {
       e.preventDefault();
@@ -57,7 +58,21 @@ export default function Navegacion(props) {
             {links &&
               links.map((link, index) => (
                 <li key={index}>
-                  <a href={`#${link.category}`}>{link.category}</a>
+                  <a
+                    href={`#${link.category}`}
+                    style={{
+                      color:
+                        link.category === lastViewedTitle ? "white" : "black",
+                      background:
+                        link.category === lastViewedTitle
+                          ? "black"
+                          : "transparent",
+                      borderRadius: "20px",
+                      padding: "10px",
+                    }}
+                  >
+                    {link.category}
+                  </a>
                 </li>
               ))}
           </div>

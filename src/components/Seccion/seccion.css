@@ -1,29 +1,27 @@
-.list-container{
-  padding: 10px;
+.list-container {
+  /*padding: 10px;*/
 }
-.titulo-card-negocio-panntalla-principal{
-  /*max-width: 20ch;*/
-  
+.titulo-card-negocio-panntalla-principal {
+  max-width: 20ch;
+
   font-size: 1rem;
   font-weight: bold;
-  /*
+  
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;*/
+  text-overflow: ellipsis;
 }
-.div-x-scroll-animation h2{
+.div-x-scroll-animation h2 {
   width: 300%;
   animation: slide 5s infinite;
 }
 
-.esqueleton-seccion-card{
+.esqueleton-seccion-card {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   height: 270px;
   width: 270px;
-  /*object-fit: contain;*/
-  /*max-width: 270px;
-  /*min-width: 180px;*/
+ 
 }
 @keyframes slide {
   0% {
@@ -32,10 +30,9 @@
   100% {
     transform: translateX(-100%);
   }
- }
- 
+}
 
- @media (max-width: 970px) {
+@media (max-width: 980px) {
   /* .list-container {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -43,8 +40,7 @@
     grid-template-columns: repeat(1, 1fr) !important;
   }
    */
-   .esqueleton-seccion-card{
-    
+  .esqueleton-seccion-card {
     height: 270px;
     width: 250px;
     /*object-fit: contain;
@@ -53,115 +49,94 @@
   }
 }
 
-@media (max-width: 917px) {
-  
-   .esqueleton-seccion-card{
-    
+@media (max-width: 925px) {
+  .esqueleton-seccion-card {
     height: 270px;
     width: 26vw;
     /*object-fit: contain;*/
-    
   }
 }
 
+@media (max-width: 830px) {
+  .esqueleton-seccion-card {
+    height: 200px;
+    width: 23vw;
+    /*object-fit: contain;*/
+  }
+}
 
 @media (max-width: 713px) {
-  
-   .lazyLoad{
+  .lazyLoad {
     height: 150px !important;
-  } 
-  .titulo-card-negocio-panntalla-principal{
-     max-width: 20ch;
-    white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
   }
-  .esqueleton-seccion-card{
-    
-    height: 270px;
+  .titulo-card-negocio-panntalla-principal {
+    max-width: 20ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .esqueleton-seccion-card {
+    height: 200px;
     width: 40vw;
     /*object-fit: contain;*/
-    
   }
-} 
-
-@media (max-width: 700px) {
-  
-  
-  .esqueleton-seccion-card{
-    
-    height: 270px;
-    width: 37vw;
-   
-    
-  }
-} 
-
-
-@media (max-width: 660px) {
-  
-  
-  .esqueleton-seccion-card{
-    
-    height: 270px;
-    width: 37vw;
-   
-    
-  }
-} 
-
-@media (max-width: 550px) {
-  .titulo-card-negocio-panntalla-principal{
-      max-width: 15ch;
-    white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;  
-  } 
-  .lazyLoad{
-    height: 100px !important;
-  } 
-  .list-container{
-    gap: "0px" !important;
-  }
-  
-  
 }
 
+@media (max-width: 700px) {
+  .esqueleton-seccion-card {
+    height: 200px;
+    width: 37vw;
+  }
+}
+
+@media (max-width: 660px) {
+  .esqueleton-seccion-card {
+    height: 200px;
+    width: 37vw;
+  }
+}
+
+@media (max-width: 550px) {
+  .titulo-card-negocio-panntalla-principal {
+    max-width: 15ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lazyLoad {
+    height: 100px !important;
+  }
+  .list-container {
+    gap: "0px" !important;
+  }
+}
 
 @media (max-width: 485px) {
-  
-  .esqueleton-seccion-card{
-    
-   height: 140px;
+  .esqueleton-seccion-card {
+    height: 140px;
     /* width: 140px */
     width: 30vw;
   }
-} 
-@media (max-width: 400px) {
-  .titulo-card-negocio-panntalla-principal{
+}
+@media (max-width: 430px) {
+  .titulo-card-negocio-panntalla-principal {
     max-width: 10ch;
-   
   }
-  
 }
-
-
-
-@media (max-width: 377px) {
-  .titulo-card-negocio-panntalla-principal{
+@media (max-width: 380px) {
+  .titulo-card-negocio-panntalla-principal {
     max-width: none;
-    white-space:inherit;
-  
+    white-space: inherit;
   }
-  
+}
+@media (max-width: 377px) {
+  .esqueleton-seccion-card {
+    height: 140px;
+    /* width: 140px */
+    width: 70vw;
+  }
 }
 
-@media (max-width: 377px) {
-  .esqueleton-seccion-card{
-    
-    height: 140px;
-     /* width: 140px */
-     width: 70vw;
-   }
-  
-}
+
+
+
