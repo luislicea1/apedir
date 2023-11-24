@@ -1,21 +1,38 @@
-import React from 'react'
-import { useState } from 'react';
-import '@smastrom/react-rating/style.css'
-import { Rating, RoundedStar } from '@smastrom/react-rating';
+import React from "react";
+import "@smastrom/react-rating/style.css";
+import { Rating, RoundedStar } from "@smastrom/react-rating";
+import { addStars } from "../../api/starsRate";
 
 export default function Stars(props) {
-    const [rating, setRating] = useState(props.rating || 0) // Initial value
-    const itemStyles = { 
-        itemShapes: RoundedStar, 
-        activeFillColor: '#f59e0b', 
-        inactiveFillColor: 'gray'
-        
-       };
+  const handleChangeStars = async (rate) => {
+    console.log(rate);
+    try {
+      await addStars(rate, props.user, props.bussiness);
+    } catch (error) {
+      console.error("Error adding stars:", error);
+    }
+  };
 
-    const floatValue = 1.44
-     const width = props.w
-    
-    return <Rating style={{ maxWidth: width}} value={rating} onChange={setRating}   {...(props.readOnly ? { readOnly: true } : {})}   itemStyles={itemStyles}/>
+  const itemStyles = {
+    itemShapes: RoundedStar,
+    activeFillColor: "#f59e0b",
+    inactiveFillColor: "gray",
+  };
+
+  const width = props.w;
+
+  return (
+    <Rating
+      style={{ maxWidth: width }}
+      value={props.rating}
+      onChange={(event) => {
+        const newRating = event;
+        handleChangeStars(newRating).then(() => {
+          props.setRating(newRating);
+        });
+      }}
+      {...(props.readOnly ? { readOnly: true } : {})}
+      itemStyles={itemStyles}
+    />
+  );
 }
-
-//**Para que salga las estrellas a la mitad debe de ser readOnly */

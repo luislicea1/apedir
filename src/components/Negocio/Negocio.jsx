@@ -1,16 +1,21 @@
 import React, { useState, useEffect, lazy, useRef } from "react";
 
-import { useHref } from "react-router-dom";
-//import Header from "../header/Header";
+import { Link, useHref } from "react-router-dom";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 import { fetchBussinessPerURL } from "../../api/bussiness";
 import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
+import { useUserStore } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
 
-const Stars = lazy(() => import("../Stars/Stars"));
+import Stars from "../Stars/Stars";
+import {
+  getProfileStars,
+  getProfileStarsFromBussiness,
+} from "../../api/profile";
+// const Stars = lazy(() => import("../Stars/Stars"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
 const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
@@ -26,7 +31,9 @@ export default function Negocio() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [lastViewedTitle, setLastViewedTitle] = useState(null);
-
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const [userStars, setUserStars] = useState(0);
+  const user = useUserStore((state) => state.user);
   useEffect(() => {
     if (lastViewedTitle !== null) {
       //alert(lastViewedTitle);
@@ -59,8 +66,16 @@ export default function Negocio() {
       }
     };
 
+    const fetchStars = async () => {
+      const stars = await getProfileStarsFromBussiness(user.id, bussiness.id);
+      console.log(stars);
+      setUserStars(stars);
+    };
     fetchCategories();
-  }, [bussiness]);
+    if (user !== null && bussiness !== null) {
+      fetchStars();
+    }
+  }, [bussiness, user]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -86,11 +101,11 @@ export default function Negocio() {
     setCarrito(product);
   };
 
-  const changeTitle = (title) =>{
+  const changeTitle = (title) => {
     setLastViewedTitle(title);
     //alert(title)
     //props.onChangeTitle(title);
-  }
+  };
 
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
@@ -122,7 +137,7 @@ export default function Negocio() {
               <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
             </div>
 
-            <div ref={ref}> 
+            <div ref={ref}>
               {categories.map((category, idx) => {
                 const categoryProducts = products.filter(
                   (product) => product.category === category.id

@@ -25,10 +25,13 @@ import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
 import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
+import SelectProvincia from "./SelectProvincia.jsx";
+import Carrito from "./CarritoIcon.jsx";
+import Notification from "./Notification.jsx";
 
-const Carrito = lazy(() => import("./CarritoIcon.jsx"));
-const Notification = lazy(() => import("./Notification.jsx"));
-const SelectProvincia = lazy(() => import("./SelectProvincia.jsx"));
+// const Carrito = lazy(() => import("./CarritoIcon.jsx"));
+// const Notification = lazy(() => import("./Notification.jsx"));
+// const SelectProvincia = lazy(() => import("./SelectProvincia.jsx"));
 
 export default function Header(props) {
   const history = useHref();
@@ -124,21 +127,21 @@ export default function Header(props) {
       </NavbarBrand>
 
       {!isBussiness && (
-        <React.Suspense fallback={<div></div>}>
-          <SelectProvincia />
-        </React.Suspense>
+        // <React.Suspense fallback={<div></div>}>
+        <SelectProvincia />
+        // </React.Suspense>
       )}
 
       {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           {isBussiness && (
-            <React.Suspense fallback={<div></div>}>
-              <Carrito carrito={[]}></Carrito>
-            </React.Suspense>
+            // <React.Suspense fallback={<div></div>}>
+            <Carrito carrito={[]}></Carrito>
+            // </React.Suspense>
           )}
-          <React.Suspense fallback={<div></div>}>
-            <Notification />
-          </React.Suspense>
+          {/* <React.Suspense fallback={<div></div>}> */}
+          <Notification />
+          {/* </React.Suspense> */}
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
