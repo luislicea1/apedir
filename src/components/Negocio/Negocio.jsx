@@ -107,7 +107,7 @@ export default function Negocio() {
             imagenPortada={bussiness.front_pic}
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
-            <div>
+            <div style={{height: "50vh"}}>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
               <Stars w={100}></Stars>
               <DescripcionNegocio

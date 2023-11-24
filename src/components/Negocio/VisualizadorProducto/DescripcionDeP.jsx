@@ -59,13 +59,14 @@ export default function DescripcionDeP(props) {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            fontSize: "1.4rem"
           }}
         >
           {props.title}
         </h2>
       </div>
       <div style={centertext}>
-        <article>{props.text}</article>
+        <article style={{fontSize: ".9rem"}}>{props.text}</article>
       </div>
 
       <div style={grid_2_col_center}>

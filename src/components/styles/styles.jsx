@@ -39,7 +39,7 @@ export const titleStyles = {
 
 export const PortadaDeNegocioStyles = {
   width: "100%",
-  height: "500px",
+  height: "60vh",
   display: "grid",
   placeItems: "center",
   background: "#ECECEE",
