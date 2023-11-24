@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, useRef } from "react";
 
-import { useHref } from "react-router-dom";
+import { Link, useHref } from "react-router-dom";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
 import { fetchBussinessPerURL } from "../../api/bussiness";
@@ -125,14 +125,19 @@ export default function Negocio() {
             <div>
               <TituloNegocio title={bussiness.name} />
 
-              <Stars
-                w={100}
-                bussiness={bussiness.id}
-                user={user?.id}
-                rating={userStars}
-                setRating={setUserStars}
-              />
-
+              {user !== null && user.id ? (
+                <Stars
+                  w={100}
+                  bussiness={bussiness.id}
+                  user={user?.id}
+                  rating={userStars}
+                  setRating={setUserStars}
+                />
+              ) : (
+                <Link to="/login">
+                  <Stars w={100} readOnly />
+                </Link>
+              )}
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}

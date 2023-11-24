@@ -85,7 +85,6 @@ const getProfileStarsFromBussiness = async (userId, bussinessId) => {
   const bussinessIndex = userStars.findIndex(
     (element) => element.bussiness === bussinessId
   );
-  console.log(bussinessIndex);
   if (bussinessIndex > -1) {
     // If business exists in userStars, update the stars rating
     const stars = userStars[bussinessIndex].stars;
@@ -96,6 +95,14 @@ const getProfileStarsFromBussiness = async (userId, bussinessId) => {
   }
 };
 
+const getUserStarsForBussiness = async (user, bussiness) => {
+  const userStars = await getProfileStars(user);
+  const businessRating = userStars.find(
+    (element) => element.bussiness === bussiness
+  );
+  return businessRating ? businessRating.stars : 0;
+};
+
 const updateProfileStars = async (user, bussiness, stars) => {
   let userStars = await getProfileStars(user);
 
@@ -104,10 +111,10 @@ const updateProfileStars = async (user, bussiness, stars) => {
   );
 
   if (bussinessIndex > -1) {
-    // If business exists in userStars, update the stars rating
+    // Si el negocio ya existe en userStars, actualizar la calificación
     userStars[bussinessIndex].stars = stars;
   } else {
-    // If business doesn't exist in userStars, add it to the list
+    // Si el negocio no existe en userStars, agregarlo a la lista
     userStars.push({
       bussiness: bussiness,
       stars: stars,
@@ -118,6 +125,7 @@ const updateProfileStars = async (user, bussiness, stars) => {
     .from("profiles")
     .update({ star_ratings: userStars })
     .eq("id", user);
+  console.log({ data });
   if (err) console.log(err);
 };
 
@@ -130,4 +138,5 @@ export {
   updateProfileStars,
   getProfileStarsFromBussiness,
   getProfileStars,
+  getUserStarsForBussiness,
 };

@@ -6,10 +6,14 @@ import { addStars } from "../../api/starsRate";
 
 export default function Stars(props) {
   
-  async function handleChangeStars(rate) {
+  const handleChangeStars = async (rate) => {
     console.log(rate);
-    await addStars(rate, props.user, props.bussiness);
-  }
+    try {
+      await addStars(rate, props.user, props.bussiness);
+    } catch (error) {
+      console.error("Error adding stars:", error);
+    }
+  };
 
   const itemStyles = {
     itemShapes: RoundedStar,
@@ -24,10 +28,9 @@ export default function Stars(props) {
       style={{ maxWidth: width }}
       value={props.rating}
       onChange={(event) => {
-        props.setRating((prevRating) => {
-          const newRating = event;
-          handleChangeStars(newRating);
-          return newRating;
+        const newRating = event;
+        handleChangeStars(newRating).then(() => {
+          props.setRating(newRating);
         });
       }}
       {...(props.readOnly ? { readOnly: true } : {})}
@@ -35,5 +38,3 @@ export default function Stars(props) {
     />
   );
 }
-
-//**Para que salga las estrellas a la mitad debe de ser readOnly */

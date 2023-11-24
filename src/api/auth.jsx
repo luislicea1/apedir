@@ -23,7 +23,7 @@ async function login(email, password) {
       email: email,
       password: password,
     });
-    
+
     if (error) {
       const message =
         "Email o contraseña incorrectos, si las credenciales son correctas entonces usted se encuentra banead@";
@@ -32,6 +32,7 @@ async function login(email, password) {
       return { session: data.session, message: "Login Exitoso", isValid: true };
     }
   } catch (error) {
+    console.log(error);
     return { message: error.message, isValid: false };
   }
 }
