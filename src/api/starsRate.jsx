@@ -50,4 +50,12 @@ const getStarsFromBussiness = async (bussinessId) => {
   return data;
 };
 
-export { addStars, getStarsFromBussiness };
+const getStarsAllBussiness = async () => { 
+  const {data, err } = await supabase.from("stars_rating").select("*")
+
+  console.log(err)
+  
+
+}
+
+export { addStars, getStarsFromBussiness, getStarsAllBussiness };

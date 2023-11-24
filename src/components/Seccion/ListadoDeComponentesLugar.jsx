@@ -19,6 +19,7 @@ import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
+import { getStarsAllBussiness } from "../../api/starsRate";
 
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
@@ -29,13 +30,14 @@ const ListadoDeComponentesLugar = () => {
   const [offset, setOffset] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [loading, setLoading] = useState(true);
-
   const { ref, inView } = useInView({
     threshold: 0,
   });
 
   const filtredBussinesses = useMemo(() => {
-    if (bussinesses?.length === 0) return null;
+    if (bussinesses?.length === 0) {
+      return null;
+    }
     if (province !== "todas") {
       return bussinesses.filter((value) => value.province === province);
     } else {
@@ -69,7 +71,6 @@ const ListadoDeComponentesLugar = () => {
       fetchMoreData();
     };
     fetchData();
-    
   }, []);
 
   useEffect(() => {
@@ -107,19 +108,23 @@ const ListadoDeComponentesLugar = () => {
       }}
     >
       {filtredBussinesses !== null &&
-        filtredBussinesses.map((item) => (
-          <div key={item.id}>
-            <ComponenteLugar
-              imagen={item.perfil_pic}
-              localizacion={item.province}
-              gps_location={item.gps_location}
-              nombre={item.name}
-              numeroPersonas={item.numeroPersonas}
-              url={item.value_url}
-              heigth={windowWidth < 713 ? "150px" : "272px"}
-            ></ComponenteLugar>
-          </div>
-        ))}
+        filtredBussinesses.map((item) => {
+          
+          return (
+            <div key={item.id}>
+              <ComponenteLugar
+              id={item.id}
+                imagen={item.perfil_pic}
+                localizacion={item.province}
+                gps_location={item.gps_location}
+                nombre={item.name}
+                numeroPersonas={item.numeroPersonas}
+                url={item.value_url}
+                heigth={windowWidth < 713 ? "150px" : "272px"}
+              ></ComponenteLugar>
+            </div>
+          );
+        })}
       {hasMore && (
         <div ref={ref} style={{ textAlign: "center" }}>
           <Loader></Loader>

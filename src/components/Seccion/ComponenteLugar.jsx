@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,10 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
+import { getStarsFromBussiness } from "../../api/starsRate";
 
 function ComponenteLugar(props) {
+  const [stars, setStars] = useState(null);
   const navigate = useNavigate();
   const { ref, inView } = useInView({
     threshold: 1,
@@ -21,6 +23,17 @@ function ComponenteLugar(props) {
   useEffect(() => {
     imagenRef.current = props.imagen; // Actualizar la referencia cuando cambia la imagen
   }, [props.imagen]);
+
+  useEffect(() => {
+    const fetchStars = async () => {
+      const s = await getStarsFromBussiness(props.id);
+      console.log(s !== null ? s : "");
+      setStars(s);
+    };
+    if (props.id !== undefined) {
+      fetchStars();
+    }
+  }, [props.id]);
 
   return (
     <>
@@ -48,7 +61,11 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            <Stars readOnly w={100} rating={3.5} />
+            <Stars
+              readOnly
+              w={100}
+              rating={stars !== null ? stars.average : 0}
+            />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2"
