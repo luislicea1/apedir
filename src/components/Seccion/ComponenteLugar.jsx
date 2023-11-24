@@ -75,21 +75,21 @@ function ComponenteLugar(props) {
             ref={ref}
           >
             {inView ? (
-              <LazyLoadImage
-                alt={props.nombre}
-                style={{ ...LogoStyle, objectFit: "contain" }}
-                src={props.imagen}// use normal <img> attributes as props
-                className="lazyload" 
-                effect="blur"
-              />
-
-              // <img
-              //   src={props.imagen}
+              // <LazyLoadImage
               //   alt={props.nombre}
-              //   className="lazyload"
-              //   loading="lazy"
               //   style={{ ...LogoStyle, objectFit: "contain" }}
+              //   src={props.imagen}// use normal <img> attributes as props
+              //   className="lazyload" 
+              //   effect="blur"
               // />
+
+              <img
+                src={props.imagen}
+                alt={props.nombre}
+                className="lazyload"
+                loading="lazy"
+                style={{ ...LogoStyle, objectFit: "contain" }}
+              />
             ) : (
               <div className="esqueleton-seccion-card"></div>
             )}
