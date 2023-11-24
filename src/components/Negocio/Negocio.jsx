@@ -68,14 +68,15 @@ export default function Negocio() {
 
     const fetchStars = async () => {
       const stars = await getProfileStarsFromBussiness(user.id, bussiness.id);
-      console.log(stars);
+
       setUserStars(stars);
     };
     fetchCategories();
-    if (user !== null && bussiness !== null) {
+    if (user !== null && bussiness !== null && bussiness !== undefined) {
       fetchStars();
     }
   }, [bussiness, user]);
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -122,9 +123,18 @@ export default function Negocio() {
             imagenPortada={bussiness.front_pic}
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
-            <div style={{height: "50vh"}}>
+            <div style={{ height: "50vh" }}>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
-              <Stars w={100}></Stars>
+              {user !== null ? (
+                <Stars rate={userStars} setRate={setUserStars} w={100} user={user.id} bussiness={bussiness.id} />
+
+              ) : (
+                <Link to="/login">
+                  <Stars rate={userStars} setRate={setUserStars} w={100} user={user.id} bussiness={bussiness.id} />
+                </Link>
+
+              )}
+
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}

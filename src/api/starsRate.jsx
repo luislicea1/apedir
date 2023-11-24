@@ -7,8 +7,7 @@ import {
 
 const addStars = async (stars, user, bussiness) => {
   let starRating = await getStarsFromBussiness(bussiness);
-  let userPreviousStars = null;
-  console.log(starRating);
+  let userPreviousStars = null
   if (starRating === null) {
     starRating = {
       bussiness: bussiness,
@@ -28,7 +27,6 @@ const addStars = async (stars, user, bussiness) => {
   }
   starRating.average = starRating.stars_num / starRating.total;
 
-  console.log(starRating);
 
   const { data, error } = await supabase
     .from("stars_rating")
@@ -45,16 +43,16 @@ const getStarsFromBussiness = async (bussinessId) => {
     .from("stars_rating")
     .select("*")
     .eq("bussiness", bussinessId)
-    .single();
-  console.log(error);
-  return data;
+    .limit(1);
+  return data[0];
 };
 
-const getStarsAllBussiness = async () => { 
-  const {data, err } = await supabase.from("stars_rating").select("*")
+
+const getStarsAllBussiness = async () => {
+  const { data, err } = await supabase.from("stars_rating").select("*")
 
   console.log(err)
-  
+
 
 }
 

@@ -27,8 +27,7 @@ function ComponenteLugar(props) {
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
-      console.log(s !== null ? s : "");
-      setStars(s);
+      setStars(s !== null && s !== undefined ? s : { bussiness: props.id, stars_num: 0, average: 0, total: 0 });
     };
     if (props.id !== undefined) {
       fetchStars();
@@ -64,7 +63,7 @@ function ComponenteLugar(props) {
             <Stars
               readOnly
               w={100}
-              rating={stars !== null ? stars.average : 0}
+              rate={stars ? stars.average : 0}
             />
           </CardHeader>
           <CardBody
