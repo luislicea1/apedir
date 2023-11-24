@@ -10,6 +10,8 @@ import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
+import { LazyLoadImage } from 'react-lazy-load-image-component'; 
+
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
@@ -44,7 +46,7 @@ function ComponenteLugar(props) {
           as="image"
         />
       </Helmet>
-      <Link to={`/lugar/${props.url}`}>
+      <Link to={`/lugar/${props.url}`} target="_blank">
         <Card
           className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}
@@ -72,6 +74,14 @@ function ComponenteLugar(props) {
             ref={ref}
           >
             {inView ? (
+              // <LazyLoadImage
+              //   alt={props.nombre}
+              //   style={{ ...LogoStyle, objectFit: "contain" }}
+              //   src={props.imagen}// use normal <img> attributes as props
+              //   className="lazyload" 
+              //   effect="blur"
+              // />
+
               <img
                 src={props.imagen}
                 alt={props.nombre}
@@ -83,7 +93,7 @@ function ComponenteLugar(props) {
               <div className="esqueleton-seccion-card"></div>
             )}
 
-            {props.imagen.caption && <span>{props.imagen.caption}</span>}
+            
           </CardBody>
         </Card>
       </Link>

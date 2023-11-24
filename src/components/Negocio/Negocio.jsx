@@ -9,6 +9,7 @@ import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useUserStore } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet";
 
 import Stars from "../Stars/Stars";
 import {
@@ -110,6 +111,23 @@ export default function Negocio() {
 
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+      
+      <Helmet>
+        <meta
+          name="description"
+          content={bussiness.description}
+        />
+        <title>
+          {bussiness.name}
+        </title>
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href={bussiness.perfil_pic}
+          alt="logo"
+        />
+      </Helmet>
+      
       <section style={NegocioSection}>
         {inView && (
           <Navegacion

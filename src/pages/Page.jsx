@@ -11,6 +11,7 @@ export default function Page({ children }) {
           name="description"
           content="pagina de promocion de negocios en cuba"
         />
+        <title>apedir - Sitio para mostrar los negocios en Cuba</title>
         <link
           rel="icon"
           type="image/svg+xml"
