@@ -11,7 +11,7 @@ export default function EventoCard(props){
         width: "450px",
         borderRadius: "0px",
         objectFit: "fill",
-     
+       
       };
     
       const center = {
@@ -23,6 +23,7 @@ export default function EventoCard(props){
         position:"relative",
         justifyContent: "center",
         //background: "red"
+        zIndex: "50"
       };
       const like = {
         zIndex : "50",

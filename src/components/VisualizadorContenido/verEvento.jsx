@@ -51,6 +51,7 @@ export default function VerEvento({ nombre }) {
     flexDirection: "column",
     //justifyContent: "center",
     height: "45vh",
+    
   };
 
   const overflow = {
