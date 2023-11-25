@@ -34,7 +34,7 @@ export default function EventoCard(props){
       
       return (
         <div style={center}>
-          <div style={{zIndex :"30"}}>
+          <div style={{zIndex :"40"}}>
           <Image
             
             style={img}
