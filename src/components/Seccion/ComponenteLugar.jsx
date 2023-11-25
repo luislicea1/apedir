@@ -10,7 +10,8 @@ import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
-import { LazyLoadImage } from 'react-lazy-load-image-component'; 
+//import { LazyLoadImage } from 'react-lazy-load-image-component'; 
+import {Image} from "@nextui-org/react";
 
 
 function ComponenteLugar(props) {
@@ -83,12 +84,21 @@ function ComponenteLugar(props) {
               //   effect="blur"
               // />
 
-              <img
-                src={props.imagen}
-                alt={props.nombre}
-                className="lazyload"
-                loading="lazy"
-                style={{ ...LogoStyle, objectFit: "contain" }}
+              // <img
+              //   src={props.imagen}
+              //   alt={props.nombre}
+              //   className="lazyload"
+              //   loading="lazy"
+              //   style={{ ...LogoStyle, objectFit: "contain" }}
+              // />
+
+              <Image
+                  style={{ ...LogoStyle, objectFit: "contain" }}
+                  alt="NextUI hero Image with delay"
+                  className="lazyload"
+                  loading="lazy"
+                  src={props.imagen}
+                  fallbackSrc="https://via.placeholder.com/300x200"
               />
             ) : (
               <div className="esqueleton-seccion-card"></div>
