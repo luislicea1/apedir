@@ -78,7 +78,6 @@ export default function Negocio() {
     }
   }, [bussiness, user]);
 
-
   useEffect(() => {
     const fetchProducts = async () => {
       if (categories.length > 0) {
@@ -111,15 +110,9 @@ export default function Negocio() {
 
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-      
       <Helmet>
-        <meta
-          name="description"
-          content={bussiness.description}
-        />
-        <title>
-          {bussiness.name}
-        </title>
+        <meta name="description" content={bussiness.description} />
+        <title>{bussiness.name}</title>
         <link
           rel="icon"
           type="image/svg+xml"
@@ -127,7 +120,7 @@ export default function Negocio() {
           alt="logo"
         />
       </Helmet>
-      
+
       <section style={NegocioSection}>
         {inView && (
           <Navegacion
@@ -144,13 +137,23 @@ export default function Negocio() {
             <div style={{ height: "50vh" }}>
               <TituloNegocio title={bussiness.name}></TituloNegocio>
               {user !== null ? (
-                <Stars rate={userStars} setRate={setUserStars} w={100} user={user.id} bussiness={bussiness.id} />
-
+                <Stars
+                  rate={userStars}
+                  setRate={setUserStars}
+                  w={100}
+                  user={user.id}
+                  bussiness={bussiness.id}
+                />
               ) : (
                 <Link to="/login">
-                  <Stars rate={userStars} setRate={setUserStars} w={100} user={user.id} bussiness={bussiness.id} />
+                  <Stars
+                    rate={userStars}
+                    setRate={setUserStars}
+                    w={100}
+                    user={user.id}
+                    bussiness={bussiness.id}
+                  />
                 </Link>
-
               )}
 
               <DescripcionNegocio
