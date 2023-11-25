@@ -68,9 +68,8 @@ export default function NegocioDashboard() {
     youtube: "",
     twitter: "",
   };
-
   const [bussinessInput, setBussinessInput] = useState(
-    business !== null ? business : defaultBussinessValues
+    business !== null && business !== undefined ? business : defaultBussinessValues
   );
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
@@ -164,7 +163,7 @@ export default function NegocioDashboard() {
         duration={3000}
       />
       <InputTitle
-        value={bussinessInput.name}
+        value={bussinessInput}
         setValue={setBussinessInput}
       ></InputTitle>
       <ImageUploadButton

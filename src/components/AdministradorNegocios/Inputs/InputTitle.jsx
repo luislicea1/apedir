@@ -9,7 +9,7 @@ export default function InputTitle({ value, setValue }) {
       label="Nombre"
       placeholder="Escriba el nombre de su negocio"
       labelPlacement="outside"
-      value={value}
+      value={value.name}
       onChange={(event) => {
         setValue({
           ...value,
