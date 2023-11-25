@@ -2,7 +2,7 @@ import React,{lazy,Suspense} from "react";
 //import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
-import ImgEvento from "../../assets/img/img (2).webp";
+
 //import EventoCard from "./EventoCard";
 //import BotonesEventos from "./BotonesEventos";
 //import DescripcionEvento from "./DescripcionDeEvento";
@@ -75,7 +75,7 @@ export default function VerEvento({ nombre }) {
 
           <section style={{}}>
             <Suspense>
-              <EventoCard evento={ImgEvento}></EventoCard>
+              <EventoCard></EventoCard>
             </Suspense>
 
             <div style={sectionDescription}>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Image } from "@nextui-org/react";
 import "./evento.css";
 import Like from "../Like/Like";
+import ImgEvento from "../../assets/img/img (2).webp";
 
 export default function EventoCard(props){
     const img = {
@@ -11,7 +12,7 @@ export default function EventoCard(props){
         width: "450px",
         borderRadius: "0px",
         objectFit: "fill",
-       
+        zIndex: "50"
       };
     
       const center = {
@@ -38,7 +39,7 @@ export default function EventoCard(props){
           <Image
             
             style={img}
-            src={props.evento}
+            src={ImgEvento}
             alt="NextUI Album Cover Image with delay"
             classNames="m-5"
           />
