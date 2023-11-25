@@ -167,9 +167,11 @@ export default function Header(props) {
               </DropdownItem>
 
               {user?.role === "user" ? (
-                <DropdownItem aria-label="settings" key="settings">
+
+                <DropdownItem aria-label="settings" key="settings" onClick={() => navigate("/administrador-negocio/perfil")}>
                   Crear negocio
                 </DropdownItem>
+
               ) : (
                 <DropdownItem
                   aria-label="settings"

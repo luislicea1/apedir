@@ -30,22 +30,35 @@ const getImage = async (bucket, path) => {
 
 const getOneBussiness = async (ownerId) => {
   let { data, error } = await supabase
-    .from("bussiness")
-    .select("*")
-    .eq("owner", ownerId);
-
-  const front_pic = await getImage("bussiness_front", data[0].front_pic);
-  const perfil_pic = await getImage("bussiness_perfil", data[0].perfil_pic);
-  const gps_location = await getImage(
-    "bussiness_location",
-    data[0].gps_location
-  );
-
-  data[0].front_pic = front_pic;
-  data[0].perfil_pic = perfil_pic;
-  data[0].gps_location = gps_location;
-  return data[0];
-};
+   .from("bussiness")
+   .select("*")
+   .eq("owner", ownerId);
+ 
+  if (data && data[0]) {
+   if (data[0].front_pic) {
+     const front_pic = await getImage("bussiness_front", data[0].front_pic);
+     data[0].front_pic = front_pic;
+   }
+ 
+   if (data[0].perfil_pic) {
+     const perfil_pic = await getImage("bussiness_perfil", data[0].perfil_pic);
+     data[0].perfil_pic = perfil_pic;
+   }
+ 
+   if (data[0].gps_location) {
+     const gps_location = await getImage(
+       "bussiness_location",
+       data[0].gps_location
+     );
+     data[0].gps_location = gps_location;
+   }
+ 
+   return data[0];
+  }
+ 
+ };
+ 
+ 
 
 const loadMoreBussiness = async (
   offset,
