@@ -95,9 +95,9 @@ function ComponenteLugar(props) {
                   style={{ ...LogoStyle, objectFit: "contain" }}
                   alt="NextUI hero Image with delay"
                   className="lazyload"
-                  loading="lazy"
+                  //loading="lazy"
                   src={props.imagen}
-                  //fallbackSrc="https://via.placeholder.com/200x200"
+                  fallbackSrc="https://via.placeholder.com/200x200"
               />
             ) : (
               <div className="esqueleton-seccion-card"></div>
