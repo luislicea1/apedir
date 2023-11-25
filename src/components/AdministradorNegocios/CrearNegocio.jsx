@@ -15,7 +15,8 @@ export default function CrearNegocio({ children }) {
   const linkColor = {
     margin: "10px 20px",
   };
-
+  
+  React.useEffect(() => {}, [bussiness]);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={sectionStyle}>
@@ -32,7 +33,7 @@ export default function CrearNegocio({ children }) {
               Perfil
             </Link>
             {bussiness !== null && bussiness !== undefined && (
-              <section style={{display: "flex", }}>
+              <section style={{ display: "flex" }}>
                 <Link to="/administrador-negocio/horarios" style={linkColor}>
                   Horario
                 </Link>

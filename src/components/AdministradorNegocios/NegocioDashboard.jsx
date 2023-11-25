@@ -17,10 +17,12 @@ import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
 import { useUserStore, useBussinessStore } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 import InputTitle from "./Inputs/InputTitle";
 
 export default function NegocioDashboard() {
+  const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
@@ -159,6 +161,8 @@ export default function NegocioDashboard() {
 
     toast.success("Actualización exitosa");
     fetchBussiness();
+    window.location.reload();
+
   };
 
   useEffect(() => {
