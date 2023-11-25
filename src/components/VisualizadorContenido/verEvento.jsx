@@ -1,4 +1,4 @@
-import React from "react";
+import React,{lazy,Suspense} from "react";
 //import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
