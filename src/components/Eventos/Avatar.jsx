@@ -1,7 +1,7 @@
 import { forwardRef, memo } from "react";
 import { useMemo } from "react";
 import React from "react";
-import { AvatarIcon, useAvatar, Image } from "@nextui-org/react";
+import { AvatarIcon, useAvatar, Image, Avatar } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -70,7 +70,7 @@ const MyAvatar = forwardRef((props, ref) => {
  return (
   <MemoizedDiv {...getAvatarProps()}>
     {src && (
-       <
+       <Avatar
        alt="NextUI hero Image with delay"
        className="object-cover rounded-xl"
        src={props.imagen}

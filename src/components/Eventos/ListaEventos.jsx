@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, lazy, Suspense } from "react";
 //import Eventos from "./Eventos";
 
+
 const Eventos = lazy(() => import("./Eventos"));
 const renderLoader = () => <p>Loading</p>;
 

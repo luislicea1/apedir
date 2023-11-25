@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 //import MyAvatar from "./Avatar";
 import { EventoCardStyles, eventoMargin } from "../styles/styles";
 
-const MyAvatar = lazy(() => import("./Avatar"));
-const renderLoader = () => <p>Loading</p>;
+
 
 export default function Eventos(props) {
   const navigate = useNavigate();
@@ -14,8 +13,8 @@ export default function Eventos(props) {
   return (
     <div className="" style={eventoMargin}>
       <Link onClick={() => navigate(`/evento/${props.nombre}`)}>
-        <Suspense fallback={renderLoader()}>
-          <MyAvatar
+        <Suspense>
+          <Avatar
             isBordered
             radius="md"
             color="danger"
