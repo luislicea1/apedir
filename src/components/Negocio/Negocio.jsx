@@ -147,11 +147,8 @@ export default function Negocio() {
               ) : (
                 <Link to="/login">
                   <Stars
-                    rate={userStars}
-                    setRate={setUserStars}
+                    readOnly
                     w={100}
-                    user={user.id}
-                    bussiness={bussiness.id}
                   />
                 </Link>
               )}
