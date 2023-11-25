@@ -2,6 +2,7 @@ import React from 'react'
 import { Image } from "@nextui-org/react";
 import "./evento.css";
 import Like from "../Like/Like";
+import ImgEvento from "../../assets/img/img (2).webp";
 
 export default function EventoCard(props){
     const img = {
@@ -11,7 +12,7 @@ export default function EventoCard(props){
         width: "450px",
         borderRadius: "0px",
         objectFit: "fill",
-     
+        zIndex: "50"
       };
     
       const center = {
@@ -23,6 +24,7 @@ export default function EventoCard(props){
         position:"relative",
         justifyContent: "center",
         //background: "red"
+        zIndex: "50"
       };
       const like = {
         zIndex : "50",
@@ -33,14 +35,15 @@ export default function EventoCard(props){
       
       return (
         <div style={center}>
+          
           <Image
             
             style={img}
-            src={props.evento}
+            src={ImgEvento}
             alt="NextUI Album Cover Image with delay"
             classNames="m-5"
           />
-          <div  className="bgtransparent"></div>
+          {/* <div  className="bgtransparent"></div> */}
           <div style={like}>
             <Like></Like>
           </div>

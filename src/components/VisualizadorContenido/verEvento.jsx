@@ -1,8 +1,8 @@
-import React from "react";
+import React,{lazy,Suspense} from "react";
 //import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
-import ImgEvento from "../../assets/img/img (1).jpg";
+
 //import EventoCard from "./EventoCard";
 //import BotonesEventos from "./BotonesEventos";
 //import DescripcionEvento from "./DescripcionDeEvento";
@@ -18,7 +18,7 @@ const BotonesEventos = lazy(() => import("./BotonesEventos"));
 const DescripcionEvento = lazy(() => import("./DescripcionDeEvento"));
 const HorarioEvento = lazy(() => import("./HorarioEvento"));
 const TituloEvento = lazy(() => import("./TituloEvento"));
-const Mapa = lazy(() => import("./Mapa"));
+//const Mapa = lazy(() => import("./Mapa"));
 
 export default function VerEvento({ nombre }) {
   const text =
@@ -50,7 +50,8 @@ export default function VerEvento({ nombre }) {
     display: "flex",
     flexDirection: "column",
     //justifyContent: "center",
-    height: "55vh",
+    height: "45vh",
+    
   };
 
   const overflow = {
@@ -74,7 +75,7 @@ export default function VerEvento({ nombre }) {
 
           <section style={{}}>
             <Suspense>
-              <EventoCard evento={ImgEvento}></EventoCard>
+              <EventoCard></EventoCard>
             </Suspense>
 
             <div style={sectionDescription}>
@@ -86,7 +87,7 @@ export default function VerEvento({ nombre }) {
               <div style={overflow}>
                 <Suspense>
                   <DescripcionEvento descripcion={text}></DescripcionEvento>
-                  <Mapa></Mapa>
+                  
                 </Suspense>
               </div>
               <Suspense>
