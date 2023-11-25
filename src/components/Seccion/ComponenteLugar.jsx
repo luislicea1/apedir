@@ -83,22 +83,22 @@ function ComponenteLugar(props) {
               //   effect="blur"
               // />
 
-              // <img
-              //   src={props.imagen}
-              //   alt={props.nombre}
-              //   className="lazyload"
-              //   loading="lazy"
-              //   style={{ ...LogoStyle, objectFit: "contain" }}
-              // />
-
-              <Image
-                  style={{ ...LogoStyle, objectFit: "contain" }}
-                  alt="NextUI hero Image with delay"
-                  className="lazyload"
-                  //loading="lazy"
-                  src={props.imagen}
-                  fallbackSrc="https://via.placeholder.com/200x200"
+              <img
+                src={props.imagen}
+                alt={props.nombre}
+                className="lazyload"
+                loading="lazy"
+                style={{ ...LogoStyle, objectFit: "contain" }}
               />
+
+              // <Image
+              //     style={{ ...LogoStyle, objectFit: "contain" }}
+              //     alt="NextUI hero Image with delay"
+              //     className="lazyload"
+              //     //loading="lazy"
+              //     src={props.imagen}
+              //     fallbackSrc="https://via.placeholder.com/200x200"
+              // />
             ) : (
               <div className="esqueleton-seccion-card"></div>
             )}
