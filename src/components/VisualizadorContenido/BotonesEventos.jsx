@@ -17,26 +17,16 @@ export default function BotonesEventos() {
     
   };
 
-  const location = {
-    background: "transparent",
-    height: "40px",
-    width: "40px",
-    borderRadius: "50%",
-    padding: "0",
-    fontWeight: "0",
-    lineHeight: "0",
-    maxWidth: "40px",
-    minWidth: "40px",
-  };
+ 
   const full = {
     width: "100%",
-    color: "white"
+    color: "black"
   }
 
   return (
     <div className="flex gap-4 items-center" style={margin}>
       <Link href="#"  style= {full}>
-        <Button color="secondary"  style={full}>
+        <Button color="primary"  style={full}>
           <p>Contactenos</p>
           
         </Button>

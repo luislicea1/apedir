@@ -50,7 +50,7 @@ export default function VerEvento({ nombre }) {
     display: "flex",
     flexDirection: "column",
     //justifyContent: "center",
-    height: "55vh",
+    height: "45vh",
   };
 
   const overflow = {
@@ -86,7 +86,7 @@ export default function VerEvento({ nombre }) {
               <div style={overflow}>
                 <Suspense>
                   <DescripcionEvento descripcion={text}></DescripcionEvento>
-                  <Mapa></Mapa>
+                  
                 </Suspense>
               </div>
               <Suspense>
