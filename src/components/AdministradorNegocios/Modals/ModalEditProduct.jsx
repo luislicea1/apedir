@@ -133,12 +133,13 @@ export default function ModalEditProduct({
                     }}
                   >
                     <div>
-                      <UploadIcon width={30} />
+                     <UploadIcon width={30} />
                       <input
                         type="file"
                         style={{ display: "none" }}
                         onChange={handleImageChange}
-                      />
+                      /> *
+                      
                     </div>
                   </label>
                   {isLoading === true && (

@@ -10,7 +10,6 @@ import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
 import ComponenteLugar from "./ComponenteLugar";
-import { For } from 'million/react';
 
 // const ComponenteLugar = lazy(() =>
 //   import("./ComponenteLugar").catch((error) => {
@@ -108,12 +107,13 @@ const ListadoDeComponentesLugar = () => {
             : "1fr 1fr 1fr",
       }}
     >
-      {filtredBussinesses !== null && (
-        <For each={filtredBussinesses}>
-          {(item) => (
+      {filtredBussinesses !== null &&
+        filtredBussinesses.map((item) => {
+          
+          return (
             <div key={item.id}>
               <ComponenteLugar
-                id={item.id}
+              id={item.id}
                 imagen={item.perfil_pic}
                 localizacion={item.province}
                 gps_location={item.gps_location}
@@ -123,16 +123,15 @@ const ListadoDeComponentesLugar = () => {
                 heigth={windowWidth < 713 ? "150px" : "272px"}
               ></ComponenteLugar>
             </div>
-          )}
-        </For>
-      )}
+          );
+        })}
       {hasMore && (
         <div ref={ref} style={{ textAlign: "center" }}>
           <Loader></Loader>
         </div>
       )}
     </div>
-   );
+  );
 };
 
 export default ListadoDeComponentesLugar;
