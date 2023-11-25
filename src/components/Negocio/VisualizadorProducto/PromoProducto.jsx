@@ -1,6 +1,7 @@
 import React from "react";
 import Like from "../../Like/Like";
 import CampanaIcon from "../../Icons/Campana/CampanaIcon";
+import { NotificationIcon } from "../../Icons/NotificationIcon";
 import RelojIcon from "../../Icons/Reloj/RelojIcon";
 import { Card } from "@nextui-org/react";
 
@@ -48,7 +49,7 @@ export default function PromoProducto(props) {
         <RelojIcon w={"26px"}></RelojIcon>
       </Card>
       <Card style={card}>
-        <CampanaIcon w={"26px"}></CampanaIcon>
+        <NotificationIcon width={"26px"}></NotificationIcon>
       </Card>
     </div>
   );

@@ -7,6 +7,8 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import LocalizacionImg from "../../../assets/img/img (1).jpg";
 import { Image } from "@nextui-org/react";
 import { fontWhite, MarginTop30 } from "../../styles/styles";
+import ShareLink from "../Share/ShareLink";
+import { NotificationIcon } from "../../Icons/NotificationIcon";
 
 export default function BtnDescription(props) {
   const location = {
@@ -27,23 +29,25 @@ export default function BtnDescription(props) {
   };
   return (
     <div className="flex gap-4 items-center" style={MarginTop30}>
-      {props.contact === "si" ? (
+      {/* {props.contact === "si" ? (
         <Link href="#contact" style={fontWhite}>
           <Button color="secondary">
             <p>Contactenos</p>
             <TelefonoIcon></TelefonoIcon>
           </Button>
         </Link>
-      ) : null}
+      ) : null} */}
 
       {props.domicilio === "si" ? (
         <Link href="#contact" color="foreground">
           <Button color="primary">
-            <p>Domicilio</p>
-            <TelefonoIcon></TelefonoIcon>
+            <p>Suscribirse</p>
+            <NotificationIcon></NotificationIcon>
           </Button>
         </Link>
       ) : null}
+
+      <ShareLink  url={props.url}></ShareLink>
 
       {props.localizacion !== undefined ? (
         <Popover placement="bottom">

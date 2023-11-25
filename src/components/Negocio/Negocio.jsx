@@ -160,6 +160,7 @@ export default function Negocio() {
                 localizacion={bussiness.address}
                 gps_location={bussiness.gps_location}
                 like={"si"}
+                url={history}
               ></DescripcionNegocio>
 
               <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
