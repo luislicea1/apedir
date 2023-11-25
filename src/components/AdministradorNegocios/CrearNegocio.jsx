@@ -4,18 +4,16 @@ import { Card, CardBody } from "@nextui-org/react";
 import { useBussinessStore } from "../../hooks/useStore";
 
 export default function CrearNegocio({ children }) {
-  const bussiness = useBussinessStore(state => state.bussiness)
+  const bussiness = useBussinessStore((state) => state.bussiness);
   const sectionStyle = {
     width: "100%",
     maxWidth: "900px",
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
-
   };
 
   const linkColor = {
     margin: "10px 20px",
-
   };
 
   return (
@@ -34,7 +32,7 @@ export default function CrearNegocio({ children }) {
               Perfil
             </Link>
             {bussiness !== null && bussiness !== undefined && (
-              <section>
+              <section style={{display: "flex", }}>
                 <Link to="/administrador-negocio/horarios" style={linkColor}>
                   Horario
                 </Link>
@@ -45,8 +43,7 @@ export default function CrearNegocio({ children }) {
                   Productos
                 </Link>
               </section>
-            )
-            }
+            )}
           </div>
           <Card>
             <CardBody>{children}</CardBody>

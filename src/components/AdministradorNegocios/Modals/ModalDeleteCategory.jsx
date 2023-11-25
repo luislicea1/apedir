@@ -15,6 +15,7 @@ export default function ModalDeleteCategory({
   onOpen,
   onOpenChange,
   categoryToDelete,
+  fetchCategories,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -22,6 +23,7 @@ export default function ModalDeleteCategory({
     setIsDeleting(true);
     await deleteCategoryById(id);
     setIsDeleting(false);
+    fetchCategories();
   };
 
   return (

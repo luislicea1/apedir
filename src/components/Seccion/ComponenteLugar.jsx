@@ -10,9 +10,8 @@ import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
-//import { LazyLoadImage } from 'react-lazy-load-image-component'; 
-import {Image} from "@nextui-org/react";
-
+//import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import {Image} from "@nextui-org/react";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
@@ -30,11 +29,16 @@ function ComponenteLugar(props) {
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
-      setStars(s !== null && s !== undefined ? s : { bussiness: props.id, stars_num: 0, average: 0, total: 0 });
+      setStars(
+        s !== null && s !== undefined
+          ? s
+          : { bussiness: props.id, stars_num: 0, average: 0, total: 0 }
+      );
     };
     if (props.id !== undefined) {
       fetchStars();
     }
+    console.log({ stars });
   }, [props.id]);
 
   return (
@@ -63,11 +67,7 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            <Stars
-              readOnly
-              w={100}
-              rate={stars ? stars.average : 0}
-            />
+            <Stars readOnly w={100} rate={stars?.average ? stars.average : 0} />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2"
@@ -79,7 +79,7 @@ function ComponenteLugar(props) {
               //   alt={props.nombre}
               //   style={{ ...LogoStyle, objectFit: "contain" }}
               //   src={props.imagen}// use normal <img> attributes as props
-              //   className="lazyload" 
+              //   className="lazyload"
               //   effect="blur"
               // />
 
@@ -90,7 +90,7 @@ function ComponenteLugar(props) {
                 loading="lazy"
                 style={{ ...LogoStyle, objectFit: "contain" }}
               />
-
+            ) : (
               // <Image
               //     style={{ ...LogoStyle, objectFit: "contain" }}
               //     alt="NextUI hero Image with delay"
@@ -99,11 +99,8 @@ function ComponenteLugar(props) {
               //     src={props.imagen}
               //     fallbackSrc="https://via.placeholder.com/200x200"
               // />
-            ) : (
               <div className="esqueleton-seccion-card"></div>
             )}
-
-            
           </CardBody>
         </Card>
       </Link>

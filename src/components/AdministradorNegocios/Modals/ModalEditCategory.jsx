@@ -12,6 +12,7 @@ import {
 import { updateCategory } from "../../../api/categories";
 
 export default function ModalEditCategory({
+  fetchCategories,
   isOpen,
   onOpenChange,
   categoryInput,
@@ -19,6 +20,7 @@ export default function ModalEditCategory({
 }) {
   const handleUpdateCategory = async () => {
     await updateCategory(categoryInput);
+    await fetchCategories();
   };
 
   return (
@@ -60,7 +62,7 @@ export default function ModalEditCategory({
                     onClose();
                   }}
                 >
-                  Agregar
+                  Editar.
                 </Button>
               </ModalFooter>
             </>

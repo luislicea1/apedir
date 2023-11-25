@@ -16,6 +16,7 @@ import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
 import { useUserStore, useBussinessStore } from "../../hooks/useStore";
+import Loader from "../Loader/Loader";
 
 import InputTitle from "./Inputs/InputTitle";
 
@@ -23,6 +24,8 @@ export default function NegocioDashboard() {
   const user = useUserStore((state) => state.user);
   const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchBussiness = async () => {
     try {
@@ -41,6 +44,19 @@ export default function NegocioDashboard() {
     if (business === null) fetchBussiness();
   }, [user]);
 
+  useEffect(() => {
+    if (business) {
+      const updatedBusiness = { ...defaultBussinessValues };
+      for (let key in updatedBusiness) {
+        updatedBusiness[key] =
+          business[key] !== null && business[key] !== undefined
+            ? business[key]
+            : "";
+      }
+      setBussinessInput(updatedBusiness);
+    }
+  }, [business]);
+
   const [imageName, setImageName] = useState({
     front_pic: "",
     perfil_pic: "",
@@ -54,7 +70,7 @@ export default function NegocioDashboard() {
     front_pic: "",
     description: "",
     address: "",
-    province: "",
+    province: "Santiago de Cuba",
     gps_location: "",
     email: "",
     phone_number: "",
@@ -69,7 +85,9 @@ export default function NegocioDashboard() {
     twitter: "",
   };
   const [bussinessInput, setBussinessInput] = useState(
-    business !== null && business !== undefined ? business : defaultBussinessValues
+    business !== null && business !== undefined
+      ? business
+      : defaultBussinessValues
   );
   const [isFormValid, setIsFormValid] = useState(false);
   const [formError, setFormError] = useState("");
@@ -79,7 +97,7 @@ export default function NegocioDashboard() {
       toast.error(formError);
       return;
     }
-
+    setIsLoading(true); // Activar el loader
     let front_pic = "";
     if (
       bussinessInput.front_pic !== null &&
@@ -137,6 +155,8 @@ export default function NegocioDashboard() {
     };
 
     await upsertBussiness(updatedBussinessInput);
+    setIsLoading(false); // Desactivar el loader
+
     toast.success("Actualización exitosa");
     fetchBussiness();
   };
@@ -212,6 +232,14 @@ export default function NegocioDashboard() {
           setValue={setBussinessInput}
         ></InputDeInstagram>
       </div>
+
+      {isLoading && (
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <Loader text={"Espera mientras se realiza la actualización."} />
+        </div>
+      )}
 
       <Button
         color="secondary"

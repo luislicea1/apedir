@@ -442,6 +442,7 @@ export default function ManageProducts() {
           />
 
           <ModalEditCategory
+            fetchCategories={fetchCategories}
             isOpen={isCategoryEditOpen}
             onOpenChange={onCategoryEditOpenChange}
             categoryInput={categoryInput}
@@ -458,6 +459,7 @@ export default function ManageProducts() {
             isOpen={isCategoryDeleteOpen}
             categoryToDelete={categoryInput}
             onOpen={onCategoryDeleteOpen}
+            fetchCategories={fetchCategories}
             onOpenChange={onCategoryDeleteOpenChange}
           />
         </div>

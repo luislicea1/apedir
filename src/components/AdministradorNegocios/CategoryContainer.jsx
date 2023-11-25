@@ -58,7 +58,7 @@ export default function CategoryContainer({
           Agregar Producto
         </Button>
         <div className="flex" style={{ gap: "10px" }}>
-          <Tooltip content="Editar producto">
+          <Tooltip content="Editar categoría">
             <span
               className="text-lg text-default-500 cursor-pointer active:opacity-50"
               onClick={() => {
@@ -76,7 +76,7 @@ export default function CategoryContainer({
               <EditIcon />
             </span>
           </Tooltip>
-          <Tooltip color="danger" content="Eliminar producto">
+          <Tooltip color="danger" content="Eliminar categoría">
             <span
               className="text-lg text-danger cursor-pointer active:opacity-50"
               onClick={() => {
@@ -89,6 +89,7 @@ export default function CategoryContainer({
                   return updatedState;
                 });
                 onCategoryDeleteOpen();
+
               }}
             >
               <DeleteIcon />
