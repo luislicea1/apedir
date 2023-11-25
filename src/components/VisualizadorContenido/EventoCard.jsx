@@ -34,6 +34,7 @@ export default function EventoCard(props){
       
       return (
         <div style={center}>
+          <div style={{zIndex :"30"}}>
           <Image
             
             style={img}
@@ -41,6 +42,8 @@ export default function EventoCard(props){
             alt="NextUI Album Cover Image with delay"
             classNames="m-5"
           />
+          </div>
+          
           <div  className="bgtransparent"></div>
           <div style={like}>
             <Like></Like>
