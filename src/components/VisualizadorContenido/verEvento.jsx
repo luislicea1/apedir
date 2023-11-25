@@ -2,7 +2,7 @@ import React,{lazy,Suspense} from "react";
 //import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import Imagen from "../../assets/fondo/restaurant.webp";
 import LogoImg from "../../assets/img/img (1).webp";
-import ImgEvento from "../../assets/img/img (1).jpg";
+import ImgEvento from "../../assets/img/img (2).webp";
 //import EventoCard from "./EventoCard";
 //import BotonesEventos from "./BotonesEventos";
 //import DescripcionEvento from "./DescripcionDeEvento";
@@ -18,7 +18,7 @@ const BotonesEventos = lazy(() => import("./BotonesEventos"));
 const DescripcionEvento = lazy(() => import("./DescripcionDeEvento"));
 const HorarioEvento = lazy(() => import("./HorarioEvento"));
 const TituloEvento = lazy(() => import("./TituloEvento"));
-const Mapa = lazy(() => import("./Mapa"));
+//const Mapa = lazy(() => import("./Mapa"));
 
 export default function VerEvento({ nombre }) {
   const text =
