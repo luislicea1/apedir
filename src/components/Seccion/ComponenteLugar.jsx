@@ -97,7 +97,7 @@ function ComponenteLugar(props) {
                   className="lazyload"
                   loading="lazy"
                   src={props.imagen}
-                  fallbackSrc="https://via.placeholder.com/300x200"
+                  //fallbackSrc="https://via.placeholder.com/200x200"
               />
             ) : (
               <div className="esqueleton-seccion-card"></div>
