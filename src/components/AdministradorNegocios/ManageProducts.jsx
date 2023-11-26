@@ -160,6 +160,7 @@ export default function ManageProducts() {
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
+
     await addCategory(categoryInput);
 
     setCategoryInput({
@@ -219,7 +220,7 @@ export default function ManageProducts() {
       setImageName(newFileName);
 
       // Llama a la función resizeImage pasándole el archivo de imagen
-      const resizedImage = await resizeImage(file, 220, 175); // Usa el archivo que guardaste
+      const resizedImage = await resizeImage(file, 800, 800); // Usa el archivo que guardaste
 
       // Usa el resultado de resizeImage para actualizar el estado del producto
       setProductInput((prevState) => {
@@ -405,6 +406,7 @@ export default function ManageProducts() {
                       onChange={(event) =>
                         setCategoryInput((prevState) => ({
                           ...prevState,
+                          bussiness: bussiness.id,
                           category: event.target.value,
                         }))
                       }
@@ -439,6 +441,7 @@ export default function ManageProducts() {
             handleImageChange={handleImageChange}
             imageName={imageName}
             setImageName={setImageName}
+            fetchProducts={fetchProducts}
           />
 
           <ModalEditCategory

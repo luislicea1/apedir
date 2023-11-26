@@ -19,7 +19,6 @@ import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
-import { getStarsAllBussiness } from "../../api/starsRate";
 
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
@@ -33,6 +32,7 @@ const ListadoDeComponentesLugar = () => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
+
 
   const filtredBussinesses = useMemo(() => {
     if (bussinesses?.length === 0) {
@@ -109,11 +109,10 @@ const ListadoDeComponentesLugar = () => {
     >
       {filtredBussinesses !== null &&
         filtredBussinesses.map((item) => {
-          
           return (
             <div key={item.id}>
               <ComponenteLugar
-              id={item.id}
+                id={item.id}
                 imagen={item.perfil_pic}
                 localizacion={item.province}
                 gps_location={item.gps_location}

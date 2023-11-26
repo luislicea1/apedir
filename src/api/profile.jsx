@@ -81,8 +81,8 @@ const getProfileStarsFromBussiness = async (userId, bussinessId) => {
     .select("star_ratings")
     .eq("id", userId)
     .single();
-  console.log(userStars)
-  let bussinessIndex = -1
+  console.log(userStars);
+  let bussinessIndex = -1;
   if (userStars.star_ratings !== null) {
     userStars = userStars.star_ratings;
 
@@ -109,20 +109,21 @@ const getUserStarsForBussiness = async (user, bussiness) => {
     (element) => element.bussiness === bussiness
   );
   return businessRating ? businessRating.stars : 0;
- };
- 
- const updateProfileStars = async (user, bussiness, stars) => {
+};
+
+const updateProfileStars = async (user, bussiness, stars) => {
   let userStars = await getProfileStars(user);
- 
+
   // Initialize userStars as an empty array if it's null
-  if (userStars === null) {
+  if (userStars === null || userStars === undefined) {
     userStars = [];
   }
- 
+
   const bussinessIndex = userStars.findIndex(
     (element) => element.bussiness === bussiness
   );
- 
+  console.log(bussinessIndex);
+
   if (bussinessIndex > -1) {
     // Si el negocio ya existe en userStars, actualizar la calificación
     userStars[bussinessIndex].stars = stars;
@@ -133,15 +134,13 @@ const getUserStarsForBussiness = async (user, bussiness) => {
       stars: stars,
     });
   }
- 
+
   const { data, err } = await supabase
     .from("profiles")
     .update({ star_ratings: userStars })
     .eq("id", user);
-  console.log({ data });
   if (err) console.log(err);
- };
- 
+};
 
 export {
   getRole,

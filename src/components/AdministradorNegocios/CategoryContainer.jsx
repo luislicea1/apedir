@@ -89,7 +89,6 @@ export default function CategoryContainer({
                   return updatedState;
                 });
                 onCategoryDeleteOpen();
-
               }}
             >
               <DeleteIcon />
@@ -112,6 +111,7 @@ export default function CategoryContainer({
             img={product.image}
             title={product.name}
             description={product.description}
+            currency={product.currency}
             onOpen={onOpen}
             onProductDeleteOpen={onProductDeleteOpen}
             productInput={product}

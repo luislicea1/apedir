@@ -14,7 +14,7 @@ export default function EventManagement() {
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
   const fetchBussiness = async () => {
-    if (user === null ) return;
+    if (user === null) return;
     const b = await getOneBussiness(user.id);
     setBussiness(b);
   };
@@ -25,55 +25,37 @@ export default function EventManagement() {
 
   const [events, setEvents] = useState([]);
 
+  const fetchEvents = async () => {
+    if (bussiness === null) return;
+    const eventList = await getEventsfromBussiness(bussiness.id);
+    setEvents(eventList !== null ? eventList : []);
+  };
+
   useEffect(() => {
-    const fetchEvents = async () => {
-      if (bussiness === null) return;
-      const eventList = await getEventsfromBussiness(bussiness.id);
-      setEvents(eventList !== null ? eventList : []);
-    };
-
-    let eventSubscription = null;
-
-    const timer = setTimeout(
-      () => (eventSubscription = subscribeToEvents()),
-      1000
-    );
-
-    const subscribeToEvents = () => {
-      return supabase
-        .channel("event-channel")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: "events" },
-          () => {
-            fetchEvents();
-          }
-        )
-        .subscribe();
-    };
-
     fetchEvents();
+  }, [user, bussiness, events]);
 
-    return () => {
-      if (eventSubscription) eventSubscription.unsubscribe();
-      clearTimeout(timer);
-    };
-  }, [events]);
+  const channels = supabase
+    .channel("custom-delete-channel")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "events" },
+      (payload) => {
+        fetchEvents();
+      }
+    )
+    .subscribe();
 
   return (
-    <div>
-      <Card>
         <Tabs aria-label="seleccion de eventos" fullWidth>
           <Tab key="create" title="Crear Evento">
-            <EventCard bussinessId={bussiness.id} />
+            {bussiness?.id && <EventCard bussinessId={bussiness.id} />}
           </Tab>
           {events.map((item) => (
             <Tab key={item.id} title={item.name}>
-              <EventCard event={item} />
+              <EventCard bussinessId={bussiness.id} event={item} />
             </Tab>
           ))}
         </Tabs>
-      </Card>
-    </div>
   );
 }

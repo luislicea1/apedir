@@ -19,6 +19,7 @@ import InputGmail from "./Inputs/InputGmail";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { deleteEvent, upsertEvent } from "../../api/events";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
+import { getImage } from "../../api/bussiness";
 
 export default function EventCard({ bussinessId, event }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -50,12 +51,8 @@ export default function EventCard({ bussinessId, event }) {
       eventInput.image !== null &&
       (eventInput.image !== "") & (eventInput.image instanceof Blob)
     ) {
-      await removeImage(eventInput.image, "bussiness_event");
-      eventImage = await uploadImage(
-        eventInput.image,
-        imageName,
-        "bussiness_event"
-      );
+      await removeImage(eventInput.image, "events");
+      eventImage = await uploadImage(eventInput.image, imageName, "events");
       eventImage = eventImage !== null ? eventImage.path : "";
     }
     const updatedEvent = {
@@ -75,7 +72,7 @@ export default function EventCard({ bussinessId, event }) {
       const lowerCaseExtension = extension.toLowerCase();
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
-      const resizedImage = await resizeImage(file, 272, 272);
+      const resizedImage = await resizeImage(file, 800, 800);
 
       setImageName(newFileName);
       setEventInput((prevState) => {
