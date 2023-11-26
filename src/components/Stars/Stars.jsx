@@ -35,7 +35,7 @@ export default function Stars(props) {
         itemStyles={itemStyles}
       />
       {props.total > 0 && (
-        <p style={{ fontSize: "0.em", marginLeft: "5px" }}>
+        <p style={{ fontSize: "0.7em", marginLeft: "5px" }}>
           {props.total} {props.total == 1 ? "valoración" : "valoraciones"}
         </p>
       )}
