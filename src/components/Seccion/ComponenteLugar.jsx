@@ -51,7 +51,7 @@ function ComponenteLugar(props) {
           as="image"
         />
       </Helmet>
-      <Link to={`/lugar/${props.url}`} target="_blank">
+      <Link to={`/lugar/${props.url}`}>
         <Card
           className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}
