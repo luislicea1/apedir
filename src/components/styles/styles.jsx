@@ -160,7 +160,7 @@ export const ProductoStyle = {
   width: "100%",
   ///width: "225px",
   //height: "175px",
-  aspectRatio: "1/0.8",
+  aspectRatio: "1/1",
   borderRadius: "10px 10px 0 0",
  
 }
