@@ -1,9 +1,5 @@
 import supabase from "./client";
-import {
-  getProfileStars,
-  updateProfileStars,
-  getUserStarsForBussiness,
-} from "./profile";
+import { updateProfileStars, getUserStarsForBussiness } from "./profile";
 
 const addStars = async (stars, user, bussiness) => {
   let starRating = await getStarsFromBussiness(bussiness);
@@ -21,12 +17,13 @@ const addStars = async (stars, user, bussiness) => {
     userPreviousStars = await getUserStarsForBussiness(user, bussiness);
     starRating.stars_num -= userPreviousStars;
   }
+  console.log({ userPreviousStars });
 
   starRating.stars_num += stars;
   if (userPreviousStars === null) {
-    starRating.total++;
+    starRating.total += 1;
   }
-  
+  console.log({ starRating });
   starRating.average = starRating.stars_num / starRating.total;
 
   const { data, error } = await supabase
