@@ -160,6 +160,7 @@ export default function ManageProducts() {
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
+
     await addCategory(categoryInput);
 
     setCategoryInput({
@@ -405,6 +406,7 @@ export default function ManageProducts() {
                       onChange={(event) =>
                         setCategoryInput((prevState) => ({
                           ...prevState,
+                          bussiness: bussiness.id,
                           category: event.target.value,
                         }))
                       }

@@ -16,7 +16,6 @@ const addCategory = async (category) => {
   const { data, error } = await supabase
     .from("categories")
     .insert(category)
-    .select();
 
   console.log(error);
   return data;
@@ -34,8 +33,6 @@ const deleteCategoryById = async (id) => {
     .eq("id", id);
 
   const { d, e } = await supabase.from("products").delete().eq("category", id);
-
-  
 };
 
 export { getCategories, addCategory, updateCategory, deleteCategoryById };
