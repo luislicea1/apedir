@@ -26,6 +26,7 @@ const addStars = async (stars, user, bussiness) => {
   if (userPreviousStars === null) {
     starRating.total++;
   }
+  
   starRating.average = starRating.stars_num / starRating.total;
 
   const { data, error } = await supabase

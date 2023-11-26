@@ -9,6 +9,7 @@ import { Image } from "@nextui-org/react";
 import { fontWhite, MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
+import { addSubscription } from "../../../api/profile";
 
 export default function BtnDescription(props) {
   const location = {
@@ -29,25 +30,25 @@ export default function BtnDescription(props) {
   };
   return (
     <div className="flex gap-4 items-center" style={MarginTop30}>
-      {/* {props.contact === "si" ? (
-        <Link href="#contact" style={fontWhite}>
-          <Button color="secondary">
-            <p>Contactenos</p>
-            <TelefonoIcon></TelefonoIcon>
-          </Button>
-        </Link>
-      ) : null} */}
+      {props.suscrito === "no" ? (
+        <Button
+          color="primary"
+          onClick={() => {
+            
+            addSubscription(props.userId, props.bussinessId);
+          }}
+        >
+          <p>Suscribirse</p>
+          <NotificationIcon></NotificationIcon>
+        </Button>
+      ) : (
+        <Button color="primary">
+          <p>Suscrito</p>
+          <NotificationIcon></NotificationIcon>
+        </Button>
+      )}
 
-      {props.domicilio === "si" ? (
-        <Link href="#contact" color="foreground">
-          <Button color="primary">
-            <p>Suscribirse</p>
-            <NotificationIcon></NotificationIcon>
-          </Button>
-        </Link>
-      ) : null}
-
-      <ShareLink  url={props.url}></ShareLink>
+      <ShareLink url={props.url}></ShareLink>
 
       {props.localizacion !== undefined ? (
         <Popover placement="bottom">

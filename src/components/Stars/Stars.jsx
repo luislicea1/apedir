@@ -27,8 +27,9 @@ export default function Stars(props) {
         value={props.rate}
         onChange={(event) => {
           const newRating = event;
+          props.setRate(newRating);
           handleChangeStars(newRating).then(() => {
-            props.setRate(newRating);
+            // props.setRate(newRating);
           });
         }}
         {...(props.readOnly ? { readOnly: true } : {})}
