@@ -166,12 +166,14 @@ export default function Header(props) {
                 <p className="font-semibold">Plan: PREMIUM</p>
               </DropdownItem>
 
-              {user?.role === "user" ? (
-
-                <DropdownItem aria-label="settings" key="settings" onClick={() => navigate("/administrador-negocio/perfil")}>
+              {selectedBussiness === undefined && selectedBussiness !== null ? (
+                <DropdownItem
+                  aria-label="settings"
+                  key="settings"
+                  onClick={() => navigate("/administrador-negocio/perfil")}
+                >
                   Crear negocio
                 </DropdownItem>
-
               ) : (
                 <DropdownItem
                   aria-label="settings"

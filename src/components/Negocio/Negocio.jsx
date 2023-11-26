@@ -146,17 +146,16 @@ export default function Negocio() {
                 />
               ) : (
                 <Link to="/login">
-                  <Stars
-                    readOnly
-                    w={100}
-                  />
+                  <Stars readOnly w={100} />
                 </Link>
               )}
 
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
-                domicilio={"si"}
+                suscrito={"no"}
+                userId={user?.id}
+                bussinessId={bussiness?.id}
                 localizacion={bussiness.address}
                 gps_location={bussiness.gps_location}
                 like={"si"}

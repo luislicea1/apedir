@@ -142,6 +142,30 @@ const updateProfileStars = async (user, bussiness, stars) => {
   if (err) console.log(err);
 };
 
+const addSubscription = async (userId, bussinessId) => {
+  let { data: prevSubs, error } = await supabase
+    .from("profiles")
+    .select("subscriptions")
+    .eq("id", userId);
+
+  prevSubs = prevSubs.length === 1 ? prevSubs[0] : null;
+
+  console.log({ prevSubs });
+  console.log({ error });
+  if (prevSubs.length === 0 || prevSubs === null || prevSubs === undefined) {
+    prevSubs = {
+      bussiness: bussinessId,
+    };
+  } else {
+    prevSubs.push({ bussiness: bussinessId });
+  }
+
+  const { data, err } = await supabase
+    .from("profiles")
+    .update("subscriptions", prevSubs);
+  console.log(data, err);
+};
+
 export {
   getRole,
   getUser,
@@ -152,4 +176,5 @@ export {
   getProfileStarsFromBussiness,
   getProfileStars,
   getUserStarsForBussiness,
+  addSubscription,
 };

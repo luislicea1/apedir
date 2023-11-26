@@ -41,31 +41,28 @@ export default function CrearNegocio({ children }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
-        
-          <div>
-            {bussiness !== null && bussiness !== undefined ? (
-              <section
-                className="flex justify-between"
-                style={{ margin: "10px" }}
-              >
-                <Link to="/administrador-negocio/perfil">Perfil</Link>
+        <div>
+          {bussiness !== null && bussiness !== undefined ? (
+            <section
+              className="flex justify-between"
+              style={{ margin: "10px" }}
+            >
+              <Link to="/administrador-negocio/perfil">Perfil</Link>
 
-                <Link to="/administrador-negocio/horarios">Horario</Link>
-                <Link to="/administrador-negocio/eventos">Eventos</Link>
-                <Link to="/administrador-negocio/productos">Productos</Link>
-              </section>
-            ) : (
-              <section className="flex justify-between mx-8">
-                <Link to="/administrador-negocio/horarios">Horario</Link>
-                <Link to="/administrador-negocio/eventos">Eventos</Link>
-                <Link to="/administrador-negocio/productos">Productos</Link>
-              </section>
-            )}
-          </div>
-          <Card>
-            <CardBody>{children}</CardBody>
-          </Card>
+              <Link to="/administrador-negocio/horarios">Horario</Link>
+              <Link to="/administrador-negocio/eventos">Eventos</Link>
+              <Link to="/administrador-negocio/productos">Productos</Link>
+            </section>
+          ) : (
+            <section className="flex justify-between mx-8">
+              <Link to="/administrador-negocio/perfil">Perfil</Link>
+            </section>
+          )}
         </div>
+        <Card>
+          <CardBody>{children}</CardBody>
+        </Card>
       </div>
+    </div>
   );
 }
