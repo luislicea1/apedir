@@ -10,6 +10,7 @@ import { fontWhite, MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
 import { addSubscription } from "../../../api/profile";
+import './style.css'
 
 export default function BtnDescription(props) {
   const location = {
@@ -33,13 +34,17 @@ export default function BtnDescription(props) {
       {props.suscrito === "no" ? (
         <Button
           color="primary"
+          className="btn-sub"
           onClick={() => {
             
             addSubscription(props.userId, props.bussinessId);
           }}
         >
           <p>Suscribirse</p>
+          <div className="svg-icon-notification ">
           <NotificationIcon></NotificationIcon>
+          </div>
+         
         </Button>
       ) : (
         <Button color="primary">

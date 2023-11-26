@@ -1,0 +1,23 @@
+
+.btn-sub:hover .svg-icon-notification {
+  animation: slope 0.4s linear infinite;
+}
+
+@keyframes slope {
+  0% {
+  }
+
+  25% {
+    transform: rotate(20deg);
+  }
+
+  50% {
+  }
+
+  75% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+  }
+}
