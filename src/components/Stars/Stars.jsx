@@ -2,11 +2,17 @@ import React from "react";
 import "@smastrom/react-rating/style.css";
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import { addStars } from "../../api/starsRate";
+import Confetti from "../Confetti/Confetti";
+import { useState } from "react";
 
 export default function Stars(props) {
+
+  const [showConfetti, setShowConfetti] = useState(false);
+
   const handleChangeStars = async (rate) => {
     try {
       await addStars(rate, props.user, props.bussiness);
+      setShowConfetti(true);
     } catch (error) {
       console.error("Error adding stars:", error);
     }
@@ -20,8 +26,10 @@ export default function Stars(props) {
 
   const width = props.w;
 
+ 
+
   return (
-    <section className="flex justify-between items-center">
+    <section className="flex justify-between items-center" style={{position: "relative"}}>
       <Rating
         style={{ maxWidth: width }}
         value={props.rate}
@@ -35,6 +43,7 @@ export default function Stars(props) {
         {...(props.readOnly ? { readOnly: true } : {})}
         itemStyles={itemStyles}
       />
+      {showConfetti && <Confetti />}
       {props.total > 0 && (
         <p style={{ fontSize: "0.7em", marginLeft: "5px" }}>
           {props.total} {props.total == 1 ? "valoración" : "valoraciones"}

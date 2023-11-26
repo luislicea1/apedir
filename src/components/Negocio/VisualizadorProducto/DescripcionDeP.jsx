@@ -80,6 +80,7 @@ export default function DescripcionDeP(props) {
         <Button
           color="primary"
           variant="bordered"
+         
           onPress={props.onClose} // Usando la función onClose aquí
           style={{
             zIndex: "100",
