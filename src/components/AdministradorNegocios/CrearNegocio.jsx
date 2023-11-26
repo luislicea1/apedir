@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody } from "@nextui-org/react";
-import { useBussinessStore } from "../../hooks/useStore";
+import { useBussinessStore, useUserStore } from "../../hooks/useStore";
+import { getOneBussiness } from "../../api/bussiness";
+import supabase from "../../api/client";
 
 export default function CrearNegocio({ children }) {
+  const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+
   const sectionStyle = {
     width: "100%",
     maxWidth: "900px",
@@ -15,8 +20,24 @@ export default function CrearNegocio({ children }) {
   const linkColor = {
     margin: "10px 20px",
   };
-  
-  React.useEffect(() => {}, [bussiness]);
+
+  const channels = supabase
+    .channel("custom-all-channel")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "bussiness" },
+      async (payload) => {
+        try {
+          if (user === null) return;
+          const b = await getOneBussiness(user.id);
+          setBussiness(b);
+        } catch (error) {
+          console.error("Error fetching business:", error);
+        }
+      }
+    )
+    .subscribe();
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={sectionStyle}>

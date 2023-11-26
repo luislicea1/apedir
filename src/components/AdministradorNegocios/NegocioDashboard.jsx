@@ -161,7 +161,7 @@ export default function NegocioDashboard() {
 
     toast.success("Actualización exitosa");
     fetchBussiness();
-    window.location.reload();
+    // window.location.reload();
 
   };
 

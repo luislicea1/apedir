@@ -19,6 +19,7 @@ import InputGmail from "./Inputs/InputGmail";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { deleteEvent, upsertEvent } from "../../api/events";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
+import { getImage } from "../../api/bussiness";
 
 export default function EventCard({ bussinessId, event }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -50,12 +51,8 @@ export default function EventCard({ bussinessId, event }) {
       eventInput.image !== null &&
       (eventInput.image !== "") & (eventInput.image instanceof Blob)
     ) {
-      await removeImage(eventInput.image, "bussiness_event");
-      eventImage = await uploadImage(
-        eventInput.image,
-        imageName,
-        "bussiness_event"
-      );
+      await removeImage(eventInput.image, "events");
+      eventImage = await uploadImage(eventInput.image, imageName, "events");
       eventImage = eventImage !== null ? eventImage.path : "";
     }
     const updatedEvent = {

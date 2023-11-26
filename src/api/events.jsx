@@ -1,5 +1,6 @@
 import { getImage } from "./bussiness";
 import supabase from "./client";
+
 const upsertEvent = async (event) => {
   let eventToInsert = Object.keys(event).reduce((acc, key) => {
     if (event[key] !== null && event[key] !== "") {
@@ -23,10 +24,9 @@ const getEventsfromBussiness = async (bussinessId) => {
     .select("*")
     .eq("bussiness", bussinessId);
 
-  console.log(error);
   const eventsWithImages = await Promise.all(
     data.map(async (event) => {
-      const image = await getImage("bussiness_event", event.image);
+      const image = await getImage("events", event.image);
       return {
         ...event,
         image,
@@ -42,4 +42,20 @@ const deleteEvent = async (eventId) => {
   await supabase.from("events").delete().eq("id", eventId);
 };
 
-export { upsertEvent, getEventsfromBussiness, deleteEvent };
+const getAllEvents = async () => {
+  const { data: events, err } = await supabase.from("events").select("*");
+
+  const eventsWithImages = await Promise.all(
+    events.map(async (event) => {
+      const image = await getImage("events", event.image);
+      return {
+        ...event,
+        image,
+      };
+    })
+  );
+  console.log(eventsWithImages);
+  return eventsWithImages;
+};
+
+export { upsertEvent, getEventsfromBussiness, deleteEvent, getAllEvents };

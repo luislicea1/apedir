@@ -1,12 +1,21 @@
-import React, { useEffect, useRef, lazy, Suspense } from "react";
+import React, { useEffect, useRef, lazy, Suspense, useState } from "react";
+import { getAllEvents } from "../../api/events";
 //import Eventos from "./Eventos";
-
-
-const Eventos = lazy(() => import("./Eventos"));
+import Eventos from "./Eventos";
+// const Eventos = lazy(() => import("./Eventos"));
 const renderLoader = () => <p>Loading</p>;
 
 export default function ListadoDeEventos(props) {
   const listContainer = useRef(null);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const e = await getAllEvents();
+      setEvents(e);
+    };
+    fetchEvents();
+  }, []);
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -41,7 +50,7 @@ export default function ListadoDeEventos(props) {
     gap: "20px",
   };
 
-  const eventos = props.eventos;
+  // const eventos = props.eventos;
   return (
     <Suspense fallback={renderLoader()}>
       <div
@@ -49,15 +58,16 @@ export default function ListadoDeEventos(props) {
         style={listContainerStyle}
         ref={listContainer}
       >
-        {eventos.map((evento, index) => (
-          <Eventos
-            key={index}
-            nombre={evento.nombre}
-            localizacion={evento.localizacion}
-            //numeroPersonas = {evento.numeroPersonas}
-            imagen={evento.imagen}
-          />
-        ))}
+        {events.length > 0 &&
+          events.map((evento, index) => (
+            <Eventos
+              key={index}
+              nombre={evento.name}
+              // localizacion={evento.localizacion}
+              //numeroPersonas = {evento.numeroPersonas}
+              imagen={evento.image}
+            />
+          ))}
       </div>
     </Suspense>
   );

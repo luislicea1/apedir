@@ -38,7 +38,6 @@ function ComponenteLugar(props) {
     if (props.id !== undefined) {
       fetchStars();
     }
-    console.log({ stars });
   }, [props.id]);
 
   return (
