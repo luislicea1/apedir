@@ -37,7 +37,7 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
           return { ...updatedState };
         });
       } else if (imageType === "cover") {
-        const resizedImage = await resizeImage(file, 735, 500);
+        const resizedImage = await resizeImage(file, 800, 800);
 
         setImageName((prevState) => {
           const updatedState = {

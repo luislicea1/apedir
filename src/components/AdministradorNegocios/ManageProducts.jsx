@@ -220,7 +220,7 @@ export default function ManageProducts() {
       setImageName(newFileName);
 
       // Llama a la función resizeImage pasándole el archivo de imagen
-      const resizedImage = await resizeImage(file, 220, 175); // Usa el archivo que guardaste
+      const resizedImage = await resizeImage(file, 800, 800); // Usa el archivo que guardaste
 
       // Usa el resultado de resizeImage para actualizar el estado del producto
       setProductInput((prevState) => {

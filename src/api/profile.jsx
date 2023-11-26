@@ -139,7 +139,6 @@ const updateProfileStars = async (user, bussiness, stars) => {
     .from("profiles")
     .update({ star_ratings: userStars })
     .eq("id", user);
-  console.log({ data });
   if (err) console.log(err);
 };
 

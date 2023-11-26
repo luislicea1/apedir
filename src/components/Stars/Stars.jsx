@@ -5,7 +5,6 @@ import { addStars } from "../../api/starsRate";
 
 export default function Stars(props) {
   const handleChangeStars = async (rate) => {
-    console.log(rate);
     try {
       await addStars(rate, props.user, props.bussiness);
     } catch (error) {
@@ -22,17 +21,24 @@ export default function Stars(props) {
   const width = props.w;
 
   return (
-    <Rating
-      style={{ maxWidth: width }}
-      value={props.rate}
-      onChange={(event) => {
-        const newRating = event;
-        handleChangeStars(newRating).then(() => {
-          props.setRate(newRating);
-        });
-      }}
-      {...(props.readOnly ? { readOnly: true } : {})}
-      itemStyles={itemStyles}
-    />
+    <section className="flex justify-between items-center">
+      <Rating
+        style={{ maxWidth: width }}
+        value={props.rate}
+        onChange={(event) => {
+          const newRating = event;
+          handleChangeStars(newRating).then(() => {
+            props.setRate(newRating);
+          });
+        }}
+        {...(props.readOnly ? { readOnly: true } : {})}
+        itemStyles={itemStyles}
+      />
+      {props.total > 0 && (
+        <p style={{ fontSize: "0.em", marginLeft: "5px" }}>
+          {props.total} {props.total == 1 ? "valoración" : "valoraciones"}
+        </p>
+      )}
+    </section>
   );
 }

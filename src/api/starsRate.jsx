@@ -7,7 +7,6 @@ import {
 
 const addStars = async (stars, user, bussiness) => {
   let starRating = await getStarsFromBussiness(bussiness);
-  console.log(starRating);
 
   let userPreviousStars = null;
   if (starRating === null || starRating === undefined) {

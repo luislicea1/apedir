@@ -29,7 +29,7 @@ function ComponenteLugar(props) {
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
-      console.log(s !== undefined && s !== null? s : "");
+      console.log(s !== undefined && s !== null ? s : "");
       setStars(
         s !== null && s !== undefined
           ? s
@@ -67,7 +67,12 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            <Stars readOnly w={100} rate={stars?.average ? stars.average : 0} />
+            <Stars
+              readOnly
+              w={100}
+              rate={stars?.average ? stars.average : 0}
+              total={stars?.total}
+            />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2 card-body-seccion"
