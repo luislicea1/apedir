@@ -69,7 +69,7 @@ function ComponenteLugar(props) {
             <Stars readOnly w={100} rate={stars?.average ? stars.average : 0} />
           </CardHeader>
           <CardBody
-            className="overflow-visible py-2"
+            className="overflow-visible py-2 card-body-seccion"
             style={ImgCardStyle}
             ref={ref}
           >
