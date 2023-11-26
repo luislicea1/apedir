@@ -110,7 +110,7 @@ export default function Negocio() {
 
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-      <Helmet>
+      {/* <Helmet>
         <meta name="description" content={bussiness.description} />
         <title>{bussiness.name}</title>
         <link
@@ -119,7 +119,7 @@ export default function Negocio() {
           href={bussiness.perfil_pic}
           alt="logo"
         />
-      </Helmet>
+      </Helmet> */}
 
       <section style={NegocioSection}>
         {inView && (
