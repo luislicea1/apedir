@@ -47,8 +47,6 @@ export default function EventManagement() {
     .subscribe();
 
   return (
-    <div>
-      <Card>
         <Tabs aria-label="seleccion de eventos" fullWidth>
           <Tab key="create" title="Crear Evento">
             {bussiness?.id && <EventCard bussinessId={bussiness.id} />}
@@ -59,7 +57,5 @@ export default function EventManagement() {
             </Tab>
           ))}
         </Tabs>
-      </Card>
-    </div>
   );
 }

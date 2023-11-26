@@ -29,6 +29,7 @@ function ComponenteLugar(props) {
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
+      console.log(s !== undefined && s !== null? s : "");
       setStars(
         s !== null && s !== undefined
           ? s

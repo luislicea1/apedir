@@ -441,6 +441,7 @@ export default function ManageProducts() {
             handleImageChange={handleImageChange}
             imageName={imageName}
             setImageName={setImageName}
+            fetchProducts={fetchProducts}
           />
 
           <ModalEditCategory

@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 import {
   Card,
@@ -23,6 +23,7 @@ export default function ProductCard({
   title,
   img,
   price,
+  currency,
   index,
   productInput,
   setProductInput,
@@ -91,7 +92,9 @@ export default function ProductCard({
       </CardBody>
       <CardFooter className="text-small justify-between">
         <b>{title}</b>
-        <p className="text-default-500">{price}</p>
+        <p className="text-default-500">
+          {price} {currency}
+        </p>
       </CardFooter>
     </Card>
   );

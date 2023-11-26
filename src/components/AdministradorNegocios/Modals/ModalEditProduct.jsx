@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { UploadIcon } from "../../Icons/UploadIcon";
 import { updateProduct } from "../../../api/products";
+import InputPrecio from "../Inputs/InputPrecio";
 
 export default function ModalEditProduct({
   isOpen,
@@ -23,13 +24,13 @@ export default function ModalEditProduct({
   handleImageChange,
   imageName,
   setImageName,
+  fetchProducts,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEditProduct = async () => {
-    console.log({ productInput }, { imageName });
     await updateProduct(productInput, imageName);
-    setImageName("")
+    setImageName("");
     setProductInput({
       name: "",
       price: "",
@@ -39,6 +40,8 @@ export default function ModalEditProduct({
       category: "",
       isAvalaible: true,
     });
+
+    fetchProducts();
   };
 
   return (
@@ -88,21 +91,7 @@ export default function ModalEditProduct({
                   }
                 />
                 <p>{productInput.description.length} / 120</p>
-                <Input
-                  autoFocus
-                  required
-                  label="Precio"
-                  placeholder="Precio del producto"
-                  variant="bordered"
-                  type="number"
-                  value={productInput.price}
-                  onChange={(event) =>
-                    setProductInput({
-                      ...productInput,
-                      price: event.target.value,
-                    })
-                  }
-                />
+                <InputPrecio value={productInput} setValues={setProductInput} />
 
                 <div
                   style={{
@@ -133,21 +122,22 @@ export default function ModalEditProduct({
                     }}
                   >
                     <div>
-                     <UploadIcon width={30} />
+                      <UploadIcon width={30} />
                       <input
                         type="file"
+                        accept="image/*"
                         style={{ display: "none" }}
                         onChange={handleImageChange}
-                      /> *
-                      
+                      />
                     </div>
+                    {isLoading === true && (
+                      <CircularProgress
+                        className="text-white"
+                        color="secondary"
+                        label="Subiendo la imagen..."
+                      />
+                    )}
                   </label>
-                  {isLoading === true && (
-                    <CircularProgress
-                      color="secondary"
-                      label="Subiendo la imagen..."
-                    />
-                  )}
                 </div>
               </ModalBody>
               <ModalFooter>
