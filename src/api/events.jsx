@@ -58,4 +58,28 @@ const getAllEvents = async () => {
   return eventsWithImages;
 };
 
-export { upsertEvent, getEventsfromBussiness, deleteEvent, getAllEvents };
+const getEventByName = async (name) => {
+  const { data, err } = await supabase
+    .from("events")
+    .select("*")
+    .eq("name", name);
+
+  const eventsWithImages = await Promise.all(
+    data.map(async (event) => {
+      const image = await getImage("events", event.image);
+      return {
+        ...event,
+        image,
+      };
+    })
+  );
+  return eventsWithImages[0];
+};
+
+export {
+  upsertEvent,
+  getEventsfromBussiness,
+  deleteEvent,
+  getAllEvents,
+  getEventByName,
+};
