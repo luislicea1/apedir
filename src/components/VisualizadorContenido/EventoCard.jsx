@@ -8,11 +8,11 @@ export default function EventoCard({ image }) {
   const img = {
     maxHeight: "70vh",
     height: "44vh",
-    //width: "100%",
+    /*width: "100%",*/
     width: "450px",
     borderRadius: "0px",
     objectFit: "fill",
-    zIndex: "50",
+    zIndex: "100 !important",
   };
 
   const center = {
@@ -35,7 +35,7 @@ export default function EventoCard({ image }) {
 
   return (
     <div style={center}>
-      <Image
+      <img
         style={img}
         src={image}
         alt="NextUI Album Cover Image with delay"
