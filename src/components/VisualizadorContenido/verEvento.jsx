@@ -7,6 +7,7 @@ import BotonesEventos from "./BotonesEventos";
 import DescripcionEvento from "./DescripcionDeEvento";
 import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
+import LoaderCompletePage from "../Loader/LoaderCompletePage";
 
 // const HeaderNegocio = lazy(() =>
 //   import("../Negocio/HeaderNegocio/HeaderNegocio")
@@ -99,5 +100,5 @@ export default function VerEvento({ nombre }) {
         </section>
       </div>
     </div>
-  ) : null;
+  ): <LoaderCompletePage />;
 }
