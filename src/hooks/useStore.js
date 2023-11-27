@@ -30,6 +30,11 @@ const useProductsList = create((set) => ({
   setProducts: (p) => set({ products: p }),
 }));
 
+const useCartStore = create((set) => ({
+  cart: null,
+  setCart: (p) => set({ cart: p }),
+}));
+
 export {
   useUserStore,
   useBussinessStore,
@@ -37,4 +42,5 @@ export {
   useBussinessList,
   useCategoriesList,
   useProductsList,
+  useCartStore,
 };
