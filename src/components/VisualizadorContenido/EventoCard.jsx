@@ -12,7 +12,7 @@ export default function EventoCard({ image }) {
     width: "450px",
     borderRadius: "0px",
     objectFit: "fill",
-    zIndex: "50",
+    //zIndex: "50",
   };
 
   const center = {
@@ -41,7 +41,7 @@ export default function EventoCard({ image }) {
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />
-      {/* <div  className="bgtransparent"></div> */}
+      <div  className="bgtransparent"></div>
       <div style={like}>
         <Like></Like>
       </div>
