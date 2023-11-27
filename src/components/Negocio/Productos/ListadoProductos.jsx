@@ -49,13 +49,13 @@ export default function ListadoProductos(props) {
    
   
   return (
-    <>
+    <div>
      <TituloDeProductos title={props.title} onChangeTitle={changeTitle}></TituloDeProductos>
 
       
       <div className="mt-2 list-container-products" style={grid_3_col}>
         {list.map(renderProducto)}
       </div>
-    </>
+    </div>
   );
 }

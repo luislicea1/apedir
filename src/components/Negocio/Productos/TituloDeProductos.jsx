@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 export default function TituloDeProductos(props) {
   const style = {
     width: "100%",
-    marginTop: "30px",
+    marginTop: "60px",
     marginBottom: "30px",
   };
 

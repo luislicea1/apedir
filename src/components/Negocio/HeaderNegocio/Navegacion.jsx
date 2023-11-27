@@ -1,73 +1,89 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-scroll";
 
 export default function Navegacion(props) {
- const listContainer = useRef(null);
- const lastViewedTitle = props.lastViewedTitle;
- 
- useEffect(() => {
-   const handleScroll = (e) => {
-     e.preventDefault();
-     let scrollAmount = 0;
-     if (e.deltaY < 0) {
-       scrollAmount = Math.max(-30, e.deltaY);
-     } else {
-       scrollAmount = Math.min(30, e.deltaY);
-     }
-     listContainer.current.scrollLeft += scrollAmount;
-   };
+  const listContainer = useRef(null);
+  const activeLinkRef = useRef(null);
+  const lastViewedTitle = props.lastViewedTitle;
 
-   if (listContainer.current) {
-     listContainer.current.addEventListener("wheel", handleScroll, {
-       passive: false,
-     });
-   }
+  useEffect(() => {
+    const handleScroll = (e) => {
+      e.preventDefault();
+      let scrollAmount = 0;
+      if (e.deltaY < 0) {
+        scrollAmount = Math.max(-30, e.deltaY);
+      } else {
+        scrollAmount = Math.min(30, e.deltaY);
+      }
+      listContainer.current.scrollLeft += scrollAmount;
+    };
 
-   return () => {
-     if (listContainer.current) {
-       listContainer.current.removeEventListener("wheel", handleScroll);
-     }
-   };
- }, []);
+    if (listContainer.current) {
+      listContainer.current.addEventListener("wheel", handleScroll, {
+        passive: false,
+      });
+    }
 
- const navegacion = {
-   position: "sticky",
-   height: "3rem",
-   top: "4rem",
-   zIndex: "40",
- };
+    return () => {
+      if (listContainer.current) {
+        listContainer.current.removeEventListener("wheel", handleScroll);
+      }
+    };
+  }, []);
 
- const flex = {
-   display: "flex",
-   gap: "30px",
-   padding: "10px",
-   width: "100%",
-   flexDirection: "row",
-   overflowX: "scroll",
-   whiteSpace: "nowrap",
- };
+  const navegacion = {
+    position: "sticky",
+    height: "3rem",
+    top: "4rem",
+    zIndex: "40",
+    
+  };
 
- let links;
- if (props.links) {
-   links = props.links;
- }
- return links !== null ? (
-   <div style={navegacion}>
-     <nav className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-       <div className="flex z-40 w-full h-auto data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-         <div style={flex} ref={listContainer}>
-           {links &&
-             links.map((link, index) => (
-               <li key={index}>
-                <Link
-                  activeClass="active"
-                  to={link.category}
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                >
+  const flex = {
+    display: "flex",
+    gap: "30px",
+    padding: "10px",
+    width: "100%",
+    flexDirection: "row",
+    overflowX: "scroll",
+    whiteSpace: "nowrap",
+  };
+
+  let links;
+  if (props.links) {
+    links = props.links;
+  }
+
+  useEffect(() => {
+    if (activeLinkRef.current) {
+      const container = listContainer.current;
+      const linkRect = activeLinkRef.current.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Ajusta el scroll solo si el enlace activo no está completamente visible
+      if (
+        linkRect.left < containerRect.left ||
+        linkRect.right > containerRect.right
+      ) {
+        container.scrollLeft =
+          activeLinkRef.current.offsetLeft - container.offsetLeft;
+      }
+    }
+  }, [lastViewedTitle]);
+
+  return links !== null ? (
+    <div style={navegacion} className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none sticky top-0 inset-x-0 border-b border-divider backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+      <nav className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 ">
+        <div className="flex z-40 w-full h-auto data-[menu-open=true]:border-none inset-x-0  data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 ">
+          <div style={flex} ref={listContainer}>
+            {links &&
+              links.map((link, index) => (
+                <li key={index}>
                   <a
+                    ref={(ref) => {
+                      if (link.category === lastViewedTitle) {
+                        activeLinkRef.current = ref;
+                      }
+                    }}
                     href={`#${link.category}`}
                     style={{
                       color:
@@ -82,12 +98,11 @@ export default function Navegacion(props) {
                   >
                     {link.category}
                   </a>
-                </Link>
-               </li>
-             ))}
-         </div>
-       </div>
-     </nav>
-   </div>
- ) : null;
+                </li>
+              ))}
+          </div>
+        </div>
+      </nav>
+    </div>
+  ) : null;
 }
