@@ -6,13 +6,13 @@ import ImgEvento from "../../assets/img/img (2).webp";
 
 export default function EventoCard({ image }) {
   const img = {
-    //maxHeight: "70vh",
-    //height: "50vh",
+    maxHeight: "70vh",
+    height: "44vh",
     //width: "100%",
     width: "450px",
     borderRadius: "0px",
     objectFit: "fill",
-    //zIndex: "50",
+    zIndex: "50",
   };
 
   const center = {
@@ -41,7 +41,7 @@ export default function EventoCard({ image }) {
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />
-      <div  className="bgtransparent"></div>
+      {/* <div  className="bgtransparent"></div> */}
       <div style={like}>
         <Like></Like>
       </div>
