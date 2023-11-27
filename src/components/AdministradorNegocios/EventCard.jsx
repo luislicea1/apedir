@@ -19,11 +19,11 @@ import InputGmail from "./Inputs/InputGmail";
 import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { deleteEvent, upsertEvent } from "../../api/events";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { getImage } from "../../api/bussiness";
+import Loader from "../Loader/Loader";
 
 export default function EventCard({ bussinessId, event }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [imageName, setImageName] = useState("");
   const [image, setImage] = useState(null);
   const defaultEventValues = {
@@ -46,6 +46,7 @@ export default function EventCard({ bussinessId, event }) {
   };
 
   const handleAddEvent = async () => {
+    setIsLoading(true);
     let eventImage = "";
     if (
       eventInput.image !== null &&
@@ -61,6 +62,7 @@ export default function EventCard({ bussinessId, event }) {
     };
     await upsertEvent(updatedEvent);
     toast.success("Evento actualizado satisfactoriamente");
+    setIsLoading(false);
   };
 
   const handleImageChange = async (event) => {
@@ -170,6 +172,7 @@ export default function EventCard({ bussinessId, event }) {
         ></InputPhoneNumber>
       </div>
       <br />
+      {isLoading && <Loader text={"Espere mientras se crea el evento"}/>}
       <Button
         color="secondary"
         className="text-white mt-2"
@@ -201,7 +204,7 @@ export default function EventCard({ bussinessId, event }) {
       </Modal>
       <Toaster
         richColors
-        duration={300}
+        duration={3000}
         position="bottom-center"
         theme="dark"
       />
