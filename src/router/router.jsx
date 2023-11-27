@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 import Page from "../pages/Page";
 // import AyudaInformacion from "../pages/AyudaInformacion";
-import { Navigate } from "react-router-dom";
 
 import {
   RequireUserRole,
@@ -14,6 +13,7 @@ import {
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
 import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
+import Loader from "../components/Loader/Loader";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
@@ -219,7 +219,7 @@ const router = createBrowserRouter([
   {
     path: "/evento/:nombre",
     element: (
-      <Suspense fallback={<LoaderCompletePage />}>
+      <Suspense fallback={<Loader text={"Cargando..."} />}>
         <LazyVerEventoWrapper />
       </Suspense>
     ),

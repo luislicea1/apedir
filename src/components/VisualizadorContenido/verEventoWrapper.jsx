@@ -1,17 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Loader from "../Loader/Loader";
-// import VerEvento from "./verEvento";
-const VerEvento = React.lazy(() => import("./verEvento"));
+import VerEvento from "./verEvento";
+// const VerEvento = React.lazy(() => import("./verEvento"));
 
 const verEventoWrapper = () => {
-  const { nombre, localizacion, numeroPersonas } = useParams();
+  const { nombre } = useParams();
 
-  return (
-    <React.Suspense fallback={Loader}>
-      <VerEvento nombre={nombre} />
-    </React.Suspense>
-  );
+  return <VerEvento nombre={nombre} />;
 };
 
 export default verEventoWrapper;
