@@ -9,7 +9,7 @@ import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useUserStore } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
-import { Helmet } from "react-helmet";
+//import { Helmet } from "react-helmet";
 
 import Stars from "../Stars/Stars";
 import {
