@@ -106,6 +106,22 @@ export default function Carrito() {
   const setCarrito = useCartStore((state) => state.setCart);
   const [totalPrice, setTotalPrice] = React.useState(0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const productInfo = carrito.map((product) => {
+    return `Título: ${product.title}, Cantidad: ${
+      product.quantity
+    }, Precio Total: ${product.price * product.quantity}`;
+  });
+  const [nombre, setNombre] = React.useState("");
+  const [direccion, setDireccion] = React.useState("");
+  const [detalles, setDetalles] = React.useState("");
+  const mensaje = `Nombre: ${nombre}%0ADirección: ${direccion}%aADetalles: ${detalles}%0aProductos: ${productInfo.join("%0a")}`;
+
+  const enviarMensaje = () => {
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    const numero = "55641782";
+    const url = `https://wa.me/${numero}?text=${mensajeCodificado}`;
+    window.open(url, "_blank");
+  };
 
   useEffect(() => {
     const newTotalPrice = carrito.reduce(
@@ -164,8 +180,15 @@ export default function Carrito() {
                         <hr />
                       </div>
                     ))}
-                    
-                    <div style={{width: "100%", display: "flex", justifyContent: "center", gap: "5px"}}>
+
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "5px",
+                      }}
+                    >
                       <p>Precio Total: </p>
                       <strong>$ {totalPrice}</strong>
                     </div>
@@ -177,6 +200,8 @@ export default function Carrito() {
                         label="Nombre"
                         placeholder="Escriba el nombre de la persona encargada de resivir el pedido"
                         labelPlacement="outside"
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
                       />
 
                       <Textarea
@@ -185,6 +210,8 @@ export default function Carrito() {
                         labelPlacement="outside"
                         placeholder="Dirección a donde enviar el pedido"
                         className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+                        value={direccion}
+                        onChange={(e) => setDireccion(e.target.value)}
                       />
 
                       <Textarea
@@ -193,6 +220,8 @@ export default function Carrito() {
                         labelPlacement="outside"
                         placeholder="Existe algun otro detalle como tocar el timbre, cuidado que hay perro, segunda planta etc que quieras añadir"
                         className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+                        value={detalles}
+                        onChange={(e) => setDetalles(e.target.value)}
                       />
                     </div>
                   </ModalBody>
@@ -200,15 +229,7 @@ export default function Carrito() {
                     <Button color="danger" variant="light" onPress={onClose}>
                       Close
                     </Button>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        const message = encodeURIComponent("Hello World!!!");
-                        const number = "55641782";
-                        const url = `https://wa.me/${number}?text=${message}`;
-                        window.open(url, "_blank");
-                      }}
-                    >
+                    <Button color="primary" onClick={enviarMensaje}>
                       Enviar
                     </Button>
                   </ModalFooter>
