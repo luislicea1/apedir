@@ -153,7 +153,7 @@ export default function Carrito() {
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            //placement="top-center"
+            placement="top-center"
             backdrop="blur"
             scrollBehavior={"inside"}
             size="full"
@@ -164,7 +164,7 @@ export default function Carrito() {
                   <ModalHeader className="flex flex-col gap-1">
                     Carrito
                   </ModalHeader>
-                  <ModalBody>
+                  <ModalBody style={{minHeight:"300px"}}>
                     {carrito.map((product, index) => (
                       <div key={index}>
                         <div style={grid_4_col}>
