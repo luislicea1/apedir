@@ -47,7 +47,12 @@ export default function DescripcionDeP(props) {
   const setCarrito = useCartStore((state) => state.setCart);
   const handleClick = () => {
     // props.onAddToCart({ title: props.title, quantity: props.cantidad });
-    const newOrder = { title: props.title, quantity: props.cantidad };
+    const newOrder = {
+      title: props.title,
+      quantity: props.cantidad,
+      image: props.image,
+      price: props.price * props.cantidad,
+    };
     const prevCart = carrito;
     setCarrito([...prevCart, newOrder]);
   };
