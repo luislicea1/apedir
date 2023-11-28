@@ -24,9 +24,7 @@ export default function Carrito() {
  }, [carrito]);
  
 
-  if (!carrito) {
-    return null;
-  }
+  
   return (
     <div className="mt-2">
       <Dropdown aria-label="carrito">
