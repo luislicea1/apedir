@@ -82,7 +82,7 @@ export default function Producto({
         isPressable
         style={CardStyles2}
         className="producto-card"
-        onClick={onOpen} // Agrega esta línea
+        onClick={onOpen} 
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
           <LazyLoadImage

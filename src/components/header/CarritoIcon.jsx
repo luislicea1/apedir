@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Badge } from "@nextui-org/react";
-import './header.css'
+import "./header.css";
 
 import { grid_4_col, btn100pc } from "../styles/styles";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
@@ -20,6 +20,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import { Input, Textarea } from "@nextui-org/react";
 
 /*
 export default function Carrito() {
@@ -121,18 +122,23 @@ export default function Carrito() {
         <LogoCarritoNegro w={30} />
       ) : (
         <>
-          <Button onPress={onOpen} className="carritoBtn2">
-          <Badge
-               color="danger"
-               content={carrito.length}
-               isInvisible={isInvisible}
-               shape="circle"
-             >
-               <LogoCarritoNegro w={30} />
-             </Badge>
+          <Button onClick={onOpen} className="carritoBtn2">
+            <Badge
+              color="danger"
+              content={carrito.length}
+              isInvisible={isInvisible}
+              shape="circle"
+            >
+              <LogoCarritoNegro w={30} />
+            </Badge>
           </Button>
 
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
+          <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            placement="top-center"
+            scrollBehavior={"inside"}
+          >
             <ModalContent>
               {(onClose) => (
                 <>
@@ -149,22 +155,46 @@ export default function Carrito() {
                             width="50px"
                           />
                           <span>
-                            <p>
-                              {product.title}
-                            </p>
+                            <p>{product.title}</p>
                           </span>
                           <span>{product.quantity}</span>
                           <span>$ {product.price}</span>
                         </div>
                       </div>
                     ))}
+
+                    <div>
+                      <Input
+                        type="text"
+                        variant="bordered"
+                        label="Nombre"
+                        placeholder="Escriba el nombre de la persona encargada de resivir el pedido"
+                        labelPlacement="outside"
+                      />
+
+                      <Textarea
+                        variant="bordered"
+                        label="Dirección"
+                        labelPlacement="outside"
+                        placeholder="Dirección a donde enviar el pedido"
+                        className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+                      />
+
+                      <Textarea
+                        variant="bordered"
+                        label="Algun otro detalle"
+                        labelPlacement="outside"
+                        placeholder="Existe algun otro detalle como tocar el timbre, cuidado que hay perro, segunda planta etc que quieras añadir"
+                        className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+                      />
+                    </div>
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>
                       Close
                     </Button>
                     <Button color="primary" onPress={onClose}>
-                      Action
+                      Enviar
                     </Button>
                   </ModalFooter>
                 </>
