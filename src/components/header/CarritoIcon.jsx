@@ -164,7 +164,7 @@ export default function Carrito() {
                   <ModalHeader className="flex flex-col gap-1">
                     Carrito
                   </ModalHeader>
-                  <ModalBody style={{minHeight:"300px"}}>
+                  <ModalBody style={{minHeight:"300px", background: "white"}}>
                     {carrito.map((product, index) => (
                       <div key={index}>
                         <div style={grid_4_col}>
