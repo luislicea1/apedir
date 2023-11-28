@@ -21,6 +21,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
+import ReactWhatsapp from "react-whatsapp";
 
 /*
 export default function Carrito() {
@@ -160,8 +161,14 @@ export default function Carrito() {
                           <span>{product.quantity}</span>
                           <span>$ {product.price}</span>
                         </div>
+                        <hr />
                       </div>
                     ))}
+                    
+                    <div style={{width: "100%", display: "flex", justifyContent: "center", gap: "5px"}}>
+                      <p>Precio Total: </p>
+                      <strong>$ {totalPrice}</strong>
+                    </div>
 
                     <div>
                       <Input
@@ -193,7 +200,15 @@ export default function Carrito() {
                     <Button color="danger" variant="light" onPress={onClose}>
                       Close
                     </Button>
-                    <Button color="primary" onPress={onClose}>
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        const message = encodeURIComponent("Hello World!!!");
+                        const number = "55641782";
+                        const url = `https://wa.me/${number}?text=${message}`;
+                        window.open(url, "_blank");
+                      }}
+                    >
                       Enviar
                     </Button>
                   </ModalFooter>
