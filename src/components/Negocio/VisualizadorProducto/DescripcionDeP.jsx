@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
 import { grid_2_col_center } from "../../styles/styles";
+import { useCartStore } from "../../../hooks/useStore";
 
 export default function DescripcionDeP(props) {
   const glass = {
@@ -42,8 +43,13 @@ export default function DescripcionDeP(props) {
     width: "95%",
   };
 
+  const carrito = useCartStore((state) => state.cart);
+  const setCarrito = useCartStore((state) => state.setCart);
   const handleClick = () => {
-    props.onAddToCart({ title: props.title, quantity: props.cantidad });
+    // props.onAddToCart({ title: props.title, quantity: props.cantidad });
+    const newOrder = { title: props.title, quantity: props.cantidad };
+    const prevCart = carrito;
+    setCarrito([...prevCart, newOrder]);
   };
 
   return (
@@ -59,14 +65,14 @@ export default function DescripcionDeP(props) {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            fontSize: "1.4rem"
+            fontSize: "1.4rem",
           }}
         >
           {props.title}
         </h2>
       </div>
       <div style={centertext}>
-        <article style={{fontSize: ".9rem"}}>{props.text}</article>
+        <article style={{ fontSize: ".9rem" }}>{props.text}</article>
       </div>
 
       <div style={grid_2_col_center}>
@@ -80,7 +86,6 @@ export default function DescripcionDeP(props) {
         <Button
           color="primary"
           variant="bordered"
-         
           onPress={props.onClose} // Usando la función onClose aquí
           style={{
             zIndex: "100",

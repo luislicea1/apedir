@@ -6,7 +6,6 @@ import Confetti from "../Confetti/Confetti";
 import { useState } from "react";
 
 export default function Stars(props) {
-
   const [showConfetti, setShowConfetti] = useState(false);
 
   const handleChangeStars = async (rate) => {
@@ -26,10 +25,11 @@ export default function Stars(props) {
 
   const width = props.w;
 
- 
-
   return (
-    <section className="flex justify-between items-center" style={{position: "relative"}}>
+    <section
+      className="flex justify-between items-center"
+      style={{ position: "relative" }}
+    >
       <Rating
         style={{ maxWidth: width }}
         value={props.rate}
@@ -44,9 +44,9 @@ export default function Stars(props) {
         itemStyles={itemStyles}
       />
       {showConfetti && <Confetti />}
-      {props.total > 0 && (
-        <p style={{ fontSize: "0.7em", marginLeft: "5px" }}>
-          {props.total} {props.total == 1 ? "valoración" : "valoraciones"}
+      {props.rate > 0 && (
+        <p style={{ fontSize: "1em", marginLeft: "5px" }}>
+          {parseFloat(props.rate).toFixed(1)}
         </p>
       )}
     </section>

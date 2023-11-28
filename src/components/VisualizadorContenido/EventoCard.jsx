@@ -37,7 +37,7 @@ export default function EventoCard({ image }) {
     <div style={center}>
       <img
         style={img}
-        src={image}
+        src={image }
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />

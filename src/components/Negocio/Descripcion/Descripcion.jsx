@@ -35,6 +35,7 @@ export default function DescripcionNegocio(props) {
         contact={props.contact}
         suscrito={props.suscrito}
         userId={props.userId}
+        setIsSub={props.setIsSub}
         bussinessId={props.bussinessId}
         localizacion={props.localizacion}
         gps_location={props.gps_location}

@@ -9,8 +9,8 @@ import { Image } from "@nextui-org/react";
 import { fontWhite, MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
-import { addSubscription } from "../../../api/profile";
-import './style.css'
+import { addOrDeleteSubscription } from "../../../api/profile";
+import "./style.css";
 
 export default function BtnDescription(props) {
   const location = {
@@ -31,23 +31,28 @@ export default function BtnDescription(props) {
   };
   return (
     <div className="flex gap-4 items-center" style={MarginTop30}>
-      {props.suscrito === "no" ? (
+      {props.suscrito === false ? (
         <Button
           color="primary"
           className="btn-sub"
           onClick={() => {
-            
-            addSubscription(props.userId, props.bussinessId);
+            props.setIsSub(true);
+            addOrDeleteSubscription(props.userId, props.bussinessId);
           }}
         >
           <p>Suscribirse</p>
           <div className="svg-icon-notification ">
-          <NotificationIcon></NotificationIcon>
+            <NotificationIcon></NotificationIcon>
           </div>
-         
         </Button>
       ) : (
-        <Button color="primary">
+        <Button
+          color="primary"
+          onClick={() => {
+            props.setIsSub(false);
+            addOrDeleteSubscription(props.userId, props.bussinessId);
+          }}
+        >
           <p>Suscrito</p>
           <NotificationIcon></NotificationIcon>
         </Button>

@@ -142,28 +142,57 @@ const updateProfileStars = async (user, bussiness, stars) => {
   if (err) console.log(err);
 };
 
-const addSubscription = async (userId, bussinessId) => {
+const addOrDeleteSubscription = async (userId, bussinessId) => {
   let { data: prevSubs, error } = await supabase
     .from("profiles")
     .select("subscriptions")
     .eq("id", userId);
-
-  prevSubs = prevSubs.length === 1 ? prevSubs[0] : null;
+  console.log(prevSubs);
+  prevSubs = prevSubs.length === 1 ? prevSubs[0].subscriptions : [];
 
   console.log({ prevSubs });
   console.log({ error });
-  if (prevSubs.length === 0 || prevSubs === null || prevSubs === undefined) {
-    prevSubs = {
-      bussiness: bussinessId,
-    };
-  } else {
+
+  if (prevSubs === null || prevSubs === undefined) {
+    prevSubs = [];
     prevSubs.push({ bussiness: bussinessId });
+  } else {
+    const index = prevSubs.findIndex((sub) => sub.bussiness === bussinessId);
+    if (index !== -1) {
+      // Eliminar el negocio de la suscripción
+      prevSubs.splice(index, 1);
+    } else {
+      // Agregar el negocio a la suscripción
+      prevSubs.push({ bussiness: bussinessId });
+    }
   }
 
   const { data, err } = await supabase
     .from("profiles")
-    .update("subscriptions", prevSubs);
-  console.log(data, err);
+    .update({ subscriptions: prevSubs })
+    .eq("id", userId);
+  if (err) console.log(err);
+};
+
+const getSubscription = async (user, bussiness) => {
+  let { data, error } = await supabase
+    .from("profiles")
+    .select("subscriptions")
+    .eq("id", user);
+
+  data = data[0].subscriptions;
+  if (error) {
+    console.error(error);
+    return;
+  }
+  if (!Array.isArray(data)) {
+    console.error("Data is not an array");
+    return;
+  }
+
+  const subscription = data.find((obj) => obj.bussiness === bussiness);
+
+  return subscription ? true : false;
 };
 
 export {
@@ -176,5 +205,6 @@ export {
   getProfileStarsFromBussiness,
   getProfileStars,
   getUserStarsForBussiness,
-  addSubscription,
+  addOrDeleteSubscription,
+  getSubscription,
 };
