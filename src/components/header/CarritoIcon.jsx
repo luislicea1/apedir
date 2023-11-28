@@ -107,19 +107,18 @@ export default function Carrito() {
   const [totalPrice, setTotalPrice] = React.useState(0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const productInfo = carrito.map((product) => {
-    return `Título: ${product.title}, Cantidad: ${
-      product.quantity
-    }, Precio Total: ${product.price * product.quantity}`;
-  });
+    return `${product.title},  Cantidad: ${product.quantity}`;
+   });
+   
   const [nombre, setNombre] = React.useState("");
   const [direccion, setDireccion] = React.useState("");
   const [detalles, setDetalles] = React.useState("");
-  const mensaje = `Nombre: ${nombre}%0ADirección: ${direccion}%aADetalles: ${detalles}%0aProductos: ${productInfo.join("%0a")}`;
+  const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join("%0A")}`;
 
   const enviarMensaje = () => {
     const mensajeCodificado = encodeURIComponent(mensaje);
     const numero = "55641782";
-    const url = `https://wa.me/${numero}?text=${mensajeCodificado}`;
+    const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
   };
 
