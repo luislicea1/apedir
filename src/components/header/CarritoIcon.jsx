@@ -22,6 +22,7 @@ import {
 } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
 import ReactWhatsapp from "react-whatsapp";
+import { grid_1_col } from "../styles/styles";
 
 /*
 export default function Carrito() {
@@ -116,7 +117,7 @@ export default function Carrito() {
   const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join("%0A")}`;
 
   const enviarMensaje = () => {
-    const mensajeCodificado = encodeURIComponent(mensaje);
+    //const mensajeCodificado = encodeURIComponent(mensaje);
     const numero = "55641782";
     const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
@@ -192,7 +193,7 @@ export default function Carrito() {
                       <strong>$ {totalPrice}</strong>
                     </div>
 
-                    <div>
+                    <div style={grid_1_col}> 
                       <Input
                         type="text"
                         variant="bordered"
