@@ -1,11 +1,17 @@
 .bgtransparent{
-    background: linear-gradient(#0e131700,#0E1317,#0E1317);
+    background: linear-gradient(transparent,transparent,#0e131700,#0E1317,#0E1317);
         
     position: absolute;
     bottom: 0;
     z-index: 30;
     height : 40vh;
     width: 100%;
+}
+
+.blur-img-fondo{
+    filter: blur(10px);
+ -webkit-filter: blur(10px);
+
 }
 
 @media only screen and (max-height: 1100px) {

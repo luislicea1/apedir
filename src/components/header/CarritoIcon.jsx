@@ -142,7 +142,7 @@ export default function Carrito() {
           <Button onClick={onOpen} className="carritoBtn2">
             <Badge
               color="danger"
-              content={carrito.length}
+              content={carrito.length > 9 ? "+9" : carrito.length}
               isInvisible={isInvisible}
               shape="circle"
             >
