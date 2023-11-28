@@ -152,7 +152,9 @@ export default function Producto({
                         title={title}
                         text={description}
                         // onAddToCart={handleAddToCart}
+                        image={img}
                         cantidad={cantidad}
+                        price={price}
                         onClose={onClose}
                       ></DescripcionDeP>
                       <OrdenarProducto

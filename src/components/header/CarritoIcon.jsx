@@ -47,6 +47,7 @@ export default function Carrito() {
                 <img src={product.image} alt={product.title} width="50px" />
                 <span>{product.title}</span>
                 <span>{product.quantity}</span>
+                <span>$ {product.price}</span>
               </div>
             </DropdownItem>
           ))}
