@@ -15,6 +15,7 @@ import Stars from "../Stars/Stars";
 import {
   getProfileStars,
   getProfileStarsFromBussiness,
+  getSubscription,
 } from "../../api/profile";
 // const Stars = lazy(() => import("../Stars/Stars"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
@@ -34,7 +35,9 @@ export default function Negocio() {
   const [lastViewedTitle, setLastViewedTitle] = useState(null);
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [userStars, setUserStars] = useState(0);
+  const [isSub, setIsSub] = useState(false);
   const user = useUserStore((state) => state.user);
+
   useEffect(() => {
     if (lastViewedTitle !== null) {
       //alert(lastViewedTitle);
@@ -54,6 +57,7 @@ export default function Negocio() {
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
       setBussiness(bussinessData);
+      console.log(bussinessData);
     };
 
     fetchData();
@@ -72,10 +76,23 @@ export default function Negocio() {
 
       setUserStars(stars);
     };
+    const isSub = async () => {
+      if (
+        user !== null &&
+        user.id !== null &&
+        bussiness !== null &&
+        bussiness.id !== null
+      ) {
+        const sub = await getSubscription(user.id, bussiness.id);
+        setIsSub(sub);
+      }
+    };
+
     fetchCategories();
     if (user !== null && bussiness !== null && bussiness !== undefined) {
       fetchStars();
     }
+    isSub();
   }, [bussiness, user]);
 
   useEffect(() => {
@@ -143,11 +160,47 @@ export default function Negocio() {
                   <Stars readOnly w={100} />
                 </Link>
               )}
+              <br />
+              {bussiness !== null && bussiness.schedules !== null && (
+                <h6>Horarios</h6>
+              )}
+              {bussiness !== null &&
+                bussiness.schedules !== null &&
+                bussiness.schedules.map((schedule) => {
+                  let dia = <h6>{schedule.dia}</h6>;
 
+                  if (!schedule.trabaja) {
+                    return (
+                      <div style={{ display: "flex", gap: "5px" }}>
+                        {dia}
+                        <span>No se trabaja</span>
+                      </div>
+                    );
+                  }
+
+                  let entrada = schedule.entrada ? (
+                    <span>Horario apertura: {schedule.entrada}</span>
+                  ) : (
+                    <span>-</span>
+                  );
+                  let salida = schedule.salida ? (
+                    <span>Horario cierre: {schedule.salida}</span>
+                  ) : (
+                    <span>-</span>
+                  );
+
+                  return (
+                    <div style={{ display: "flex", gap: "5px" }}>
+                      {dia}: {entrada} {salida}
+                    </div>
+                  );
+                })}
+              <br />
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
-                suscrito={"no"}
+                suscrito={isSub}
+                setIsSub={setIsSub}
                 userId={user?.id}
                 bussinessId={bussiness?.id}
                 localizacion={bussiness.address}

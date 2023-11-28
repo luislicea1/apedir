@@ -71,7 +71,6 @@ function ComponenteLugar(props) {
               readOnly
               w={100}
               rate={stars?.average ? stars.average : 0}
-              total={stars?.total}
             />
           </CardHeader>
           <CardBody
