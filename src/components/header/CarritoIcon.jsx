@@ -153,7 +153,7 @@ export default function Carrito() {
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            placement="top-center"
+            //placement="top-center"
             backdrop="blur"
             scrollBehavior={"inside"}
             size="full"
