@@ -46,16 +46,17 @@ export default function Producto({
 
   const [carrito, setCarrito] = useState([]);
 
-  const handleAddToCart = (product) => {
-    setCarrito((prevCarrito) => {
-      const newCarrito = [
-        ...prevCarrito,
-        { title: product.title, quantity: product.quantity, image: img },
-      ];
-      onChangeCarrito(newCarrito);
-      return newCarrito;
-    });
-  };
+  // const handleAddToCart = (product) => {
+  //   const newCarrito = [carrito, product];
+  //   setCarrito((prevCarrito) => {
+  //     const newCarrito = [
+  //       ...prevCarrito,
+  //       { title: product.title, quantity: product.quantity, image: img },
+  //     ];
+  //     onChangeCarrito(newCarrito);
+  //     return newCarrito;
+  //   });
+  // };
 
   const sectionStyle2 = {
     width: "100%",
@@ -150,7 +151,7 @@ export default function Producto({
                       <DescripcionDeP
                         title={title}
                         text={description}
-                        onAddToCart={handleAddToCart}
+                        // onAddToCart={handleAddToCart}
                         cantidad={cantidad}
                         onClose={onClose}
                       ></DescripcionDeP>

@@ -13,11 +13,9 @@ import { useInView } from "react-intersection-observer";
 
 import Stars from "../Stars/Stars";
 import {
-  getProfileStars,
   getProfileStarsFromBussiness,
   getSubscription,
 } from "../../api/profile";
-// const Stars = lazy(() => import("../Stars/Stars"));
 const FooterNegocio = lazy(() => import("./Footer/FooterNegocio"));
 const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
@@ -168,7 +166,6 @@ export default function Negocio() {
                 bussiness.schedules !== null &&
                 bussiness.schedules.map((schedule) => {
                   let dia = <h6>{schedule.dia}</h6>;
-
                   if (!schedule.trabaja) {
                     return (
                       <div style={{ display: "flex", gap: "5px" }}>
