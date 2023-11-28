@@ -96,12 +96,6 @@ export default function Negocio() {
     fetchProducts();
   }, [categories]);
 
-  const [carrito, setCarrito] = useState([]);
-
-  const handleAddToCart = (product) => {
-    setCarrito(product);
-  };
-
   const changeTitle = (title) => {
     setLastViewedTitle(title);
     //alert(title)
@@ -179,7 +173,6 @@ export default function Negocio() {
                       nombre={category.category}
                       localizacion={category.category}
                       lista={categoryProducts}
-                      onChangeCarrito={handleAddToCart}
                       onChangeTitle={changeTitle}
                     ></ListadoProductos>
                   )

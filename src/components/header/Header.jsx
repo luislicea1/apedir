@@ -136,7 +136,7 @@ export default function Header(props) {
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           {isBussiness && (
             // <React.Suspense fallback={<div></div>}>
-            <Carrito carrito={[]}></Carrito>
+            <Carrito></Carrito>
             // </React.Suspense>
           )}
           {/* <React.Suspense fallback={<div></div>}> */}

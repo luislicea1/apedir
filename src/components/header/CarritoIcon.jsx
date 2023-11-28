@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Badge } from "@nextui-org/react";
 //import { CartIcon } from "../Icons/CartIcon/CartIcon";
 import { grid_3_col, btn100pc } from "../styles/styles";
@@ -10,10 +10,19 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
+import { useCartStore } from "../../hooks/useStore";
+
 
 // En el componente Carrito
-export default function Carrito({ carrito }) {
+export default function Carrito() {
   const [isInvisible, setIsInvisible] = React.useState(false);
+  const carrito = useCartStore((state) => state.cart);
+ const setCarrito = useCartStore((state) => state.setCart);
+
+ useEffect(() => {
+  console.log(carrito);
+ }, [carrito]);
+ 
 
   if (!carrito) {
     return null;

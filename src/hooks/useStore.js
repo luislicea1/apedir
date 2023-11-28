@@ -31,7 +31,7 @@ const useProductsList = create((set) => ({
 }));
 
 const useCartStore = create((set) => ({
-  cart: null,
+  cart: [],
   setCart: (p) => set({ cart: p }),
 }));
 
@@ -44,3 +44,4 @@ export {
   useProductsList,
   useCartStore,
 };
+

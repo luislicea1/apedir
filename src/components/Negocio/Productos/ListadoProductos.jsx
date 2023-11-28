@@ -4,6 +4,7 @@ import TituloDeProductos from "./TituloDeProductos";
 import "./productos.css";
 import "./responsive.css"
 import { grid_3_col } from "../../styles/styles";
+import { useCartStore } from "../../../hooks/useStore";
 
 
 // Envolviendo el componente Producto con React.memo
@@ -13,6 +14,9 @@ export default function ListadoProductos(props) {
   const list = props.lista;
   const [carrito, setCarrito] = useState([]);
   //const [lastViewedTitle, setLastViewedTitle] = useState([]);
+  const carrito2 = useCartStore((state) => state.cart);
+ const setCarrito2 = useCartStore((state) => state.setCart);
+
   
 
   const changeTitle = (title) =>{
@@ -22,9 +26,10 @@ export default function ListadoProductos(props) {
   }
   
   const handleAddToCart = (carrito) => {
-    carrito = carrito
-    props.onChangeCarrito(carrito)
-    console.log(carrito)
+    carrito2.push(carrito)
+    //props.onChangeCarrito(carrito2)
+
+    //console.log(carrito2)
    };
 
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado

@@ -9,6 +9,7 @@ import "./visualizarProducto.css";
 //import DescripcionDeP from "./DescripcionDeP";
 //import PromoProducto from "./PromoProducto";
 //import OrdenarProducto from "./OrdenarProducto";
+import { useCartStore } from "../../../hooks/useStore";
 
 const HeaderNegocio = lazy(() => import("../HeaderNegocio/HeaderNegocio"));
 const ImagenVisualizador = lazy(() => import("./ImagenVisualizador"));
@@ -55,13 +56,16 @@ export default function VisualizarProducto({ nombre, title, localizacion }) {
   const [cantidad, setCantidad] = useState(0);
 
   const [carrito, setCarrito] = useState([]);
-
+ 
   const handleAddToCart = (product) => {
-    setCarrito((prevCarrito) => [
-      ...prevCarrito,
-      { title: product.title, quantity: product.quantity, image: Imagen },
-    ]);
-  };
+    setCarrito((prevCarrito) => {
+        return [
+            ...prevCarrito,
+            { title: product.title, quantity: product.quantity, image: Imagen },
+        ];
+    });
+};
+
 
 
   return (
