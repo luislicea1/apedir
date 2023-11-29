@@ -78,6 +78,8 @@ function ComponenteLugar(props) {
               useIntersectionObserver={true}
               className="lazyload"
               threshold={100}
+              delayTime={300}
+              delayMethod="throttle"
             />
           </CardBody>
         </Card>
