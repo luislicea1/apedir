@@ -41,7 +41,7 @@ export const PortadaDeNegocioStyles = {
   width: "100%",
   height: "60vh",
   display: "grid",
-  placeItems: "center",
+  //placeItems: "center",
   background: "#ECECEE",
   position: "relative",
   overflow: "hidden"
