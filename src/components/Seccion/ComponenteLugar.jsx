@@ -12,15 +12,7 @@ import { getStarsFromBussiness } from "../../api/starsRate";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
-  // const { ref, inView } = useInView({
-  //   threshold: 1,
-  //   triggerOnce: true,
-  // });
-   const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
-
-  // useEffect(() => {
-  //   imagenRef.current = props.imagen; // Actualizar la referencia cuando cambia la imagen
-  // }, [props.imagen]);
+  const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
 
   useEffect(() => {
     const fetchStars = async () => {
@@ -46,7 +38,7 @@ function ComponenteLugar(props) {
           //as="image"
         />
       </Helmet>
-      <Link to={`/lugar/${props.url}`} aria-label={props.nombre}>
+      <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
         <Card
           className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}
