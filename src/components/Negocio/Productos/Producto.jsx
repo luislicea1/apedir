@@ -3,22 +3,17 @@ import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
-import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Modal,
   ModalContent,
-  ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
   useDisclosure,
 } from "@nextui-org/react";
 import {
-  ImgCardStyle,
+  ImgCardStyle2,
   CardStyles2,
-  Imagen100pc400H,
   ProductoStyle,
 } from "../../styles/styles";
 
@@ -84,17 +79,17 @@ export default function Producto({
         className="producto-card"
         onClick={onOpen} 
       >
-        <CardBody className="overflow-visible p-0" style={ImgCardStyle}>
+        <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
           <LazyLoadImage
             alt={title}
             src={img}
             effect="blur"
             style={{ ...ProductoStyle, objectFit: "cover" }}
-           // delayMethod="debounce"
-           // delayTime={300}
+            delayMethod="debounce"
+            delayTime={300}
             placeholderSrc={img}
             useIntersectionObserver={true}
-            //visibleByDefault={true}
+            
           />
         </CardBody>
         <CardFooter
@@ -102,16 +97,16 @@ export default function Producto({
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            height: "100%",
+           
           }}
         >
-          <div style={{ gridColumn: "span 2", marginBottom: "20px" }}>
+          <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
             <b
               style={{
                 fontSize: "20px",
               }}
             >
-              {title}
+              {title} Titulo
             </b>
           </div>
           <div style={{ gridColumn: "span 2" }}>
