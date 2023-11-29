@@ -57,7 +57,7 @@ export default function Negocio() {
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
       setBussiness(bussinessData);
-      console.log(bussinessData);
+      //console.log(bussinessData);
     };
 
     fetchData();

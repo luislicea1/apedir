@@ -14,7 +14,6 @@ export default function PortadaDeNegocio(props) {
             rel="preload"
             href={props.imagenPortada}
             as="image"
-            imagesrcset="image_400px.jpg 400w, image_800px.jpg 800w"
           />
         </Helmet>
       <LazyLoadImage
