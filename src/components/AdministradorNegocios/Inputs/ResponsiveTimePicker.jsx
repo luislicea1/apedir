@@ -5,6 +5,7 @@ import { Card } from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
 import { useBussinessStore } from "../../../hooks/useStore";
 import { getSchedule, updateBussinessSchedule } from "../../../api/bussiness";
+import "./input.css"
 
 const format = "HH:mm";
 
@@ -67,7 +68,7 @@ const CardComponent = React.memo(function CardComponent({
       <div>
         <Checkbox
           checked={dia.trabaja}
-          color="secondary"
+          color="primary"
           onChange={handleCheckboxChange}
         />
         <label htmlFor="">Trabaja</label>
@@ -92,13 +93,13 @@ const CardComponent = React.memo(function CardComponent({
 export default function ResponsiveTimePickers() {
   const bussiness = useBussinessStore((state) => state.bussiness);
   const [dias, setDias] = useState([
-    { dia: "Lunes", entrada: null, salida: null, trabaja: false },
-    { dia: "Martes", entrada: null, salida: null, trabaja: false },
-    { dia: "Miercoles", entrada: null, salida: null, trabaja: false },
-    { dia: "Jueves", entrada: null, salida: null, trabaja: false },
-    { dia: "Viernes", entrada: null, salida: null, trabaja: false },
-    { dia: "Sábado", entrada: null, salida: null, trabaja: false },
-    { dia: "Domingo", entrada: null, salida: null, trabaja: false },
+    { dia: "Lunes", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Martes", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Miercoles", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Jueves", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Viernes", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Sábado", entrada: "8:00", salida: "20:00", trabaja: true },
+    { dia: "Domingo", entrada: "8:00", salida: "20:00", trabaja: true },
     // Repite para los demás días de la semana
   ]);
 
