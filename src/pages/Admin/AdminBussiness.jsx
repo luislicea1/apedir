@@ -1,36 +1,28 @@
 import React from "react";
-import { getUsers } from "../../api/profile";
-import { useState, useEffect } from "react";
-import supabase from "../../api/client";
+// import { getUsers } from "../../api/profile";
+// import { useState, useEffect } from "react";
+// import supabase from "../../api/client";
 import NegocioTable from "../../components/Admin/NegocioTable";
+import { useAdminBussiness } from "../../hooks/useStore";
+import { fetchAllBussiness } from "../../api/bussiness";
 
 export default function AdminBussiness() {
-  const [users, setUsers] = useState([]);
+  const bussiness = useAdminBussiness((state) => state.bussiness);
+  const setBussiness = useAdminBussiness((state) => state.setBussiness);
 
-  const fetchUsers = async () => {
-    const data = await getUsers();
-    setUsers(data);
-  };
-
-  const channelA = supabase
-    .channel("schema-db-changes")
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "profiles",
-      },
-      (payload) => fetchUsers()
-    )
-    .subscribe();
-
-  useEffect(() => {
-    fetchUsers();
-  }, [channelA]); // users quitado de las dependencias
+  React.useEffect(() => {
+    const getAllBussinesses = async () => {
+      const bList = await fetchAllBussiness();
+      setBussiness(bList);
+    };
+    if (bussiness.length === 0) {
+      getAllBussinesses();
+    }
+  }, []);
 
   return (
     <>
-      <NegocioTable />
+      <NegocioTable bussinessList={bussiness} setBussinessList={setBussiness} />
     </>
   );
 }

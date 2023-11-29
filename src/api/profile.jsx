@@ -31,6 +31,16 @@ const getUser = async (email) => {
   }
 };
 
+const getUserByID = async (id) => {
+  const { data, err } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  return data;
+};
+
 const getUsers = async () => {
   let { data: profiles, error } = await supabase.from("profiles").select("*");
   if (error) {
@@ -198,6 +208,7 @@ const getSubscription = async (user, bussiness) => {
 export {
   getRole,
   getUser,
+  getUserByID,
   getUsers,
   updateProfile,
   deleteProfile,

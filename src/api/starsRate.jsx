@@ -41,7 +41,7 @@ const getStarsFromBussiness = async (bussinessId) => {
     .select("*")
     .eq("bussiness", bussinessId)
     .limit(1);
-  return data[0];
+  return data ? data[0] : null;
 };
 
 const getStarsAllBussiness = async () => {

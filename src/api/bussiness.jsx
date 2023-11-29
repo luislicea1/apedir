@@ -1,4 +1,5 @@
 import supabase from "./client";
+import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
 
 const upsertBussiness = async (bussiness) => {
@@ -78,7 +79,7 @@ const loadMoreBussiness = async (
     .from("bussiness")
     .select("*")
     // .eq("isActive", true)
-    .range(offset, offset + 19);
+    .range(offset, offset + 6);
 
   if (error) {
     console.error(error);
@@ -125,7 +126,9 @@ const loadMoreBussiness = async (
     setBussiness(businessesWithImages);
   }
   // Incrementa el desplazamiento
-  setOffset(offset + 19);
+  console.log(businessesWithImages?.length);
+  const newOf = offset + 6;
+  setOffset(newOf);
   return businessesWithImages.length > 0 ? true : false;
 };
 
@@ -142,6 +145,7 @@ const fetchAllBussiness = async () => {
   // Obtener imágenes asociadas a cada negocio
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
+      const owner = await getUserByID(business.owner);
       // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
@@ -155,14 +159,14 @@ const fetchAllBussiness = async () => {
 
       return {
         ...business,
-        // stars,
+        owner,
         front_pic,
         perfil_pic,
         gps_location,
       };
     })
   );
-  console.log(businessesWithImages);
+
   // Actualiza el estado con los nuevos elementos
   return businessesWithImages;
 };

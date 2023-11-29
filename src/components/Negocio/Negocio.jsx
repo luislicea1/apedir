@@ -67,7 +67,7 @@ export default function Negocio() {
     const fetchCategories = async () => {
       if (bussiness !== null && bussiness !== undefined && bussiness?.id) {
         const categoryList = await getCategories(bussiness.id);
-        setCategories(categoryList);
+        setCategories(categoryList !== null ? categoryList : []);
       }
     };
 
@@ -115,23 +115,10 @@ export default function Negocio() {
 
   const changeTitle = (title) => {
     setLastViewedTitle(title);
-    //alert(title)
-    //props.onChangeTitle(title);
   };
 
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
-      {/* <Helmet>
-        <meta name="description" content={bussiness.description} />
-        <title>{bussiness.name}</title>
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href={bussiness.perfil_pic}
-          alt="logo"
-        />
-      </Helmet> */}
-
       <section style={NegocioSection}>
         {inView && (
           <Navegacion
@@ -160,8 +147,41 @@ export default function Negocio() {
                   <Stars readOnly w={100} />
                 </Link>
               )}
-              
-             
+              <br />
+              {bussiness !== null && bussiness.schedules !== null && (
+                <h6>Horarios</h6>
+              )}
+              {bussiness !== null &&
+                bussiness.schedules !== null &&
+                bussiness.schedules.map((schedule, idx) => {
+                  let dia = <h6>{schedule.dia}</h6>;
+                  if (!schedule.trabaja) {
+                    return (
+                      <div style={{ display: "flex", gap: "5px" }} key={idx}>
+                        {dia}
+                        <span>No se trabaja</span>
+                      </div>
+                    );
+                  }
+
+                  let entrada = schedule.entrada ? (
+                    <span>Horario apertura: {schedule.entrada}</span>
+                  ) : (
+                    <span>-</span>
+                  );
+                  let salida = schedule.salida ? (
+                    <span>Horario cierre: {schedule.salida}</span>
+                  ) : (
+                    <span>-</span>
+                  );
+
+                  return (
+                    <div style={{ display: "flex", gap: "5px" }} key={idx}>
+                      {dia}: {entrada} {salida}
+                    </div>
+                  );
+                })}
+              <br />
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
@@ -191,7 +211,7 @@ export default function Negocio() {
                 return (
                   categoryProducts.length > 0 && (
                     <ListadoProductos
-                      id={idx}
+                      id={category.id}
                       key={idx}
                       title={category.category}
                       nombre={category.category}

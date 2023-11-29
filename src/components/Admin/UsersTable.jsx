@@ -45,7 +45,7 @@ const columns = [
   { name: "FECHA CREACIÓN", uid: "createdAt", sortable: true },
   { name: "ACCIONES", uid: "actions" },
 ];
-export default function UsersTable({ users }) {
+export default function UsersTable({ users, setUsers }) {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
 
@@ -322,7 +322,7 @@ export default function UsersTable({ users }) {
   return (
     <div style={{ width: "90%" }}>
       <Table
-      aria-label="users table"
+        aria-label="users table"
         isHeaderSticky
         bottomContent={bottomContent}
         bottomContentPlacement="outside"

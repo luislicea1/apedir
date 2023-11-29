@@ -38,24 +38,24 @@ const getEventsfromBussiness = async (bussinessId) => {
 };
 
 const deleteEvent = async (eventId) => {
-  console.log(eventId);
   await supabase.from("events").delete().eq("id", eventId);
 };
 
 const getAllEvents = async () => {
   const { data: events, err } = await supabase.from("events").select("*");
 
-  const eventsWithImages = await Promise.all(
-    events.map(async (event) => {
-      const image = await getImage("events", event.image);
-      return {
-        ...event,
-        image,
-      };
-    })
-  );
-  console.log(eventsWithImages);
-  return eventsWithImages;
+  if (events) {
+    const eventsWithImages = await Promise.all(
+      events.map(async (event) => {
+        const image = await getImage("events", event.image);
+        return {
+          ...event,
+          image,
+        };
+      })
+    );
+    return eventsWithImages;
+  }
 };
 
 const getEventByName = async (name) => {

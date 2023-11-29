@@ -11,12 +11,6 @@ import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
 import ComponenteLugar from "./ComponenteLugar";
 
-// const ComponenteLugar = lazy(() =>
-//   import("./ComponenteLugar").catch((error) => {
-//     console.error("Error loading ComponenteLugar:", error);
-//   })
-// );
-
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
@@ -32,7 +26,6 @@ const ListadoDeComponentesLugar = () => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
-
 
   const filtredBussinesses = useMemo(() => {
     if (bussinesses?.length === 0) {
@@ -53,6 +46,7 @@ const ListadoDeComponentesLugar = () => {
         bussinesses,
         setBussinesses
       );
+      setLoading(false);
 
       if (!response) {
         setHasMore(false);
@@ -61,8 +55,6 @@ const ListadoDeComponentesLugar = () => {
       }
     } catch (error) {
       console.error("Error fetching more data:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -93,6 +85,7 @@ const ListadoDeComponentesLugar = () => {
 
   return (
     <div
+      ref={ref}
       className="list-container"
       style={{
         gap: "10px",
@@ -124,8 +117,8 @@ const ListadoDeComponentesLugar = () => {
             </div>
           );
         })}
-      {hasMore && (
-        <div ref={ref} style={{ textAlign: "center" }}>
+      {hasMore && loading  && (
+        <div style={{ textAlign: "center" }}>
           <Loader></Loader>
         </div>
       )}
