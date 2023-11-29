@@ -21,6 +21,8 @@ const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
+import Horario from "./Horario/Horario";
+import { Card } from "@nextui-org/react";
 
 const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")
@@ -158,41 +160,8 @@ export default function Negocio() {
                   <Stars readOnly w={100} />
                 </Link>
               )}
-              <br />
-              {bussiness !== null && bussiness.schedules !== null && (
-                <h6>Horarios</h6>
-              )}
-              {bussiness !== null &&
-                bussiness.schedules !== null &&
-                bussiness.schedules.map((schedule) => {
-                  let dia = <h6>{schedule.dia}</h6>;
-                  if (!schedule.trabaja) {
-                    return (
-                      <div style={{ display: "flex", gap: "5px" }}>
-                        {dia}
-                        <span>No se trabaja</span>
-                      </div>
-                    );
-                  }
-
-                  let entrada = schedule.entrada ? (
-                    <span>Horario apertura: {schedule.entrada}</span>
-                  ) : (
-                    <span>-</span>
-                  );
-                  let salida = schedule.salida ? (
-                    <span>Horario cierre: {schedule.salida}</span>
-                  ) : (
-                    <span>-</span>
-                  );
-
-                  return (
-                    <div style={{ display: "flex", gap: "5px" }}>
-                      {dia}: {entrada} {salida}
-                    </div>
-                  );
-                })}
-              <br />
+              
+             
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
@@ -208,6 +177,11 @@ export default function Negocio() {
 
               <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
             </div>
+            <Card>
+              <Horario bussiness = {bussiness}></Horario>
+            </Card>
+
+           
 
             <div ref={ref}>
               {categories.map((category, idx) => {

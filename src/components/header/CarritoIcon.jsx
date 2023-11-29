@@ -21,7 +21,6 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
-import ReactWhatsapp from "react-whatsapp";
 import { grid_1_col } from "../styles/styles";
 
 /*
