@@ -46,7 +46,7 @@ function ComponenteLugar(props) {
           //as="image"
         />
       </Helmet>
-      <Link to={`/lugar/${props.url}`}>
+      <Link to={`/lugar/${props.url}`} aria-label={props.nombre}>
         <Card
           className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}

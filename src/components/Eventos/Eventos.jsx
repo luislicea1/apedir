@@ -10,7 +10,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 export default function Eventos(props) {
   return (
     <div style={eventoMargin}>
-      <Link to={`/evento/${props.nombre}`}>
+      <Link to={`/evento/${props.nombre}`} aria-label="evento">
         <div
           style={{
             border: "4px solid #F31260",
@@ -27,6 +27,8 @@ export default function Eventos(props) {
             height={140}
             effect="blur"
             style={{ objectFit: "cover" }}
+            delayMethod="debounce"
+            delayTime={100}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
           />
