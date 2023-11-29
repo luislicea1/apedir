@@ -73,28 +73,18 @@ function ComponenteLugar(props) {
             style={ImgCardStyle}
             ref={ref}
           >
-            {inView ? (
-              // <img
-              //   src={props.imagen}
-              //   alt={props.nombre}
-              //   className="lazyload"
-              //   loading="lazy"
-              //   style={{ ...LogoStyle, objectFit: "contain" }}
-              // />
+            
+             
               <LazyLoadImage
-              alt={props.nombre}
-              src={props.imagen}
-              effect="blur"
-              style={{ ...LogoStyle, objectFit: "contain" }}
-             // delayMethod="debounce"
-             // delayTime={300}
-              placeholderSrc={props.imagen}
-              useIntersectionObserver={true}
+                alt={props.nombre}
+                src={props.imagen}
+                effect="blur"
+                style={{ ...LogoStyle, objectFit: "contain" }}
+                placeholderSrc={props.imagen}
+                useIntersectionObserver={true}
               //visibleByDefault={true}
             />
-            ) : (
-              <div className="esqueleton-seccion-card"></div>
-            )}
+            
           </CardBody>
         </Card>
       </Link>
@@ -103,3 +93,19 @@ function ComponenteLugar(props) {
 }
 
 export default ComponenteLugar;
+
+
+// {inView ? (
+             
+//   <LazyLoadImage
+//     alt={props.nombre}
+//     src={props.imagen}
+//     effect="blur"
+//     style={{ ...LogoStyle, objectFit: "contain" }}
+//     placeholderSrc={props.imagen}
+//     useIntersectionObserver={true}
+//   //visibleByDefault={true}
+// />
+// ) : (
+//   <div className="esqueleton-seccion-card"></div>
+// )}
