@@ -21,11 +21,11 @@ export default function PortadaDeNegocio(props) {
               src={props.imagenPortada}
               effect="blur"
               style={{ ...Imagen100pcCover, objectFit: "cover" }}
-              delayMethod="debounce"
-              delayTime={100}
+              //delayMethod="debounce"
+              //delayTime={100}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
-              visibleByDefault={true}
+              //visibleByDefault={true}
             />
       {/* <div style={Degradado1}></div> */}
     </div>

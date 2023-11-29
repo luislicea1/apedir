@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
@@ -73,13 +74,24 @@ function ComponenteLugar(props) {
             ref={ref}
           >
             {inView ? (
-              <img
-                src={props.imagen}
-                alt={props.nombre}
-                className="lazyload"
-                loading="lazy"
-                style={{ ...LogoStyle, objectFit: "contain" }}
-              />
+              // <img
+              //   src={props.imagen}
+              //   alt={props.nombre}
+              //   className="lazyload"
+              //   loading="lazy"
+              //   style={{ ...LogoStyle, objectFit: "contain" }}
+              // />
+              <LazyLoadImage
+              alt={props.nombre}
+              src={props.imagen}
+              effect="blur"
+              style={{ ...LogoStyle, objectFit: "contain" }}
+             // delayMethod="debounce"
+             // delayTime={300}
+              placeholderSrc={props.imagen}
+              useIntersectionObserver={true}
+              //visibleByDefault={true}
+            />
             ) : (
               <div className="esqueleton-seccion-card"></div>
             )}

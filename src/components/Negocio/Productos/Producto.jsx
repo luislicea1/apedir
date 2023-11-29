@@ -90,11 +90,11 @@ export default function Producto({
             src={img}
             effect="blur"
             style={{ ...ProductoStyle, objectFit: "cover" }}
-            delayMethod="debounce"
-            delayTime={300}
+           // delayMethod="debounce"
+           // delayTime={300}
             placeholderSrc={img}
             useIntersectionObserver={true}
-            visibleByDefault={true}
+            //visibleByDefault={true}
           />
         </CardBody>
         <CardFooter
