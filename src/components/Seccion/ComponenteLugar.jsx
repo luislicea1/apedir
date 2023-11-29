@@ -12,15 +12,15 @@ import { getStarsFromBussiness } from "../../api/starsRate";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
-  const { ref, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
-  });
-  const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
+  // const { ref, inView } = useInView({
+  //   threshold: 1,
+  //   triggerOnce: true,
+  // });
+   const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
 
-  useEffect(() => {
-    imagenRef.current = props.imagen; // Actualizar la referencia cuando cambia la imagen
-  }, [props.imagen]);
+  // useEffect(() => {
+  //   imagenRef.current = props.imagen; // Actualizar la referencia cuando cambia la imagen
+  // }, [props.imagen]);
 
   useEffect(() => {
     const fetchStars = async () => {
@@ -67,7 +67,7 @@ function ComponenteLugar(props) {
           <CardBody
             className="overflow-visible py-2 card-body-seccion"
             style={ImgCardStyle}
-            ref={ref}
+            
           >
             <LazyLoadImage
               alt={props.nombre}
@@ -77,19 +77,8 @@ function ComponenteLugar(props) {
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               className="lazyload"
+              threshold={100}
             />
-
-{/* {inView ? (
-  <img
-    src={props.imagen}
-    alt={props.nombre}
-    className="lazyload"
-    loading="lazy"
-    style={{ ...LogoStyle, objectFit: "contain" }}
-  />
-) : (
-  <div className="esqueleton-seccion-card"></div>
-)} */}
           </CardBody>
         </Card>
       </Link>
