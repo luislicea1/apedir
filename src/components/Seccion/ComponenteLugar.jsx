@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
@@ -62,29 +62,34 @@ function ComponenteLugar(props) {
             >
               {props.nombre}
             </h2>
-            <Stars
-              readOnly
-              w={100}
-              rate={stars?.average ? stars.average : 0}
-            />
+            <Stars readOnly w={100} rate={stars?.average ? stars.average : 0} />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2 card-body-seccion"
             style={ImgCardStyle}
             ref={ref}
           >
-            
-             
-              <LazyLoadImage
-                alt={props.nombre}
-                src={props.imagen}
-                effect="blur"
-                style={{ ...LogoStyle, objectFit: "contain" }}
-                placeholderSrc={props.imagen}
-                useIntersectionObserver={true}
-              //visibleByDefault={true}
+            <LazyLoadImage
+              alt={props.nombre}
+              src={props.imagen}
+              effect="blur"
+              style={{ ...LogoStyle, objectFit: "contain" }}
+              placeholderSrc={props.imagen}
+              useIntersectionObserver={true}
+              className="lazyload"
             />
-            
+
+{/* {inView ? (
+  <img
+    src={props.imagen}
+    alt={props.nombre}
+    className="lazyload"
+    loading="lazy"
+    style={{ ...LogoStyle, objectFit: "contain" }}
+  />
+) : (
+  <div className="esqueleton-seccion-card"></div>
+)} */}
           </CardBody>
         </Card>
       </Link>
@@ -94,18 +99,14 @@ function ComponenteLugar(props) {
 
 export default ComponenteLugar;
 
-
 // {inView ? (
-             
-//   <LazyLoadImage
-//     alt={props.nombre}
+//   <img
 //     src={props.imagen}
-//     effect="blur"
+//     alt={props.nombre}
+//     className="lazyload"
+//     loading="lazy"
 //     style={{ ...LogoStyle, objectFit: "contain" }}
-//     placeholderSrc={props.imagen}
-//     useIntersectionObserver={true}
-//   //visibleByDefault={true}
-// />
+//   />
 // ) : (
 //   <div className="esqueleton-seccion-card"></div>
 // )}

@@ -147,7 +147,9 @@ export const ImgStyle = {
 };
 
 export const LogoStyle = {
-  width: "282px",
+  //width: "282px",
+  width: "100%",
+  //maxWidth: '282px',
   aspectRatio: "1 / 1",
   //width: "100%",
   //height: "100%",
