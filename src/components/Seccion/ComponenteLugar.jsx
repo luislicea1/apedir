@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
-
 import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -10,12 +8,9 @@ import { Helmet } from "react-helmet";
 import "./seccion.css";
 import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
-//import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import {Image} from "@nextui-org/react";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
-  const navigate = useNavigate();
   const { ref, inView } = useInView({
     threshold: 1,
     triggerOnce: true,
@@ -29,7 +24,6 @@ function ComponenteLugar(props) {
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
-      console.log(s !== undefined && s !== null ? s : "");
       setStars(
         s !== null && s !== undefined
           ? s
@@ -79,14 +73,6 @@ function ComponenteLugar(props) {
             ref={ref}
           >
             {inView ? (
-              // <LazyLoadImage
-              //   alt={props.nombre}
-              //   style={{ ...LogoStyle, objectFit: "contain" }}
-              //   src={props.imagen}// use normal <img> attributes as props
-              //   className="lazyload"
-              //   effect="blur"
-              // />
-
               <img
                 src={props.imagen}
                 alt={props.nombre}
@@ -95,14 +81,6 @@ function ComponenteLugar(props) {
                 style={{ ...LogoStyle, objectFit: "contain" }}
               />
             ) : (
-              // <Image
-              //     style={{ ...LogoStyle, objectFit: "contain" }}
-              //     alt="NextUI hero Image with delay"
-              //     className="lazyload"
-              //     //loading="lazy"
-              //     src={props.imagen}
-              //     fallbackSrc="https://via.placeholder.com/200x200"
-              // />
               <div className="esqueleton-seccion-card"></div>
             )}
           </CardBody>

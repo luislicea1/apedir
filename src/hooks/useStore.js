@@ -35,13 +35,30 @@ const useCartStore = create((set) => ({
   setCart: (p) => set({ cart: p }),
 }));
 
+const useAdminUsers = create((set) => ({
+  users: [],
+  setUsers: (u) => set({ users: u }),
+}));
+
+const useAdminBussiness = create((set) => ({
+  bussiness: [],
+  setBussiness: (b) => set({ bussiness: b }),
+}));
+
+const eventsStore = create((set) => ({
+  events: [],
+  setEvents: (b) => set({ events: b }),
+}));
+
 export {
   useUserStore,
   useBussinessStore,
   useProvinceStore,
+  useAdminUsers,
+  useAdminBussiness,
   useBussinessList,
   useCategoriesList,
   useProductsList,
   useCartStore,
+  eventsStore,
 };
-

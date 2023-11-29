@@ -1,34 +1,24 @@
 import React, { lazy, Suspense } from "react";
 
 import { getUsers } from "../../api/profile";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import UsersTable from "../../components/Admin/UsersTable";
-import supabase from "../../api/client";
+import { useAdminUsers } from "../../hooks/useStore";
 
 export default function AdminDashboard() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  const channelA = supabase
-    .channel("schema-db-changes")
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "profiles",
-      },
-      (payload) => console.log(payload)
-    )
-    .subscribe();
+  const users = useAdminUsers((state) => state.users);
+  const setUsers = useAdminUsers((state) => state.setUsers);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const data = await getUsers();
-      setUsers(data);
+      const ul = await getUsers();
+      setUsers(ul);
     };
-
-    fetchUsers();
-  }, [channelA]); // users quitado de las dependencias
-
+    if (users.length === 0) fetchUsers();
+  }, []);
+  
   return (
     <>
       <div
@@ -41,7 +31,7 @@ export default function AdminDashboard() {
           width: "100%",
         }}
       >
-        <UsersTable users={users} />
+        <UsersTable users={users} setUsers={setUsers} />
       </div>
     </>
   );

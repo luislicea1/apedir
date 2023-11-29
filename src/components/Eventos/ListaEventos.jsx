@@ -2,12 +2,15 @@ import React, { useEffect, useRef, lazy, Suspense, useState } from "react";
 import { getAllEvents } from "../../api/events";
 //import Eventos from "./Eventos";
 import Eventos from "./Eventos";
+import { eventsStore } from "../../hooks/useStore";
 // const Eventos = lazy(() => import("./Eventos"));
 const renderLoader = () => <p>Loading</p>;
 
 export default function ListadoDeEventos(props) {
   const listContainer = useRef(null);
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
+  const events = eventsStore((state) => state.events);
+  const setEvents = eventsStore((state) => state.setEvents);
 
   useEffect(() => {
     const fetchEvents = async () => {
