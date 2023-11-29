@@ -148,40 +148,7 @@ export default function Negocio() {
                 </Link>
               )}
               <br />
-              {bussiness !== null && bussiness.schedules !== null && (
-                <h6>Horarios</h6>
-              )}
-              {bussiness !== null &&
-                bussiness.schedules !== null &&
-                bussiness.schedules.map((schedule, idx) => {
-                  let dia = <h6>{schedule.dia}</h6>;
-                  if (!schedule.trabaja) {
-                    return (
-                      <div style={{ display: "flex", gap: "5px" }} key={idx}>
-                        {dia}
-                        <span>No se trabaja</span>
-                      </div>
-                    );
-                  }
-
-                  let entrada = schedule.entrada ? (
-                    <span>Horario apertura: {schedule.entrada}</span>
-                  ) : (
-                    <span>-</span>
-                  );
-                  let salida = schedule.salida ? (
-                    <span>Horario cierre: {schedule.salida}</span>
-                  ) : (
-                    <span>-</span>
-                  );
-
-                  return (
-                    <div style={{ display: "flex", gap: "5px" }} key={idx}>
-                      {dia}: {entrada} {salida}
-                    </div>
-                  );
-                })}
-              <br />
+              
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
