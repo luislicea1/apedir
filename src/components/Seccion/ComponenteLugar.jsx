@@ -40,10 +40,10 @@ function ComponenteLugar(props) {
     <>
       <Helmet>
         <link
-          fetchpriority="high"
-          rel="preload"
-          href={imagenRef.current} // Usar la referencia en lugar del prop directamente
-          as="image"
+          //fetchpriority="high"
+          //rel="preload"
+          //href={imagenRef.current} // Usar la referencia en lugar del prop directamente
+          //as="image"
         />
       </Helmet>
       <Link to={`/lugar/${props.url}`}>

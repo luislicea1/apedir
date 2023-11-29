@@ -133,12 +133,11 @@ export const CardStyles2 = {
 export const ImgCardStyle = {
   width: "100%",
   height: "100%",
+  minHeight: "100px",
+  minWidth: "100px",
   display: "grid",
   placeItems: "center",
   borderRadius: "10px",
-  // justifyItems: "stretch",
-  // alignContent: "stretch"
-  /*padding: "10px"*/
 };
 export const ImgStyle = {
   minHeight: "200px",
@@ -147,21 +146,14 @@ export const ImgStyle = {
 };
 
 export const LogoStyle = {
-  //width: "282px",
   width: "100%",
-  //maxWidth: '282px',
+  minHeight: "100px",
   aspectRatio: "1 / 1",
-  //width: "100%",
-  //height: "100%",
-  
-  //margin: "5px",
   borderRadius: "10px",
  
 }
 export const ProductoStyle = {
   width: "100%",
-  ///width: "225px",
-  //height: "175px",
   aspectRatio: "1/1",
   borderRadius: "10px 10px 0 0",
  
