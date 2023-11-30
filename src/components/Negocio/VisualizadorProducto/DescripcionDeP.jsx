@@ -46,16 +46,40 @@ export default function DescripcionDeP(props) {
   const carrito = useCartStore((state) => state.cart);
   const setCarrito = useCartStore((state) => state.setCart);
   const handleClick = () => {
-    // props.onAddToCart({ title: props.title, quantity: props.cantidad });
+    if (props.cantidad === 0) {
+      window.alert('No añadiste nada al carrito');
+      props.onQuantityChange(0);
+      return;
+    }
+   
     const newOrder = {
       title: props.title,
       quantity: props.cantidad,
       image: props.image,
       price: props.price * props.cantidad,
     };
-    const prevCart = carrito;
-    setCarrito([...prevCart, newOrder]);
-  };
+   
+    const updatedCart = carrito.map(item => {
+      if (item.title === newOrder.title) {
+        return {
+          ...item,
+          quantity: item.quantity + newOrder.quantity,
+          price: item.price + newOrder.price,
+        };
+      }
+      props.onQuantityChange(0);
+      return item;
+    });
+   
+    if (!updatedCart.find(item => item.title === newOrder.title)) {
+      props.onQuantityChange(0);
+      updatedCart.push(newOrder);
+    }
+   
+    setCarrito(updatedCart);
+    props.onQuantityChange(0);
+   };
+   
 
   return (
     <div
