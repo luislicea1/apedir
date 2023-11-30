@@ -1,12 +1,8 @@
-.list-container {
-  /*padding: 10px;*/
-}
+
 .titulo-card-negocio-panntalla-principal {
   max-width: 20ch;
-
   font-size: 1rem;
   font-weight: bold;
-  
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -22,6 +18,10 @@
   height: 270px;
   width: 270px;
  
+}
+
+.lazyload{
+  min-width: 200px;
 }
 @keyframes slide {
   0% {
@@ -57,17 +57,21 @@
   }
 }
 
-@media (max-width: 830px) {
+@media(max-width: 830px) {
   .esqueleton-seccion-card {
     height: 200px;
     width: 23vw;
     /*object-fit: contain;*/
+  }
+  .lazyload{
+    min-width: 150px;
   }
 }
 
 @media (max-width: 713px) {
   .lazyLoad {
     height: 150px !important;
+    
   }
   .titulo-card-negocio-panntalla-principal {
     max-width: 20ch;
@@ -84,6 +88,7 @@
      max-width: 45vw;
      
    }
+   
 }
 
 @media (max-width: 700px) {
@@ -107,9 +112,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .lazyLoad {
-    height: 100px !important;
-  }
+  
+  
   .list-container {
     gap: "0px" !important;
   }
@@ -131,8 +135,12 @@
     max-width: 10ch;
   }
   .tarjeta-negocio-card{
-   /* max-width: 162px;
+    /*max-width: 162px;
     max-height: 235px;*/
+  }
+  
+  .lazyload{
+    min-width: 100px;
   }
 }
 @media (max-width: 380px) {
@@ -150,6 +158,9 @@
   .card-body-seccion{
     max-width: 80vw;
     
+  }
+  .lazyload{
+    min-width: 60vw;
   }
 }
 

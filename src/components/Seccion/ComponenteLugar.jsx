@@ -7,12 +7,12 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
 import "./seccion.css";
-import { useInView } from "react-intersection-observer";
+//import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
-  const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
+  //const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
 
   useEffect(() => {
     const fetchStars = async () => {

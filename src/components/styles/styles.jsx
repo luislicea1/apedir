@@ -157,7 +157,7 @@ export const ImgStyle = {
 
 export const LogoStyle = {
   width: "100%",
-  minHeight: "100px",
+  //minHeight: "100px",
   aspectRatio: "1 / 1",
   borderRadius: "10px",
  
