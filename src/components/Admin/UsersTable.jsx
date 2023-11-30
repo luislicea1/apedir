@@ -45,7 +45,7 @@ const columns = [
   { name: "FECHA CREACIÓN", uid: "createdAt", sortable: true },
   { name: "ACCIONES", uid: "actions" },
 ];
-export default function UsersTable({ users, setUsers }) {
+export default function UsersTable({ users, setUsers, fetchUsers }) {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
 
@@ -129,6 +129,7 @@ export default function UsersTable({ users, setUsers }) {
       role: "",
       isActive: "",
     });
+    fetchUsers();
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -138,6 +139,7 @@ export default function UsersTable({ users, setUsers }) {
     // console.log(user)
     setUserToDelete(user);
     onOpen();
+    fetchUsers();
   };
 
   const renderCell = React.useCallback((user, columnKey) => {

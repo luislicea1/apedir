@@ -7,7 +7,7 @@ export default function ImagenVisualizador(props) {
     height: "40vh",
     maxHeight: "70vh",
     //width: "100%",
-    borderRadius: "0px",
+    // borderRadius: "0px",
     objectFit: "contain",
     //width: "350px",
     marginTop: "70px",

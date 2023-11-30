@@ -78,7 +78,7 @@ const loadMoreBussiness = async (
   const { data, error } = await supabase
     .from("bussiness")
     .select("*")
-    // .eq("isActive", true)
+    .eq("isActive", true)
     .range(offset, offset + 19);
 
   if (error) {
@@ -92,22 +92,22 @@ const loadMoreBussiness = async (
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
       // const stars = await getStarsFromBussiness(business.id);
-      const front_pic = await getImage("bussiness_front", business.front_pic);
+      // const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
         business.perfil_pic
       );
-      const gps_location = await getImage(
-        "bussiness_location",
-        business.gps_location
-      );
+      // const gps_location = await getImage(
+      //   "bussiness_location",
+      //   business.gps_location
+      // );
 
       return {
         ...business,
         // stars,
-        front_pic,
+        // front_pic,
         perfil_pic,
-        gps_location,
+        // gps_location,
       };
     })
   );
@@ -126,7 +126,7 @@ const loadMoreBussiness = async (
     setBussiness(businessesWithImages);
   }
   // Incrementa el desplazamiento
-  console.log(businessesWithImages?.length);
+
   const newOf = offset + 19;
   setOffset(newOf);
   return businessesWithImages.length > 0 ? true : false;
@@ -134,7 +134,7 @@ const loadMoreBussiness = async (
 
 const fetchAllBussiness = async () => {
   const { data, error } = await supabase.from("bussiness").select("*");
-  console.log(data);
+
   if (error) {
     console.error(error);
     return;
@@ -278,7 +278,16 @@ const getSchedule = async (bussinessId) => {
   else return null;
 };
 
+const setIsActive = async (bussinessId, isActive) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .update({ isActive: isActive })
+    .eq("id", bussinessId);
+  if (error) console.error(error);
+};
+
 export {
+  setIsActive,
   upsertBussiness,
   getOneBussiness,
   getImage,

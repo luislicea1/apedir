@@ -10,11 +10,12 @@ export default function AdminBussiness() {
   const bussiness = useAdminBussiness((state) => state.bussiness);
   const setBussiness = useAdminBussiness((state) => state.setBussiness);
 
+  const getAllBussinesses = async () => {
+    const bList = await fetchAllBussiness();
+    setBussiness(bList);
+  };
+
   React.useEffect(() => {
-    const getAllBussinesses = async () => {
-      const bList = await fetchAllBussiness();
-      setBussiness(bList);
-    };
     if (bussiness.length === 0) {
       getAllBussinesses();
     }
@@ -22,7 +23,7 @@ export default function AdminBussiness() {
 
   return (
     <>
-      <NegocioTable bussinessList={bussiness} setBussinessList={setBussiness} />
+      <NegocioTable bussinessList={bussiness} />
     </>
   );
 }

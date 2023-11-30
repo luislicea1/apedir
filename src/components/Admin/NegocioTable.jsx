@@ -15,7 +15,7 @@ import {
   Tooltip,
   getKeyValue,
 } from "@nextui-org/react";
-import { fetchAllBussiness } from "../../api/bussiness";
+import { fetchAllBussiness, setIsActive } from "../../api/bussiness";
 
 const columns = [
   { name: "Nombre", uid: "name" },
@@ -33,9 +33,11 @@ const statusColorMap = {
   vacation: "warning",
 };
 
-export default function NegocioTable({ bussinessList, setbussinessList }) {
+const handleCheckboxChange = async (event, bussinessId) => {
+  await setIsActive(bussinessId, event.target.checked);
+};
 
-
+export default function NegocioTable({ bussinessList }) {
   const renderCell = React.useCallback((bussiness, columnKey) => {
     const cellValue = bussiness.columnKey;
     switch (columnKey) {
@@ -84,7 +86,12 @@ export default function NegocioTable({ bussinessList, setbussinessList }) {
             <div>
               <Tooltip color="primary" content="Active or deactive">
                 <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <Checkbox defaultSelected></Checkbox>
+                  <Checkbox
+                    isSelected={bussiness.isActive}
+                    onValueChange={(event) =>
+                      handleCheckboxChange(event, bussiness.id)
+                    }
+                  />
                 </span>
               </Tooltip>
             </div>

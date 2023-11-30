@@ -10,15 +10,14 @@ export default function AdminDashboard() {
 
   const users = useAdminUsers((state) => state.users);
   const setUsers = useAdminUsers((state) => state.setUsers);
-
+  const fetchUsers = async () => {
+    const ul = await getUsers();
+    setUsers(ul);
+  };
   useEffect(() => {
-    const fetchUsers = async () => {
-      const ul = await getUsers();
-      setUsers(ul);
-    };
     if (users.length === 0) fetchUsers();
   }, []);
-  
+
   return (
     <>
       <div
@@ -31,7 +30,7 @@ export default function AdminDashboard() {
           width: "100%",
         }}
       >
-        <UsersTable users={users} setUsers={setUsers} />
+        <UsersTable users={users} setUsers={setUsers} fetchUsers={fetchUsers} />
       </div>
     </>
   );
