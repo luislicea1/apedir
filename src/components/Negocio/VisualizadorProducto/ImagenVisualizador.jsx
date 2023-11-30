@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image } from "@nextui-org/react";
 import "./visualizarProducto.css";
 
 export default function ImagenVisualizador(props) {
