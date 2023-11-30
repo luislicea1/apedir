@@ -101,13 +101,13 @@ export default function Producto({
               {title} Titulo
             </b>
           </div>
-          <div style={{ gridColumn: "span 2" }}>
+          <div style={{ gridColumn: "span 2" , marginBottom: "10px"}}>
             <p className="text-default-500">
               {price} {currency}
             </p>
           </div>
 
-          {/* <Button onPress={onOpen}>View</Button> */}
+         
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}

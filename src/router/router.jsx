@@ -4,7 +4,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/Home";
 import Page from "../pages/Page";
-// import AyudaInformacion from "../pages/AyudaInformacion";
 
 import {
   RequireUserRole,
@@ -60,9 +59,7 @@ const LazyVisualizarProductoWrapper = lazy(() =>
   import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
 );
 
-const LazyNegocioGratuitoWrapper = lazy(() =>
-  import("../components/NegociosGratuitos/NegocioGratuitoWrapper")
-);
+
 const LazyComprasWrapper = lazy(() => import("../pages/Compras"));
 
 const AdminTabs = lazy(() => import("../components/Admin/AdminTabs"));
@@ -197,25 +194,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/lugarGratuito",
-    element: (
-      <Suspense fallback={<LoaderCompletePage />}>
-        <Outlet />
-      </Suspense>
-    ),
-    children: [
-      {
-        path: ":localizacion/:nombre/",
-        element: (
-          <Suspense fallback={<LoaderCompletePage />}>
-            <LazyNegocioGratuitoWrapper />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-
+ 
   {
     path: "/evento/:nombre",
     element: (

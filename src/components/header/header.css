@@ -9,7 +9,11 @@
   gap: 0 !important;
 
 }
-
+.carrito-list-products{
+  max-height: 40vh;
+  overflow-y: scroll;
+  
+}
 
 .titulo-negocio-header {
     max-width: 40ch;
