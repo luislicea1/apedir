@@ -119,6 +119,7 @@ export const grid_center = {
 export const CardStyles = {
   height: "100%",
   //minWidth: "200px",
+  //maxWidth: "300px",
   width: "100%",
   //maxHeight: "400px",
   padding: "2px"
@@ -134,7 +135,7 @@ export const ImgCardStyle = {
   width: "100%",
   height: "100%",
   minHeight: "100px",
-  minWidth: "20vw",
+  //minWidth: "20vw",
   display: "grid",
   placeItems: "center",
   borderRadius: "10px",

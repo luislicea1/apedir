@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, Suspense } from "react";
 import { getAllEvents } from "../../api/events";
+
 import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
 
@@ -7,6 +8,7 @@ const renderLoader = () => <p>Loading</p>;
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
+  // const [events, setEvents] = useState([]);
   const events = eventsStore((state) => state.events);
   const setEvents = eventsStore((state) => state.setEvents);
 
@@ -51,6 +53,7 @@ export default function ListadoDeEventos() {
     gap: "20px",
   };
 
+  // const eventos = props.eventos;
   return (
     <Suspense fallback={renderLoader()}>
       <div
