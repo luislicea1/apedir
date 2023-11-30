@@ -1,9 +1,7 @@
 import React from "react";
 import TituloDeSeccion from "./TituloDeSeccion";
 import { container, section } from "../styles/styles";
-//import { CircularProgress } from "@nextui-org/react";
 import ListadoDeComponentesLugar from "./ListadoDeComponentesLugar";
-
 
 export default function Seccion(props) {
   return (
@@ -14,9 +12,6 @@ export default function Seccion(props) {
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={props.title}></TituloDeSeccion>
         <ListadoDeComponentesLugar />  
-       
-         {/* <Prueba3></Prueba3>  */}
-        
       </section>
     </div>
   );

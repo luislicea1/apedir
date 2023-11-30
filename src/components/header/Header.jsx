@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import { Link as LinkReact } from "react-router-dom";
 import { useHref } from "react-router-dom";
@@ -28,10 +28,6 @@ import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
 import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
-
-// const Carrito = lazy(() => import("./CarritoIcon.jsx"));
-// const Notification = lazy(() => import("./Notification.jsx"));
-// const SelectProvincia = lazy(() => import("./SelectProvincia.jsx"));
 
 export default function Header(props) {
   const history = useHref();

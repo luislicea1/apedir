@@ -32,10 +32,10 @@ function ComponenteLugar(props) {
     <>
       <Helmet>
         <link
-          //fetchpriority="high"
-          //rel="preload"
-          //href={imagenRef.current} // Usar la referencia en lugar del prop directamente
-          //as="image"
+          fetchpriority="high"
+          rel="preload"
+          href={props.imagen.current} // Usar la referencia en lugar del prop directamente
+          as="image"
         />
       </Helmet>
       <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
@@ -83,14 +83,4 @@ function ComponenteLugar(props) {
 
 export default ComponenteLugar;
 
-// {inView ? (
-//   <img
-//     src={props.imagen}
-//     alt={props.nombre}
-//     className="lazyload"
-//     loading="lazy"
-//     style={{ ...LogoStyle, objectFit: "contain" }}
-//   />
-// ) : (
-//   <div className="esqueleton-seccion-card"></div>
-// )}
+

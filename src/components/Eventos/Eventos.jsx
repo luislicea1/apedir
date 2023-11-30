@@ -1,9 +1,6 @@
 import React from "react";
-import { Avatar } from "@nextui-org/react";
-// import { Link } from "@nextui-org/react";
 import { Link } from "react-router-dom";
-//import MyAvatar from "./Avatar";
-import { EventoCardStyles, eventoMargin } from "../styles/styles";
+import { eventoMargin } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 

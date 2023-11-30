@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import LogoImg from "../../assets/img/img (1).webp";
 import { getEventByName } from "../../api/events";
 import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
@@ -9,20 +9,9 @@ import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 
-// const HeaderNegocio = lazy(() =>
-//   import("../Negocio/HeaderNegocio/HeaderNegocio")
-// );
-// const EventoCard = lazy(() => import("./EventoCard"));
-// const BotonesEventos = lazy(() => import("./BotonesEventos"));
-// const DescripcionEvento = lazy(() => import("./DescripcionDeEvento"));
-// const HorarioEvento = lazy(() => import("./HorarioEvento"));
-// const TituloEvento = lazy(() => import("./TituloEvento"));
-//const Mapa = lazy(() => import("./Mapa"));
 
 export default function VerEvento({ nombre }) {
-  const text =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto reprehenderit vel! Recusandae distinctio laboriosam optio, quam at vero iure! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nobis quam laboriosam eveniet voluptatibus iste esse, consectetur iure distinctio, iusto repr";
-
+ 
   const sectionStyle2 = {
     width: "100%",
     maxWidth: "450px",
@@ -49,7 +38,6 @@ export default function VerEvento({ nombre }) {
     bottom: "0",
     display: "flex",
     flexDirection: "column",
-    //justifyContent: "center",
     height: "45vh",
   };
 

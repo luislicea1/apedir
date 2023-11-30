@@ -17,10 +17,6 @@ export default function CrearNegocio({ children }) {
     gridTemplateColumns: "repeat(1,1fr)",
   };
 
-  // const linkColor = {
-  //   margin: "10px 20px",
-  // };
-
   const channels = supabase
     .channel("custom-all-channel")
     .on(

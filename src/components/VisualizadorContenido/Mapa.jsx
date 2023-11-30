@@ -2,11 +2,9 @@ import React from 'react'
 import { Image } from "@nextui-org/react";
 
 const mapa = {
-    //position: "absolute",
     zIndex: "40",
     width: "90%",
     minHeight: "100px"
-    //bottom: "5vh"
 }
 export default function Mapa(){
     return(

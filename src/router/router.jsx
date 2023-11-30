@@ -55,10 +55,6 @@ const LazyNegocioTableWrapper = lazy(() =>
 const LazyAyudaInformacionWrapper = lazy(() =>
   import("../pages/AyudaInformacion")
 );
-const LazyVisualizarProductoWrapper = lazy(() =>
-  import("../components/Negocio/VisualizadorProducto/VisualizarProductoWrapper")
-);
-
 
 const LazyComprasWrapper = lazy(() => import("../pages/Compras"));
 
@@ -181,14 +177,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoaderCompletePage />}>
             <LazyNegocioWrapper />
-          </Suspense>
-        ),
-      },
-      {
-        path: ":url/producto/:title",
-        element: (
-          <Suspense fallback={<LoaderCompletePage />}>
-            <LazyVisualizarProductoWrapper />
           </Suspense>
         ),
       },

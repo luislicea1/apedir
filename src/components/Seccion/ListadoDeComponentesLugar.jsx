@@ -1,10 +1,8 @@
 import React, {
   useState,
   useEffect,
-  useCallback,
   useMemo,
-  useRef,
-  lazy,
+  
 } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";

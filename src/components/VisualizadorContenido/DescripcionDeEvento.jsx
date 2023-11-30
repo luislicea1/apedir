@@ -16,53 +16,17 @@ export default function DescripcionEvento(props) {
   const style = {
     fontWeight: "bold",
   };
-
-  const contenedor = {
-    width: "100%",
-  };
-
   const white = {
     color: "white",
   };
 
   const glass = {
     width: "90%",
-    //position: "absolute",
-    //bottom: "22vh",
     height: "20vh",
-    //background: "rgba(150, 156, 161, 0.411)",
     marginBottom: "3%",
-    //padding: "10px",
     zIndex: "1000",
     overflowY: "scroll",
   };
-  const center = {
-    display: "grid",
-    placeItems: "center",
-    width: "100%",
-    color: "white",
-    textAlign: "center",
-  };
-  const centertext = {
-    display: "grid",
-    placeItems: "center",
-    width: "100%",
-    color: "white",
-    textAlign: "center",
-    height: "15vh",
-    overflowY: "scroll",
-  };
-  const title = {
-    color: "#FFD600",
-    fontWeight: "bold",
-    fontSize: "30px",
-  };
-
-  const btn = {
-    marginTop: "15px",
-    width: "95%",
-  };
-
   return (
     <div style={glass}>
       <article className="mt-2" style={white}>

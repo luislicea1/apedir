@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const AcmeLogo = () => {
-  const navigate = useNavigate();
+  
 
   return (
     <Link to="/" aria-label="Home">

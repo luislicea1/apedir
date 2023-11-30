@@ -1,14 +1,11 @@
 import React from "react";
-import { Image } from "@nextui-org/react";
 import "./evento.css";
 import Like from "../Like/Like";
-import ImgEvento from "../../assets/img/img (2).webp";
 
 export default function EventoCard({ image }) {
   const img = {
     maxHeight: "70vh",
     height: "44vh",
-    /*width: "100%",*/
     width: "450px",
     borderRadius: "0px",
     objectFit: "fill",
@@ -23,7 +20,6 @@ export default function EventoCard({ image }) {
     placeItems: "start",
     position: "relative",
     justifyContent: "center",
-    //background: "red"
     zIndex: "50",
   };
   const like = {
@@ -41,7 +37,6 @@ export default function EventoCard({ image }) {
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
       />
-      {/* <div  className="bgtransparent"></div> */}
       <div style={like}>
         <Like></Like>
       </div>

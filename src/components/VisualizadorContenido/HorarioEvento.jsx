@@ -6,21 +6,16 @@ const grid = {
     display: 'grid',
     gridTemplateColumns: "repeat(2,1fr)",
     gap: "10px",
-    //position: "absolute",
-   // bottom: "45vh",
     zIndex: "50",
     placeItems: 'center',
     width: "90%",
     
 }
 const grid2 = {
-    
     width: "100%",
     display: "flex",
     flexDirection: "row",
     paddingTop: "10px",
-    
-
 }
 const white = {
     color: "white",

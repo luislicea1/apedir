@@ -1,14 +1,9 @@
 import React, { useEffect } from "react";
 import { Badge } from "@nextui-org/react";
 import "./header.css";
-
-import { grid_4_col, btn100pc } from "../styles/styles";
+import { grid_4_col} from "../styles/styles";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
 import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
   Button,
 } from "@nextui-org/react";
 import { useCartStore } from "../../hooks/useStore";
@@ -39,7 +34,6 @@ export default function Carrito() {
   const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join("%0A")}`;
 
   const enviarMensaje = () => {
-    //const mensajeCodificado = encodeURIComponent(mensaje);
     const numero = "55641782";
     const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
@@ -75,9 +69,6 @@ export default function Carrito() {
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            //placement="top-center"
-            //backdrop="blur"
-            //scrollBehavior={"inside"}
             size="full"
           >
             <ModalContent>

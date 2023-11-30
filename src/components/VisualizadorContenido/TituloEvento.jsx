@@ -3,8 +3,6 @@ const grid = {
     display: 'grid',
     placeItems: "start",
     marginTop: "20px",
-    //position: "absolute",
-    ///bottom: "50vh",
     zIndex: "50",
     width: "90%"
     

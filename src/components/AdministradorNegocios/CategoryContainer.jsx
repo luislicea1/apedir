@@ -10,14 +10,11 @@ export default function CategoryContainer({
   category,
   products,
   onOpen,
-  productInput,
   setProductInput,
   onProductEditOpen,
   onProductDeleteOpen,
-  categoryInput,
   setCategoryInput,
   onCategoryEditOpen,
-  onCategoryEditOpenChange,
   onCategoryDeleteOpen,
 }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

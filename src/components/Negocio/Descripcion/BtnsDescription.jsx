@@ -1,12 +1,9 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
-import TelefonoIcon from "../../Icons/Llamada/Telefono";
-import { Link } from "@nextui-org/react";
 import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
-import LocalizacionImg from "../../../assets/img/img (1).jpg";
 import { Image } from "@nextui-org/react";
-import { fontWhite, MarginTop30 } from "../../styles/styles";
+import {  MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
 import { addOrDeleteSubscription } from "../../../api/profile";

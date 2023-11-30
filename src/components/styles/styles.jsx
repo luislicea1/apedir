@@ -143,10 +143,7 @@ export const ImgCardStyle = {
 export const ImgCardStyle2 = {
   width: "100%",
   height: "100%",
-  //minHeight: "100px",
-  //minWidth: "100px",
   display: "grid",
-  //placeItems: "center",
   borderRadius: "10px",
 };
 export const ImgStyle = {
@@ -157,14 +154,12 @@ export const ImgStyle = {
 
 export const LogoStyle = {
   width: "100%",
-  //minHeight: "100px",
   aspectRatio: "1 / 1",
   borderRadius: "10px",
  
 }
 export const ProductoStyle = {
   width: "100%",
-  //height: "100%",
   aspectRatio: "1/1",
   borderRadius: "10px 10px 0 0",
  
@@ -197,7 +192,6 @@ export const eventoMargin = {
 export const badge = {
   width: "50px",
   height: "30px",
-  //borderRadius: "50%",
   fontSize: "15px"
 };
 
@@ -209,7 +203,6 @@ export const FontBold20px = {
 };
 export const FontBold40px = {
   fontSize: "40px",
-  //fontWeight: "bold",
 };
 
 export const fontWhite = {

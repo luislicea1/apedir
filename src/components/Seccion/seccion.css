@@ -33,19 +33,9 @@
 }
 
 @media (max-width: 980px) {
-  /* .list-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .list-container-recomend{
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
-   */
   .esqueleton-seccion-card {
     height: 270px;
     width: 250px;
-    /*object-fit: contain;
-    max-width: 270px;
-    min-width: 180px;*/
   }
 }
 
@@ -53,7 +43,6 @@
   .esqueleton-seccion-card {
     height: 270px;
     width: 26vw;
-    /*object-fit: contain;*/
   }
 }
 
@@ -61,7 +50,6 @@
   .esqueleton-seccion-card {
     height: 200px;
     width: 23vw;
-    /*object-fit: contain;*/
   }
   .lazyload{
     min-width: 150px;
@@ -82,7 +70,6 @@
   .esqueleton-seccion-card {
     height: 200px;
     width: 40vw;
-    /*object-fit: contain;*/
   }
   .card-body-seccion{
      max-width: 45vw;
@@ -122,21 +109,13 @@
 @media (max-width: 485px) {
   .esqueleton-seccion-card {
     height: 140px;
-    /* width: 140px */
     width: 30vw;
   }
-  .card-body-seccion{
-   /* max-width: 186px;
-    max-height: 200px;*/
-  }
+  
 }
 @media (max-width: 430px) {
   .titulo-card-negocio-panntalla-principal {
     max-width: 10ch;
-  }
-  .tarjeta-negocio-card{
-    /*max-width: 162px;
-    max-height: 235px;*/
   }
   
   .lazyload{
@@ -152,7 +131,6 @@
 @media (max-width: 377px) {
   .esqueleton-seccion-card {
     height: 140px;
-    /* width: 140px */
     width: 70vw;
   }
   .card-body-seccion{
