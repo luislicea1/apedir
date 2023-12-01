@@ -14,7 +14,6 @@ const ListadoDeComponentesLugar = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.screen.width);
   const [loading, setLoading] = useState(true);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -50,13 +49,7 @@ const ListadoDeComponentesLugar = () => {
       console.error("Error fetching more data:", error);
     }
   };
-  React.useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+ 
 
   useEffect(() => {
     const fetchData = () => {
@@ -84,12 +77,6 @@ const ListadoDeComponentesLugar = () => {
         display: "grid",
         placeItems: "center",
         alignContent: "stretch",
-        gridTemplateColumns:
-          windowWidth < 380
-            ? "1fr"
-            : windowWidth < 720
-            ? "1fr 1fr"
-            : "1fr 1fr 1fr",
       }}
     >
       {filtredBussinesses !== null &&
@@ -104,7 +91,6 @@ const ListadoDeComponentesLugar = () => {
                 nombre={item.name}
                 numeroPersonas={item.numeroPersonas}
                 url={item.value_url}
-                heigth={windowWidth < 713 ? "150px" : "272px"}
               ></ComponenteLugar>
             </div>
           );
