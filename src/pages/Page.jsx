@@ -5,6 +5,14 @@ import Header from "../components/header/Header";
 // const Header = React.lazy(() => import("../components/header/Header"));
 
 export default function Page({ children }) {
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div>
       <Helmet>
