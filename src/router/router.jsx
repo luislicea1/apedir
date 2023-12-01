@@ -182,7 +182,7 @@ const router = createBrowserRouter([
       },
     ],
   },
- 
+
   {
     path: "/evento/:nombre",
     element: (
@@ -192,10 +192,10 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/administrador-negocio/",
+    path: "/administrador-negocio",
     element: (
       <Page>
-        <Suspense fallback={<LoaderCompletePage />}>
+        <Suspense fallback={<LoaderCompletePage />} >
           <LazyAdministradorNegocio>
             <Outlet />
           </LazyAdministradorNegocio>

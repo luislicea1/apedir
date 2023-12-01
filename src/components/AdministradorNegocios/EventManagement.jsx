@@ -10,7 +10,6 @@ import {
 import { getOneBussiness } from "../../api/bussiness";
 
 import EventCard from "./EventCard";
-import supabase from "../../api/client";
 
 export default function EventManagement() {
   const user = useUserStore((state) => state.user);
@@ -40,18 +39,7 @@ export default function EventManagement() {
 
   useEffect(() => {
     if (events.length === 0) fetchEvents();
-  }, [bussiness]);
-
-  // const channels = supabase
-  //   .channel("custom-delete-channel")
-  //   .on(
-  //     "postgres_changes",
-  //     { event: "*", schema: "public", table: "events" },
-  //     (payload) => {
-  //       fetchEvents();
-  //     }
-  //   )
-  //   .subscribe();
+  }, []);
 
   return (
     <Tabs aria-label="seleccion de eventos" fullWidth>
