@@ -11,11 +11,7 @@ import {
   ModalBody,
   useDisclosure,
 } from "@nextui-org/react";
-import {
-  ImgCardStyle2,
-  CardStyles2,
-  ProductoStyle,
-} from "../../styles/styles";
+import { ImgCardStyle2, CardStyles2, ProductoStyle } from "../../styles/styles";
 
 import ImagenVisualizador from "../VisualizadorProducto/ImagenVisualizador";
 import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
@@ -43,7 +39,7 @@ export default function Producto({
 
   const handleQuantityChange = (newQuantity) => {
     setCantidad(newQuantity);
-   };
+  };
 
   const sectionStyle2 = {
     width: "100%",
@@ -55,13 +51,7 @@ export default function Producto({
   return (
     <div>
       <Helmet>
-        <link
-          fetchpriority="high"
-          rel="preload"
-          href={img}
-          as="image"
-         
-        />
+        <link fetchpriority="high" rel="preload" href={img} as="image" />
       </Helmet>
       <Card
         shadow="sm"
@@ -69,7 +59,7 @@ export default function Producto({
         isPressable
         style={CardStyles2}
         className="producto-card"
-        onClick={onOpen} 
+        onClick={onOpen}
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
           <LazyLoadImage
@@ -81,7 +71,6 @@ export default function Producto({
             delayTime={300}
             placeholderSrc={img}
             useIntersectionObserver={true}
-            
           />
         </CardBody>
         <CardFooter
@@ -89,7 +78,6 @@ export default function Producto({
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-           
           }}
         >
           <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
@@ -98,16 +86,15 @@ export default function Producto({
                 fontSize: "20px",
               }}
             >
-              {title} 
+              {title}
             </b>
           </div>
-          <div style={{ gridColumn: "span 2" , marginBottom: "10px"}}>
+          <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
             <p className="text-default-500">
               {price} {currency}
             </p>
           </div>
 
-         
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}

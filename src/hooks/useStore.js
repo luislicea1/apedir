@@ -50,8 +50,14 @@ const eventsStore = create((set) => ({
   setEvents: (b) => set({ events: b }),
 }));
 
+const merchantEvents = create((set) => ({
+  events: [],
+  setEvents: (b) => set({ events: b }),
+}));
+
 export {
   useUserStore,
+  merchantEvents,
   useBussinessStore,
   useProvinceStore,
   useAdminUsers,

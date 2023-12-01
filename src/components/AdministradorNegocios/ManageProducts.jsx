@@ -45,7 +45,7 @@ export default function ManageProducts() {
   const setCategoriesGlobal = useCategoriesList((state) => state.setCategories);
   const productsGlobal = useProductsList((state) => state.products);
   const setProductsGlobal = useProductsList((state) => state.setProducts);
-
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(
     productsGlobal !== null ? productsGlobal : []
   );
@@ -206,6 +206,7 @@ export default function ManageProducts() {
 
   const handleImageChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
+      setLoading(true);
       const file = event.target.files[0]; // Guarda el archivo en una variable
 
       // Obtiene la extensión del archivo
@@ -220,7 +221,7 @@ export default function ManageProducts() {
       setImageName(newFileName);
 
       // Llama a la función resizeImage pasándole el archivo de imagen
-      const resizedImage = await resizeImage(file, 800, 800); // Usa el archivo que guardaste
+      const resizedImage = await resizeImage(file, 500, 500); // Usa el archivo que guardaste
 
       // Usa el resultado de resizeImage para actualizar el estado del producto
       setProductInput((prevState) => {
@@ -231,6 +232,7 @@ export default function ManageProducts() {
 
         return updatedState;
       });
+      setLoading(false);
     }
   };
 
@@ -360,6 +362,7 @@ export default function ManageProducts() {
                           />
                         </div>
                       </label>
+                      {loading && <p>Subiendo imagen...</p>}
                     </div>
                   </ModalBody>
                   <ModalFooter>
@@ -457,6 +460,7 @@ export default function ManageProducts() {
             onOpen={onProductDeleteOpen}
             onOpenChange={onProductDeleteOpenChange}
             productToDelete={productInput}
+            fetchProducts={fetchProducts}
           />
           <ModalDeleteCategory
             isOpen={isCategoryDeleteOpen}

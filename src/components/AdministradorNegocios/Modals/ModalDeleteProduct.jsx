@@ -15,6 +15,7 @@ export default function ModalDeleteProduct({
   onOpen,
   onOpenChange,
   productToDelete,
+  fetchProducts,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -22,6 +23,7 @@ export default function ModalDeleteProduct({
     setIsDeleting(true);
     await deleteProductById(id);
     setIsDeleting(false);
+    fetchProducts();
   };
 
   return (

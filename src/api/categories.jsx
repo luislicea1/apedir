@@ -13,9 +13,7 @@ const getCategories = async (bussiness) => {
 };
 
 const addCategory = async (category) => {
-  const { data, error } = await supabase
-    .from("categories")
-    .insert(category)
+  const { data, error } = await supabase.from("categories").insert(category);
 
   console.log(error);
   return data;
@@ -27,12 +25,12 @@ const updateCategory = async (category) => {
 };
 
 const deleteCategoryById = async (id) => {
+  const { d, e } = await supabase.from("products").delete().eq("category", id);
+
   const { data, error } = await supabase
     .from("categories")
     .delete()
     .eq("id", id);
-
-  const { d, e } = await supabase.from("products").delete().eq("category", id);
 };
 
 export { getCategories, addCategory, updateCategory, deleteCategoryById };
