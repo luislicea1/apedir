@@ -98,7 +98,7 @@ export default function Producto({
                 fontSize: "20px",
               }}
             >
-              {title} Titulo
+              {title} 
             </b>
           </div>
           <div style={{ gridColumn: "span 2" , marginBottom: "10px"}}>
