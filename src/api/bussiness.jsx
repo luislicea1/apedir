@@ -29,6 +29,22 @@ const getImage = async (bucket, path) => {
   return data.publicUrl;
 };
 
+const getBussinessImage = async (id) => {
+  let { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("id", id);
+
+  console.error(error)
+  if (data && data[0]) {
+    if (data[0].perfil_pic) {
+      const perfil_pic = await getImage("bussiness_perfil", data[0].perfil_pic);
+      
+      return perfil_pic;
+    }
+  }
+};
+
 const getOneBussiness = async (ownerId) => {
   let { data, error } = await supabase
     .from("bussiness")
@@ -285,4 +301,5 @@ export {
   fetchBussinessPerURL,
   updateBussinessSchedule,
   getSchedule,
+  getBussinessImage,
 };

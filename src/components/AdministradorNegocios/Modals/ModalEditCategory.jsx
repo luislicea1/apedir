@@ -36,6 +36,7 @@ export default function ModalEditCategory({
               <ModalBody>
                 <Input
                   autoFocus
+                  maxLength={30}
                   label="Nombre"
                   placeholder="Escribe el nombre de la categoría"
                   variant="bordered"
@@ -50,6 +51,7 @@ export default function ModalEditCategory({
                     })
                   }
                 />
+                <p>{categoryInput.category.length} / 30</p>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>

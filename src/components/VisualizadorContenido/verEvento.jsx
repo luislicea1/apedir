@@ -1,5 +1,5 @@
 import React from "react";
-import LogoImg from "../../assets/img/img (1).webp";
+import { getBussinessImage } from "../../api/bussiness";
 import { getEventByName } from "../../api/events";
 import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import EventoCard from "./EventoCard";
@@ -8,16 +8,15 @@ import DescripcionEvento from "./DescripcionDeEvento";
 import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
-
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function VerEvento({ nombre }) {
- 
+  const [image, setImage] = useState(null);
   const sectionStyle2 = {
     width: "100%",
     maxWidth: "450px",
-
     height: "100vh",
-
     background: "#202632",
   };
   const sectionStyle = {
@@ -53,16 +52,28 @@ export default function VerEvento({ nombre }) {
     const fetchEvent = async () => {
       const e = await getEventByName(nombre);
       setEvent(e);
+      const img = getBussinessImage(e.bussiness);
+      setImage(img);
+      console.log({ image });
     };
-    fetchEvent();
+    return () => fetchEvent();
   }, []);
+
+  React.useEffect(() => {
+    const fetchImage = async () => {
+      const img = await getBussinessImage(event.bussiness);
+      setImage(img);
+      console.log({ image });
+    };
+    fetchImage();
+  }, [event]);
 
   return event !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <div style={sectionStyle2}>
         <section style={sectionStyle}>
           <HeaderNegocio
-            logo={LogoImg}
+            logo={image}
             nombre={nombre}
             horario={"no"}
             anterior={"/"}
@@ -88,5 +99,7 @@ export default function VerEvento({ nombre }) {
         </section>
       </div>
     </div>
-  ): <LoaderCompletePage />;
+  ) : (
+    <LoaderCompletePage />
+  );
 }
