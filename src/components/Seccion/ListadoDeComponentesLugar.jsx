@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  
-} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import Loader from "../Loader/Loader";
@@ -19,7 +14,7 @@ const ListadoDeComponentesLugar = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(window.screen.width);
   const [loading, setLoading] = useState(true);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -55,6 +50,13 @@ const ListadoDeComponentesLugar = () => {
       console.error("Error fetching more data:", error);
     }
   };
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = () => {
@@ -107,7 +109,7 @@ const ListadoDeComponentesLugar = () => {
             </div>
           );
         })}
-      {hasMore && loading  && (
+      {hasMore && loading && (
         <div style={{ textAlign: "center" }}>
           <Loader></Loader>
         </div>
