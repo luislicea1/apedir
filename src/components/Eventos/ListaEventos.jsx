@@ -61,7 +61,8 @@ export default function ListadoDeEventos() {
         style={listContainerStyle}
         ref={listContainer}
       >
-        {events.length > 0 &&
+        {events &&
+          events.length > 0 &&
           events.map((evento, index) => (
             <Eventos
               key={index}
