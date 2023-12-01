@@ -34,7 +34,7 @@ function ComponenteLugar(props) {
         <link
           fetchpriority="high"
           rel="preload"
-          href={props.imagen.current} // Usar la referencia en lugar del prop directamente
+          href={props.imagen} // Usar la referencia en lugar del prop directamente
           as="image"
         />
       </Helmet>

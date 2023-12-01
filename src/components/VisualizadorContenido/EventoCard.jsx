@@ -4,14 +4,22 @@ import Like from "../Like/Like";
 
 export default function EventoCard({ image }) {
   const img = {
-    maxHeight: "70vh",
-    height: "44vh",
-    width: "450px",
+    height: "30vh",
     borderRadius: "0px",
-    objectFit: "fill",
-    zIndex: "100 !important",
+    marginTop: "5vh",
+    borderRadius: "10px"
   };
-
+  const img2 = {
+    height: "44vh",
+    maxHeight: "70vh",
+    //width: "100%",
+    borderRadius: "0px",
+    objectFit: "cover",
+    width: "450px",
+    position: "absolute",
+    top: 0
+  };
+  
   const center = {
     width: "100%",
     height: "70vh",
@@ -32,10 +40,17 @@ export default function EventoCard({ image }) {
   return (
     <div style={center}>
       <img
-        style={img}
+        style={{...img, zIndex: "100"}}
         src={image }
         alt="NextUI Album Cover Image with delay"
         classNames="m-5"
+      />
+       <img
+        className='blur-img-fondo'
+        style={{...img2, zIndex: "88"}}
+        src={image}
+        //alt="NextUI Album Cover Image with delay"
+        
       />
       <div style={like}>
         <Like></Like>
