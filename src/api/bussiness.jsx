@@ -25,7 +25,6 @@ const upsertBussiness = async (bussiness) => {
 
 const getImage = async (bucket, path) => {
   let { data, ef } = supabase.storage.from(bucket).getPublicUrl(path);
-
   return data.publicUrl;
 };
 
