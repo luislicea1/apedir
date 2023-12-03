@@ -148,7 +148,7 @@ export default function Negocio() {
                 </Link>
               )}
               <br />
-              
+
               <DescripcionNegocio
                 descripcion={bussiness.description}
                 contact={"si"}
@@ -165,10 +165,8 @@ export default function Negocio() {
               <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
             </div>
             <Card>
-              <Horario bussiness = {bussiness}></Horario>
+              <Horario key={bussiness.id} bussiness={bussiness}></Horario>
             </Card>
-
-           
 
             <div ref={ref}>
               {categories.map((category, idx) => {

@@ -17,12 +17,12 @@ import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
 import { useUserStore, useBussinessStore } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
-import { useNavigate } from "react-router-dom";
+import supabase from "../../api/client";
 
 import InputTitle from "./Inputs/InputTitle";
+import { addNotification } from "../../api/notifications";
 
 export default function NegocioDashboard() {
-  const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
@@ -157,12 +157,22 @@ export default function NegocioDashboard() {
     };
 
     await upsertBussiness(updatedBussinessInput);
+
+    if (business) {
+      let notification = {
+        message: `El negocio ${bussinessInput.name} se ha actualizado.`,
+        bussiness: business.id,
+        addressee: null,
+        bussiness_link: business.value_url,
+      };
+      addNotification(notification);
+    }
+
     setIsLoading(false); // Desactivar el loader
 
     toast.success("Actualización exitosa");
     fetchBussiness();
     // window.location.reload();
-
   };
 
   useEffect(() => {

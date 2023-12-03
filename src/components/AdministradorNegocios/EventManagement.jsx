@@ -38,7 +38,9 @@ export default function EventManagement() {
   };
 
   useEffect(() => {
-    if (events.length === 0) fetchEvents();
+    return () => {
+      if (events.length === 0) fetchEvents();
+    };
   }, []);
 
   return (

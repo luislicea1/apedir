@@ -91,7 +91,6 @@ const getProfileStarsFromBussiness = async (userId, bussinessId) => {
     .select("star_ratings")
     .eq("id", userId)
     .single();
-  console.log(userStars);
   let bussinessIndex = -1;
   if (userStars.star_ratings !== null) {
     userStars = userStars.star_ratings;
@@ -132,7 +131,6 @@ const updateProfileStars = async (user, bussiness, stars) => {
   const bussinessIndex = userStars.findIndex(
     (element) => element.bussiness === bussiness
   );
-  console.log(bussinessIndex);
 
   if (bussinessIndex > -1) {
     // Si el negocio ya existe en userStars, actualizar la calificación
@@ -157,23 +155,22 @@ const addOrDeleteSubscription = async (userId, bussinessId) => {
     .from("profiles")
     .select("subscriptions")
     .eq("id", userId);
-  console.log(prevSubs);
+
   prevSubs = prevSubs.length === 1 ? prevSubs[0].subscriptions : [];
 
-  console.log({ prevSubs });
   console.log({ error });
 
   if (prevSubs === null || prevSubs === undefined) {
     prevSubs = [];
-    prevSubs.push({ bussiness: bussinessId });
+    prevSubs.push(bussinessId);
   } else {
-    const index = prevSubs.findIndex((sub) => sub.bussiness === bussinessId);
+    const index = prevSubs.findIndex((b) => b === bussinessId);
     if (index !== -1) {
       // Eliminar el negocio de la suscripción
       prevSubs.splice(index, 1);
     } else {
       // Agregar el negocio a la suscripción
-      prevSubs.push({ bussiness: bussinessId });
+      prevSubs.push(bussinessId);
     }
   }
 
@@ -197,11 +194,10 @@ const getSubscription = async (user, bussiness) => {
   }
   if (!Array.isArray(data)) {
     console.error("Data is not an array");
-    return;
+    return false;
   }
 
-  const subscription = data.find((obj) => obj.bussiness === bussiness);
-
+  const subscription = data.find((b) => b === bussiness);
   return subscription ? true : false;
 };
 
