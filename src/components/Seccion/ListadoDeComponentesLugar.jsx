@@ -6,6 +6,7 @@ import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
+import { addNotification } from "../../api/notifications";
 
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
@@ -49,7 +50,6 @@ const ListadoDeComponentesLugar = () => {
       console.error("Error fetching more data:", error);
     }
   };
- 
 
   useEffect(() => {
     const fetchData = () => {

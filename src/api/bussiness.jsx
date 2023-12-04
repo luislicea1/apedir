@@ -2,6 +2,22 @@ import supabase from "./client";
 import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
 
+const getBussinessName = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("name")
+    .eq("id", bussinessId);
+  return data.name;
+};
+
+const getBussinessUrl = async (bussinessId) => {
+  const { data, err } = await supabase
+    .from("bussiness")
+    .select("value_url")
+    .eq("id", bussinessId);
+  return data[0].value_url;
+};
+
 const upsertBussiness = async (bussiness) => {
   let bussinessToInsert = Object.keys(bussiness).reduce((acc, key) => {
     if (bussiness[key] !== null && bussiness[key] !== "") {
@@ -34,11 +50,11 @@ const getBussinessImage = async (id) => {
     .select("*")
     .eq("id", id);
 
-  console.error(error)
+  console.error(error);
   if (data && data[0]) {
     if (data[0].perfil_pic) {
       const perfil_pic = await getImage("bussiness_perfil", data[0].perfil_pic);
-      
+
       return perfil_pic;
     }
   }
@@ -227,7 +243,6 @@ const fetchBussinessPerName = async (name) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -301,4 +316,6 @@ export {
   updateBussinessSchedule,
   getSchedule,
   getBussinessImage,
+  getBussinessName,
+  getBussinessUrl,
 };
