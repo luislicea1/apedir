@@ -37,14 +37,18 @@ export default function Notification() {
     <Dropdown aria-label="notifications for user">
       <DropdownTrigger aria-label="notifications for user">
         <div style={{ marginTop: "10px" }}>
-          <Badge
-            color={notifications.length > 0 ? "danger" : "default"}
-            content={notifications.length || 0}
-            isInvisible={isInvisible}
-            shape="circle"
-          >
+          {notifications.length > 0 ? (
+            <Badge
+              color={notifications.length > 0 ? "danger" : "default"}
+              content={notifications.length || 0}
+              isInvisible={isInvisible}
+              shape="circle"
+            >
+              <NotificationIcon className="fill-current" size={30} />
+            </Badge>
+          ) : (
             <NotificationIcon className="fill-current" size={30} />
-          </Badge>
+          )}
         </div>
       </DropdownTrigger>
       <DropdownMenu items={notifications} aria-label="notifications for user">
