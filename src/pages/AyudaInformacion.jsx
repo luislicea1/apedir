@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 
 import { container, section } from "../components/styles/styles";
+import TituloDeSeccion from "../components/Seccion/TituloDeSeccion";
 
 const AyudaInformacionContainer = lazy(() =>
   import("../components/AyudaInformacion/AyudaInformacionContainer")
@@ -13,6 +14,7 @@ export default function AyudaInformacion() {
     >
       <section className="section px-6" style={section}>
         <Suspense>
+          <TituloDeSeccion title = {"Preguntas más comunes"}></TituloDeSeccion>
           <AyudaInformacionContainer></AyudaInformacionContainer>
         </Suspense>
       </section>
