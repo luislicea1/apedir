@@ -4,6 +4,7 @@ import { Card, CardBody } from "@nextui-org/react";
 import { useBussinessStore, useUserStore } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
 import supabase from "../../api/client";
+import CambioDePaquete from "./CambioDePaquete";
 
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
@@ -37,6 +38,8 @@ export default function CrearNegocio({ children }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
+
+        <CambioDePaquete paquete = {"Gratis"}></CambioDePaquete>
         <div>
           {bussiness !== null && bussiness !== undefined ? (
             <section
@@ -44,7 +47,6 @@ export default function CrearNegocio({ children }) {
               style={{ margin: "10px" }}
             >
               <Link to="/administrador-negocio/perfil">Perfil</Link>
-
               <Link to="/administrador-negocio/horarios">Horario</Link>
               <Link to="/administrador-negocio/eventos">Eventos</Link>
               <Link to="/administrador-negocio/productos">Productos</Link>
