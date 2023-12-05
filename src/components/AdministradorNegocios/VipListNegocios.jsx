@@ -1,8 +1,10 @@
 import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Card from "antd/es/card/Card";
-//import ComponenteLugar from "../Seccion/ComponenteLugar";
+import { getAllBussinessFromUser } from "../../api/bussiness";
+import NegocioIdVip from "./NegocioIdVip";
+import { grid_2_col } from "../styles/styles";
 
 export default function VipListNegocios(props) {
     const agregarUnNuevoNegocio = {
@@ -13,6 +15,17 @@ export default function VipListNegocios(props) {
         display: "grid",
         placeItems: "center",
     }
+    const [businesses, setBusinesses] = useState([]);
+    useEffect(() => {
+        const fetchBusinesses = async () => {
+          const data = await getAllBussinessFromUser(props.userId);
+          setBusinesses(data);
+        };
+       
+        fetchBusinesses();
+       }, [props.userId]);
+       
+
   return (
     <>
       <div
@@ -21,8 +34,26 @@ export default function VipListNegocios(props) {
       >
         <section className="section px-6" style={section}>
           <TituloDeSeccion title={props.title}></TituloDeSeccion>
+          <div style={{...grid_2_col, marginBottom: "40px"}}>
+            {businesses.map((business, index) => (
+                
 
-          <div style= {agregarUnNuevoNegocio}>
+                <NegocioIdVip
+                id={business.id}
+                imagen={business.perfil_pic}
+                localizacion={business.province}
+                gps_location={business.gps_location}
+                nombre={business.name}
+                //numeroPersonas={business.numeroPersonas}
+            // url={business.value_url}
+            ></NegocioIdVip>
+            ))}
+          </div>
+
+          
+
+
+          <div style= {{...agregarUnNuevoNegocio, marginBottom: "40px"}}>
                 Agregar Negocio
           </div>
           
