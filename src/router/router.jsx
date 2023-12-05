@@ -186,7 +186,7 @@ const router = createBrowserRouter([
   {
     path: "/evento/:nombre",
     element: (
-      <Suspense fallback={<Loader text={"Cargando..."} />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <LazyVerEventoWrapper />
       </Suspense>
     ),

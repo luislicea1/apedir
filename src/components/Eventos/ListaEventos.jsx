@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, Suspense } from "react";
+import React, { useEffect, useRef } from "react";
 import { getAllEvents } from "../../api/events";
 
 import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
-
-const renderLoader = () => <p>Loading</p>;
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
@@ -55,7 +53,6 @@ export default function ListadoDeEventos() {
 
   // const eventos = props.eventos;
   return (
-    <Suspense fallback={renderLoader()}>
       <div
         className="list-container"
         style={listContainerStyle}
@@ -67,12 +64,9 @@ export default function ListadoDeEventos() {
             <Eventos
               key={index}
               nombre={evento.name}
-              // localizacion={evento.localizacion}
-              //numeroPersonas = {evento.numeroPersonas}
               imagen={evento.image}
             />
           ))}
       </div>
-    </Suspense>
   );
 }
