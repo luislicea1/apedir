@@ -9,7 +9,6 @@ import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useState } from "react";
-import { useEffect } from "react";
 
 export default function VerEvento({ nombre }) {
   const [image, setImage] = useState(null);
@@ -52,21 +51,11 @@ export default function VerEvento({ nombre }) {
     const fetchEvent = async () => {
       const e = await getEventByName(nombre);
       setEvent(e);
-      const img = getBussinessImage(e.bussiness);
+      const img = await getBussinessImage(e.bussiness);
       setImage(img);
-      console.log({ image });
     };
-    return () => fetchEvent();
+    fetchEvent();
   }, []);
-
-  React.useEffect(() => {
-    const fetchImage = async () => {
-      const img = await getBussinessImage(event.bussiness);
-      setImage(img);
-      console.log({ image });
-    };
-    fetchImage();
-  }, [event]);
 
   return event !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">

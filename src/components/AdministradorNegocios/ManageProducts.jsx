@@ -142,19 +142,6 @@ export default function ManageProducts() {
     fetchProducts();
   }, [categories]);
 
-  // useEffect(() => {
-  //   validateForm();
-  // }, [productInput]);
-
-  // const validateForm = async () => {
-  //   try {
-  //     await ProductInputSchema.validate(productInput);
-  //     setIsFormValid(true);
-  //   } catch (error) {
-  //     setIsFormValid(false);
-  //   }
-  // };
-
   const handleAddCategory = async () => {
     if (categoryInput.category.trim() === "") {
       toast.error("El nombre de la categoría no puede estar vacío");
@@ -171,11 +158,12 @@ export default function ManageProducts() {
   };
 
   const handleAddProduct = async () => {
-    const error = await ProductInputSchema.validate(productInput);
-    console.log(error);
-
-    if (error) {
-      toast.error(error);
+    try {
+      await ProductInputSchema.validate(productInput, {
+        strict: true,
+      });
+    } catch (e) {
+      toast.error(e.message);
       return;
     }
 
