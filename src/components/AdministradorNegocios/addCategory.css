@@ -57,3 +57,23 @@
   .custum-file-upload input {
     display: none;
   }
+
+  @media only screen and (max-width: 470px) {
+    
+    .cambioDePaqueteDiv{
+      display: grid !important;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      place-items: center;
+      
+    }
+
+    .cambioDePaqueteTitle,
+    .category-type-text-color-premium,
+    .category-type-text-color-basico,
+    .category-type-text-color-gratis{
+        font-size: 2rem !important;
+    }
+  
+    
+}

@@ -161,7 +161,7 @@ export default function Header(props) {
                 className="h-14 gap-4"
               >
                 <p className="font-semibold">{user?.email}</p>
-                <p className="font-semibold">Plan: PREMIUM</p>
+                <p className="font-semibold">{user.plan}</p>
               </DropdownItem>
 
               {selectedBussiness === undefined && selectedBussiness !== null ? (

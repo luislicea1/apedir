@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody } from "@nextui-org/react";
 import { useBussinessStore, useUserStore } from "../../hooks/useStore";
@@ -10,6 +10,19 @@ export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
+
+  const fetchBussiness = async () => {
+    if (user === null) return;
+
+    const b = await getOneBussiness(user.id);
+    setBussiness(b);
+  };
+
+  useEffect(() => {
+    return () => fetchBussiness();
+  }, [
+    user
+  ]);
 
   const sectionStyle = {
     width: "100%",
@@ -39,7 +52,7 @@ export default function CrearNegocio({ children }) {
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
 
-        <CambioDePaquete paquete = {"Gratis"}></CambioDePaquete>
+        <CambioDePaquete paquete = {user.plan}></CambioDePaquete>
         <div>
           {bussiness !== null && bussiness !== undefined ? (
             <section

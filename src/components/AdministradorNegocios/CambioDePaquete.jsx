@@ -10,17 +10,17 @@ export default function CambioDePaquete(props){
         fontSize: "3rem",
         lineHeight: "1",
         fontWeight: "600",
-        
     }
+    
 
     return(
         <div style={{...grid_1_col_center, padding: "20px 20px 40px 20px"}}>
 
-            <div style={{display: "flex", gap: "10px"}}>
-                <h2 style={fuente}>Paquete </h2>
+            <div style={{display: "flex", gap: "10px"}} className="cambioDePaqueteDiv">
+                <h2 style={fuente} className="cambioDePaqueteTitle">Paquete </h2>
                 <span  
-                    className = {props.paquete == "Premium" ? "category-type-text-color-premium" : props.paquete == "Basico" ?"category-type-text-color-basico" : "category-type-text-color-gratis"} 
-                    style={fuente}
+                    className = {props.paquete == "premium" ? "category-type-text-color-premium" : props.paquete == "basico" ?"category-type-text-color-basico" : "category-type-text-color-gratis"} 
+                    style={{...fuente,  textTransform: "uppercase"}}
                 >
                     {props.paquete}.
                 </span>
@@ -32,11 +32,7 @@ export default function CambioDePaquete(props){
                         Cambiar de paquete
                     </Button>
                 </Link>
-                <Link to={'/plans'} aria-label={"negocio"}>
-                    <Button>
-                        Contactenos
-                    </Button>
-                </Link>
+                
             </div>
             
             {/* <a href="/plans">Cambiar de paquete</a> */}
