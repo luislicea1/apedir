@@ -64,7 +64,7 @@ const getOneBussiness = async (ownerId) => {
     .from("bussiness")
     .select("*")
     .eq("owner", ownerId);
-
+  console.log({ data });
   if (data && data[0]) {
     if (data[0].front_pic) {
       const front_pic = await getImage("bussiness_front", data[0].front_pic);
@@ -83,9 +83,40 @@ const getOneBussiness = async (ownerId) => {
       );
       data[0].gps_location = gps_location;
     }
-
     return data[0];
   }
+};
+
+const getAllBussinessFromUser = async (ownerId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("owner", ownerId);
+  const businessesWithImages = await Promise.all(
+    data.map(async (business) => {
+      // const stars = await getStarsFromBussiness(business.id);
+      const front_pic = await getImage("bussiness_front", business.front_pic);
+      const perfil_pic = await getImage(
+        "bussiness_perfil",
+        business.perfil_pic
+      );
+      const gps_location = await getImage(
+        "bussiness_location",
+        business.gps_location
+      );
+
+      return {
+        ...business,
+        front_pic,
+        perfil_pic,
+        gps_location,
+      };
+    })
+  );
+
+  console.log(businessesWithImages);
+  // Actualiza el estado con los nuevos elementos
+  return businessesWithImages;
 };
 
 const updateBussinessSchedule = async (bussinessId, schedules) => {
@@ -272,7 +303,6 @@ const fetchBussinessPerURL = async (valueUrl) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -317,4 +347,5 @@ export {
   getBussinessImage,
   getBussinessName,
   getBussinessUrl,
+  getAllBussinessFromUser,
 };

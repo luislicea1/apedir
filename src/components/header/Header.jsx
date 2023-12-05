@@ -24,7 +24,11 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
-import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
+import {
+  fetchBussinessPerURL,
+  getAllBussinessFromUser,
+  getOneBussiness,
+} from "../../api/bussiness";
 import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
