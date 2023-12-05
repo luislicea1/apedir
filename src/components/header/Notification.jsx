@@ -13,12 +13,24 @@ import {
   deleteUserNotification,
   getNotificationsFromUser,
 } from "../../api/notifications";
+import supabase from "../../api/client";
 
 export default function Notification() {
   const user = useUserStore((state) => state.user);
   const [notifications, setNotifications] = useState([]);
   const [isInvisible, setIsInvisible] = useState(false);
   const navigate = useNavigate();
+
+  const channels = supabase
+    .channel("custom-insert-channel")
+    .on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "notifications" },
+      (payload) => {
+        fetchNotifications();
+      }
+    )
+    .subscribe();
 
   const fetchNotifications = async () => {
     const notificationList = await getNotificationsFromUser(user.id);
