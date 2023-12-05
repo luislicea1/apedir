@@ -37,7 +37,7 @@ export default function Notification() {
     <Dropdown aria-label="notifications for user">
       <DropdownTrigger aria-label="notifications for user">
         <div style={{ marginTop: "10px" }}>
-          {notifications.length > 0 ? (
+          {notifications && notifications.length > 0 ? (
             <Badge
               color={notifications.length > 0 ? "danger" : "default"}
               content={notifications.length || 0}
@@ -53,20 +53,16 @@ export default function Notification() {
       </DropdownTrigger>
       <DropdownMenu items={notifications} aria-label="notifications for user">
         {(item) => (
-          //   <Link to={`/lugar/${item.bussiness_link}`}>
           <DropdownItem
             key={`${item.id}`}
-            // as={Link}
             onClick={() => {
               handleDelete(item.id);
               navigate(`/lugar/${item.bussiness_link}`);
               fetchNotifications();
             }}
-            // to={`/lugar/${item.bussiness_link}`}
           >
             {item.message}
           </DropdownItem>
-          //   </Link>
         )}
       </DropdownMenu>
     </Dropdown>

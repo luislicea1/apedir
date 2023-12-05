@@ -89,8 +89,10 @@ export default function Header(props) {
   };
 
   useEffect(() => {
-    fetchBussiness();
-  }, [user]);
+    return () => fetchBussiness();
+  }, [
+    user
+  ]);
 
   return (
     <Navbar isBordered disableAnimation>

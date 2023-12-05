@@ -14,6 +14,7 @@ import {
 import { UploadIcon } from "../../Icons/UploadIcon";
 import { updateProduct } from "../../../api/products";
 import InputPrecio from "../Inputs/InputPrecio";
+import { addNotification } from "../../../api/notifications";
 
 export default function ModalEditProduct({
   isOpen,
@@ -25,15 +26,25 @@ export default function ModalEditProduct({
   imageName,
   setImageName,
   fetchProducts,
+  bussiness,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEditProduct = async () => {
     await updateProduct(productInput, imageName);
+    if (bussiness) {
+      let notification = {
+        message: `El negocio ${bussiness.name} ha cambiado el producto ${productInput.name}.`,
+        bussiness: bussiness.id,
+        addressee: null,
+        bussiness_link: bussiness.value_url,
+      };
+      addNotification(notification);
+    }
     setImageName("");
     setProductInput({
       name: "",
-      price: "",
+      price: 0,
       currency: "CUP",
       description: "",
       image: "",

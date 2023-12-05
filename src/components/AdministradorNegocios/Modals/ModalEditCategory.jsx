@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Modal,
@@ -18,6 +18,7 @@ export default function ModalEditCategory({
   categoryInput,
   setCategoryInput,
 }) {
+  const [loading, setLoading] = useState(false);
   const handleUpdateCategory = async () => {
     await updateCategory(categoryInput);
     await fetchCategories();
@@ -64,7 +65,7 @@ export default function ModalEditCategory({
                     onClose();
                   }}
                 >
-                  Editar.
+                  {loading ? "Editando..." : "Editar"}
                 </Button>
               </ModalFooter>
             </>

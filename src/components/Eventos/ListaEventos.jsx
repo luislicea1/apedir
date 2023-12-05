@@ -17,7 +17,7 @@ export default function ListadoDeEventos() {
       const e = await getAllEvents();
       setEvents(e);
     };
-    return () => fetchEvents();
+    fetchEvents();
   }, []);
 
   useEffect(() => {

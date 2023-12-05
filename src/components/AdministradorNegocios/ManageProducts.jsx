@@ -34,6 +34,7 @@ import {
   useUserStore,
 } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
+import { addNotification } from "../../api/notifications";
 
 export default function ManageProducts() {
   const user = useUserStore((state) => state.user);
@@ -55,8 +56,6 @@ export default function ManageProducts() {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const fetchBussiness = async () => {
-    if (user === null) return;
-
     const b = await getOneBussiness(user.id);
     setBussiness(b);
     setCategoryInput((prev) => {
@@ -69,8 +68,10 @@ export default function ManageProducts() {
   };
 
   useEffect(() => {
-    if (bussiness === null) fetchBussiness();
-  }, [user, bussiness]);
+    return () => {
+      if (bussiness === null) fetchBussiness();
+    };
+  }, [bussiness]);
 
   const [categoryInput, setCategoryInput] = useState({
     bussiness: "",
@@ -109,7 +110,7 @@ export default function ManageProducts() {
   const [imageName, setImageName] = useState("");
   const [productInput, setProductInput] = useState({
     name: "",
-    price: "",
+    price: 0,
     currency: "CUP",
     description: "",
     image: "",
@@ -141,19 +142,18 @@ export default function ManageProducts() {
     fetchProducts();
   }, [categories]);
 
-  useEffect(() => {
-    validateForm();
-  }, [productInput]);
-  // Recuperar los productos y las categorías
+  // useEffect(() => {
+  //   validateForm();
+  // }, [productInput]);
 
-  const validateForm = async () => {
-    try {
-      await ProductInputSchema.validate(productInput);
-      setIsFormValid(true);
-    } catch (error) {
-      setIsFormValid(false);
-    }
-  };
+  // const validateForm = async () => {
+  //   try {
+  //     await ProductInputSchema.validate(productInput);
+  //     setIsFormValid(true);
+  //   } catch (error) {
+  //     setIsFormValid(false);
+  //   }
+  // };
 
   const handleAddCategory = async () => {
     if (categoryInput.category.trim() === "") {
@@ -171,15 +171,14 @@ export default function ManageProducts() {
   };
 
   const handleAddProduct = async () => {
-    // Añadiendo la imagen
+    const error = await ProductInputSchema.validate(productInput);
+    console.log(error);
 
-    if (!isFormValid) {
-      toast.error(
-        await ProductInputSchema.validate().catch((error) => error.message)
-      );
-
+    if (error) {
+      toast.error(error);
       return;
     }
+
     const insertedImage = await uploadImage(
       productInput.image,
       imageName,
@@ -191,6 +190,14 @@ export default function ManageProducts() {
       image: insertedImage.path,
     };
     await addProduct(updatedProductInput);
+
+    let notification = {
+      message: `El negocio ${bussiness.name} tiene un nuevo producto.`,
+      bussiness: bussiness.id,
+      addressee: null,
+      bussiness_link: bussiness.value_url,
+    };
+    await addNotification(notification);
 
     setProductInput({
       name: "",
@@ -291,6 +298,7 @@ export default function ManageProducts() {
                   <ModalBody>
                     <Input
                       autoFocus
+                      required
                       label="Nombre"
                       placeholder="Escribe el nombre del producto"
                       variant="bordered"
@@ -376,7 +384,7 @@ export default function ManageProducts() {
                         handleAddProduct();
                         onClose();
                       }}
-                      disabled={!isFormValid}
+                      // disabled={!isFormValid}
                     >
                       Agregar
                     </Button>
@@ -445,6 +453,7 @@ export default function ManageProducts() {
             imageName={imageName}
             setImageName={setImageName}
             fetchProducts={fetchProducts}
+            bussiness={bussiness}
           />
 
           <ModalEditCategory

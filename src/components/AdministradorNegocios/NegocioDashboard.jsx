@@ -43,7 +43,9 @@ export default function NegocioDashboard() {
   };
 
   useEffect(() => {
-    if (business === null) fetchBussiness();
+    return () => {
+      if (business === null) fetchBussiness();
+    };
   }, [user]);
 
   useEffect(() => {

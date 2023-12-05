@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import { Tab, Tabs, Card, CardBody } from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import { getEventsfromBussiness } from "../../api/events";
 import {
   merchantEvents,
@@ -22,17 +22,27 @@ export default function EventManagement() {
     setBussiness(b);
   };
 
-  useEffect(() => {
-    if (bussiness === null) fetchBussiness();
-  }, [user, bussiness]);
+  useEffect(
+    () => {
+      return () => {
+        if (bussiness === null) fetchBussiness();
+      };
+    },
+    [
+      // user, bussiness
+    ]
+  );
 
   // const [events, setEvents] = useState([]);
   const events = merchantEvents((state) => state.events);
   const setEvents = merchantEvents((state) => state.setEvents);
 
   const fetchEvents = async () => {
-    if (bussiness === null) return;
-    const eventList = await getEventsfromBussiness(bussiness.id);
+    let b = bussiness;
+    if (bussiness === null) {
+      b = await getOneBussiness(user.id);
+    }
+    const eventList = await getEventsfromBussiness(b.id);
 
     setEvents(eventList !== null ? eventList : []);
   };
