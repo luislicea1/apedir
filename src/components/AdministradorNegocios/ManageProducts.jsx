@@ -128,7 +128,7 @@ export default function ManageProducts() {
   };
 
   useEffect(() => {
-    fetchCategories();
+    if (bussiness) fetchCategories();
   }, [bussiness]);
 
   const fetchProducts = async () => {

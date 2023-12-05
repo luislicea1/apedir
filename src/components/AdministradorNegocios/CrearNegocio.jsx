@@ -17,7 +17,7 @@ export default function CrearNegocio({ children }) {
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
   };
-
+  
   const channels = supabase
     .channel("custom-all-channel")
     .on(
@@ -38,8 +38,7 @@ export default function CrearNegocio({ children }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
-
-        <CambioDePaquete paquete = {"Gratis"}></CambioDePaquete>
+        <CambioDePaquete paquete={"Gratis"}></CambioDePaquete>
         <div>
           {bussiness !== null && bussiness !== undefined ? (
             <section

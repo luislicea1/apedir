@@ -118,7 +118,9 @@ export default function ResponsiveTimePickers() {
         setBussiness(b);
       }
       const schedules = await getSchedule(b.id);
-      setDias(schedules);
+      if (schedules) {
+        setDias(schedules);
+      }
     };
     return () => fetchScheduleFromBussiness();
   }, []);
