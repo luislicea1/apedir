@@ -5,6 +5,7 @@ import { useBussinessStore, useUserStore } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
 import supabase from "../../api/client";
 import CambioDePaquete from "./CambioDePaquete";
+import VipListNegocios from "./VipListNegocios";
 
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
@@ -30,7 +31,7 @@ export default function CrearNegocio({ children }) {
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
   };
-
+  
   const channels = supabase
     .channel("custom-all-channel")
     .on(
@@ -52,7 +53,10 @@ export default function CrearNegocio({ children }) {
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
 
-        <CambioDePaquete paquete = {user.plan}></CambioDePaquete>
+        <CambioDePaquete paquete = {user?.plan}></CambioDePaquete>
+
+        {user?.plan == "premium" ? <VipListNegocios></VipListNegocios>:null}
+
         <div>
           {bussiness !== null && bussiness !== undefined ? (
             <section

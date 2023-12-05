@@ -1,8 +1,18 @@
 import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
+import React from "react";
+import Card from "antd/es/card/Card";
 //import ComponenteLugar from "../Seccion/ComponenteLugar";
 
 export default function VipListNegocios(props) {
+    const agregarUnNuevoNegocio = {
+        width: "100%",
+        height: "100px",
+        borderRadius: "10px", 
+        border: "2px dashed #cacaca",
+        display: "grid",
+        placeItems: "center",
+    }
   return (
     <>
       <div
@@ -12,9 +22,9 @@ export default function VipListNegocios(props) {
         <section className="section px-6" style={section}>
           <TituloDeSeccion title={props.title}></TituloDeSeccion>
 
-          <Card style= {{}}>
+          <div style= {agregarUnNuevoNegocio}>
                 Agregar Negocio
-          </Card>
+          </div>
           
         </section>
       </div>
