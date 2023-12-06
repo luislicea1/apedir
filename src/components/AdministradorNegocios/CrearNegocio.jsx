@@ -64,8 +64,12 @@ export default function CrearNegocio({ children }) {
             >
               <Link to="/administrador-negocio/perfil">Perfil</Link>
               <Link to="/administrador-negocio/horarios">Horario</Link>
-              <Link to="/administrador-negocio/eventos">Eventos</Link>
-              <Link to="/administrador-negocio/productos">Productos</Link>
+              {user.plan !== "gratis" && (
+                <>
+                  <Link to="/administrador-negocio/eventos">Eventos</Link>
+                  <Link to="/administrador-negocio/productos">Productos</Link>
+                </>
+              )}
             </section>
           ) : (
             <section className="flex justify-between mx-8">
