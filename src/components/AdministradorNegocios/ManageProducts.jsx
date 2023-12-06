@@ -60,7 +60,7 @@ export default function ManageProducts() {
   // });
 
   const categoryInput = useRef({
-    bussiness: bussiness.id,
+    bussiness: bussiness ? bussiness.id : "",
     category: "",
   });
 
@@ -469,7 +469,6 @@ export default function ManageProducts() {
             fetchCategories={fetchCategories}
             onOpenChange={onCategoryDeleteOpenChange}
             bussiness={bussiness}
-
           />
         </div>
       </label>

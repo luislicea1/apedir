@@ -17,12 +17,12 @@ export default function CategoryContainer({
   onCategoryEditOpen,
   onCategoryDeleteOpen,
 }) {
-  // const [windowWidth, setWindowWidth] = useState(window.screen.width);
-  // useEffect(() => {
-  //   const handleResize = () => setWindowWidth(window.screen.width);
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+  const [windowWidth, setWindowWidth] = useState(window.screen.width);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.screen.width);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div

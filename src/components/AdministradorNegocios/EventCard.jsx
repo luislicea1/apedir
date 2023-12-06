@@ -26,6 +26,7 @@ export default function EventCard({ bussinessId, event }) {
   const [isLoading, setIsLoading] = useState(false);
   const [imageName, setImageName] = useState("");
   const [image, setImage] = useState(null);
+  const [render, setRender] = useState(0);
   const defaultEventValues = {
     id: "",
     bussiness:
@@ -37,7 +38,7 @@ export default function EventCard({ bussinessId, event }) {
     phone_number: "",
   };
 
-  const [eventInput, setEventInput] = useState(
+  const eventInput = React.useRef(
     event !== null && event !== undefined ? event : defaultEventValues
   );
 
@@ -49,15 +50,20 @@ export default function EventCard({ bussinessId, event }) {
     setIsLoading(true);
     let eventImage = "";
     if (
-      eventInput.image !== null &&
-      (eventInput.image !== "") & (eventInput.image instanceof Blob)
+      eventInput.current.image !== null &&
+      (eventInput.current.image !== "") &
+        (eventInput.current.image instanceof Blob)
     ) {
-      await removeImage(eventInput.image, "events");
-      eventImage = await uploadImage(eventInput.image, imageName, "events");
+      await removeImage(eventInput.current.image, "events");
+      eventImage = await uploadImage(
+        eventInput.current.image,
+        imageName,
+        "events"
+      );
       eventImage = eventImage !== null ? eventImage.path : "";
     }
     const updatedEvent = {
-      ...eventInput,
+      ...eventInput.current,
       image: eventImage,
     };
     await upsertEvent(updatedEvent);
@@ -77,13 +83,11 @@ export default function EventCard({ bussinessId, event }) {
       const resizedImage = await resizeImage(file, 500, 500);
 
       setImageName(newFileName);
-      setEventInput((prevState) => {
-        const updatedState = {
-          ...prevState,
-          image: resizedImage,
-        };
-        return updatedState;
-      });
+      eventInput.current = {
+        ...eventInput.current,
+        image: resizedImage,
+      };
+      setRender((render) => render + 1);
     }
   };
   return (
@@ -109,12 +113,13 @@ export default function EventCard({ bussinessId, event }) {
         variant="bordered"
         placeholder="Escribe el nombre del evento"
         labelPlacement="outside"
-        value={eventInput.name}
+        value={eventInput.current.name}
         onChange={(event) => {
-          setEventInput({
-            ...eventInput,
+          eventInput.current = {
+            ...eventInput.current,
             name: event.target.value,
-          });
+          };
+          setRender((render) => render + 1);
         }}
       />
       <div>
@@ -131,7 +136,7 @@ export default function EventCard({ bussinessId, event }) {
             width={272}
             height={272}
             alt="Imagen del evento"
-            src={image || eventInput.image}
+            src={image || eventInput.current.image}
           />
         </div>
 
@@ -152,12 +157,13 @@ export default function EventCard({ bussinessId, event }) {
           style={{ width: "300px", height: "230px" }}
           placeholder="Escribe la descripción del evento"
           variant="bordered"
-          value={eventInput.description}
+          value={eventInput.current.description}
           onChange={(event) => {
-            setEventInput({
-              ...eventInput,
+            eventInput.current = {
+              ...eventInput.current,
               description: event.target.value,
-            });
+            };
+            setRender((render) => render + 1);
           }}
         />
       </div>
@@ -165,14 +171,11 @@ export default function EventCard({ bussinessId, event }) {
       <br />
 
       <div style={grid_2_col} className="mt-2 mb-2">
-        <InputGmail value={eventInput} setValue={setEventInput}></InputGmail>
-        <InputPhoneNumber
-          value={eventInput}
-          setValue={setEventInput}
-        ></InputPhoneNumber>
+        <InputGmail value={eventInput}></InputGmail>
+        <InputPhoneNumber value={eventInput}></InputPhoneNumber>
       </div>
       <br />
-      {isLoading && <Loader text={"Espere mientras se crea el evento"}/>}
+      {isLoading && <Loader text={"Espere mientras se crea el evento"} />}
       <Button
         color="secondary"
         className="text-white mt-2"

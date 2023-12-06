@@ -6,11 +6,14 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
-import { useProvinceStore } from "../../../hooks/useStore";
 
-export default function SelectorProvincia({ value, setValue }) {
+export default function SelectorProvincia({ value }) {
   const [selectedKeys, setSelectedKeys] = React.useState(
-    new Set([value.province !== "" ? value.province : "Santiago de Cuba"])
+    new Set([
+      value.current.province !== ""
+        ? value.current.province
+        : "Santiago de Cuba",
+    ])
   );
 
   const handleSelectionChange = (selectedKeys) => {
@@ -18,21 +21,19 @@ export default function SelectorProvincia({ value, setValue }) {
     setSelectedKeys(selectedKeys);
     const selectedValue = Array.from(selectedKeys)[0];
 
-    setValue((prevState) => {
-      const updatedState = {
-        ...prevState,
-        province: selectedValue,
-      };
-
-      return updatedState;
-    });
+    value.current = {
+      ...value.current,
+      province: selectedValue,
+    };
   };
 
   return (
     <Dropdown aria-label="menu de provincias dropdown">
       <DropdownTrigger aria-label="trigger menu provincias">
         <Button variant="bordered" className="capitalize">
-          {value.province !== null ? value.province : selectedValue}
+          {value.current.province !== null
+            ? value.current.province
+            : selectedValue}
         </Button>
       </DropdownTrigger>
       <DropdownMenu

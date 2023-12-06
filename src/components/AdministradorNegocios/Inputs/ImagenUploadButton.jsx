@@ -4,11 +4,10 @@ import { Image } from "@nextui-org/react";
 import { resizeImage } from "../../../api/helpers/image";
 import "./input.css";
 import { useState } from "react";
-import { getImage } from "../../../api/bussiness";
-function ImageUploadButton({ imageName, setImageName, value, setValue }) {
+function ImageUploadButton({ imageName, setImageName, value }) {
   const [perfil, setPerfil] = useState(null);
   const [front, setFront] = useState(null);
-
+  const [render, setRender] = useState(0);
   const handleImageChange = async (event, imageType) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -25,17 +24,12 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
             ...prevState,
             perfil_pic: newFileName,
           };
-
           return updatedState;
         });
-        setValue((prevState) => {
-          const updatedState = {
-            ...prevState,
-            perfil_pic: resizedImage,
-          };
-
-          return { ...updatedState };
-        });
+        value.current = {
+          ...value.current,
+          perfil_pic: resizedImage,
+        };
       } else if (imageType === "cover") {
         const resizedImage = await resizeImage(file, 800, 800);
 
@@ -48,13 +42,10 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
           return updatedState;
         });
 
-        setValue((prevState) => {
-          const updatedState = {
-            ...prevState,
-            front_pic: resizedImage,
-          };
-          return updatedState;
-        });
+        value.current = {
+          ...value.current,
+          front_pic: resizedImage,
+        };
       }
     }
   };
@@ -63,12 +54,13 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setPerfil(imageUrl);
     await handleImageChange(event, "logo");
+    setRender((render) => render + 1);
   };
-
   const handleCoverImageUpload = async (event) => {
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setFront(imageUrl);
     await handleImageChange(event, "cover");
+    setRender((render) => render + 1);
   };
 
   const white = {
@@ -103,7 +95,7 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
             style={imagenLogo}
             alt="Card background NextUI hero Image with delay"
             className="object-cover rounded-xl"
-            src={perfil || value.perfil_pic}
+            src={perfil || value.current.perfil_pic}
           />
         </div>
         <div>
@@ -132,7 +124,7 @@ function ImageUploadButton({ imageName, setImageName, value, setValue }) {
               style={imagenLogo}
               alt="Card background NextUI hero Image with delay"
               className="object-cover rounded-xl"
-              src={front || value.front_pic}
+              src={front || value.current.front_pic}
             />
           </div>
           <input

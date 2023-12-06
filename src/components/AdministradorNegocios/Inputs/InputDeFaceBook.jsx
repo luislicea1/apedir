@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputDeFaceBook({ value, setValue }) {
+  const [render, setRender] = React.useState(0);
   return (
     <Input
       type="url"
@@ -15,15 +16,16 @@ export default function InputDeFaceBook({ value, setValue }) {
         </div>
       }
       value={
-        value.facebook !== null && value.facebook !== undefined
-          ? value.facebook
+        value.current.facebook !== null && value.current.facebook !== undefined
+          ? value.current.facebook
           : ""
       }
       onChange={(event) => {
-        setValue({
-          ...value,
+        value.current = {
+          ...value.current,
           facebook: event.target.value,
-        });
+        };
+        setRender((render) => render + 1);
       }}
     />
   );

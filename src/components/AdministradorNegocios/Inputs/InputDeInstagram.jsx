@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "@nextui-org/react";
 
-export default function InputDeInstagram({ value, setValue }) {
+export default function InputDeInstagram({ value }) {
   return (
     <Input
       type="url"
@@ -15,15 +15,16 @@ export default function InputDeInstagram({ value, setValue }) {
         </div>
       }
       value={
-        value.instagram !== undefined && value.instagram !== null
-          ? value.instagram
+        value.current.instagram !== undefined &&
+        value.current.instagram !== null
+          ? value.current.instagram
           : ""
       }
       onChange={(event) => {
-        setValue({
-          ...value,
+        value.current = {
+          ...value.current,
           instagram: event.target.value,
-        });
+        };
       }}
     />
   );
