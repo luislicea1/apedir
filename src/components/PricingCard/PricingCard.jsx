@@ -9,8 +9,10 @@ import {
 } from "@nextui-org/react";
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";
-import { Link } from "react-router-dom";
+//import { Button } from "react-router-dom";
 import { flex_center } from "../styles/styles";
+
+import { Button } from "@nextui-org/react";
 export default function PricingCard({
   img,
   name,
@@ -179,7 +181,7 @@ export default function PricingCard({
             marginBottom: "5px",
           }}
         >
-          <Link
+          <Button
             style={{
               padding: "10px 20px",
               backgroundColor: "#5E17EB",
@@ -190,7 +192,7 @@ export default function PricingCard({
             onClick={enviarMensaje}
           >
             Comprar ahora
-          </Link>
+          </Button>
         </CardFooter>
       </Card>
     </Suspense>
