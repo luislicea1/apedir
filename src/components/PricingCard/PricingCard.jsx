@@ -39,6 +39,15 @@ export default function PricingCard({
     marginRight: "5px",
   };
 
+  const numero = 55971705
+  const mensaje = `Buenas estoy interesado en un paquete ${name}`
+
+  const enviarMensaje = () => {
+    const numero = "55641782";
+    const url = `https://wa.me/${numero}?text=${mensaje}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <Suspense>
       <Card className="max-w-[200px] max-h-[300px]" style={{ margin: "10px" }}>
@@ -178,6 +187,7 @@ export default function PricingCard({
               fontWeight: "bold",
               borderRadius: "10px",
             }}
+            onClick={enviarMensaje}
           >
             Comprar ahora
           </Link>

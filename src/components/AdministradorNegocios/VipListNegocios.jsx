@@ -45,7 +45,7 @@ export default function VipListNegocios(props) {
                 gps_location={business.gps_location}
                 nombre={business.name}
                 //numeroPersonas={business.numeroPersonas}
-            // url={business.value_url}
+                // url={business.value_url}
             ></NegocioIdVip>
             ))}
           </div>

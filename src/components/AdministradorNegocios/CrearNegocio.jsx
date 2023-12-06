@@ -55,7 +55,7 @@ export default function CrearNegocio({ children }) {
 
         <CambioDePaquete paquete = {user?.plan}></CambioDePaquete>
 
-        {user?.plan == "premium" ? <VipListNegocios userId = {user.id}></VipListNegocios>:null}
+        {user?.plan == "premium" ? <VipListNegocios userId = {user.id} title = {"Negocios"}></VipListNegocios>:null}
 
         <div>
           {bussiness !== null && bussiness !== undefined ? (

@@ -29,6 +29,7 @@ export default function Producto({
   description,
   currency,
   onChangeCarrito,
+  url
 }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -47,7 +48,7 @@ export default function Producto({
     height: "100vh",
     background: "#0F0D13",
   };
-
+  
   return (
     <div>
       <Helmet>
@@ -60,6 +61,7 @@ export default function Producto({
         style={CardStyles2}
         className="producto-card"
         onClick={onOpen}
+        id={title}
       >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
           <LazyLoadImage
@@ -136,7 +138,7 @@ export default function Producto({
                         onChangeQuantity={setCantidad}
                       ></OrdenarProducto>
 
-                      <PromoProducto></PromoProducto>
+                      <PromoProducto   url={url}></PromoProducto>
                     </div>
                   </ModalBody>
                 </div>

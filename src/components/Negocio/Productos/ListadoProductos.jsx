@@ -43,6 +43,7 @@ export default function ListadoProductos(props) {
         description={item.description}
         localizacion={props.localizacion}
         onChangeCarrito={handleAddToCart}
+        url = {props.url}
       ></ProductoMemo>
     ),
     [props.nombre, props.localizacion]

@@ -22,9 +22,9 @@ export default function ShareLink(props) {
     const url = `https://apedir.pages.dev${props.url}` 
   return (
     <Popover placement="top" showArrow backdrop="opaque">
-      <PopoverTrigger style={{ background: "white" }}>
+      <PopoverTrigger style={{ background: "white", maxWidth: "40px", minWidth: "40px", padding: "0", borderRadius: "50%" }}>
         <Button>
-          <ShareIcon color={"black"} w={"30px"} h={"30px"} />
+          <ShareIcon color={"black"} w={"24px"} h={"24px"} />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

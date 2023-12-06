@@ -183,6 +183,7 @@ export default function Negocio() {
                       localizacion={category.category}
                       lista={categoryProducts}
                       onChangeTitle={changeTitle}
+                      url={history}
                     ></ListadoProductos>
                   )
                 );
