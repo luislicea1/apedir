@@ -6,7 +6,7 @@ const addNotification = async (notification) => {
     .select("id")
     .contains("subscriptions", [notification.bussiness]);
 
-  idList = idList[0].id;
+  idList = idList.map((obj) => obj.id);
 
   if (idList instanceof Array && idList.length > 0) {
     notification.addressee = idList;
@@ -14,9 +14,6 @@ const addNotification = async (notification) => {
     idList = [idList] || [];
     notification.addressee = idList;
   }
-  console.log(notification);
-
-  console.log(notification.addressee);
   const { data, error } = await supabase
     .from("notifications")
     .insert(notification);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";
@@ -57,7 +57,7 @@ export default function NegocioDashboard() {
             ? business[key]
             : "";
       }
-      setBussinessInput(updatedBusiness);
+      bussinessInput.current = updatedBusiness;
     }
   }, [business]);
 
@@ -88,7 +88,7 @@ export default function NegocioDashboard() {
     youtube: "",
     twitter: "",
   };
-  const [bussinessInput, setBussinessInput] = useState(
+  const bussinessInput = useRef(
     business !== null && business !== undefined
       ? business
       : defaultBussinessValues
@@ -104,14 +104,14 @@ export default function NegocioDashboard() {
     setIsLoading(true); // Activar el loader
     let front_pic = "";
     if (
-      bussinessInput.front_pic !== null &&
-      bussinessInput.front_pic !== "" &&
-      bussinessInput.front_pic instanceof Blob
+      bussinessInput.current.front_pic !== null &&
+      bussinessInput.current.front_pic !== "" &&
+      bussinessInput.current.front_pic instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "bussiness_front");
+      await removeImage(bussinessInput.current.id, "bussiness_front");
 
       front_pic = await uploadImage(
-        bussinessInput.front_pic,
+        bussinessInput.current.front_pic,
         imageName.front_pic,
         "bussiness_front"
       );
@@ -120,14 +120,18 @@ export default function NegocioDashboard() {
 
     let perfil_pic = "";
     if (
-      bussinessInput.perfil_pic !== null &&
-      bussinessInput.perfil_pic !== "" &&
-      bussinessInput.perfil_pic instanceof Blob
+      bussinessInput.current.perfil_pic !== null &&
+      bussinessInput.current.perfil_pic !== "" &&
+      bussinessInput.current.perfil_pic instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "perfil_pic", "bussiness_perfil");
+      await removeImage(
+        bussinessInput.current.id,
+        "perfil_pic",
+        "bussiness_perfil"
+      );
 
       perfil_pic = await uploadImage(
-        bussinessInput.perfil_pic,
+        bussinessInput.current.perfil_pic,
         imageName.perfil_pic,
         "bussiness_perfil"
       );
@@ -136,14 +140,14 @@ export default function NegocioDashboard() {
 
     let gps_location = "";
     if (
-      bussinessInput.gps_location !== null &&
-      bussinessInput.gps_location !== "" &&
-      bussinessInput.gps_location instanceof Blob
+      bussinessInput.current.gps_location !== null &&
+      bussinessInput.current.gps_location !== "" &&
+      bussinessInput.current.gps_location instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "bussiness_location");
+      await removeImage(bussinessInput.current.id, "bussiness_location");
 
       gps_location = await uploadImage(
-        bussinessInput.gps_location,
+        bussinessInput.current.gps_location,
         imageName.gps_location,
         "bussiness_location"
       );
@@ -151,7 +155,7 @@ export default function NegocioDashboard() {
     }
 
     const updatedBussinessInput = {
-      ...bussinessInput,
+      ...bussinessInput.current,
       owner: user.id,
       front_pic: front_pic,
       perfil_pic: perfil_pic,
@@ -162,7 +166,7 @@ export default function NegocioDashboard() {
 
     if (business) {
       let notification = {
-        message: `El negocio ${bussinessInput.name} se ha actualizado.`,
+        message: `El negocio ${bussinessInput.current.name} se ha actualizado.`,
         bussiness: business.id,
         addressee: null,
         bussiness_link: business.value_url,
@@ -180,7 +184,7 @@ export default function NegocioDashboard() {
   useEffect(() => {
     const validateForm = async () => {
       try {
-        await BussinessInputSchema.validate(bussinessInput);
+        await BussinessInputSchema.validate(bussinessInput.current);
         setIsFormValid(true);
       } catch (error) {
         setIsFormValid(false);
@@ -188,7 +192,7 @@ export default function NegocioDashboard() {
       }
     };
     validateForm();
-  }, [bussinessInput]);
+  }, [bussinessInput.current]);
 
   return (
     <div>
@@ -198,55 +202,30 @@ export default function NegocioDashboard() {
         position="bottom-center"
         duration={3000}
       />
-      <InputTitle
-        value={bussinessInput}
-        setValue={setBussinessInput}
-      ></InputTitle>
+      <InputTitle value={bussinessInput}></InputTitle>
       <ImageUploadButton
         value={bussinessInput}
-        setValue={setBussinessInput}
         imageName={imageName}
         setImageName={setImageName}
       />
       <TextAreaDescription
         value={bussinessInput}
-        setValue={setBussinessInput}
         maxChars={120}
       ></TextAreaDescription>
       <InputLocation
         value={bussinessInput}
-        setValue={setBussinessInput}
         setImageName={setImageName}
       ></InputLocation>
       <div style={grid_2_col} className="mt-2 mb-2">
-        <InputGmail
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputGmail>
-        <InputPhoneNumber
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputPhoneNumber>
-        <InputWhatsapp
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputWhatsapp>
-        <InputTelegram
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputTelegram>
+        <InputGmail value={bussinessInput}></InputGmail>
+        <InputPhoneNumber value={bussinessInput}></InputPhoneNumber>
+        <InputWhatsapp value={bussinessInput}></InputWhatsapp>
+        <InputTelegram value={bussinessInput}></InputTelegram>
         <InputTelefonoLocalNumber
           value={bussinessInput}
-          setValue={setBussinessInput}
         ></InputTelefonoLocalNumber>
-        <InputDeFaceBook
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputDeFaceBook>
-        <InputDeInstagram
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputDeInstagram>
+        <InputDeFaceBook value={bussinessInput}></InputDeFaceBook>
+        <InputDeInstagram value={bussinessInput}></InputDeInstagram>
       </div>
 
       {isLoading && (
@@ -262,14 +241,10 @@ export default function NegocioDashboard() {
         className="text-white mt-2"
         style={btnHeight}
         onClick={() => {
-          setBussinessInput((prevState) => {
-            const updatedState = {
-              ...prevState,
-              owner: user.id,
-            };
-
-            return updatedState;
-          });
+          bussinessInput.current = {
+            ...bussinessInput.current,
+            owner: user.id,
+          };
           handleUpsertBussiness();
         }}
       >

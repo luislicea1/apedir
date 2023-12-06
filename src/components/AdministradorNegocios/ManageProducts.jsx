@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getProducts } from "../../api/products";
 import CategoryContainer from "./CategoryContainer";
 import { UploadIcon } from "../Icons/UploadIcon";
@@ -54,29 +54,40 @@ export default function ManageProducts() {
     categoriesGlobal !== null ? categoriesGlobal : []
   );
 
+  // const [categoryInput, setCategoryInput] = useState({
+  //   bussiness: "",
+  //   category: "",
+  // });
+
+  const categoryInput = useRef({
+    bussiness: bussiness ? bussiness.id : "",
+    category: "",
+  });
+
+  const [productInput, setProductInput] = useState({
+    name: "",
+    price: 0,
+    currency: "CUP",
+    description: "",
+    image: "",
+    category: "",
+    isAvalaible: true,
+  });
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const fetchBussiness = async () => {
     const b = await getOneBussiness(user.id);
     setBussiness(b);
-    setCategoryInput((prev) => {
-      const newCat = {
-        ...prev,
-        bussiness: b.id,
-      };
-      return newCat;
-    });
+    categoryInput.current = {
+      ...categoryInput.current,
+      bussiness: b.id,
+    };
   };
 
   useEffect(() => {
-    return () => {
-      if (bussiness === null) fetchBussiness();
-    };
-  }, [bussiness]);
+    if (bussiness === null && user) fetchBussiness();
+  }, [user, bussiness]);
 
-  const [categoryInput, setCategoryInput] = useState({
-    bussiness: "",
-    category: "",
-  });
   const {
     isOpen: isProductModalOpen,
     onOpen: onProductModalOpen,
@@ -108,15 +119,6 @@ export default function ManageProducts() {
   } = useDisclosure();
 
   const [imageName, setImageName] = useState("");
-  const [productInput, setProductInput] = useState({
-    name: "",
-    price: 0,
-    currency: "CUP",
-    description: "",
-    image: "",
-    category: "",
-    isAvalaible: true,
-  });
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -143,17 +145,17 @@ export default function ManageProducts() {
   }, [categories]);
 
   const handleAddCategory = async () => {
-    if (categoryInput.category.trim() === "") {
+    if (categoryInput.current.category.trim() === "") {
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
 
-    await addCategory(categoryInput);
+    await addCategory(categoryInput.current);
 
-    setCategoryInput({
+    categoryInput.current = {
       bussiness: bussiness.id,
       category: "",
-    });
+    };
     await fetchCategories();
   };
 
@@ -245,6 +247,7 @@ export default function ManageProducts() {
         );
         return (
           <CategoryContainer
+            user={user}
             category={category}
             products={categoryProducts}
             onOpen={onProductModalOpen}
@@ -258,7 +261,6 @@ export default function ManageProducts() {
             productInput={productInput}
             setProductInput={setProductInput}
             categoryInput={categoryInput}
-            setCategoryInput={setCategoryInput}
             key={category.id}
           />
         );
@@ -266,7 +268,17 @@ export default function ManageProducts() {
 
       <label className="custum-file-upload" htmlFor="file">
         <div className="icon">
-          <CategoryIcon onOpen={onOpen} />
+          <CategoryIcon
+            onOpen={() => {
+              if (categories.length === 1 && user.plan === "gratis") {
+                toast.error(
+                  "Ha excedido la cantidad de categorias que se pueden añadir en su plan."
+                );
+                return;
+              }
+              onOpen();
+            }}
+          />
         </div>
         <div className="text">
           <span>Agregar nueva categoría</span>
@@ -401,14 +413,13 @@ export default function ManageProducts() {
                       isRequired
                       placeholder="Escribe el nombre de la categoría"
                       variant="bordered"
-                      value={categoryInput.category}
-                      onChange={(event) =>
-                        setCategoryInput((prevState) => ({
-                          ...prevState,
-                          bussiness: bussiness.id,
+                      // value={categoryInput.current.category}
+                      onChange={(event) => {
+                        categoryInput.current = {
+                          ...categoryInput.current,
                           category: event.target.value,
-                        }))
-                      }
+                        };
+                      }}
                     />
                   </ModalBody>
                   <ModalFooter>
@@ -436,7 +447,7 @@ export default function ManageProducts() {
             onOpenChange={onProductEditOpenChange}
             productInput={productInput}
             setProductInput={setProductInput}
-            setCategoryInput={setCategoryInput}
+            // setCategoryInput={setCategoryInput}
             handleImageChange={handleImageChange}
             imageName={imageName}
             setImageName={setImageName}
@@ -449,7 +460,9 @@ export default function ManageProducts() {
             isOpen={isCategoryEditOpen}
             onOpenChange={onCategoryEditOpenChange}
             categoryInput={categoryInput}
-            setCategoryInput={setCategoryInput}
+            bussiness={bussiness}
+
+            // setCategoryInput={setCategoryInput}
           />
 
           <ModalDeleteProduct
@@ -458,6 +471,7 @@ export default function ManageProducts() {
             onOpenChange={onProductDeleteOpenChange}
             productToDelete={productInput}
             fetchProducts={fetchProducts}
+            bussiness={bussiness}
           />
           <ModalDeleteCategory
             isOpen={isCategoryDeleteOpen}
@@ -465,6 +479,7 @@ export default function ManageProducts() {
             onOpen={onCategoryDeleteOpen}
             fetchCategories={fetchCategories}
             onOpenChange={onCategoryDeleteOpenChange}
+            bussiness={bussiness}
           />
         </div>
       </label>

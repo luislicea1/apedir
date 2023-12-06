@@ -1,4 +1,12 @@
 import { create } from "zustand";
+import { createClient } from "@supabase/supabase-js";
+
+const useSupabase = create((set) => ({
+  supabase: createClient(
+    import.meta.env.VITE_APP_SUPABASE_URL,
+    import.meta.env.VITE_APP_SUPABASE_ANON_KEY
+  ),
+}));
 
 const useUserStore = create((set) => ({
   user: null,
@@ -67,4 +75,5 @@ export {
   useProductsList,
   useCartStore,
   eventsStore,
+  useSupabase,
 };

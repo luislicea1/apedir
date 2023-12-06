@@ -16,12 +16,18 @@ export default function ModalDeleteCategory({
   onOpenChange,
   categoryToDelete,
   fetchCategories,
+  bussiness,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteCategory = async (id) => {
     setIsDeleting(true);
     await deleteCategoryById(id);
+    categoryToDelete.current = {
+      bussiness: bussiness.id,
+      category: "",
+    };
+    delete categoryToDelete.current.id;
     setIsDeleting(false);
     fetchCategories();
   };
@@ -49,7 +55,7 @@ export default function ModalDeleteCategory({
                 <Button
                   color="primary"
                   onClick={async () => {
-                    await deleteCategory(categoryToDelete.id);
+                    await deleteCategory(categoryToDelete.current.id);
                     onClose();
                   }}
                   disabled={isDeleting}

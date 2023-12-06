@@ -2,7 +2,8 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 import TelefonoIcon from "../../Icons/Llamada/Telefono";
 
-export default function InputTelefonoLocalNumber({ value, setValue }) {
+export default function InputTelefonoLocalNumber({ value }) {
+  const [render, setRender] = React.useState(0);
   return (
     <Input
       type="tel"
@@ -10,13 +11,14 @@ export default function InputTelefonoLocalNumber({ value, setValue }) {
       variant="bordered"
       placeholder="22666666"
       labelPlacement="outside"
-      value={value.local_phone}
+      value={value.current.local_phone}
       endContent={<TelefonoIcon w="20px" />}
       onChange={(event) => {
-        setValue({
-          ...value,
+        value.current = {
+          ...value.current,
           local_phone: event.target.value,
-        });
+        };
+        setRender((render) => render + 1);
       }}
     />
   );

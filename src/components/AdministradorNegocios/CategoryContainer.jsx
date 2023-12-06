@@ -5,15 +5,16 @@ import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { grid_3_col, grid_1_col } from "../styles/styles";
+import { toast } from "sonner";
 
 export default function CategoryContainer({
+  user,
   category,
   products,
   onOpen,
   setProductInput,
   onProductEditOpen,
   onProductDeleteOpen,
-  setCategoryInput,
   categoryInput,
   onCategoryEditOpen,
   onCategoryDeleteOpen,
@@ -43,6 +44,12 @@ export default function CategoryContainer({
           color="secondary"
           variant="shadow"
           onClick={() => {
+            if (products.length === 3 && user.plan === "gratis") {
+              toast.error(
+                "Ha excedido el máximo de productos que puede añadir con su plan."
+              );
+              return;
+            }
             setProductInput((prevState) => {
               const updatedState = {
                 ...prevState,
@@ -60,11 +67,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-default-500 cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput({
-                  ...categoryInput,
+                categoryInput.current = {
+                  ...categoryInput.current,
                   id: category.id,
                   category: category.category,
-                });
+                };
                 onCategoryEditOpen();
               }}
             >
@@ -75,11 +82,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-danger cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput({
-                  ...categoryInput,
+                categoryInput.current = {
+                  ...categoryInput.current,
                   id: category.id,
                   category: category.category,
-                });
+                };
                 onCategoryDeleteOpen();
               }}
             >
