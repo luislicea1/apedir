@@ -20,7 +20,11 @@ const addCategory = async (category) => {
 };
 
 const updateCategory = async (category) => {
-  const { data, error } = await supabase.from("categories").upsert(category);
+  const { data, error } = await supabase
+    .from("categories")
+    .update({ category: category.category })
+    .eq("id", category.id);
+  console.log({ data });
   console.log(error);
 };
 

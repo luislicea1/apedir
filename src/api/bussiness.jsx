@@ -64,7 +64,7 @@ const getOneBussiness = async (ownerId) => {
     .from("bussiness")
     .select("*")
     .eq("owner", ownerId);
-  console.log({ data });
+    
   if (data && data[0]) {
     if (data[0].front_pic) {
       const front_pic = await getImage("bussiness_front", data[0].front_pic);
@@ -215,7 +215,6 @@ const fetchAllBussiness = async () => {
     })
   );
 
-  // Actualiza el estado con los nuevos elementos
   return businessesWithImages;
 };
 
@@ -228,7 +227,6 @@ const fetchBussinessPerProvince = async (province) => {
 
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
-      // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
@@ -241,7 +239,6 @@ const fetchBussinessPerProvince = async (province) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -260,7 +257,6 @@ const fetchBussinessPerName = async (name) => {
 
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
-      // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",

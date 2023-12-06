@@ -34,7 +34,7 @@ export default function Notification() {
 
   const fetchNotifications = async () => {
     const notificationList = await getNotificationsFromUser(user.id);
-
+    console.log(notificationList);
     setNotifications(notificationList);
   };
   React.useEffect(() => {

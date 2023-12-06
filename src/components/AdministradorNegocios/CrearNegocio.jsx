@@ -20,10 +20,8 @@ export default function CrearNegocio({ children }) {
   };
 
   useEffect(() => {
-    return () => fetchBussiness();
-  }, [
-    user
-  ]);
+    if (bussiness === null) fetchBussiness();
+  }, [user, bussiness]);
 
   const sectionStyle = {
     width: "100%",
@@ -31,7 +29,7 @@ export default function CrearNegocio({ children }) {
     display: "grid",
     gridTemplateColumns: "repeat(1,1fr)",
   };
-  
+
   const channels = supabase
     .channel("custom-all-channel")
     .on(
@@ -52,10 +50,11 @@ export default function CrearNegocio({ children }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
+        <CambioDePaquete paquete={user?.plan}></CambioDePaquete>
 
-        <CambioDePaquete paquete = {user?.plan}></CambioDePaquete>
-
-        {user?.plan == "premium" ? <VipListNegocios userId = {user.id}></VipListNegocios>:null}
+        {user?.plan == "premium" ? (
+          <VipListNegocios userId={user.id}></VipListNegocios>
+        ) : null}
 
         <div>
           {bussiness !== null && bussiness !== undefined ? (

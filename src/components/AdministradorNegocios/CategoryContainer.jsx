@@ -13,17 +13,16 @@ export default function CategoryContainer({
   setProductInput,
   onProductEditOpen,
   onProductDeleteOpen,
-  setCategoryInput,
   categoryInput,
   onCategoryEditOpen,
   onCategoryDeleteOpen,
 }) {
-  const [windowWidth, setWindowWidth] = useState(window.screen.width);
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.screen.width);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // const [windowWidth, setWindowWidth] = useState(window.screen.width);
+  // useEffect(() => {
+  //   const handleResize = () => setWindowWidth(window.screen.width);
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   return (
     <div
@@ -60,11 +59,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-default-500 cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput({
-                  ...categoryInput,
+                categoryInput.current = {
+                  ...categoryInput.current,
                   id: category.id,
                   category: category.category,
-                });
+                };
                 onCategoryEditOpen();
               }}
             >
@@ -75,11 +74,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-danger cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput({
-                  ...categoryInput,
+                categoryInput.current = {
+                  ...categoryInput.current,
                   id: category.id,
                   category: category.category,
-                });
+                };
                 onCategoryDeleteOpen();
               }}
             >
@@ -91,7 +90,7 @@ export default function CategoryContainer({
 
       <div
         className="mt-2 list-container"
-        style={windowWidth < 800 ? grid_1_col : grid_3_col}
+        // style={windowWidth < 800 ? grid_1_col : grid_3_col}
       >
         {products.map((product, index) => (
           <ProductCard

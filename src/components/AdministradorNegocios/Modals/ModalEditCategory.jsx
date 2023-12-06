@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Modal,
   ModalContent,
@@ -10,17 +9,29 @@ import {
   Input,
 } from "@nextui-org/react";
 import { updateCategory } from "../../../api/categories";
+import { useSupabase } from "../../../hooks/useStore";
 
 export default function ModalEditCategory({
   fetchCategories,
   isOpen,
   onOpenChange,
   categoryInput,
-  setCategoryInput,
+  bussiness,
 }) {
+  const supabase = useSupabase((state) => state.supabase);
   const [loading, setLoading] = useState(false);
+  const [render, setRender] = useState(0);
+
   const handleUpdateCategory = async () => {
-    await updateCategory(categoryInput);
+    console.log(categoryInput.current);
+    await updateCategory(categoryInput.current);
+    categoryInput.current = {
+      id: "",
+      bussiness: bussiness.id,
+      category: "",
+    };
+    delete categoryInput.current.id;
+    console.log(categoryInput.current);
     await fetchCategories();
   };
 
@@ -31,7 +42,7 @@ export default function ModalEditCategory({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Editar Categoría {categoryInput.category}
+                Editar Categoría {categoryInput.current.category}
               </ModalHeader>
 
               <ModalBody>
@@ -41,18 +52,17 @@ export default function ModalEditCategory({
                   label="Nombre"
                   placeholder="Escribe el nombre de la categoría"
                   variant="bordered"
-                  value={categoryInput.category}
-                  onChange={(event) =>
-                    setCategoryInput((prevState) => {
-                      const updatedState = {
-                        ...prevState,
-                        category: event.target.value,
-                      };
-                      return updatedState;
-                    })
-                  }
+                  value={categoryInput.current.category}
+                  onChange={(event) => {
+                    categoryInput.current = {
+                      ...categoryInput.current,
+                      category: event.target.value,
+                    };
+                    setRender((render) => render + 1);
+                  }}
                 />
-                <p>{categoryInput.category.length} / 30</p>
+
+                <p>{categoryInput.current.category.length} / 30</p>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>
