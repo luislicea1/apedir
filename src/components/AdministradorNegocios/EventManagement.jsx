@@ -16,15 +16,19 @@ export default function EventManagement() {
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
 
-  useEffect(() => {
-    const fetchBussiness = async () => {
-      if (user === null) return;
-      const b = await getOneBussiness(user.id);
-      setBussiness(b);
-    };
+  // useEffect(() => {
+  //   console.log(bussiness)
+  //   const fetchBussiness = async () => {
+  //     console.log("fetching bussiness");
+  //     if (user === null) return;
+  //     const b = await getOneBussiness(user.id);
+  //     setBussiness(b);
+  //   };
 
-    if (bussiness === null) fetchBussiness();
-  }, [user]);
+  //   return () => {
+  //     if (bussiness === null) fetchBussiness();
+  //   };
+  // }, [user]);
 
   const events = merchantEvents((state) => state.events);
   const setEvents = merchantEvents((state) => state.setEvents);
@@ -35,9 +39,7 @@ export default function EventManagement() {
   };
 
   useEffect(() => {
-    return () => {
-      if (bussiness) fetchEvents();
-    };
+    if (bussiness) fetchEvents();
   }, [bussiness]);
 
   return (

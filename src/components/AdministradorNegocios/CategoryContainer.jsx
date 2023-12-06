@@ -5,8 +5,10 @@ import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { grid_3_col, grid_1_col } from "../styles/styles";
+import { toast } from "sonner";
 
 export default function CategoryContainer({
+  user,
   category,
   products,
   onOpen,
@@ -42,6 +44,12 @@ export default function CategoryContainer({
           color="secondary"
           variant="shadow"
           onClick={() => {
+            if (products.length === 3 && user.plan === "gratis") {
+              toast.error(
+                "Ha excedido el máximo de productos que puede añadir con su plan."
+              );
+              return;
+            }
             setProductInput((prevState) => {
               const updatedState = {
                 ...prevState,
@@ -90,7 +98,7 @@ export default function CategoryContainer({
 
       <div
         className="mt-2 list-container"
-        // style={windowWidth < 800 ? grid_1_col : grid_3_col}
+        style={windowWidth < 800 ? grid_1_col : grid_3_col}
       >
         {products.map((product, index) => (
           <ProductCard

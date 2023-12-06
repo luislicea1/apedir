@@ -247,6 +247,7 @@ export default function ManageProducts() {
         );
         return (
           <CategoryContainer
+            user={user}
             category={category}
             products={categoryProducts}
             onOpen={onProductModalOpen}
@@ -267,7 +268,17 @@ export default function ManageProducts() {
 
       <label className="custum-file-upload" htmlFor="file">
         <div className="icon">
-          <CategoryIcon onOpen={onOpen} />
+          <CategoryIcon
+            onOpen={() => {
+              if (categories.length === 1 && user.plan === "gratis") {
+                toast.error(
+                  "Ha excedido la cantidad de categorias que se pueden añadir en su plan."
+                );
+                return;
+              }
+              onOpen();
+            }}
+          />
         </div>
         <div className="text">
           <span>Agregar nueva categoría</span>
