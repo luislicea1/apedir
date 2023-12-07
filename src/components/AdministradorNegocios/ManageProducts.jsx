@@ -30,6 +30,7 @@ import { getCategories } from "../../api/categories";
 import {
   useBussinessStore,
   useCategoriesList,
+  usePlan,
   useProductsList,
   useUserStore,
 } from "../../hooks/useStore";
@@ -38,10 +39,9 @@ import { addNotification } from "../../api/notifications";
 
 export default function ManageProducts() {
   const user = useUserStore((state) => state.user);
-
+  const plan = usePlan((state) => state.plan);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
-
   const categoriesGlobal = useCategoriesList((state) => state.categories);
   const setCategoriesGlobal = useCategoriesList((state) => state.setCategories);
   const productsGlobal = useProductsList((state) => state.products);

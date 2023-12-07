@@ -15,10 +15,8 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
-import { useUserStore, useBussinessStore } from "../../hooks/useStore";
+import { useUserStore, usePlan, useBussinessStore } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
-import supabase from "../../api/client";
-
 import InputTitle from "./Inputs/InputTitle";
 import { addNotification } from "../../api/notifications";
 
@@ -26,6 +24,7 @@ export default function NegocioDashboard() {
   const user = useUserStore((state) => state.user);
   const business = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
+  const plan = usePlan((state) => state.plan);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -210,7 +209,7 @@ export default function NegocioDashboard() {
       />
       <TextAreaDescription
         value={bussinessInput}
-        maxChars={120}
+        maxChars={plan?.description}
       ></TextAreaDescription>
       <InputLocation
         value={bussinessInput}

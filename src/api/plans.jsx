@@ -9,6 +9,14 @@ const getPlans = async () => {
   return data;
 };
 
+const getPlan = async (name) => {
+  const { data, error } = await supabase
+    .from("plans")
+    .select("*")
+    .eq("name", name);
+  return data[0];
+};
+
 const updatePlan = async (plan) => {
   let updatedPlan = Object.keys(plan).reduce((acc, key) => {
     if (plan[key] !== null && plan[key] !== "" && key !== "id") {
@@ -19,16 +27,16 @@ const updatePlan = async (plan) => {
   }, {});
   console.log(updatedPlan);
 
-    const { data, error } = await supabase
-      .from("plans")
-      .update(updatedPlan)
-      .eq("id", plan.id);
-    if(error) return error
+  const { data, error } = await supabase
+    .from("plans")
+    .update(updatedPlan)
+    .eq("id", plan.id);
+  if (error) return error;
 };
 
-const deletePlan = async (id) => {
-  const { error } = await supabase.from("plans").delete().eq("id", id);
+const deletePlan = async (name) => {
+  const { error } = await supabase.from("plans").delete().eq("name", name);
   console.log(error);
 };
 
-export { getPlans, updatePlan, deletePlan };
+export { getPlans, updatePlan, deletePlan, getPlan };
