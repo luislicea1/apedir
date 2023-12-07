@@ -52,15 +52,9 @@ export default function CrearNegocio({ children }) {
       <div style={sectionStyle}>
         <CambioDePaquete paquete={user?.plan}></CambioDePaquete>
 
-<<<<<<< HEAD
-        <CambioDePaquete paquete = {user?.plan}></CambioDePaquete>
-
-        {user?.plan == "premium" ? <VipListNegocios userId = {user.id} title = {"Negocios"}></VipListNegocios>:null}
-=======
         {user?.plan == "premium" ? (
           <VipListNegocios userId={user.id}></VipListNegocios>
         ) : null}
->>>>>>> 9c1d11962706c3c71680931fae7f9109b6fdd0ee
 
         <div>
           {bussiness !== null && bussiness !== undefined ? (

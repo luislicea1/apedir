@@ -54,11 +54,6 @@ export default function ManageProducts() {
     categoriesGlobal !== null ? categoriesGlobal : []
   );
 
-  // const [categoryInput, setCategoryInput] = useState({
-  //   bussiness: "",
-  //   category: "",
-  // });
-
   const categoryInput = useRef({
     bussiness: bussiness ? bussiness.id : "",
     category: "",
