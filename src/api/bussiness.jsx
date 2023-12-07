@@ -64,7 +64,7 @@ const getOneBussiness = async (ownerId) => {
     .from("bussiness")
     .select("*")
     .eq("owner", ownerId);
-    
+
   if (data && data[0]) {
     if (data[0].front_pic) {
       const front_pic = await getImage("bussiness_front", data[0].front_pic);
@@ -320,6 +320,18 @@ const getSchedule = async (bussinessId) => {
   else return null;
 };
 
+const getSocialMedia = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select(
+      "telegram_link, facebook, instagram, linkedin, threads, twitter, youtube"
+    )
+    .eq("id", bussinessId);
+
+  if (error) console.log(error);
+  return data;
+};
+
 const setIsActive = async (bussinessId, isActive) => {
   const { data, error } = await supabase
     .from("bussiness")
@@ -344,4 +356,5 @@ export {
   getBussinessName,
   getBussinessUrl,
   getAllBussinessFromUser,
+  getSocialMedia,
 };
