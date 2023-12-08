@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputDeInstagram({ value }) {
+  const [render, setRender] = React.useState(0);
   return (
     <Input
       type="url"
@@ -25,6 +26,7 @@ export default function InputDeInstagram({ value }) {
           ...value.current,
           instagram: event.target.value,
         };
+        setRender((render) => render + 1);
       }}
     />
   );

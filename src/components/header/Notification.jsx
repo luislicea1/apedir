@@ -34,12 +34,11 @@ export default function Notification() {
 
   const fetchNotifications = async () => {
     const notificationList = await getNotificationsFromUser(user.id);
-    console.log(notificationList);
     setNotifications(notificationList);
   };
   React.useEffect(() => {
     return () => fetchNotifications();
-  }, [user, notifications]);
+  }, [user]);
 
   const handleDelete = async (notificationId) => {
     await deleteUserNotification(notificationId, user.id);

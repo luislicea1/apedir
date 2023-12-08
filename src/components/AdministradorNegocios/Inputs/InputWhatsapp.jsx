@@ -17,7 +17,7 @@ export default function InputWhatsapp({ value, setValue }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          whatsapp: event.target.value,
+          whatsapp: parseInt(event.target.value),
         };
         setRender((render) => render + 1);
       }}
