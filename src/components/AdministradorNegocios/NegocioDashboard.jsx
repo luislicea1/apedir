@@ -92,14 +92,18 @@ export default function NegocioDashboard() {
       ? business
       : defaultBussinessValues
   );
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [formError, setFormError] = useState("");
 
   const handleUpsertBussiness = async () => {
-    if (!isFormValid) {
-      toast.error(formError);
+    console.log(bussinessInput);
+    try {
+      await BussinessInputSchema.validate(bussinessInput.current, {
+        strict: true,
+      });
+    } catch (e) {
+      toast.error(e.message);
       return;
     }
+
     setIsLoading(true); // Activar el loader
     let front_pic = "";
     if (
@@ -179,19 +183,6 @@ export default function NegocioDashboard() {
     fetchBussiness();
     // window.location.reload();
   };
-
-  useEffect(() => {
-    const validateForm = async () => {
-      try {
-        await BussinessInputSchema.validate(bussinessInput.current);
-        setIsFormValid(true);
-      } catch (error) {
-        setIsFormValid(false);
-        setFormError(error.message);
-      }
-    };
-    validateForm();
-  }, [bussinessInput.current]);
 
   return (
     <div>

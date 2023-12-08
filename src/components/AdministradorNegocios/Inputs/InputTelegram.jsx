@@ -22,7 +22,7 @@ export default function InputTelegram({ value, setValue }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          telegram_link: event.target.value,
+          telegram_link: parseInt(event.target.value),
         };
         setRender((render) => render + 1);
       }}

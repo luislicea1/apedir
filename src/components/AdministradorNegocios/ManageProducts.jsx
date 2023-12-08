@@ -115,8 +115,6 @@ export default function ManageProducts() {
 
   const [imageName, setImageName] = useState("");
 
-  const [isFormValid, setIsFormValid] = useState(false);
-
   const fetchCategories = async () => {
     if (bussiness === null) return;
     const categorylist = await getCategories(bussiness.id);

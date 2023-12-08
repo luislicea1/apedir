@@ -16,7 +16,7 @@ export default function InputTelefonoLocalNumber({ value }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          local_phone: event.target.value,
+          local_phone: parseInt(event.target.value),
         };
         setRender((render) => render + 1);
       }}

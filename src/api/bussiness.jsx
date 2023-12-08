@@ -324,7 +324,7 @@ const getSocialMedia = async (bussinessId) => {
   const { data, error } = await supabase
     .from("bussiness")
     .select(
-      "telegram_link, facebook, instagram, linkedin, threads, twitter, youtube, email, phone_number"
+      "telegram_link, facebook,whatsapp, instagram, linkedin, threads, twitter, youtube, email, phone_number"
     )
     .eq("id", bussinessId);
 
