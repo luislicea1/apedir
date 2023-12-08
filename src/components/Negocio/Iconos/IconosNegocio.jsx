@@ -47,7 +47,7 @@ export default function IconosNegocio(props) {
         <div className="mt-2" id="contactenos" style={grid_5_col}>
           
           {socialMedia.phone_number ? (
-            <Popover placement="bottom">
+            <Popover placement="bottom" style={{maxWidth: "37px", minWidth: "37px"}}> 
               <PopoverTrigger>
                 <Button style={telefono}>
                   <TelefonoIcon color="white" w={"30px"}></TelefonoIcon>
