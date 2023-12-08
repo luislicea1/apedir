@@ -40,11 +40,11 @@ export default function PricingCard({
     marginRight: "5px",
   };
 
-  const numero = 55971705
+  //const numero = 55971705
   const mensaje = `Buenas estoy interesado en un paquete ${name}`
 
   const enviarMensaje = () => {
-    const numero = "55641782";
+    const numero = "55971705";
     const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
   };

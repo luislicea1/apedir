@@ -1,18 +1,19 @@
 import React from 'react'
 import Contact from "../Contact/Contact";
-import Logo from '../../../assets/LogoBlancoApp.webp'
+//import Logo from '../../../assets/LogoBlancoApp.webp'
 import { NegocioFooterSection, ImagenFooter } from "../../styles/styles";
 import QR from '../../QR/QRCodeLogo';
-import { grid_2_col_center} from '../../styles/styles';
-import LogoCarritoNegro from '../../../assets/logoReduce/LogoCarritoNegro';
+//import { grid_2_col_center} from '../../styles/styles';
+//import LogoCarritoNegro from '../../../assets/logoReduce/LogoCarritoNegro';
 import LogoReduce from '../../../assets/logoReduce/LogoReduce';
 
 export default function FooterNegocio(props) {
   
+  
   return (
    
     <section style={NegocioFooterSection}>
-        <Contact title = {props.title}></Contact>
+        <Contact title = {props.title} idNegocio = {props.idNegocio}></Contact>
         <div>
             <QR url = {props.url} imagen = {props.imagen} negocio ={"si"}></QR>
            

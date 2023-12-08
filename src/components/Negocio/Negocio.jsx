@@ -193,6 +193,7 @@ export default function Negocio() {
         </section>
         <div>
           <FooterNegocio
+            idNegocio = {bussiness.id}
             title={bussiness.name}
             imagen={bussiness.perfil_pic}
             url={history}
