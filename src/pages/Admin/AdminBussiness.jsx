@@ -23,7 +23,10 @@ export default function AdminBussiness() {
 
   return (
     <>
-      <NegocioTable bussinessList={bussiness} />
+      <NegocioTable
+        bussinessList={bussiness}
+        getAllBussinesses={getAllBussinesses}
+      />
     </>
   );
 }

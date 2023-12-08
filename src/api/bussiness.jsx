@@ -340,6 +340,129 @@ const setIsActive = async (bussinessId, isActive) => {
   if (error) console.error(error);
 };
 
+const deleteBussinessById = async (businessId) => {
+  // Obtener las categorías del negocio dado
+  const { data: events, error: eventsError } = await supabase
+    .from("events")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: stars, error: starsError } = await supabase
+    .from("stars_rating")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: notifications, error: notificationErr } = await supabase
+    .from("notifications")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: categories, error: categoriesError } = await supabase
+    .from("categories")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  if (starsError) return;
+
+  if (notificationErr) return;
+
+  if (categoriesError) {
+    console.error(categoriesError);
+    return;
+  }
+
+  // Obtener los productos de las categorías del negocio dado
+  const { data: products, error: productsError } = await supabase
+    .from("products")
+    .select("id")
+    .in(
+      "category",
+      categories.map((category) => category.id)
+    );
+
+  if (productsError) {
+    console.error(productsError);
+    return;
+  }
+
+  // Borrar los productos del negocio dado
+  const { error: deleteProductsError } = await supabase
+    .from("products")
+    .delete()
+    .in(
+      "id",
+      products.map((product) => product.id)
+    );
+
+  if (deleteProductsError) {
+    console.error(deleteProductsError);
+    return;
+  }
+
+  // Borrar las categorías del negocio dado
+  const { error: deleteCategoriesError } = await supabase
+    .from("categories")
+    .delete()
+    .in(
+      "id",
+      categories.map((category) => category.id)
+    );
+
+  if (deleteCategoriesError) {
+    console.error(deleteCategoriesError);
+    return;
+  }
+
+  const { error: deleteEventsError } = await supabase
+    .from("events")
+    .delete()
+    .in(
+      "id",
+      events.map((event) => event.id)
+    );
+
+  if (deleteEventsError) {
+    console.log(deleteEventsError);
+    return;
+  }
+
+  const { error: deleteStarsError } = await supabase
+    .from("stars_rating")
+    .delete()
+    .in(
+      "id",
+      stars.map((star) => star.id)
+    );
+
+  if (deleteStarsError) {
+    console.log(deleteStarsError);
+    return;
+  }
+
+  const { error: deleteNotificationsError } = await supabase
+    .from("notifications")
+    .delete()
+    .in(
+      "id",
+      notifications.map((notification) => notification.id)
+    );
+
+  if (deleteNotificationsError) {
+    console.log(deleteNotificationsError);
+    return;
+  }
+
+  // Borrar el negocio dado
+  const { data: bussinessData, error: deleteBusinessError } = await supabase
+    .from("bussiness")
+    .delete()
+    .eq("id", businessId);
+
+  if (deleteBusinessError) {
+    console.error(deleteBusinessError);
+    return;
+  }
+};
 export {
   setIsActive,
   upsertBussiness,
@@ -357,4 +480,5 @@ export {
   getBussinessUrl,
   getAllBussinessFromUser,
   getSocialMedia,
+  deleteBussinessById,
 };
