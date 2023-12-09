@@ -20,13 +20,14 @@ import Loader from "../Loader/Loader";
 import InputTitle from "./Inputs/InputTitle";
 import { addNotification } from "../../api/notifications";
 import QR from "../QR/QRCodeLogo";
+import { useShallow } from "zustand/react/shallow";
 
 export default function NegocioDashboard() {
   const user = useUserStore((state) => state.user);
-  const business = useBussinessStore((state) => state.bussiness);
+  const business = useBussinessStore(useShallow((state) => state.bussiness));
   const setBussiness = useBussinessStore((state) => state.setBussiness);
   const plan = usePlan((state) => state.plan);
-
+  const [render, setRender] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchBussiness = async () => {
@@ -58,6 +59,7 @@ export default function NegocioDashboard() {
             : "";
       }
       bussinessInput.current = updatedBusiness;
+      setRender((render) => render + 1);
     }
   }, [business]);
 
@@ -200,8 +202,19 @@ export default function NegocioDashboard() {
         setImageName={setImageName}
       />
 
-      <div style={{marginBottom: "20px", width: "100%", display: "grid", placeItems: "center"}}>
-        <QR url={null} imagen={null} negocio={"si"}></QR>
+      <div
+        style={{
+          marginBottom: "20px",
+          width: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <QR
+          url={business?.value_url}
+          imagen={business?.perfil_pic}
+          negocio={"si"}
+        ></QR>
       </div>
       <TextAreaDescription
         value={bussinessInput}

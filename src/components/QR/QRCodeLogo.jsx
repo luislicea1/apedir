@@ -33,6 +33,7 @@ const QR = (props) => {
             style={{
               marginBottom: 16,
             }}
+            icon={icon}
           />
 
           <Button type="primary" onClick={downloadQRCode}>

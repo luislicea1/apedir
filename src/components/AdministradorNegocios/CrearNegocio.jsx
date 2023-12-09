@@ -34,6 +34,7 @@ export default function CrearNegocio({ children }) {
     if (bussiness === null) fetchBussiness();
   }, [user, bussiness]);
 
+
   const sectionStyle = {
     width: "100%",
     maxWidth: "900px",
