@@ -8,6 +8,7 @@ import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
 
+
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);

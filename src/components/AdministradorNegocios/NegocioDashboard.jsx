@@ -19,6 +19,7 @@ import { useUserStore, usePlan, useBussinessStore } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
 import InputTitle from "./Inputs/InputTitle";
 import { addNotification } from "../../api/notifications";
+import QR from "../QR/QRCodeLogo";
 
 export default function NegocioDashboard() {
   const user = useUserStore((state) => state.user);
@@ -198,6 +199,10 @@ export default function NegocioDashboard() {
         imageName={imageName}
         setImageName={setImageName}
       />
+
+      <div style={{marginBottom: "20px", width: "100%", display: "grid", placeItems: "center"}}>
+        <QR url={null} imagen={null} negocio={"si"}></QR>
+      </div>
       <TextAreaDescription
         value={bussinessInput}
         maxChars={plan?.description}

@@ -37,14 +37,15 @@ export default function IconosNegocio(props) {
     lineHeight: "0",
     maxWidth: "50px",
     minWidth: "50px",
+    
   };
 
   return (
-    <div style={grid_center}>
+    <div style={{...grid_center, width: "100%"}}>
      
 
       {socialMedia && (
-        <div className="mt-2" id="contactenos" style={grid_5_col}>
+        <div className="mt-2" id="contactenos" style={{display: "flex", gap: "20px", justifyContent: "center", alignItems: "center", flexWrap: "wrap"}}>
           
           {socialMedia.phone_number ? (
             <Popover placement="bottom" style={{maxWidth: "37px", minWidth: "37px"}}> 
