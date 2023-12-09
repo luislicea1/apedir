@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { getAllEvents } from "../../api/events";
-
+import { Empty } from 'antd';
 import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
+import { grid_center } from "../styles/styles";
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
@@ -53,20 +54,21 @@ export default function ListadoDeEventos() {
 
   // const eventos = props.eventos;
   return (
-      <div
-        className="list-container"
-        style={listContainerStyle}
-        ref={listContainer}
-      >
-        {events &&
-          events.length > 0 &&
-          events.map((evento, index) => (
-            <Eventos
-              key={index}
-              nombre={evento.name}
-              imagen={evento.image}
-            />
-          ))}
-      </div>
+    <div
+      className="list-container"
+      style={listContainerStyle}
+      ref={listContainer}
+    >
+      {events && events.length > 0 ? (
+        events.map((evento, index) => (
+          <Eventos key={index} nombre={evento.name} imagen={evento.image} />
+        ))
+      ) : (
+        <div style={{...grid_center, width: "100%"}}>
+           <Empty />
+        </div>  
+      
+      )}
+    </div>
   );
 }

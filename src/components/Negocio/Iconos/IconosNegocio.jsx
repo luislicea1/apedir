@@ -24,7 +24,7 @@ export default function IconosNegocio(props) {
     });
   }, []);
 
-  console.log(socialMedia)
+  
 
   const telefono = {
     background: "#5E17EB",

@@ -172,6 +172,15 @@ export const ProductoStyle = {
   borderRadius: "10px 10px 0 0",
  
 }
+
+// export const ProductoStyle = {
+//   width: "100%",
+//   height: "140px",
+//   //aspectRatio: "1/1",
+//   borderRadius: "10px",
+//   border: "1px solid #e5e7eb",
+
+// }
 export const no_shadow = {
   boxShadow: "none",
   border: "none",
@@ -195,7 +204,7 @@ export const EventoCardStyles = {
   background: "transparent",
 };
 export const eventoMargin = {
-  margin: "30px 5px 30px 5px",
+  margin: "20px 5px 20px 0px",
 };
 export const badge = {
   width: "50px",
