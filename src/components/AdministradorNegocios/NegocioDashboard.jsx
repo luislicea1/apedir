@@ -96,8 +96,14 @@ export default function NegocioDashboard() {
       : defaultBussinessValues
   );
 
+  useEffect(() => {
+    if (business === null) {
+      bussinessInput.current = defaultBussinessValues;
+      setRender((render) => render + 1);
+    }
+  }, [business]);
+
   const handleUpsertBussiness = async () => {
-    console.log(bussinessInput);
     try {
       await BussinessInputSchema.validate(bussinessInput.current, {
         strict: true,
@@ -107,7 +113,7 @@ export default function NegocioDashboard() {
       return;
     }
 
-    setIsLoading(true); // Activar el loader
+    setIsLoading(true);
     let front_pic = "";
     if (
       bussinessInput.current.front_pic !== null &&
@@ -180,11 +186,10 @@ export default function NegocioDashboard() {
       addNotification(notification);
     }
 
-    setIsLoading(false); // Desactivar el loader
+    setIsLoading(false);
 
     toast.success("Actualización exitosa");
     fetchBussiness();
-    // window.location.reload();
   };
 
   return (

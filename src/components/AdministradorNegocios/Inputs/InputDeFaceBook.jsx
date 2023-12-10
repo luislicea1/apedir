@@ -7,7 +7,7 @@ export default function InputDeFaceBook({ value, setValue }) {
     <Input
       type="url"
       label="Facebook"
-      placeholder="https://www.facebook.com/username"
+      placeholder="Nombre de tu usuario en facebook"
       variant="bordered"
       labelPlacement="outside"
       startContent={

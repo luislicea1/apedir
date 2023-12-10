@@ -5,8 +5,10 @@ import Card from "antd/es/card/Card";
 import { getAllBussinessFromUser } from "../../api/bussiness";
 import NegocioIdVip from "./NegocioIdVip";
 import { grid_2_col } from "../styles/styles";
+import { useBussinessStore } from "../../hooks/useStore";
 
-export default function VipListNegocios(props) {
+export default function VipListNegocios({ userId, ...props }) {
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
   const agregarUnNuevoNegocio = {
     width: "100%",
     height: "100px",
@@ -18,19 +20,18 @@ export default function VipListNegocios(props) {
   const [businesses, setBusinesses] = useState([]);
   useEffect(() => {
     const fetchBusinesses = async () => {
-      const data = await getAllBussinessFromUser(props.userId);
+      const data = await getAllBussinessFromUser(userId);
       setBusinesses(data);
     };
 
     fetchBusinesses();
-  }, [props.userId]);
+  }, [userId]);
 
   return (
     <>
       <div
         style={container}
-        className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
-        
+        // className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
       >
         <section className="section px-6" style={section}>
           <TituloDeSeccion title={props.title}></TituloDeSeccion>
@@ -44,13 +45,17 @@ export default function VipListNegocios(props) {
                 gps_location={business.gps_location}
                 nombre={business.name}
                 bussiness={business}
-                //numeroPersonas={business.numeroPersonas}
-                // url={business.value_url}
               ></NegocioIdVip>
             ))}
           </div>
 
-          <div style={{ ...agregarUnNuevoNegocio, marginBottom: "40px" }}>
+          <div
+            style={{ ...agregarUnNuevoNegocio, marginBottom: "40px" }}
+            onClick={() => {
+              setBussiness(null);
+              
+            }}
+          >
             Agregar Negocio
           </div>
         </section>

@@ -9,7 +9,7 @@ export default function InputTelefonoLocalNumber({ value }) {
       type="tel"
       label="Telefono del Local"
       variant="bordered"
-      placeholder="22666666"
+      placeholder="22 XXXXXX"
       labelPlacement="outside"
       value={value.current.local_phone}
       endContent={<TelefonoIcon w="20px" />}

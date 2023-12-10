@@ -20,13 +20,17 @@ import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { deleteEvent, upsertEvent } from "../../api/events";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import Loader from "../Loader/Loader";
+import { getEventsfromBussiness } from "../../api/events";
+import { merchantEvents } from "../../hooks/useStore";
 
-export default function EventCard({ bussinessId, event }) {
+export default function EventCard({ bussinessId, event, bussiness }) {
+  const setEvents = merchantEvents((state) => state.setEvents);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const [imageName, setImageName] = useState("");
   const [image, setImage] = useState(null);
   const [render, setRender] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const defaultEventValues = {
     id: "",
     bussiness:
@@ -38,12 +42,22 @@ export default function EventCard({ bussinessId, event }) {
     phone_number: "",
   };
 
+  const fetchEvents = async () => {
+    const eventList = await getEventsfromBussiness(bussinessId);
+    setEvents(eventList);
+  };
+
   const eventInput = React.useRef(
     event !== null && event !== undefined ? event : defaultEventValues
   );
 
   const handleDelete = async () => {
+    setIsDeleting(true);
+    console.log(event.id);
     await deleteEvent(event.id);
+    console.log("here");
+    await fetchEvents();
+    setIsDeleting(false);
   };
 
   const handleAddEvent = async () => {
@@ -66,9 +80,11 @@ export default function EventCard({ bussinessId, event }) {
       ...eventInput.current,
       image: eventImage,
     };
+
     await upsertEvent(updatedEvent);
     toast.success("Evento actualizado satisfactoriamente");
     setIsLoading(false);
+    await fetchEvents();
   };
 
   const handleImageChange = async (event) => {
@@ -194,11 +210,17 @@ export default function EventCard({ bussinessId, event }) {
                 <p>Si eliminas este evento no podrás recuperarlo.</p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onClick={onClose}>
+                <Button color="danger" variant="flat" onClick={onClose}>
                   cerrar
                 </Button>
-                <Button color="primary" onClick={handleDelete}>
-                  Eliminar
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    handleDelete();
+                    onClose();
+                  }}
+                >
+                  {isDeleting ? "Eliminando..." : "Eliminar"}
                 </Button>
               </ModalFooter>
             </>

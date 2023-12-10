@@ -10,7 +10,7 @@ export default function InputTelegram({ value, setValue }) {
       type="tel"
       label="Link de Telegram"
       variant="bordered"
-      placeholder="Link de telegram o el link de tu grupo"
+      placeholder="+53 XXXXXXXX"
       labelPlacement="outside"
       value={
         value.current.telegram_link !== null &&

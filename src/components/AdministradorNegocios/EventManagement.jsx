@@ -39,7 +39,9 @@ export default function EventManagement() {
   };
 
   useEffect(() => {
-    if (bussiness) fetchEvents();
+    if (bussiness) {
+      fetchEvents();
+    }
   }, [bussiness]);
 
   return (
@@ -49,7 +51,11 @@ export default function EventManagement() {
       </Tab>
       {events.map((item) => (
         <Tab key={item.id} title={item.name}>
-          <EventCard bussinessId={bussiness.id} event={item} />
+          <EventCard
+            bussinessId={bussiness.id}
+            bussiness={bussiness}
+            event={item}
+          />
         </Tab>
       ))}
     </Tabs>

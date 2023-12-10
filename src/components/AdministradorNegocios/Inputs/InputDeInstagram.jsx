@@ -7,7 +7,7 @@ export default function InputDeInstagram({ value }) {
     <Input
       type="url"
       label="Instagram"
-      placeholder="https://www.instagram.com/username"
+      placeholder="Nombre de tu usuario en Instagram sin @"
       variant="bordered"
       labelPlacement="outside"
       startContent={

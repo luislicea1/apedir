@@ -8,19 +8,18 @@ import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
 
-
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
   const setPlan = usePlan((state) => state.setPlan);
 
-  const fetchBussiness = async () => {
-    if (user === null) return;
+  // const fetchBussiness = async () => {
+  //   if (user === null) return;
 
-    const b = await getOneBussiness(user.id);
-    setBussiness(b);
-  };
+  //   const b = await getOneBussiness(user.id);
+  //   setBussiness(b);
+  // };
 
   useEffect(() => {
     const fetchPlan = async () => {
@@ -30,10 +29,9 @@ export default function CrearNegocio({ children }) {
     if (user && user.plan) fetchPlan();
   }, [user]);
 
-  useEffect(() => {
-    if (bussiness === null) fetchBussiness();
-  }, [user, bussiness]);
-
+  // useEffect(() => {
+  //   if (bussiness === null) fetchBussiness();
+  // }, [user, bussiness]);
 
   const sectionStyle = {
     width: "100%",
@@ -62,11 +60,9 @@ export default function CrearNegocio({ children }) {
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
-        <CambioDePaquete paquete={user?.plan}></CambioDePaquete>
+        <CambioDePaquete paquete={user?.plan} />
 
-        {user?.plan == "premium" ? (
-          <VipListNegocios userId={user.id}></VipListNegocios>
-        ) : null}
+        {user?.plan == "premium" ? <VipListNegocios userId={user.id}  /> : null}
 
         <div>
           {bussiness !== null && bussiness !== undefined ? (

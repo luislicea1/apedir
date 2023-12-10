@@ -10,7 +10,7 @@ export default function InputWhatsapp({ value, setValue }) {
       type="tel"
       label="Número de Whatsapp"
       variant="bordered"
-      placeholder="55555555"
+      placeholder="+53 XXXXXXXX"
       labelPlacement="outside"
       value={value.current.whatsapp}
       endContent={<WhatsappIcons w="20px" />}

@@ -27,7 +27,6 @@ function NegocioIdVip(props) {
         </CardHeader>
         <CardBody
           onClick={() => {
-            console.log(props.bussiness.name);
             setBussiness(props.bussiness);
           }}
           className="overflow-visible py-2 card-body-seccion"
