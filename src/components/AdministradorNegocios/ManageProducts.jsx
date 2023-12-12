@@ -114,12 +114,14 @@ export default function ManageProducts() {
   } = useDisclosure();
 
   const [imageName, setImageName] = useState("");
+  const [render, setRender] = useState(0);
 
   const fetchCategories = async () => {
     if (bussiness === null) return;
     const categorylist = await getCategories(bussiness.id);
     setCategories(categorylist !== null ? categorylist : []);
     setCategoriesGlobal(categorylist);
+    setRender((render) => render + 1);
   };
 
   useEffect(() => {
@@ -149,6 +151,7 @@ export default function ManageProducts() {
       bussiness: bussiness.id,
       category: "",
     };
+
     await fetchCategories();
   };
 
@@ -420,6 +423,7 @@ export default function ManageProducts() {
                       Cerrar
                     </Button>
                     <Button
+                      className="text-white"
                       color="secondary"
                       onPress={() => {
                         handleAddCategory();

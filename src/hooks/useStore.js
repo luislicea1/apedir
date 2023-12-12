@@ -68,6 +68,11 @@ const usePlan = create((set) => ({
   setPlan: (p) => set({ plan: p }),
 }));
 
+const useVipBussiness = create((set) => ({
+  vipBussiness: null,
+  setVipBussiness: (b) => set({ vipBussiness: b }),
+}));
+
 export {
   useUserStore,
   merchantEvents,
@@ -82,4 +87,5 @@ export {
   eventsStore,
   useSupabase,
   usePlan,
+  useVipBussiness,
 };

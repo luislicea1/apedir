@@ -156,6 +156,7 @@ export default function ModalEditProduct({
                   Cerrar
                 </Button>
                 <Button
+                  className="text-white"
                   color="secondary"
                   onPress={() => {
                     setIsLoading(true);

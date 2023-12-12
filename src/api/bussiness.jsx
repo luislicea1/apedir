@@ -114,7 +114,6 @@ const getAllBussinessFromUser = async (ownerId) => {
     })
   );
 
-  console.log(businessesWithImages);
   // Actualiza el estado con los nuevos elementos
   return businessesWithImages;
 };
