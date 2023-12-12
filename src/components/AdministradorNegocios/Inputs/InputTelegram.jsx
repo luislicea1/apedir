@@ -7,7 +7,7 @@ export default function InputTelegram({ value, setValue }) {
 
   return (
     <Input
-      type="tel"
+      type="number"
       label="Link de Telegram"
       variant="bordered"
       placeholder="+53 XXXXXXXX"
@@ -22,7 +22,7 @@ export default function InputTelegram({ value, setValue }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          telegram_link: parseInt(event.target.value),
+          telegram_link: event.target.value,
         };
         setRender((render) => render + 1);
       }}

@@ -7,7 +7,7 @@ export default function InputWhatsapp({ value, setValue }) {
 
   return (
     <Input
-      type="tel"
+      type="number"
       label="Número de Whatsapp"
       variant="bordered"
       placeholder="+53 XXXXXXXX"
@@ -17,7 +17,7 @@ export default function InputWhatsapp({ value, setValue }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          whatsapp: parseInt(event.target.value),
+          whatsapp: event.target.value,
         };
         setRender((render) => render + 1);
       }}
