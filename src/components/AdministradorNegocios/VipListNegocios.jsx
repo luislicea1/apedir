@@ -9,6 +9,7 @@ import { useBussinessStore } from "../../hooks/useStore";
 import supabase from "../../api/client";
 
 export default function VipListNegocios({ userId, ...props }) {
+  const [isSelected, setIsSelected] = useState(0);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
   const agregarUnNuevoNegocio = {
     width: "100%",
@@ -57,6 +58,9 @@ export default function VipListNegocios({ userId, ...props }) {
           <div style={{ ...grid_2_col, marginBottom: "40px" }}>
             {businesses.current.map((business, index) => (
               <NegocioIdVip
+                index={index}
+                isSelected={isSelected}
+                setIsSelected={setIsSelected}
                 key={business.id}
                 id={business.id}
                 imagen={business.perfil_pic}

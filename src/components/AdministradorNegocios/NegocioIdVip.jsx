@@ -8,12 +8,21 @@ import { useBussinessStore } from "../../hooks/useStore";
 
 function NegocioIdVip(props) {
   const setBussiness = useBussinessStore((state) => state.setBussiness);
+  const [render, setRender] = useState(0);
   return (
     <>
       {/* <Link to={`/lugar/${props.url}`} aria-label={"negocio"}> */}
       <Card
         className="py-4 tarjeta-negocio-card"
-        style={{ ...CardStyles, margin: "5px 5px 5px 5px" }}
+        style={
+          props.index === props.isSelected
+            ? {
+                border: "2px solid #5E17EB",
+                ...CardStyles,
+                margin: "5px 5px 5px 5px",
+              }
+            : { ...CardStyles, margin: "5px 5px 5px 5px" }
+        }
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.localizacion}</p>
@@ -26,11 +35,13 @@ function NegocioIdVip(props) {
           </h2>
         </CardHeader>
         <CardBody
+          style={ImgCardStyle}
           onClick={() => {
             setBussiness(props.bussiness);
+            props.setIsSelected(props.index);
+            setRender((render) => render + 1);
           }}
           className="overflow-visible py-2 card-body-seccion"
-          style={ImgCardStyle}
         >
           <LazyLoadImage
             alt={props.nombre}
