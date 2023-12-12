@@ -17,7 +17,7 @@ export default function InputPhoneNumber({ value, setValue }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          phone_number: parseInt(event.target.value),
+          phone_number: event.target.value,
         };
         setRender((render) => render + 1);
       }}

@@ -121,7 +121,6 @@ export default function ManageProducts() {
     const categorylist = await getCategories(bussiness.id);
     setCategories(categorylist !== null ? categorylist : []);
     setCategoriesGlobal(categorylist);
-    setRender((render) => render + 1);
   };
 
   useEffect(() => {
@@ -153,6 +152,7 @@ export default function ManageProducts() {
     };
 
     await fetchCategories();
+    setRender((render) => render + 1);
   };
 
   const handleAddProduct = async () => {

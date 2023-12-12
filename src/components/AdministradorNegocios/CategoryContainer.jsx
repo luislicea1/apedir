@@ -26,6 +26,8 @@ export default function CategoryContainer({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  
+
   return (
     <div
       style={{

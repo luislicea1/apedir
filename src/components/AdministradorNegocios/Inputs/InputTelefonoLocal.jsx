@@ -6,7 +6,7 @@ export default function InputTelefonoLocalNumber({ value }) {
   const [render, setRender] = React.useState(0);
   return (
     <Input
-      type="tel"
+      type="number"
       label="Telefono del Local"
       variant="bordered"
       placeholder="22 XXXXXX"
@@ -16,7 +16,7 @@ export default function InputTelefonoLocalNumber({ value }) {
       onChange={(event) => {
         value.current = {
           ...value.current,
-          local_phone: parseInt(event.target.value),
+          local_phone: event.target.value,
         };
         setRender((render) => render + 1);
       }}
