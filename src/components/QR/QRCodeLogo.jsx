@@ -19,7 +19,7 @@ const downloadQRCode = () => {
 const QR = (props) => {
   const value =
     props.negocio === "si"
-      ? `https://apedir.pages.dev${props.url}`
+      ? `https://apedir.pages.dev/lugar/${props.url}`
       : "https://apedir.pages.dev/";
   const icon = props.negocio === "si" ? props.imagen : logo;
 
@@ -42,7 +42,7 @@ const QR = (props) => {
         </>
       ) : (
         <>
-          <QRCode value="https://ant.design/" status="loading" />
+          <QRCode value="https://apedir.pages.dev/" status="loading" />
         </>
       )}
     </div>
