@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { grid_3_col, grid_1_col } from "../styles/styles";
+import { grid_1_col, grid_2_col } from "../styles/styles";
 import { toast } from "sonner";
 
 export default function CategoryContainer({
@@ -25,8 +25,6 @@ export default function CategoryContainer({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  
 
   return (
     <div
@@ -100,7 +98,7 @@ export default function CategoryContainer({
 
       <div
         className="mt-2 list-container"
-        style={windowWidth < 800 ? grid_1_col : grid_3_col}
+        style={windowWidth < 800 ? grid_1_col : grid_2_col}
       >
         {products.map((product, index) => (
           <ProductCard
@@ -118,6 +116,7 @@ export default function CategoryContainer({
             setProductInput={setProductInput}
             onProductEditOpen={onProductEditOpen}
             isAvalaible={product.isAvalaible}
+            isRecomended={product.isRecomended}
           />
         ))}
       </div>

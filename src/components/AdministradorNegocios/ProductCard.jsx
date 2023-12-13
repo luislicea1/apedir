@@ -13,7 +13,7 @@ import {
 import PropTypes from "prop-types";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { updateAvailability } from "../../api/products";
+import { updateAvailability, updateRecomended } from "../../api/products";
 import { ImgCardStyle } from "../styles/styles";
 import { ImgStyle } from "../styles/styles";
 import { CardStyles2 } from "../styles/styles";
@@ -30,12 +30,18 @@ export default function ProductCard({
   onProductEditOpen,
   onProductDeleteOpen,
   isAvalaible,
+  isRecomended,
 }) {
   const [isSelected, setIsSelected] = useState(isAvalaible);
-
+  const [recomended, setRecomended] = useState(isRecomended);
   const changeAvailability = async () => {
     setIsSelected(!isSelected);
     await updateAvailability(id, !isSelected);
+  };
+
+  const changeRecomended = async () => {
+    setRecomended(!recomended);
+    await updateRecomended(id, !recomended);
   };
 
   return (
@@ -47,6 +53,13 @@ export default function ProductCard({
       className="producto-card"
     >
       <CardHeader style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="flex">
+          <Checkbox
+            isSelected={recomended}
+            onValueChange={changeRecomended}
+          ></Checkbox>
+          <p className="text-sm text-default-500">Recomandado</p>
+        </div>
         <div className="flex">
           <Checkbox
             isSelected={isSelected}

@@ -25,6 +25,6 @@ export default function Home() {
       <SeccionEventos title="Eventos"></SeccionEventos>
       <Seccion title="Lugares"></Seccion>
       <Toaster richColors theme="dark" duration={3000} position="bottom-center" />
-    </div>
+    </div> 
   );
 }
