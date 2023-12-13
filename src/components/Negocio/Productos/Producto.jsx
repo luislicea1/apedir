@@ -18,6 +18,9 @@ import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
 import OrdenarProducto from "../VisualizadorProducto/OrdenarProducto";
 import PromoProducto from "../VisualizadorProducto/PromoProducto";
 import "./productos.css";
+import BestChoiceIcon from "../../Icons/bestchoise/bestChoiceIcon";
+import Crown from "../../Icons/bestchoise/crown";
+import { Badge, Switch } from "@nextui-org/react";
 
 export default function Producto({
   localizacion,
@@ -33,10 +36,9 @@ export default function Producto({
 }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const [cantidad, setCantidad] = useState(0);
-
   const [carrito, setCarrito] = useState([]);
+  const [isInvisible, setIsInvisible] = React.useState(false);
 
   const handleQuantityChange = (newQuantity) => {
     setCantidad(newQuantity);
@@ -54,6 +56,8 @@ export default function Producto({
       <Helmet>
         <link fetchpriority="high" rel="preload" href={img} as="image" />
       </Helmet>
+      <Badge content={<Crown w = {"30px"} color={"white"} ></Crown>} color="danger" isInvisible={isInvisible}>
+      
       <Card
         shadow="sm"
         key={index}
@@ -90,6 +94,7 @@ export default function Producto({
             >
               {title}
             </b>
+            
           </div>
           <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
             <p className="text-default-500">
@@ -147,6 +152,7 @@ export default function Producto({
           </Modal>
         </CardFooter>
       </Card>
+      </Badge>
     </div>
   );
 }

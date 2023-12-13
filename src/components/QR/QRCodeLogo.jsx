@@ -7,7 +7,7 @@ const QR = (props) => {
   const [iconLoaded, setIconLoaded] = useState(false);
   const [render, setRender] = useState(0);
   const iconRef = useRef(new Image());
-
+ 
   useEffect(() => {
     const icon = iconRef.current;
     icon.crossOrigin = "anonymous";
@@ -76,6 +76,7 @@ const QR = (props) => {
           <QRCode
             value={value}
             bgColor="#fff"
+            errorLevel="H"
             style={{
               marginBottom: 16,
             }}
