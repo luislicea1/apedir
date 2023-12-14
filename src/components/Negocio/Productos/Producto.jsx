@@ -56,102 +56,104 @@ export default function Producto({
       <Helmet>
         <link fetchpriority="high" rel="preload" href={img} as="image" />
       </Helmet>
-      <Badge content={<Crown w = {"30px"} color={"white"} ></Crown>} color="danger" isInvisible={isInvisible}>
-      
-      <Card
-        shadow="sm"
-        key={index}
-        isPressable
-        style={CardStyles2}
-        className="producto-card"
-        onClick={onOpen}
-        id={title}
+      <Badge
+        content={<Crown w={"30px"} color={"white"}></Crown>}
+        color="danger"
+        isInvisible={isRecomended}
       >
-        <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
-          <LazyLoadImage
-            alt={title}
-            src={img}
-            effect="blur"
-            style={{ ...ProductoStyle, objectFit: "cover" }}
-            delayMethod="debounce"
-            delayTime={300}
-            placeholderSrc={img}
-            useIntersectionObserver={true}
-          />
-        </CardBody>
-        <CardFooter
-          className="text-small justify-between"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-          }}
+        <Card
+          shadow="sm"
+          key={index}
+          isPressable
+          style={CardStyles2}
+          className="producto-card"
+          onClick={onOpen}
+          id={title}
         >
-          <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
-            <b
-              style={{
-                fontSize: "20px",
-              }}
-            >
-              {title}
-            </b>
-            
-          </div>
-          <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
-            <p className="text-default-500">
-              {price} {currency}
-            </p>
-          </div>
-
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            size="full"
+          <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
+            <LazyLoadImage
+              alt={title}
+              src={img}
+              effect="blur"
+              style={{ ...ProductoStyle, objectFit: "cover" }}
+              delayMethod="debounce"
+              delayTime={300}
+              placeholderSrc={img}
+              useIntersectionObserver={true}
+            />
+          </CardBody>
+          <CardFooter
+            className="text-small justify-between"
             style={{
-              padding: "0px",
-              background: "#0F0D13",
-              position: "relative",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
             }}
           >
-            <ModalContent style={{ padding: "0px", position: " relative" }}>
-              {(onClose) => (
-                <div>
-                  <ModalBody
-                    style={{
-                      padding: "0px",
-                      width: "100vw",
-                      display: "grid",
-                      placeItems: "center",
-                      position: "relative",
-                    }}
-                  >
-                    <div style={{ ...sectionStyle2, position: "relative" }}>
-                      <ImagenVisualizador image={img} />
-                    </div>
+            <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
+              <b
+                style={{
+                  fontSize: "20px",
+                }}
+              >
+                {title}
+              </b>
+            </div>
+            <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
+              <p className="text-default-500">
+                {price} {currency}
+              </p>
+            </div>
 
-                    <div className="sectionDescription ">
-                      <DescripcionDeP
-                        title={title}
-                        text={description}
-                        // onAddToCart={handleAddToCart}
-                        image={img}
-                        cantidad={cantidad}
-                        price={price}
-                        onClose={onClose}
-                        onQuantityChange={handleQuantityChange}
-                      ></DescripcionDeP>
-                      <OrdenarProducto
-                        onChangeQuantity={setCantidad}
-                      ></OrdenarProducto>
+            <Modal
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              size="full"
+              style={{
+                padding: "0px",
+                background: "#0F0D13",
+                position: "relative",
+              }}
+            >
+              <ModalContent style={{ padding: "0px", position: " relative" }}>
+                {(onClose) => (
+                  <div>
+                    <ModalBody
+                      style={{
+                        padding: "0px",
+                        width: "100vw",
+                        display: "grid",
+                        placeItems: "center",
+                        position: "relative",
+                      }}
+                    >
+                      <div style={{ ...sectionStyle2, position: "relative" }}>
+                        <ImagenVisualizador image={img} />
+                      </div>
 
-                      <PromoProducto url={url}></PromoProducto>
-                    </div>
-                  </ModalBody>
-                </div>
-              )}
-            </ModalContent>
-          </Modal>
-        </CardFooter>
-      </Card>
+                      <div className="sectionDescription ">
+                        <DescripcionDeP
+                          title={title}
+                          text={description}
+                          // onAddToCart={handleAddToCart}
+                          image={img}
+                          cantidad={cantidad}
+                          price={price}
+                          onClose={onClose}
+                          onQuantityChange={handleQuantityChange}
+                        ></DescripcionDeP>
+                        <OrdenarProducto
+                          onChangeQuantity={setCantidad}
+                        ></OrdenarProducto>
+
+                        <PromoProducto url={url}></PromoProducto>
+                      </div>
+                    </ModalBody>
+                  </div>
+                )}
+              </ModalContent>
+            </Modal>
+          </CardFooter>
+        </Card>
       </Badge>
     </div>
   );
