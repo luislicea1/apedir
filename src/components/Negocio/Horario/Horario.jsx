@@ -6,8 +6,27 @@ export default function Horario(props) {
   return (
     <>
       {bussiness !== null && bussiness.schedules !== null && (
-        <div style={{ display: "grid", placeItems: "center" }}>
-          <strong style={{ fontSize: "20px", margin: "10px" }}>Horarios</strong>
+        <div>
+          <div style={{ display: "grid", placeItems: "center" }}>
+            <strong style={{ fontSize: "20px", margin: "10px" }}>
+              Horarios
+            </strong>
+            <Divider></Divider>
+          </div>
+          <div
+            style={{
+              display: "grid",
+              width: "100%",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              margin: "10px",
+              placeItems: "center"
+            }}
+          >
+            <span>Dia</span>
+            <span>Abierto</span>
+            <span>Cerrado</span>
+           
+          </div>
           <Divider></Divider>
         </div>
       )}
@@ -35,12 +54,12 @@ export default function Horario(props) {
           }
 
           let entrada = schedule.entrada ? (
-            <span>Horario apertura: {schedule.entrada}</span>
+            <span>{schedule.entrada}</span>
           ) : (
             <span>-</span>
           );
           let salida = schedule.salida ? (
-            <span>Horario cierre: {schedule.salida}</span>
+            <span>{schedule.salida}</span>
           ) : (
             <span>-</span>
           );
@@ -49,13 +68,14 @@ export default function Horario(props) {
             <div>
               <div
                 style={{
-                  display: "flex",
+                  display: "grid",
                   width: "100%",
-                  justifyContent: "space-around",
+                  gridTemplateColumns: "1fr 1fr 1fr",
                   margin: "10px",
+                  placeItems: "center"
                 }}
               >
-                {dia}: {entrada} {salida}
+                {dia} {entrada} {salida}
               </div>
               <Divider></Divider>
             </div>
