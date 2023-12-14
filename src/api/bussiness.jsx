@@ -139,7 +139,8 @@ const loadMoreBussiness = async (
     .from("bussiness")
     .select("*")
     .eq("isActive", true)
-    .range(offset, offset + 19);
+    .range(offset, offset + 19)
+    .order('privileges', { ascending: false });
 
   if (error) {
     console.error(error);

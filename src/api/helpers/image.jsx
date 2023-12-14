@@ -1,3 +1,4 @@
+
 // const resizeImage = async (file, newWidth, newHeight) => {
 //   // Verificar el tamaño del archivo
 //   var fileSizeInKB = file.size / 1024; // Convertir a KB
@@ -30,6 +31,11 @@
 //  }
 
 //  export {resizeImage}
+
+
+
+
+// Recorta la imagen acorde a el ancho haciendo un calculo
 
 // const resizeImage = async (file, newWidth, newHeight) => {
 //   var fileSizeInKB = file.size / 1024; // Convertir a KB

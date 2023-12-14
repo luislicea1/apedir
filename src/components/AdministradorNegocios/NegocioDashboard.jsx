@@ -72,6 +72,7 @@ export default function NegocioDashboard() {
     id: "",
     owner: "",
     name: "",
+    privileges: plan === "gratis" ? 1 : plan === "basico" ? 2 : 3,
     perfil_pic: "",
     front_pic: "",
     description: "",

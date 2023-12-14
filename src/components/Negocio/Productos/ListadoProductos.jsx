@@ -6,8 +6,6 @@ import "./responsive.css";
 import { grid_3_col } from "../../styles/styles";
 import { useCartStore } from "../../../hooks/useStore";
 
-// Envolviendo el componente Producto con React.memo
-const ProductoMemo = memo(Producto);
 
 export default function ListadoProductos(props) {
   const list = props.lista;
@@ -32,7 +30,7 @@ export default function ListadoProductos(props) {
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado
   const renderProducto = useCallback(
     (item, index) => (
-      <ProductoMemo
+      <Producto
         key={item.id}
         index={index}
         img={item.image}
@@ -45,7 +43,7 @@ export default function ListadoProductos(props) {
         onChangeCarrito={handleAddToCart}
         isRecomended={item.isRecomended}
         url={props.url}
-      ></ProductoMemo>
+      ></Producto>
     ),
     [props.nombre, props.localizacion]
   );
