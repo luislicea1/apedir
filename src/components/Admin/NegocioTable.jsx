@@ -3,7 +3,7 @@ import { Pagination, Input, Avatar, Checkbox } from "@nextui-org/react";
 import { SearchIcon } from "../Icons/SearchIcon";
 import DeleteBussinessModal from "./modals/DeleteBussinessModal";
 import { setIsActive } from "../../api/bussiness";
-
+import { setBussinessPrivileges } from "../../api/bussiness";
 import React, { useState } from "react";
 import {
   Table,
@@ -15,6 +15,7 @@ import {
   User,
   Tooltip,
   useDisclosure,
+  
 } from "@nextui-org/react";
 
 const columns = [
@@ -24,6 +25,7 @@ const columns = [
   { name: "Dirección", uid: "address" },
   { name: "Provincia", uid: "province" },
   { name: "Teléfono", uid: "phone" },
+  { name: "Privilegios", uid: "privileges" },
   { name: "Acciones", uid: "actions" },
 ];
 
@@ -33,14 +35,30 @@ const statusColorMap = {
   vacation: "warning",
 };
 
+
 const handleCheckboxChange = async (event, bussinessId) => {
   await setIsActive(bussinessId, event.target.checked);
 };
 
+const handlePrivilegesChange = async (event, bussinessId) => {
+  const newPrivileges = parseInt(event.target.value, 10);
+
+  try {
+    await setBussinessPrivileges(bussinessId, newPrivileges);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
 export default function NegocioTable({ bussinessList, getAllBussinesses }) {
   const [bussinessToDelete, setBussinessToDelete] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  
   const renderCell = React.useCallback((bussiness, columnKey) => {
+    
+    
     const cellValue = bussiness.columnKey;
     switch (columnKey) {
       case "name":
@@ -82,10 +100,23 @@ export default function NegocioTable({ bussinessList, getAllBussinesses }) {
         return <p>{bussiness.province || "N/A"}</p>;
       case "phone":
         return <p>{bussiness.phone_number || "N/A"}</p>;
+
+        case "privileges":
+          return (
+            <Input
+              type="number"
+              defaultValue={bussiness.privileges}
+              onChange={(event) => handlePrivilegesChange(event, bussiness.id)}
+            />
+          );
+        
+         
+
       case "actions":
         return (
           <div className="relative flex items-center gap-2">
             <div>
+            
               <Tooltip color="primary" content="Activar o desactivar negocio">
                 <span className="text-lg text-danger cursor-pointer active:opacity-50">
                   <Checkbox

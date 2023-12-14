@@ -339,6 +339,31 @@ const setIsActive = async (bussinessId, isActive) => {
   if (error) console.error(error);
 };
 
+const setBussinessPrivileges = async (bussinessId, newPrivileges) => {
+  try {
+    const { data, error } = await supabase
+      .from("bussiness")
+      .update({ privileges: newPrivileges })
+      .eq("id", bussinessId);
+
+    if (error) {
+      console.error(error);
+      
+    } else {
+      console.log(`Privileges updated successfully for business with ID ${bussinessId}`);
+    }
+  } catch (error) {
+    console.error(error);
+   
+  }
+};
+
+export {
+  // ... (otras funciones)
+  setBussinessPrivileges,
+};
+
+
 const deleteBussinessById = async (businessId) => {
   // Obtener las categorías del negocio dado
   const { data: events, error: eventsError } = await supabase
