@@ -5,7 +5,7 @@ import TelegramIcon from "../../Icons/Telegram/Telegram";
 import Correo from "../../Icons/Correo/correo";
 import TelefonoIcon from "../../Icons/Llamada/Telefono";
 import FaceBookIcon from "../../Icons/Facebook/FaceBookIcon";
-import { grid_5_col, flex_center,grid_center } from "../../styles/styles";
+import { grid_5_col, flex_center, grid_center } from "../../styles/styles";
 import {
   Popover,
   PopoverTrigger,
@@ -24,8 +24,6 @@ export default function IconosNegocio(props) {
     });
   }, []);
 
-  
-
   const telefono = {
     background: "#5E17EB",
     margin: "10px",
@@ -37,18 +35,24 @@ export default function IconosNegocio(props) {
     lineHeight: "0",
     maxWidth: "50px",
     minWidth: "50px",
-    
   };
 
   return (
-    <div style={{...grid_center, width: "100%"}}>
-     
-
+    <div style={{ ...grid_center, width: "100%" }}>
       {socialMedia && (
-        <div className="mt-2" id="contactenos" style={{display: "flex", gap: "20px", justifyContent: "center", alignItems: "center", flexWrap: "wrap"}}>
-          
+        <div
+          className="mt-2"
+          id="contactenos"
+          style={{
+            display: "flex",
+            gap: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {socialMedia.phone_number ? (
-            <Popover placement="bottom" style={{maxWidth: "37px", minWidth: "37px"}}> 
+            <Popover placement="bottom">
               <PopoverTrigger>
                 <Button style={telefono}>
                   <TelefonoIcon color="white" w={"30px"}></TelefonoIcon>
@@ -61,35 +65,35 @@ export default function IconosNegocio(props) {
                 </div>
               </PopoverContent>
             </Popover>
-          ) : (
-            null
-          )}
+          ) : null}
           {socialMedia.email ? (
-            <Correo color="white" w={"36px"}></Correo>
-          ) : (
-            null
-          )}
-         {socialMedia.telegram_link ? (
-           <TelegramIcon color="white" w={"50px"}></TelegramIcon>
-          ) : (
-            null
-          )}
+             <a href={`mailto:${socialMedia.email}`} target="_blank">
+                <Correo color="white" w={"36px"}></Correo>
+              </a>
+          ) : null}
+          {socialMedia.telegram_link ? (
+            <a
+              href={`https://t.me/+53${socialMedia.telegram_link}`}
+              target="_blank"
+            >
+              <TelegramIcon color="white" w={"50px"}></TelegramIcon>
+            </a>
+          ) : null}
           {socialMedia.facebook ? (
-             <FaceBookIcon color = "white" w = {"36px"} h = {"36px"}></FaceBookIcon>
-          ) : (
-            null
-          )}
+            <a href={`https://www.facebook.com/${socialMedia.facebook.replace(/\s+/g, '')}`} target="_blank"> 
+              <FaceBookIcon color="white" w={"36px"} h={"36px"}></FaceBookIcon>
+            </a>
+          ) : null}
           {socialMedia.instagram ? (
-            <InstagramIcon color="white" w={"36px"}></InstagramIcon>
-          ) : (
-            null
-          )}
+            <a href={`https://www.instagram.com/${socialMedia.instagram.replace(/\s+/g, '')}`}  target="_blank">
+              <InstagramIcon color="white" w={"36px"}></InstagramIcon>
+            </a>
+          ) : null}
           {socialMedia.whatsapp ? (
-            <WhatsappIcons color="white" w={"36px"}></WhatsappIcons>
-          ) : (
-            null
-          )}
-          
+            <a href={`https://wa.me/${socialMedia.whatsapp}`} target="_blank">
+              <WhatsappIcons color="white" w={"36px"}></WhatsappIcons>
+            </a>
+          ) : null}
         </div>
       )}
     </div>

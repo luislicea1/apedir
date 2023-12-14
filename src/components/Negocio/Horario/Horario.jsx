@@ -22,9 +22,9 @@ export default function Horario(props) {
               placeItems: "center"
             }}
           >
-            <span>Dia</span>
-            <span>Abierto</span>
-            <span>Cerrado</span>
+            <strong>Dia</strong>
+            <strong>Abierto</strong>
+            <strong>Cerrado</strong>
            
           </div>
           <Divider></Divider>
