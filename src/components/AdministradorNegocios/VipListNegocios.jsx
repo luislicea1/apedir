@@ -7,6 +7,7 @@ import NegocioIdVip from "./NegocioIdVip";
 import { grid_2_col } from "../styles/styles";
 import { useBussinessStore } from "../../hooks/useStore";
 import supabase from "../../api/client";
+import { toast, Toaster } from "sonner";
 
 export default function VipListNegocios({ userId, ...props }) {
   const [isSelected, setIsSelected] = useState(0);
@@ -75,11 +76,23 @@ export default function VipListNegocios({ userId, ...props }) {
           <div
             style={{ ...agregarUnNuevoNegocio, marginBottom: "40px" }}
             onClick={() => {
+              if (businesses.current.length >= 5) {
+                toast.error(
+                  "Ha llegado al límite de negocios que puede tener con su plan"
+                );
+                return;
+              }
               setBussiness(null);
             }}
           >
             Agregar Negocio
           </div>
+          <Toaster
+            richColors
+            theme="dark"
+            duration={3000}
+            position="bottom-center"
+          />
         </section>
       </div>
     </>

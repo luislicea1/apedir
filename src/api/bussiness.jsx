@@ -140,7 +140,7 @@ const loadMoreBussiness = async (
     .select("*")
     .eq("isActive", true)
     .range(offset, offset + 19)
-    .order('privileges', { ascending: false });
+    .order("privileges", { ascending: false });
 
   if (error) {
     console.error(error);
@@ -349,13 +349,13 @@ const setBussinessPrivileges = async (bussinessId, newPrivileges) => {
 
     if (error) {
       console.error(error);
-      
     } else {
-      console.log(`Privileges updated successfully for business with ID ${bussinessId}`);
+      console.log(
+        `Privileges updated successfully for business with ID ${bussinessId}`
+      );
     }
   } catch (error) {
     console.error(error);
-   
   }
 };
 
@@ -363,7 +363,6 @@ export {
   // ... (otras funciones)
   setBussinessPrivileges,
 };
-
 
 const deleteBussinessById = async (businessId) => {
   // Obtener las categorías del negocio dado
@@ -488,6 +487,18 @@ const deleteBussinessById = async (businessId) => {
     return;
   }
 };
+
+const bussinessNum = async (ownerId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select()
+    .eq("owner", ownerId)
+    .count();
+
+  console.log(data);
+  return data;
+};
+
 export {
   setIsActive,
   upsertBussiness,
@@ -506,4 +517,5 @@ export {
   getAllBussinessFromUser,
   getSocialMedia,
   deleteBussinessById,
+  bussinessNum
 };
