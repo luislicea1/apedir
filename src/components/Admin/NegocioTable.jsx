@@ -40,15 +40,7 @@ const handleCheckboxChange = async (event, bussinessId) => {
   await setIsActive(bussinessId, event.target.checked);
 };
 
-const handlePrivilegesChange = async (event, bussinessId) => {
-  const newPrivileges = parseInt(event.target.value, 10);
 
-  try {
-    await setBussinessPrivileges(bussinessId, newPrivileges);
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 
 
@@ -57,7 +49,16 @@ export default function NegocioTable({ bussinessList, getAllBussinesses }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   
   const renderCell = React.useCallback((bussiness, columnKey) => {
+    const handlePrivilegesChange = async (event, bussinessId) => {
+      const newPrivileges = parseInt(event.target.value, 10);
     
+      try {
+        await setBussinessPrivileges(bussinessId, newPrivileges);
+        await getAllBussinesses();
+      } catch (error) {
+        console.error(error);
+      }
+    };  
     
     const cellValue = bussiness.columnKey;
     switch (columnKey) {
