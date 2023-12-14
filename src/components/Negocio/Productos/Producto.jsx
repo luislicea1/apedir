@@ -18,9 +18,9 @@ import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
 import OrdenarProducto from "../VisualizadorProducto/OrdenarProducto";
 import PromoProducto from "../VisualizadorProducto/PromoProducto";
 import "./productos.css";
-import BestChoiceIcon from "../../Icons/bestchoise/bestChoiceIcon";
+
 import Crown from "../../Icons/bestchoise/crown";
-import { Badge, Switch } from "@nextui-org/react";
+import { Badge} from "@nextui-org/react";
 
 export default function Producto({
   localizacion,
