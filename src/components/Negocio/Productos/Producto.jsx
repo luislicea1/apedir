@@ -32,9 +32,9 @@ export default function Producto({
   description,
   currency,
   onChangeCarrito,
-  url
+  isRecomended,
+  url,
 }) {
-  const navigate = useNavigate();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [cantidad, setCantidad] = useState(0);
   const [carrito, setCarrito] = useState([]);
@@ -50,7 +50,7 @@ export default function Producto({
     height: "100vh",
     background: "#0F0D13",
   };
-  
+
   return (
     <div>
       <Helmet>
@@ -143,7 +143,7 @@ export default function Producto({
                         onChangeQuantity={setCantidad}
                       ></OrdenarProducto>
 
-                      <PromoProducto   url={url}></PromoProducto>
+                      <PromoProducto url={url}></PromoProducto>
                     </div>
                   </ModalBody>
                 </div>

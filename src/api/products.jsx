@@ -17,6 +17,14 @@ const updateAvailability = async (id, status) => {
     .select();
 };
 
+const updateRecomended = async (id, status) => {
+  const { data, error } = await supabase
+    .from("products")
+    .update({ isRecomended: status })
+    .eq("id", id)
+    .select();
+};
+
 const updateProduct = async (product, imageName) => {
   if (imageName.length > 0 && product.image instanceof Blob) {
     const { data: oldData, error: oldError } = await supabase
@@ -131,4 +139,5 @@ export {
   updateAvailability,
   updateProduct,
   deleteProductById,
+  updateRecomended,
 };
