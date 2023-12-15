@@ -146,7 +146,7 @@ export const ImgCardStyle = {
   maxHeight: "288px",
   //minWidth: "20vw",
   display: "grid",
-  placeItems: "center",
+  placeItems: "start",
   borderRadius: "10px",
 };
 
