@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import { eventoMargin, grid_center } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
+import {Card, CardBody} from "@nextui-org/react";
 
 export default function Eventos(props) {
   return (
     <div style={eventoMargin}>
       <Link to={`/evento/${props.nombre}`} aria-label="evento">
-        <div
+        <Card
           style={{
-            border: "4px solid #F31260",
-            borderRadius: "10px",
+            
+            borderRadius: "20px",
             overflow: "hidden",
-            width: "200px",
+            width: "170px",
             height: "200px",
           }}
         >
@@ -29,7 +29,7 @@ export default function Eventos(props) {
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
           />
-        </div>
+        </Card>
       </Link>
     </div>
   );

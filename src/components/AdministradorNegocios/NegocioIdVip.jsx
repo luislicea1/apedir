@@ -20,8 +20,9 @@ function NegocioIdVip(props) {
                 border: "2px solid #5E17EB",
                 ...CardStyles,
                 margin: "5px 5px 5px 5px",
+                maxHeight: "386px" 
               }
-            : { ...CardStyles, margin: "5px 5px 5px 5px" }
+            : { ...CardStyles, margin: "5px 5px 5px 5px", maxHeight: "386px" }
         }
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
