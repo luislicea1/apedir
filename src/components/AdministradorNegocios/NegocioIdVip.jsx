@@ -5,6 +5,7 @@ import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useBussinessStore } from "../../hooks/useStore";
+import './vip.css'
 
 function NegocioIdVip(props) {
   const setBussiness = useBussinessStore((state) => state.setBussiness);
@@ -20,9 +21,9 @@ function NegocioIdVip(props) {
                 border: "2px solid #5E17EB",
                 ...CardStyles,
                 margin: "5px 5px 5px 5px",
-                maxHeight: "386px" 
+                
               }
-            : { ...CardStyles, margin: "5px 5px 5px 5px", maxHeight: "386px" }
+            : { ...CardStyles, margin: "5px 5px 5px 5px" }
         }
       >
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

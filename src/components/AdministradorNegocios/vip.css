@@ -1,0 +1,10 @@
+.tarjeta-negocio-card{
+    max-height: 386px;
+}
+
+@media only screen and (max-width: 420px) {
+    
+    .tarjeta-negocio-card{
+        max-height: 234px;
+    }
+}
