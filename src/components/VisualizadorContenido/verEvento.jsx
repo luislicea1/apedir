@@ -82,7 +82,7 @@ export default function VerEvento({ nombre }) {
                 ></DescripcionEvento>
               </div>
               <p className="text-white">Teléfono: {event.phone_number}</p>
-              <BotonesEventos></BotonesEventos>
+              <BotonesEventos whatsapp = {event.phone_number}></BotonesEventos>
             </div>
           </section>
         </section>
