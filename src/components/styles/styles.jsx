@@ -143,6 +143,7 @@ export const ImgCardStyle = {
   width: "100%",
   height: "100%",
   minHeight: "100px",
+  maxHeight: "288px",
   //minWidth: "20vw",
   display: "grid",
   placeItems: "center",
