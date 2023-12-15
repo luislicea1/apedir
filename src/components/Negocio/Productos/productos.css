@@ -1,4 +1,6 @@
-
+.producto-card{
+  max-height: 550px;
+}
   
   
 .sectionDescription {
@@ -23,5 +25,17 @@
   };
 }
 
+@media screen and (max-width: 420px) {
+  .producto-card{
+    max-height: 284px;
+    
+  }
+}
 
+@media screen and (max-width: 400px) {
+  .producto-card{
+    max-height: 500px;
+    
+  }
+}
 

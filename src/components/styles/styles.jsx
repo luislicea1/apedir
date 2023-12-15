@@ -135,7 +135,7 @@ export const CardStyles = {
 export const CardStyles2 = {
   width: "100%",
   height: "100%",
-  maxHeight: "550px",
+  // maxHeight: "550px",
   paddingBottom: "10px",
   position: "relative"
 };
