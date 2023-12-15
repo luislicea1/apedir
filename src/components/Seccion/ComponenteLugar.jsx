@@ -65,7 +65,7 @@ function ComponenteLugar(props) {
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "cover" }}
+              style={{ ...LogoStyle, objectFit: "contain"}}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               className="lazyload"
