@@ -6,7 +6,9 @@ import ComponenteLugar from "./ComponenteLugar";
 
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
-import { addNotification } from "../../api/notifications";
+//import { addNotification } from "../../api/notifications";
+import { Empty } from "antd";
+import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
 
 const ListadoDeComponentesLugar = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
@@ -19,7 +21,7 @@ const ListadoDeComponentesLugar = () => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
-
+  
   const filtredBussinesses = useMemo(() => {
     if (bussinesses?.length === 0) {
       return null;
@@ -65,7 +67,7 @@ const ListadoDeComponentesLugar = () => {
   }, [inView, hasMore]);
 
   if (loading) {
-    return <Loader />;
+    return <ListadoSkeleton />;
   }
 
   return (
@@ -79,6 +81,7 @@ const ListadoDeComponentesLugar = () => {
         alignContent: "stretch",
       }}
     >
+      
       {filtredBussinesses !== null &&
         filtredBussinesses.map((item) => {
           return (
@@ -97,10 +100,11 @@ const ListadoDeComponentesLugar = () => {
         })}
       {hasMore && loading && (
         <div style={{ textAlign: "center" }}>
-          <Loader></Loader>
+          <ListadoSkeleton />
         </div>
       )}
     </div>
+    
   );
 };
 

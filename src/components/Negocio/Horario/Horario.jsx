@@ -6,7 +6,7 @@ export default function Horario(props) {
   return (
     <>
       {bussiness !== null && bussiness.schedules !== null && (
-        <div>
+        <div key={bussiness.id}>
           <div style={{ display: "grid", placeItems: "center" }}>
             <strong style={{ fontSize: "20px", margin: "10px" }}>
               Horarios

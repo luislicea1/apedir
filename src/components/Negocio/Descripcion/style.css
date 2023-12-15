@@ -1,7 +1,9 @@
 
-.btn-sub:hover .svg-icon-notification {
-  animation: slope  0.9s both;
+.btn-sub:hover .svg-icon-notification,
+.btn-sub.clicked .svg-icon-notification {
+ animation: slope 0.9s both;
 }
+
 
 @keyframes slope {
   0%,
@@ -29,3 +31,4 @@
     transform: rotateZ(2deg);
   }
 }
+

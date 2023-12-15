@@ -33,7 +33,7 @@ import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
 
-export default function Header(props) {
+export default function Header() {
   const history = useHref();
   const [isBussiness, setIsBussiness] = useState(false);
   const [session, setSession] = useState(null);
@@ -96,6 +96,7 @@ export default function Header(props) {
     fetchBussiness();
   }, [user]);
 
+  
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
@@ -118,7 +119,7 @@ export default function Header(props) {
               >
                 {selectedBussiness.name}
               </p>
-              <AbiertoCerrado />
+              <AbiertoCerrado horario = {selectedBussiness?.schedules}/>
             </div>
           </>
         ) : (

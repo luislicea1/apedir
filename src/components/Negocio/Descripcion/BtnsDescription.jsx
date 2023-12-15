@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import LocationIcon from "../../Icons/Location/Location";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
@@ -26,6 +26,8 @@ export default function BtnDescription(props) {
     maxWidth: "300px",
     marginTop: "30px",
   };
+  const [clicked, setClicked] = useState(false);
+
   return (
     <div className="flex gap-4 items-center" style={MarginTop30}>
       {props.suscrito === false ? (
@@ -35,6 +37,7 @@ export default function BtnDescription(props) {
           onClick={() => {
             props.setIsSub(true);
             addOrDeleteSubscription(props.userId, props.bussinessId);
+            setClicked(true);
           }}
         >
           <p>Suscribirse</p>
@@ -45,13 +48,17 @@ export default function BtnDescription(props) {
       ) : (
         <Button
           color="primary"
+          className="btn-sub"
           onClick={() => {
             props.setIsSub(false);
             addOrDeleteSubscription(props.userId, props.bussinessId);
+            setClicked(true);
           }}
         >
           <p>Suscrito</p>
-          <NotificationIcon></NotificationIcon>
+          <div className="svg-icon-notification ">
+            <NotificationIcon></NotificationIcon>
+          </div>
         </Button>
       )}
 
