@@ -74,7 +74,7 @@ export default function VerEvento({ nombre }) {
 
             <div style={sectionDescription}>
               <TituloEvento title={event.name}></TituloEvento>
-              <HorarioEvento></HorarioEvento>
+              {/* <HorarioEvento></HorarioEvento> */}
 
               <div style={overflow}>
                 <DescripcionEvento
