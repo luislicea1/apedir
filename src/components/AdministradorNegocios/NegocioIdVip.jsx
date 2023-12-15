@@ -14,7 +14,7 @@ function NegocioIdVip(props) {
     <>
       {/* <Link to={`/lugar/${props.url}`} aria-label={"negocio"}> */}
       <Card
-        className="py-4 tarjeta-negocio-card"
+        className="py-4 tarjeta-negocio-card-vip"
         style={
           props.index === props.isSelected
             ? {
