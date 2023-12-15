@@ -120,7 +120,7 @@ export default function Negocio() {
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={NegocioSection}>
-        {inView && (
+        {inView && categories.length > 0 && (
           <Navegacion
             links={categories}
             lastViewedTitle={lastViewedTitle}
@@ -162,8 +162,9 @@ export default function Negocio() {
                 url={history}
               ></DescripcionNegocio>
 
-              <Promo seguidores={300} productos={200} lesGusta={1200}></Promo>
+              <Promo seguidores={0} productos={0} lesGusta={1200}></Promo>
             </div>
+
             <Card>
               <Horario key={bussiness.id} bussiness={bussiness}></Horario>
             </Card>

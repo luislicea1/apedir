@@ -1,16 +1,10 @@
 import React from 'react'
 import UserAltIcon from "../../Icons/user/UserAltIcon";
-import Corazon2 from "../../Icons/Corazon/Corazon2";
+//import Corazon2 from "../../Icons/Corazon/Corazon2";
 import Regalo from "../../Icons/regalo/Regalo";
-import { Card, CardBody, CardFooter, Image, Button } from "@nextui-org/react";
-import Like from "../../Like/Like";
+import { Card, Button } from "@nextui-org/react";
+//import Like from "../../Like/Like";
 import { grid_center, grid_2_col } from "../../styles/styles";
-
-const stats = [
-  { id: 1, name: "Seguidores", value: "44 million" },
-  { id: 2, name: "Productos", value: "55" },
-  { id: 3, name: "Me Gusta", value: "46,000" },
-];
 
 export default function Promo(props) {
   
@@ -91,3 +85,5 @@ export default function Promo(props) {
     </div>
   );
 }
+
+
