@@ -3,13 +3,15 @@ import React, { useState, useEffect, lazy, useRef } from "react";
 import { Link, useHref } from "react-router-dom";
 import { NegocioSection } from "../styles/styles";
 import Navegacion from "./HeaderNegocio/Navegacion";
-import { fetchBussinessPerURL } from "../../api/bussiness";
+import {
+  fetchBussinessPerURL,
+  getSubscriptorsOfBussiness,
+} from "../../api/bussiness";
 import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useUserStore } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
-//import { Helmet } from "react-helmet";
 
 import Stars from "../Stars/Stars";
 import {
@@ -22,7 +24,7 @@ const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
 import Horario from "./Horario/Horario";
-import { Card } from "@nextui-org/react";
+import { Card, useDisclosure } from "@nextui-org/react";
 
 const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")
@@ -36,8 +38,9 @@ export default function Negocio() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
   const [userStars, setUserStars] = useState(0);
   const [isSub, setIsSub] = useState(false);
+  const subsNum = useRef(0);
   const user = useUserStore((state) => state.user);
-
+  const [render, setRender] = useState(0);
   useEffect(() => {
     if (lastViewedTitle !== null) {
       //alert(lastViewedTitle);
@@ -96,6 +99,18 @@ export default function Negocio() {
   }, [bussiness, user]);
 
   useEffect(() => {
+    const getSubs = async () => {
+      const num = await getSubscriptorsOfBussiness(bussiness.id);
+      subsNum.current = num;
+      setRender((render) => render + 1);
+    };
+
+    if (bussiness) {
+      getSubs();
+    }
+  }, [bussiness]);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       if (categories.length > 0) {
         const productList = await getProducts(categories, true);
@@ -111,7 +126,7 @@ export default function Negocio() {
     };
 
     fetchProducts();
-  }, [categories]);
+  }, [categories.length]);
 
   const changeTitle = (title) => {
     setLastViewedTitle(title);
@@ -158,11 +173,16 @@ export default function Negocio() {
                 bussinessId={bussiness?.id}
                 localizacion={bussiness.address}
                 gps_location={bussiness.gps_location}
+                delivery={bussiness.delivery}
                 like={"si"}
                 url={history}
               ></DescripcionNegocio>
 
-              <Promo seguidores={0} productos={0} lesGusta={1200}></Promo>
+              <Promo
+                seguidores={subsNum.current}
+                productos={products.length}
+                lesGusta={1200}
+              ></Promo>
             </div>
 
             <Card>
@@ -201,6 +221,8 @@ export default function Negocio() {
           ></FooterNegocio>
         </div>
       </section>
+
+      
     </div>
   ) : (
     <LoaderCompletePage />

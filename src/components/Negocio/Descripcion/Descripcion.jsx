@@ -39,6 +39,7 @@ export default function DescripcionNegocio(props) {
         bussinessId={props.bussinessId}
         localizacion={props.localizacion}
         gps_location={props.gps_location}
+        delivery={props.delivery}
         like={props.like}
         url={props.url}
       ></BtnDescription>

@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import LocationIcon from "../../Icons/Location/Location";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Tooltip,
+} from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
-import {  MarginTop30 } from "../../styles/styles";
+import { MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
 import { addOrDeleteSubscription } from "../../../api/profile";
 import "./style.css";
+import { DeliveryIcon } from "../../Icons/DeliveryIcon";
 
 export default function BtnDescription(props) {
   const location = {
@@ -63,6 +69,8 @@ export default function BtnDescription(props) {
       )}
 
       <ShareLink url={props.url}></ShareLink>
+
+      {props.delivery && <DeliveryIcon width="24px" height="24px" />}
 
       {props.localizacion !== undefined ? (
         <Popover placement="bottom">
