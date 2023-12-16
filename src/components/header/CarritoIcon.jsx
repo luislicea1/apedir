@@ -17,6 +17,7 @@ import {
 } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
 import { grid_1_col } from "../styles/styles";
+import { Toaster, toast } from "sonner";
 
 export default function Carrito() {
   const [isInvisible, setIsInvisible] = React.useState(false);
@@ -35,6 +36,9 @@ export default function Carrito() {
 
   const enviarMensaje = () => {
     const numero = "55641782";
+    if ((nombre === "") | (direccion === ""))
+      return toast.error("Los campos no pueden estar vacios");
+
     const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
   };
@@ -71,6 +75,14 @@ export default function Carrito() {
             onOpenChange={onOpenChange}
             size="full"
           >
+             <Toaster
+              position="bottom-center"
+              duration={3000}
+              expand={false}
+              richColors
+              theme="dark"
+              style={{zIndex: "560"}}
+            />
             <ModalContent>
               {(onClose) => (
                 <>
@@ -157,6 +169,8 @@ export default function Carrito() {
           </Modal>
         </>
       )}
+
+     
     </div>
   );
 }
