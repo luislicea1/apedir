@@ -14,12 +14,16 @@ export default function SkeletonCard() {
         <Skeleton className="rounded-lg" style={{width: "50%", height: "20px", borderRadius: "20px", marginTop: "20px"}}>
           <div className="h-24 rounded-lg bg-default-300"></div>
         </Skeleton>
-        <Skeleton className="w-4/5 rounded-lg" style={{width: "60%", height: "20px", borderRadius: "20px", marginTop: "5px"}}>
+        <Skeleton className="w-4/5 rounded-lg" style={{width: "80%", height: "20px", borderRadius: "20px", marginTop: "5px"}}>
           <div className="h-3 w-4/5 rounded-lg bg-default-200"></div>
         </Skeleton>
-        <Skeleton className="w-2/5 rounded-lg">  
-          <div className="h-3 w-2/5 rounded-lg bg-default-300"></div>
-        </Skeleton>
+        
+          <Skeleton className="rounded-lg" style={{width: "40%", height: "20px", borderRadius: "20px", marginTop: "5px"}}>
+            <div className="h-24 rounded-lg bg-default-300"></div>
+          </Skeleton>
+        <div>
+          
+        </div>
       </CardHeader>
 
       <CardBody

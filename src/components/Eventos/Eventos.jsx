@@ -14,7 +14,7 @@ export default function Eventos(props) {
             
             borderRadius: "20px",
             overflow: "hidden",
-            width: "170px",
+            width: "180px",
             height: "200px",
           }}
         >
