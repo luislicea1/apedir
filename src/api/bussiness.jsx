@@ -499,6 +499,17 @@ const bussinessNum = async (ownerId) => {
   return data;
 };
 
+const getSubscriptorsOfBussiness = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select()
+    .contains("subscriptions", [bussinessId]);
+
+  if (error) console.error(error);
+  if (data == null) return 0;
+  return data.length;
+};
+
 export {
   setIsActive,
   upsertBussiness,
@@ -517,5 +528,6 @@ export {
   getAllBussinessFromUser,
   getSocialMedia,
   deleteBussinessById,
-  bussinessNum
+  bussinessNum,
+  getSubscriptorsOfBussiness,
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
-import Card from "antd/es/card/Card";
 import { getAllBussinessFromUser } from "../../api/bussiness";
 import NegocioIdVip from "./NegocioIdVip";
 import { grid_2_col } from "../styles/styles";
@@ -26,6 +25,7 @@ export default function VipListNegocios({ userId, ...props }) {
   const fetchBusinesses = async () => {
     const data = await getAllBussinessFromUser(userId);
     businesses.current = data;
+    setBussiness(data && data.length > 0 ? data[0] : null);
     setRender((render) => render + 1);
   };
   useEffect(() => {
@@ -69,6 +69,7 @@ export default function VipListNegocios({ userId, ...props }) {
                 gps_location={business.gps_location}
                 nombre={business.name}
                 bussiness={business}
+                onOpenChange={props.onOpenChange}
               ></NegocioIdVip>
             ))}
           </div>

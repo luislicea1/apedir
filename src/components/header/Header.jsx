@@ -18,17 +18,13 @@ import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
 import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
 import Izquierda from "../Icons/Angulo/izquierda";
 import { MarginLeft30 } from "../styles/styles";
-import { useBussinessStore } from "../../hooks/useStore";
+import { useBussinessStore, useCartStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
-import {
-  fetchBussinessPerURL,
-  getAllBussinessFromUser,
-  getOneBussiness,
-} from "../../api/bussiness";
+import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
 import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
@@ -41,11 +37,15 @@ export default function Header() {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+  const setCarrito = useCartStore((state) => state.setCart);
 
   useEffect(() => {
     const path = history.split("/");
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
+      if (bussinessData?.value_url !== selectedBussiness?.value_url) {
+        setCarrito([]);
+      }
       setSelectedBussiness(bussinessData);
     };
 
@@ -127,22 +127,14 @@ export default function Header() {
         )}
       </NavbarBrand>
 
-      {!isBussiness && (
-        // <React.Suspense fallback={<div></div>}>
-        <SelectProvincia />
-        // </React.Suspense>
-      )}
+      {!isBussiness && <SelectProvincia />}
 
       {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          {isBussiness && (
-            // <React.Suspense fallback={<div></div>}>
-            <Carrito></Carrito>
-            // </React.Suspense>
-          )}
-          {/* <React.Suspense fallback={<div></div>}> */}
+          {isBussiness &&
+            selectedBussiness &&
+            selectedBussiness.delivery == true && <Carrito></Carrito>}
           <Notification />
-          {/* </React.Suspense> */}
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar

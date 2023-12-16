@@ -15,6 +15,7 @@ export default function DeleteBussinessModal({
   onOpenChange,
   bussinessToDelete,
   getAllBussinesses,
+  merchant,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -22,6 +23,7 @@ export default function DeleteBussinessModal({
     setIsDeleting(true);
     await deleteBussinessById(id);
     setIsDeleting(false);
+    if (merchant) return;
     await getAllBussinesses();
   };
 
@@ -33,7 +35,7 @@ export default function DeleteBussinessModal({
             <>
               <ModalHeader>Eliminar a {bussinessToDelete.name}</ModalHeader>
               <ModalBody>
-                ¿Estás seguro de que quieres eliminar el producto{" "}
+                ¿Estás seguro de que quieres eliminar el negocio{" "}
                 {bussinessToDelete.name}?
               </ModalBody>
               <ModalFooter>

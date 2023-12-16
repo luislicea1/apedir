@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button } from "@nextui-org/react";
+import { Button, Checkbox } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";
 import InputTelegram from "./Inputs/InputTelegram";
@@ -90,6 +90,7 @@ export default function NegocioDashboard() {
     linkedin: "",
     youtube: "",
     twitter: "",
+    delivery: false,
   };
   const bussinessInput = useRef(
     business !== null && business !== undefined
@@ -222,10 +223,24 @@ export default function NegocioDashboard() {
           negocio={"si"}
         ></QR>
       </div>
+
       <TextAreaDescription
         value={bussinessInput}
         maxChars={plan?.description}
       ></TextAreaDescription>
+      <Checkbox
+        isSelected={bussinessInput.current.delivery}
+        onValueChange={() => {
+          bussinessInput.current = {
+            ...bussinessInput.current,
+            delivery: !bussinessInput.current.delivery,
+          };
+          setRender((render) => render + 1);
+        }}
+      >
+        Delivery (Márquelo si hace delivery)
+      </Checkbox>
+      <br /><br />
       <InputLocation
         value={bussinessInput}
         setImageName={setImageName}

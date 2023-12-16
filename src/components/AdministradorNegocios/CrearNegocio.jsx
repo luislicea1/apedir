@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, useDisclosure } from "@nextui-org/react";
 import { useBussinessStore, usePlan, useUserStore } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
 import supabase from "../../api/client";
 import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
+import DeleteBussinessModal from "../Admin/modals/DeleteBussinessModal";
 
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
   const setPlan = usePlan((state) => state.setPlan);
-
-  // const fetchBussiness = async () => {
-  //   if (user === null) return;
-
-  //   const b = await getOneBussiness(user.id);
-  //   setBussiness(b);
-  // };
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     const fetchPlan = async () => {
@@ -28,10 +23,6 @@ export default function CrearNegocio({ children }) {
     };
     if (user && user.plan) fetchPlan();
   }, [user]);
-
-  // useEffect(() => {
-  //   if (bussiness === null) fetchBussiness();
-  // }, [user, bussiness]);
 
   const sectionStyle = {
     width: "100%",
@@ -57,12 +48,15 @@ export default function CrearNegocio({ children }) {
     )
     .subscribe();
 
+
   return (
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
         <CambioDePaquete paquete={user?.plan} />
 
-        {user?.plan == "premium" ? <VipListNegocios userId={user.id}  /> : null}
+        {user?.plan == "premium" ? (
+          <VipListNegocios userId={user.id} onOpenChange={onOpenChange} />
+        ) : null}
 
         <div>
           {bussiness !== null && bussiness !== undefined ? (
@@ -86,6 +80,12 @@ export default function CrearNegocio({ children }) {
         <Card>
           <CardBody>{children}</CardBody>
         </Card>
+        <DeleteBussinessModal
+          bussinessToDelete={bussiness}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          merchant={true}
+        />
       </div>
     </div>
   );
