@@ -1,6 +1,6 @@
 .producto-card{
   max-height: 326px;
-  background-color: red;
+  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
