@@ -75,7 +75,7 @@
     height: 180px !important;
    }
   .card-body-productos{
-    max-height: 191px;
+    max-height: 180px !important;
   }
 }
 
@@ -90,7 +90,7 @@
     
   }
   .card-body-productos{
-    max-height: 181px;
+    max-height: 180px !important;
   }
 }
 
@@ -105,7 +105,7 @@
     
   }
   .card-body-productos{
-    max-height: 155px;
+    max-height: 150px !important;
   }
 }
 
