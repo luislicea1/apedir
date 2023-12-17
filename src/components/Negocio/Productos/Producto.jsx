@@ -50,8 +50,7 @@ export default function Producto({
     height: "100vh",
     background: "#0F0D13",
   };
- 
-  
+
   return (
     <div>
       <Helmet>
@@ -64,7 +63,7 @@ export default function Producto({
           color="danger"
           isInvisible = {!isRecomended}
         >
-           <Card
+          <Card
           shadow="sm"
           key={index}
           isPressable
@@ -168,6 +167,7 @@ export default function Producto({
           </CardFooter>
         </Card>
         </Badge>
+      
     </div>
   );
 }
@@ -179,3 +179,111 @@ Producto.propTypes = {
   price: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
+
+
+/***
+ * 
+ * 
+ * <Card
+          shadow="sm"
+          key={index}
+          isPressable
+          style={CardStyles2}
+          className="producto-card"
+          onClick={onOpen}
+          id={title}
+        >
+          <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
+            <LazyLoadImage
+              alt={title}
+              src={img}
+              effect="blur"
+             // style={{ ...ProductoStyle, objectFit: "cover" }}
+              className="product-lazy-load"
+              delayMethod="debounce"
+              delayTime={300}
+              placeholderSrc={img}
+              useIntersectionObserver={true}
+            />
+          </CardBody>
+          <CardFooter
+            className="text-small justify-between"
+            style={{
+              height: "100%",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              placeItems: "center",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
+              <strong
+                style={{
+                  fontSize: "20px",
+                  display: "inline-block",
+                  maxWidth: "10ch",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {title}
+              </strong>
+            </div>
+            <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
+              <p className="text-default-500">
+                {price} {currency}
+              </p>
+            </div>
+
+            <Modal
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              size="full"
+              style={{
+                padding: "0px",
+                background: "#0F0D13",
+                position: "relative",
+              }}
+            >
+              <ModalContent style={{ padding: "0px", position: " relative" }}>
+                {(onClose) => (
+                  <div>
+                    <ModalBody
+                      style={{
+                        padding: "0px",
+                        width: "100vw",
+                        display: "grid",
+                        placeItems: "center",
+                        position: "relative",
+                      }}
+                    >
+                      <div style={{ ...sectionStyle2, position: "relative" }}>
+                        <ImagenVisualizador image={img} />
+                      </div>
+
+                      <div className="sectionDescription ">
+                        <DescripcionDeP
+                          title={title}
+                          text={description}
+                          // onAddToCart={handleAddToCart}
+                          image={img}
+                          cantidad={cantidad}
+                          price={price}
+                          onClose={onClose}
+                          onQuantityChange={handleQuantityChange}
+                        ></DescripcionDeP>
+                        <OrdenarProducto
+                          onChangeQuantity={setCantidad}
+                        ></OrdenarProducto>
+
+                        <PromoProducto url={url}></PromoProducto>
+                      </div>
+                    </ModalBody>
+                  </div>
+                )}
+              </ModalContent>
+            </Modal>
+          </CardFooter>
+        </Card>
+ */

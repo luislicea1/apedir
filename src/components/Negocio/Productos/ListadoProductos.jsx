@@ -10,21 +10,15 @@ import { useCartStore } from "../../../hooks/useStore";
 export default function ListadoProductos(props) {
   const list = props.lista;
   const [carrito, setCarrito] = useState([]);
-  //const [lastViewedTitle, setLastViewedTitle] = useState([]);
   const carrito2 = useCartStore((state) => state.cart);
   const setCarrito2 = useCartStore((state) => state.setCart);
 
   const changeTitle = (title) => {
-    //setLastViewedTitle(title);
-    //alert(title)
     props.onChangeTitle(title);
   };
 
   const handleAddToCart = (carrito) => {
     carrito2.push(carrito);
-    //props.onChangeCarrito(carrito2)
-
-    //console.log(carrito2)
   };
 
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado
