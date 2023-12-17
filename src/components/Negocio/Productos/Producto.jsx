@@ -71,13 +71,14 @@ export default function Producto({
            onClick={onOpen}
            id={title}
          >
-           <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
+           <CardBody className="overflow-visible p-0 " style={ImgCardStyle2}>
             
             <LazyLoadImage
               alt={title}
               src={img}
               effect="blur"
-              style={{ ...ProductoStyle, objectFit: "cover" }}
+              style={{ ...ProductoStyle, objectFit: "cover"}}
+              //className="product-lazy-load"
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={img}
@@ -87,6 +88,7 @@ export default function Producto({
           <CardFooter
            
             style={{
+              height: "100%",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               placeItems: "center",
@@ -96,10 +98,14 @@ export default function Producto({
             <div style={{ gridColumn: "span 2", }}>
               <strong
                 style={{
-                  fontSize: "20px", 
-                  background: "red"
+                  fontSize: "20px",
+                  display: "inline-block",
+                  maxWidth: "10ch",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
-               
+                
               >
                 {title}
               </strong>
@@ -161,7 +167,11 @@ export default function Producto({
           </CardFooter>
          </Card>
        </Badge>
-     ) : (
+     ) : 
+     
+     /***************************************************************************** */
+     
+     (
        <Card
          shadow="sm"
          key={index}
@@ -172,11 +182,12 @@ export default function Producto({
          id={title}
        >
         <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
-            <LazyLoadImage
+        <LazyLoadImage
               alt={title}
               src={img}
               effect="blur"
-              style={{ ...ProductoStyle, objectFit: "cover" }}
+              style={{ ...ProductoStyle, objectFit: "cover"}}
+              //className="product-lazy-load"
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={img}
@@ -186,18 +197,27 @@ export default function Producto({
           <CardFooter
             className="text-small justify-between"
             style={{
+              height: "100%",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
+              placeItems: "center",
+              overflow: "hidden"
             }}
           >
             <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
-              <b
-                style={{
-                  fontSize: "20px",
-                }}
+            <strong
+              style={{
+                fontSize: "20px",
+                display: "inline-block",
+                maxWidth: "10ch",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
               >
-                {title}
-              </b>
+              {title}
+              </strong>
+
             </div>
             <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
               <p className="text-default-500">
