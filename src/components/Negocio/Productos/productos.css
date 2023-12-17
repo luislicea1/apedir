@@ -49,6 +49,14 @@
   }
 }
 
+@media (max-width: 550px) {
+  .product-lazy-load{
+   
+   height: 150px !important;
+    
+  }
+}
+
 
 @media screen and (max-width: 450px) {
   .sectionDescription {
