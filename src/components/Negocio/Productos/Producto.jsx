@@ -78,7 +78,7 @@ export default function Producto({
               src={img}
               effect="blur"
               style={{ ...ProductoStyle, objectFit: "cover" }}
-              //className="product-lazy-load"
+              className="product-lazy-load"
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={img}
