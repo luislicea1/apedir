@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
+import { CardStyles, LogoStyle } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useBussinessStore } from "../../hooks/useStore";
@@ -33,7 +33,6 @@ function NegocioIdVip(props) {
         >
           {props.nombre}
         </h2>
-
         <span
           className="text-danger"
           onClick={() => {
