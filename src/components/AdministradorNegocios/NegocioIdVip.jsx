@@ -39,6 +39,7 @@ function NegocioIdVip(props) {
             setBussiness(props.bussiness);
             props.onOpenChange();
           }}
+          style={{position: "absolute", top: "10px", right: "10px"}}
         >
           <DeleteIcon />
         </span>

@@ -40,10 +40,6 @@ const handleCheckboxChange = async (event, bussinessId) => {
   await setIsActive(bussinessId, event.target.checked);
 };
 
-
-
-
-
 export default function NegocioTable({ bussinessList, getAllBussinesses }) {
   const [bussinessToDelete, setBussinessToDelete] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

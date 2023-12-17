@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@nextui-org/react";
 import { grid_2_col_center } from "../../styles/styles";
 import { useCartStore } from "../../../hooks/useStore";
+import { Toaster, toast } from "sonner";
 
 export default function DescripcionDeP(props) {
   const glass = {
@@ -47,9 +48,8 @@ export default function DescripcionDeP(props) {
   const setCarrito = useCartStore((state) => state.setCart);
   const handleClick = () => {
     if (props.cantidad === 0) {
-      window.alert('No añadiste nada al carrito');
       props.onQuantityChange(0);
-      return;
+      return toast.error("No agregaste nada al carrito");
     }
    
     const newOrder = {
@@ -86,6 +86,14 @@ export default function DescripcionDeP(props) {
       style={glass}
       className=" backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
     >
+      <Toaster
+              position="bottom-center"
+              duration={3000}
+              expand={false}
+              richColors
+              theme="dark"
+              style={{zIndex: "560"}}
+            />
       <div style={center}>
         <h2
           style={{
