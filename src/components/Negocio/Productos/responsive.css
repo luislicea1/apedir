@@ -5,6 +5,13 @@
     }
   }
 
+  /* @media (max-width: 646px) {
+    .list-container-products{
+      grid-template-columns: repeat(2, 1fr) !important;
+      
+    }
+  } */
+
   @media (max-width: 420px) {
     .list-container-products{
       grid-template-columns: repeat(2, 1fr) !important;

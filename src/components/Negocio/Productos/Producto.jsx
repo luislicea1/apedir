@@ -72,7 +72,7 @@ export default function Producto({
           onClick={onOpen}
           id={title}
         >
-          <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
+          <CardBody className="overflow-visible p-0 card-body-productos" >
             <LazyLoadImage
               alt={title}
               src={img}

@@ -174,8 +174,8 @@ export const LogoStyle = {
   maxHeight: "272px"
 }
 export const ProductoStyle = {
-  //height: "100%",
-  width: "100%",
+  height: "226px",
+  //width: "100%",
   aspectRatio: "1/1",
   maxHeight: "226px",
   borderRadius: "10px 10px 10px 10px",

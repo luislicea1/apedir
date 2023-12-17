@@ -49,7 +49,7 @@ export default function ListadoProductos(props) {
         onChangeTitle={changeTitle}
       ></TituloDeProductos>
 
-      <div className="mt-2 list-container-products" style={grid_3_col}>
+      <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
         {list.map(renderProducto)}
       </div>
     </div>

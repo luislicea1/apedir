@@ -13,13 +13,6 @@
   text-overflow: ellipsis;
 }
 
-.card-body-productos{
-  width: 100%;
-  height: 100%;
-
- 
-}
-  
 .sectionDescription {
   width: 450px;
   padding: 20px;
@@ -29,20 +22,29 @@
   justify-content: center;
 };
 
-.product-lazy-load{
+/* .product-lazy-load{
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1/1; 
   max-height: 226px;
   border-radius: 10px 10px 10px 10px;
+  object-fit: cover;
+} */
+
+.card-body-productos{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  border-radius: 10px;
+  max-height: 226px;
+  place-items: start;
+ 
+  background: gray;
 }
 
 @media (max-width: 768px) {
   .product-lazy-load{
-    
-    width: 100%;
-    aspect-ratio: 1/1;
-    max-height: 226px;
-    border-radius: 10px 10px 10px 10px;
+   
+   height: 200px !important;
     
   }
 }
@@ -62,42 +64,40 @@
     
   }
   .product-lazy-load{
-    
-    width: 100%;
-    aspect-ratio: 1/1;
+    height: 180px !important;
+   }
+  .card-body-productos{
     max-height: 191px;
-    border-radius: 10px 10px 10px 10px;
-    
   }
 }
 
 @media screen and (max-width: 400px) {
   .producto-card{
-    max-height: 500px;
+    max-height: 284px;
     
   }
   .product-lazy-load{
     
-    width: 100%;
-    aspect-ratio: 1/1;
-    max-height: 181px;
-    border-radius: 10px 10px 10px 10px;
+    height: 180px !important;
     
+  }
+  .card-body-productos{
+    max-height: 181px;
   }
 }
 
 @media screen and (max-width: 350px) {
   .producto-card{
-    max-height: 500px;
+    max-height: 2840px;
     
   }
   .product-lazy-load{
     
-    width: 100%;
-    aspect-ratio: 1/1;
-    max-height: 155px;
-    border-radius: 10px 10px 10px 10px;
+    height: 150px !important;
     
+  }
+  .card-body-productos{
+    max-height: 155px;
   }
 }
 
