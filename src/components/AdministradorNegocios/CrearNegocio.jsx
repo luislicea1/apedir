@@ -35,7 +35,11 @@ export default function CrearNegocio({ children }) {
     .channel("custom-all-channel")
     .on(
       "postgres_changes",
-      { event: "*", schema: "public", table: "bussiness" },
+      {
+        event: "*",
+        schema: "public",
+        table: "bussiness",
+      },
       async (payload) => {
         try {
           if (user === null) return;

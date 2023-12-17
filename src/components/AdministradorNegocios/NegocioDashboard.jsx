@@ -101,8 +101,8 @@ export default function NegocioDashboard() {
   useEffect(() => {
     if (business === null) {
       bussinessInput.current = defaultBussinessValues;
-      setRender((render) => render + 1);
     }
+    setRender((render) => render + 1);
   }, [business]);
 
   const handleUpsertBussiness = async () => {
@@ -192,6 +192,9 @@ export default function NegocioDashboard() {
 
     toast.success("Actualización exitosa");
     fetchBussiness();
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return (
