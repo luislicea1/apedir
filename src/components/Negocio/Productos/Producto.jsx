@@ -97,6 +97,7 @@ export default function Producto({
               <strong
                 style={{
                   fontSize: "20px", 
+                  background: "red"
                 }}
                
               >

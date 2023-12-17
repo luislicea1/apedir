@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import { CardStyles, LogoStyle , ImgCardStyle2, ProductoStyle} from "../styles/styles";
+import { CardStyles, LogoStyle , ImgCardStyle} from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useBussinessStore } from "../../hooks/useStore";
@@ -13,7 +13,7 @@ function NegocioIdVip(props) {
 
   return (
     <Card
-      className="py-4 tarjeta-negocio-card"
+      className="py-4 tarjeta-negocio-card-vip"
       style={
         props.index === props.isSelected
           ? {
@@ -45,7 +45,7 @@ function NegocioIdVip(props) {
         </span>
       </CardHeader>
       <CardBody
-        style={ImgCardStyle2}
+        style={ImgCardStyle}
         onClick={() => {
           setBussiness(props.bussiness);
           props.setIsSelected(props.index);
@@ -56,7 +56,7 @@ function NegocioIdVip(props) {
           alt={props.nombre}
           src={props.imagen}
           effect="blur"
-          style={{ ...ProductoStyle, objectFit: "cover" }}
+          style={{ ...LogoStyle, objectFit: "cover" }}
           placeholderSrc={props.imagen}
           useIntersectionObserver={true}
           className="lazyload"
