@@ -85,7 +85,7 @@ export default function Producto({
             />
           </CardBody>
           <CardFooter
-            className="text-small justify-between"
+           
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -93,12 +93,12 @@ export default function Producto({
               overflow: "hidden"
             }}
           >
-            <div style={{ gridColumn: "span 2"}}>
+            <div style={{ gridColumn: "span 2", }}>
               <strong
                 style={{
-                  fontSize: "20px",
+                  fontSize: "20px", 
                 }}
-                className="titulo-producto-negocio"
+               
               >
                 {title}
               </strong>

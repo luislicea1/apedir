@@ -172,8 +172,9 @@ export const LogoStyle = {
 }
 export const ProductoStyle = {
   height: "100%",
-  aspectRatio: "1/1",
-  borderRadius: "10px 10px 0 0",
+  width: "100%",
+  //aspectRatio: "1/1",
+  borderRadius: "10px 10px 10px 10px",
  
 }
 
