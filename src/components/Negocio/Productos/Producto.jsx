@@ -86,15 +86,15 @@ export default function Producto({
             />
           </CardBody>
           <CardFooter
-            className="text-small justify-between"
-            style={{
-              height: "100%",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              placeItems: "center",
-              overflow: "hidden",
+            className="text-small justify-between card-footer-productos"
+            // style={{
+            //   height: "100%",
+            //   display: "grid",
+            //   gridTemplateColumns: "1fr 1fr",
+            //   placeItems: "center",
+            //   overflow: "hidden",
       
-            }}
+            // }}
           >
             <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
               <strong
