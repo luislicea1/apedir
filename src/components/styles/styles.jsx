@@ -152,9 +152,11 @@ export const ImgCardStyle = {
 
 export const ImgCardStyle2 = {
   width: "100%",
-  height: "100%",
+  //height: "100%",
+  aspectRatio: "1/1",
   display: "grid",
   borderRadius: "10px",
+  overflow: "hidden"
 };
 export const ImgStyle = {
   minHeight: "200px",
@@ -169,7 +171,7 @@ export const LogoStyle = {
   maxHeight: "272px"
 }
 export const ProductoStyle = {
-  width: "100%",
+  height: "100%",
   aspectRatio: "1/1",
   borderRadius: "10px 10px 0 0",
  

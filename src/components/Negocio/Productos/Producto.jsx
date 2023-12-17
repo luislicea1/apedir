@@ -72,6 +72,7 @@ export default function Producto({
            id={title}
          >
            <CardBody className="overflow-visible p-0" style={ImgCardStyle2}>
+            
             <LazyLoadImage
               alt={title}
               src={img}
@@ -88,16 +89,19 @@ export default function Producto({
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
+              placeItems: "center",
+              overflow: "hidden"
             }}
           >
-            <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
-              <b
+            <div style={{ gridColumn: "span 2"}}>
+              <strong
                 style={{
                   fontSize: "20px",
                 }}
+                className="titulo-producto-negocio"
               >
                 {title}
-              </b>
+              </strong>
             </div>
             <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
               <p className="text-default-500">
@@ -105,7 +109,7 @@ export default function Producto({
               </p>
             </div>
 
-            <Modal
+            <Modal 
               isOpen={isOpen}
               onOpenChange={onOpenChange}
               size="full"
