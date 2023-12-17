@@ -76,8 +76,8 @@ export default function Producto({
               alt={title}
               src={img}
               effect="blur"
-              style={{ ...ProductoStyle, objectFit: "cover" }}
-              //className="product-lazy-load"
+             // style={{ ...ProductoStyle, objectFit: "cover" }}
+              className="product-lazy-load"
               delayMethod="debounce"
               delayTime={300}
               placeholderSrc={img}
@@ -198,6 +198,7 @@ export default function Producto({
               gridTemplateColumns: "1fr 1fr",
               placeItems: "center",
               overflow: "hidden",
+      
             }}
           >
             <div style={{ gridColumn: "span 2", marginBottom: "10px" }}>
