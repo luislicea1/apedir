@@ -15,6 +15,10 @@ export default function AbiertoCerrado(props) {
 
  useEffect(() => {
    const actualizarEstatus = () => {
+    if (!horario) {
+      setEstaAbierto(false);
+      return;
+    }
      const dia = new Date().getDay();
      const horaActual = new Date();
      const diaSemana = [
