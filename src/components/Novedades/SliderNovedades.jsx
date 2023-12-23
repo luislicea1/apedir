@@ -20,7 +20,7 @@ export default function SliderNovedades() {
 
         <Swiper
           spaceBetween={10}
-          style={{ height: "240px" , width: "100%"}}
+          style={{ width: "100%", padding: "35px 0px"}}
           pagination={{
             clickable: true,
           }}

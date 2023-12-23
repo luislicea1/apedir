@@ -20,10 +20,9 @@
   }
 
   .swiper-3d .swiper-slide-shadow-right{
-    /* background-image: none !important; */
-    border-radius: 20px;
+    background-image: none !important;
+   
   }
   .swiper-3d .swiper-slide-shadow-left{
-    /* background-image: none !important; */
-    border-radius: 20px;
+    background-image: none !important;
   }

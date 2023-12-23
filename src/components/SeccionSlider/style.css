@@ -24,20 +24,3 @@
   height: 100%;
   object-fit: cover;
 }
-/* @media screen and (max-width: 995px) {
-  .slider-negocios {
-    height: 50vh;
-  }
-}
-
-
-@media screen and (max-width: 620px) {
-  .slider-negocios {
-    height: 45vh;
-  }
-}
-@media screen and (max-width: 590px) {
-  .slider-negocios {
-    height: 100%;
-  }
-} */

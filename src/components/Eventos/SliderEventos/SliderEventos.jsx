@@ -75,8 +75,8 @@ export default function SliderEventos() {
             style={
               {
                 width: "90%",
-                padding: "50px 0",
-                height: "400px"
+                padding: "10px",
+                
               }
             }
           >
