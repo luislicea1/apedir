@@ -74,8 +74,8 @@ export default function SliderEventos() {
             className="mySwiper"
             style={
               {
-                width: "90%",
-                padding: "10px",
+                width: "100%",
+                padding: "0px 10px",
                 
               }
             }
