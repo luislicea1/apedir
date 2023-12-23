@@ -82,7 +82,7 @@ export default function SliderEventos() {
           >
            
             {events.map((evento, index) => (
-              <SwiperSlide key={index} style={{width: "300px", heigth: "300px"}}>
+              <SwiperSlide key={index}  className="swiper-slide-events">
                 <Eventos nombre={evento.name} imagen={evento.image}></Eventos>
               </SwiperSlide>
             ))}

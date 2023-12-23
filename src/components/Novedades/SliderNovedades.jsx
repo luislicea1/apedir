@@ -20,11 +20,11 @@ export default function SliderNovedades() {
 
         <Swiper
           spaceBetween={10}
-          style={{ width: "100%", padding: "35px 0px"}}
-          pagination={{
-            clickable: true,
-          }}
-          //   pagination={false}
+          style={{ width: "100%", height: "170px"}}
+          // pagination={{
+          //   clickable: true,
+          // }}
+          pagination={false}
           navigation={false}
           modules={[Pagination, Navigation, HashNavigation]}
           className="mySwiper"

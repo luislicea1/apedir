@@ -19,6 +19,7 @@ export default function Eventos(props) {
             width: "300px",
             height: "300px",
           }}
+          className="card-events"
         >
           <LazyLoadImage
             alt={props.nombre}
@@ -31,6 +32,7 @@ export default function Eventos(props) {
             delayTime={100}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
+            className="card-events-lazyload"
           />
         </Card>
       </Link>
