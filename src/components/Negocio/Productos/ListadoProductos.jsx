@@ -4,7 +4,13 @@ import TituloDeProductos from "./TituloDeProductos";
 import "./productos.css";
 import "./responsive.css";
 import { grid_3_col } from "../../styles/styles";
-import { useCartStore } from "../../../hooks/useStore";
+import { useCartStore } from "../../../hooks/useStore";import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import 'swiper/css/grid';
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
 
 
 export default function ListadoProductos(props) {
@@ -20,10 +26,10 @@ export default function ListadoProductos(props) {
   const handleAddToCart = (carrito) => {
     carrito2.push(carrito);
   };
-
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado
   const renderProducto = useCallback(
     (item, index) => (
+      <SwiperSlide>
       <Producto
         key={item.id}
         index={index}
@@ -38,6 +44,7 @@ export default function ListadoProductos(props) {
         isRecomended={item.isRecomended}
         url={props.url}
       ></Producto>
+      </SwiperSlide>
     ),
     [props.nombre, props.localizacion]
   );
@@ -49,9 +56,40 @@ export default function ListadoProductos(props) {
         onChangeTitle={changeTitle}
       ></TituloDeProductos>
 
-      <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
+      {/* <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
         {list.map(renderProducto)}
-      </div>
+      </div> */}
+      <Swiper
+        spaceBetween={0}
+        pagination = {false}
+        navigation={false}
+        modules={[Pagination, Navigation, HashNavigation, Autoplay]}
+        className="slider-negocios"
+        breakpoints={{
+          360: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+            711: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            
+            1020: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
+          loop={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+      >
+          {list.map(renderProducto)}
+      </Swiper>
     </div>
   );
 }
+
+

@@ -28,25 +28,25 @@ export default function IconosNegocio(props) {
     background: "transparent",
     margin: "10px",
     height: "50px",
-    width: "50px",
+    width: "25px",
     borderRadius: "50%",
     padding: "0",
     fontWeight: "0",
     lineHeight: "0",
-    maxWidth: "50px",
-    minWidth: "50px",
+    maxWidth: "26px",
+    minWidth: "26px",
   };
 
   return (
-    <div style={{ ...grid_center, width: "100%" }}>
+    <div style={{  width: "100%" }}>
       {socialMedia && (
         <div
           className="mt-2"
           id="contactenos"
           style={{
             display: "flex",
-            gap: "20px",
-            justifyContent: "center",
+             gap: "15px",
+            justifyContent: "start",
             alignItems: "center",
             flexWrap: "wrap",
           }}
@@ -55,7 +55,7 @@ export default function IconosNegocio(props) {
             <Popover placement="bottom">
               <PopoverTrigger>
                 <Button style={telefono}>
-                  <TelefonoIcon color={props.color} w={"30px"}></TelefonoIcon>
+                  <TelefonoIcon color={props.color} w={"25px"}></TelefonoIcon>
                 </Button>
               </PopoverTrigger>
               <PopoverContent>
@@ -68,7 +68,7 @@ export default function IconosNegocio(props) {
           ) : null}
           {socialMedia.email ? (
              <a href={`mailto:${socialMedia.email}`} target="_blank">
-                <Correo color={props.color} w={"36px"}></Correo>
+                <Correo color={props.color} w={"30px"}></Correo>
               </a>
           ) : null}
           {socialMedia.telegram_link ? (
@@ -76,7 +76,7 @@ export default function IconosNegocio(props) {
               href={`https://t.me/+53${socialMedia.telegram_link}`}
               target="_blank"
             >
-              <TelegramIcon color={props.color} w={"50px"}></TelegramIcon>
+              <TelegramIcon color={props.color} w={"49px"}></TelegramIcon>
             </a>
           ) : null}
           {socialMedia.facebook ? (
