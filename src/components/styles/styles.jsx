@@ -39,12 +39,13 @@ export const titleStyles = {
 
 export const PortadaDeNegocioStyles = {
   width: "100%",
-  height: "60vh",
+  height: "300px",
   display: "grid",
   //placeItems: "center",
   background: "#ECECEE",
+  overflow: "hidden",
   position: "relative",
-  overflow: "hidden"
+  placeItems: "center"
 };
 
 /***********GRID FLEX************************************* */
@@ -129,7 +130,8 @@ export const CardStyles = {
   //maxWidth: "300px",
   width: "100%",
   //maxHeight: "400px",
-  padding: "2px"
+  padding: "2px",
+  
 };
 
 export const CardStyles2 = {
@@ -267,9 +269,10 @@ export const ImagenFooter = {
 };
 
 export const Imagen100pcCover = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
+  // width: "100%",
+  height: "300px",
+  objectFit: "contain",
+  borderRadius: "10px"
 };
 
 export const Imagen100pc400H = {

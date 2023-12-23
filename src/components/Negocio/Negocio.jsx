@@ -135,19 +135,19 @@ export default function Negocio() {
   return bussiness !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none top-0 inset-x-0  backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
       <section style={NegocioSection}>
-        {inView && categories.length > 0 && (
+        {/* {inView && categories.length > 0 && (
           <Navegacion
             links={categories}
             lastViewedTitle={lastViewedTitle}
           ></Navegacion>
-        )}
+        )} */}
 
         <section className="section" style={NegocioSection}>
           <PortadaDeNegocio
             imagenPortada={bussiness.front_pic}
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
-            <div style={{ height: "50vh" }}>
+            <div >
               <TituloNegocio title={bussiness.name}></TituloNegocio>
               {user !== null ? (
                 <Stars
@@ -176,18 +176,19 @@ export default function Negocio() {
                 delivery={bussiness.delivery}
                 like={"si"}
                 url={history}
+                bussiness = {bussiness}
               ></DescripcionNegocio>
 
               <Promo
                 seguidores={subsNum.current}
                 productos={products.length}
-                lesGusta={1200}
+                
               ></Promo>
             </div>
 
-            <Card>
+            {/* <Card>
               <Horario key={bussiness.id} bussiness={bussiness}></Horario>
-            </Card>
+            </Card> */}
 
             <div ref={ref}>
               {categories.map((category, idx) => {

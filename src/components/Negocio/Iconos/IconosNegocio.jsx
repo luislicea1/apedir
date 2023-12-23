@@ -25,7 +25,7 @@ export default function IconosNegocio(props) {
   }, []);
 
   const telefono = {
-    background: "#5E17EB",
+    background: "transparent",
     margin: "10px",
     height: "50px",
     width: "50px",
@@ -55,7 +55,7 @@ export default function IconosNegocio(props) {
             <Popover placement="bottom">
               <PopoverTrigger>
                 <Button style={telefono}>
-                  <TelefonoIcon color="white" w={"30px"}></TelefonoIcon>
+                  <TelefonoIcon color={props.color} w={"30px"}></TelefonoIcon>
                 </Button>
               </PopoverTrigger>
               <PopoverContent>
@@ -68,7 +68,7 @@ export default function IconosNegocio(props) {
           ) : null}
           {socialMedia.email ? (
              <a href={`mailto:${socialMedia.email}`} target="_blank">
-                <Correo color="white" w={"36px"}></Correo>
+                <Correo color={props.color} w={"36px"}></Correo>
               </a>
           ) : null}
           {socialMedia.telegram_link ? (
@@ -76,22 +76,22 @@ export default function IconosNegocio(props) {
               href={`https://t.me/+53${socialMedia.telegram_link}`}
               target="_blank"
             >
-              <TelegramIcon color="white" w={"50px"}></TelegramIcon>
+              <TelegramIcon color={props.color} w={"50px"}></TelegramIcon>
             </a>
           ) : null}
           {socialMedia.facebook ? (
             <a href={`https://www.facebook.com/${socialMedia.facebook.replace(/\s+/g, '')}`} target="_blank"> 
-              <FaceBookIcon color="white" w={"36px"} h={"36px"}></FaceBookIcon>
+              <FaceBookIcon color={props.color} w={"36px"} h={"36px"}></FaceBookIcon>
             </a>
           ) : null}
           {socialMedia.instagram ? (
             <a href={`https://www.instagram.com/${socialMedia.instagram.replace(/\s+/g, '')}`}  target="_blank">
-              <InstagramIcon color="white" w={"36px"}></InstagramIcon>
+              <InstagramIcon color={props.color} w={"36px"}></InstagramIcon>
             </a>
           ) : null}
           {socialMedia.whatsapp ? (
             <a href={`https://wa.me/${socialMedia.whatsapp}`} target="_blank">
-              <WhatsappIcons color="white" w={"36px"}></WhatsappIcons>
+              <WhatsappIcons color={props.color} w={"36px"}></WhatsappIcons>
             </a>
           ) : null}
         </div>
@@ -99,3 +99,5 @@ export default function IconosNegocio(props) {
     </div>
   );
 }
+
+

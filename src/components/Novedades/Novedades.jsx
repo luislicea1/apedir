@@ -5,7 +5,7 @@ export default function Novedades() {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
-    <Card className="max-w-[340px]" style={{width: "90%"}}>
+    <Card className="max-w-[340px]" style={{width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2"}}>
       <CardHeader className="justify-between" style={{marginBottom: "10px"}}>
         <div className="flex gap-5" style={{gap: "15px"}}>
           <Avatar isBordered radius="full" size="md" src="/avatars/avatar-1.png" />

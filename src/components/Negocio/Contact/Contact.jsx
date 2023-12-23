@@ -23,7 +23,7 @@ export default function Contact(props) {
      <h2 style={fuente} id="contact"> {props.title}</h2>
  </div>
  
- <IconosNegocio idNegocio = {props.idNegocio}></IconosNegocio>
+ <IconosNegocio idNegocio = {props.idNegocio} color = {props.color}></IconosNegocio>
  </>
  );
 }

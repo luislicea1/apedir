@@ -10,7 +10,7 @@ import LogoReduce from "../../../assets/logoReduce/LogoReduce";
 export default function FooterNegocio(props) {
   return (
     <section style={NegocioFooterSection}>
-      <Contact title={props.title} idNegocio={props.idNegocio}></Contact>
+      {/* <Contact title={props.title} idNegocio={props.idNegocio} ></Contact> */}
 
       <a href="/">
         <div style={{ margin: "60px 0 160px 0" }}>
