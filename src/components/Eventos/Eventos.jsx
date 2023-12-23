@@ -14,8 +14,10 @@ export default function Eventos(props) {
             
             borderRadius: "20px",
             overflow: "hidden",
-            width: "180px",
-            height: "200px",
+            // width: "180px",
+            // height: "200px",
+            width: "300px",
+            height: "300px",
           }}
         >
           <LazyLoadImage
@@ -23,7 +25,8 @@ export default function Eventos(props) {
             src={props.imagen}
             
             effect="blur"
-            style={{ objectFit: "cover", width: "200px", height: "200px" }}
+            // style={{ objectFit: "cover", width: "200px", height: "200px" }}
+            style={{ objectFit: "cover", width: "300px", height: "300px" }}
             delayMethod="debounce"
             delayTime={100}
             placeholderSrc={props.imagen}

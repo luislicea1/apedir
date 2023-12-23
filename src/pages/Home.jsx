@@ -3,6 +3,7 @@ import SeccionEventos from "../components/Eventos/SeccionEventos";
 import React from "react";
 import { useHref } from "react-router-dom";
 import { Toaster, toast } from "sonner";
+import SliderNovedades from "../components/Novedades/SliderNovedades";
 
 export default function Home() {
   const history = useHref();
@@ -23,6 +24,7 @@ export default function Home() {
   return (
     <div>
       <SeccionEventos title="Eventos"></SeccionEventos>
+      <SliderNovedades></SliderNovedades>
       <Seccion title="Lugares"></Seccion>
       <Toaster richColors theme="dark" duration={3000} position="bottom-center" />
     </div> 

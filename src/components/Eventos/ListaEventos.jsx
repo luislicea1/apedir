@@ -4,6 +4,7 @@ import { Empty } from 'antd';
 import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
 import { grid_center } from "../styles/styles";
+import SliderEventos from "./SliderEventos/SliderEventos";
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
@@ -59,7 +60,7 @@ export default function ListadoDeEventos() {
       style={listContainerStyle}
       ref={listContainer}
     >
-      {events && events.length > 0 ? (
+      {/* {events && events.length > 0 ? (
         events.map((evento, index) => (
           <Eventos key={index} nombre={evento.name} imagen={evento.image} />
         ))
@@ -68,7 +69,8 @@ export default function ListadoDeEventos() {
            <Empty />
         </div>  
       
-      )}
+      )} */}
+      <SliderEventos></SliderEventos>
     </div>
   );
 }

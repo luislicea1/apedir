@@ -1,0 +1,43 @@
+
+.slider-negocios {
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px 10px 0px;
+
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* @media screen and (max-width: 995px) {
+  .slider-negocios {
+    height: 50vh;
+  }
+}
+
+
+@media screen and (max-width: 620px) {
+  .slider-negocios {
+    height: 45vh;
+  }
+}
+@media screen and (max-width: 590px) {
+  .slider-negocios {
+    height: 100%;
+  }
+} */

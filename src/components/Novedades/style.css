@@ -1,0 +1,35 @@
+
+.swiper {
+    width: 100%;
+    height: 55vh;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 995px) {
+    .swiper{
+      height: 50vh;
+    }
+  }
+  
+  @media screen and (max-width: 620px) {
+    .swiper{
+      height: 45vh;
+    }
+  }
