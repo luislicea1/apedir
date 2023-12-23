@@ -83,7 +83,7 @@ export default function SliderNegocios() {
   return (
     <div>
       <Swiper
-        spaceBetween={0}
+        spaceBetween={30}
         // hashNavigation={{
         //   watchState: true,
         // }}
@@ -95,9 +95,13 @@ export default function SliderNegocios() {
         modules={[Pagination, Navigation, HashNavigation, Autoplay]}
         className="slider-negocios"
         breakpoints={{
-          360: {
-            slidesPerView: 2,
+          280: {
+            slidesPerView: 1,
             spaceBetween: 10,
+          },
+          380: {
+            slidesPerView: 2,
+            spaceBetween: 20,
           },
             711: {
               slidesPerView: 2,

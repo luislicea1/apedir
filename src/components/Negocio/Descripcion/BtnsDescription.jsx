@@ -115,7 +115,7 @@ export default function BtnDescription(props) {
                 {props.bussiness.name}
               </ModalHeader>
               <ModalBody style={{padding: "10px"}}> 
-                <div style={{height: "calc(100vh - 100px)", overflow: "scroll", width: "100%"}}>
+                <div style={{height: "calc(100vh - 300px)", overflow: "scroll", width: "100%"}}>
                 <p style={{marginBottom: "30px"}}> 
                   {props.description}
                 </p>
@@ -128,7 +128,13 @@ export default function BtnDescription(props) {
                 </div>
                 
               </ModalBody>
-             
+                <ModalFooter>
+                  
+                  <Button color="primary" onPress={onClose}>
+                    Close
+                  </Button>
+                </ModalFooter>
+           
             </>
           )}
         </ModalContent>

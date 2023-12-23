@@ -66,7 +66,7 @@ export default function ListadoProductos(props) {
         modules={[Pagination, Navigation, HashNavigation, Autoplay]}
         className="slider-negocios"
         breakpoints={{
-          360: {
+          160: {
             slidesPerView: 2,
             spaceBetween: 10,
           },

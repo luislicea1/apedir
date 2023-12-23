@@ -41,7 +41,7 @@ function ComponenteLugar(props) {
       <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
         <Card
           className="py-4 tarjeta-negocio-card"
-          style={{ ...CardStyles, margin: "5px 5px 5px 5px"}}
+          style={{ ...CardStyles, margin: "5px 5px 5px 5px", boxShadow: "none", border: ".8px solid #D4D4D8"}}
         >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
