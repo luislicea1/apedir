@@ -58,6 +58,7 @@ export default function SliderEventos() {
       {events && events.length > 0 ? (
         <>
           <Swiper
+            loop = {true}
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
