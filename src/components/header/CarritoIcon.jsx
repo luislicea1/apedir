@@ -184,7 +184,7 @@ export default function Carrito() {
                         type="text"
                         variant="bordered"
                         label="Nombre"
-                        placeholder="Escriba el nombre de la persona encargada de resivir el pedido"
+                        placeholder="Escriba el nombre de la persona encargada de recibir el pedido"
                         labelPlacement="outside"
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
