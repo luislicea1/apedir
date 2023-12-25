@@ -19,7 +19,7 @@ export default function Eventos(props) {
             width: "300px",
             height: "300px",
             boxShadow: "none",
-            border: ".5px #E2E2E2 solid"
+            border: ".8px solid #D4D4D8"
           }}
           className="card-events"
         >

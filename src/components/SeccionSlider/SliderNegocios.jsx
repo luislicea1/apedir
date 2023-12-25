@@ -81,7 +81,7 @@ export default function SliderNegocios() {
     return <ListadoSkeleton />;
   }
   return (
-    <div>
+    <div id="lugares">
       <Swiper
         spaceBetween={30}
         // hashNavigation={{

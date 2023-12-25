@@ -4,6 +4,7 @@ import React from "react";
 import { useHref } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import SliderNovedades from "../components/Novedades/SliderNovedades";
+import Footer from "../components/Footer/Footer";
 
 export default function Home() {
   const history = useHref();
@@ -27,6 +28,7 @@ export default function Home() {
       <SliderNovedades></SliderNovedades>
       <Seccion title="Lugares"></Seccion>
       <Toaster richColors theme="dark" duration={3000} position="bottom-center" />
+      <Footer></Footer>
     </div> 
   );
 }

@@ -15,7 +15,7 @@ export default function SliderNovedades() {
       style={container}
       className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
     >
-      <section className="section px-6" style={section}>
+      <section className="section px-6" style={section} id="novedades">
         <TituloDeSeccion title={"Novedades"}></TituloDeSeccion>
 
         <Swiper
@@ -44,19 +44,36 @@ export default function SliderNovedades() {
           }}
         >
           <SwiperSlide>
-            <Novedades></Novedades>
+            <Novedades 
+              name = {"St Pauli"} 
+              province = {"Santiago de Cuba"} 
+              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
+            </Novedades>
           </SwiperSlide>
           <SwiperSlide>
-            <Novedades></Novedades>
+            <Novedades 
+              name = {"St Pauli"} 
+              province = {"Santiago de Cuba"} 
+              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
+            </Novedades>
           </SwiperSlide>
           <SwiperSlide>
-            <Novedades></Novedades>
+            <Novedades 
+              name = {"St Pauli"} 
+              province = {"Santiago de Cuba"} 
+              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
+            </Novedades>
           </SwiperSlide>
           <SwiperSlide>
-            <Novedades></Novedades>
+            <Novedades 
+              name = {"St Pauli"} 
+              province = {"Santiago de Cuba"} 
+              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
+            </Novedades>
           </SwiperSlide>
         </Swiper>
       </section>
+      
     </div>
   );
 }
