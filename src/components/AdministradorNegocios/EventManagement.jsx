@@ -7,7 +7,6 @@ import {
   useBussinessStore,
   useUserStore,
 } from "../../hooks/useStore";
-import { getOneBussiness } from "../../api/bussiness";
 
 import EventCard from "./EventCard";
 

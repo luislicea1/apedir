@@ -59,8 +59,13 @@ const getBussinessImage = async (id) => {
   }
 };
 
+const getAllBussinessUrl = async () => {
+  const { data } = await supabase.from("bussiness").select("id, value_url")
+  return data
+}
+
 const getOneBussiness = async (ownerId) => {
-  let { data, error } = await supabase
+  let { data } = await supabase
     .from("bussiness")
     .select("*")
     .eq("owner", ownerId);
@@ -530,4 +535,5 @@ export {
   deleteBussinessById,
   bussinessNum,
   getSubscriptorsOfBussiness,
+  getAllBussinessUrl
 };

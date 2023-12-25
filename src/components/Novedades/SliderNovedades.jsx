@@ -8,8 +8,21 @@ import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import Novedades from "./Novedades";
 import { Pagination, Navigation, HashNavigation } from "swiper/modules";
+import { merchantNovedades } from "../../hooks/useStore";
+import { getAllNovedades } from "../../api/novedades";
 
 export default function SliderNovedades() {
+  const novedades = merchantNovedades(state => state.novedades)
+  const setNovedades = merchantNovedades(state => state.setNovedades)
+
+  React.useEffect(() => {
+    const fetchNovedades = async () => {
+      const n = await getAllNovedades()
+      setNovedades(n)
+    }
+    if (novedades.length === 0) fetchNovedades()
+  }, []);
+
   return (
     <div
       style={container}
@@ -20,7 +33,7 @@ export default function SliderNovedades() {
 
         <Swiper
           spaceBetween={10}
-          style={{ width: "100%", padding: "10px"}}
+          style={{ width: "100%", padding: "10px" }}
           // pagination={{
           //   clickable: true,
           // }}
@@ -43,37 +56,18 @@ export default function SliderNovedades() {
             },
           }}
         >
-          <SwiperSlide>
-            <Novedades 
-              name = {"St Pauli"} 
-              province = {"Santiago de Cuba"} 
-              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
-            </Novedades>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Novedades 
-              name = {"St Pauli"} 
-              province = {"Santiago de Cuba"} 
-              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
-            </Novedades>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Novedades 
-              name = {"St Pauli"} 
-              province = {"Santiago de Cuba"} 
-              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
-            </Novedades>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Novedades 
-              name = {"St Pauli"} 
-              province = {"Santiago de Cuba"} 
-              novedad  = {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste cupiditate, beatae animi sint pariatur excepturi, nemo qui dolorum libero, assumenda autem odit eum quas nisi consectetur unde blanditiis repudiandae voluptate?"}>
-            </Novedades>
-          </SwiperSlide>
+          {novedades.map((novedad) => {
+            return (
+              <SwiperSlide key={novedad.id}>
+                <Novedades novedad={novedad} />
+              </SwiperSlide>
+            )
+          })
+
+          }
         </Swiper>
       </section>
-      
+
     </div>
   );
 }

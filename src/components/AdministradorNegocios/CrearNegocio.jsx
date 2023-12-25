@@ -8,6 +8,7 @@ import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
 import DeleteBussinessModal from "../Admin/modals/DeleteBussinessModal";
+import { getAllNovedades } from "../../api/novedades";
 
 export default function CrearNegocio({ children }) {
   const user = useUserStore((state) => state.user);
@@ -23,6 +24,8 @@ export default function CrearNegocio({ children }) {
     };
     if (user && user.plan) fetchPlan();
   }, [user]);
+
+
 
   const sectionStyle = {
     width: "100%",
@@ -73,6 +76,11 @@ export default function CrearNegocio({ children }) {
               {user?.plan === "premium" && (
                 <Link to="/administrador-negocio/eventos">Eventos</Link>
               )}
+
+              {user?.plan === "premium" && (
+                <Link to="/administrador-negocio/novedades">Novedades</Link>
+              )}
+
               <Link to="/administrador-negocio/productos">Productos</Link>
             </section>
           ) : (

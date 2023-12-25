@@ -73,6 +73,12 @@ const useVipBussiness = create((set) => ({
   setVipBussiness: (b) => set({ vipBussiness: b }),
 }));
 
+const merchantNovedades = create((set) => ({
+  novedades: [],
+  setNovedades: (b) => set({ novedades: b }),
+}));
+
+
 export {
   useUserStore,
   merchantEvents,
@@ -88,4 +94,5 @@ export {
   useSupabase,
   usePlan,
   useVipBussiness,
+  merchantNovedades
 };
