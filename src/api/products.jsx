@@ -138,6 +138,7 @@ const getAllProductsVipsFirst = async () => {
   const { data, error } = await supabase.from("products").select(`
     id,
     name,
+    image,
     description,
     price,
     currency,
@@ -148,6 +149,7 @@ const getAllProductsVipsFirst = async () => {
   }
   if (data) {
     const novedades = await Promise.all(data.map(async (item) => {
+      
       const pic = await getImage('products', item.image);
 
       return {
