@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Avatar } from "@nextui-org/react";
-
+import { Link } from "react-router-dom";
 export default function Novedades({ novedad }) {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
-    <Card className="max-w-[340px]" style={{ width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2" }}>
+    <Card as={Link} to={`/lugar/${novedad.url}`} className="max-w-[340px]" style={{ width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2" }}>
       <CardHeader className="justify-between" style={{ marginBottom: "10px" }}>
         <div className="flex gap-5" style={{ gap: "15px" }}>
           <Avatar isBordered radius="full" size="md" src={novedad.perfil_pic} />
@@ -15,6 +15,7 @@ export default function Novedades({ novedad }) {
           </div>
         </div>
       </CardHeader>
+      
       <CardBody className="px-3 py-0 text-small text-default-400" style={{ marginBottom: "10px" }}>
         <p>
           {novedad.text}
