@@ -133,6 +133,11 @@ const deleteProductById = async (id) => {
   await supabase.from("products").delete().eq("id", id);
 };
 
+const getAllProductsVipsFirst = async () => {
+  
+}
+
+
 export {
   addProduct,
   getProducts,

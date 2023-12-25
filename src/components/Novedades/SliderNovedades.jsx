@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
+import { Link } from "react-router-dom";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -59,7 +60,9 @@ export default function SliderNovedades() {
           {novedades.map((novedad) => {
             return (
               <SwiperSlide key={novedad.id}>
-                <Novedades novedad={novedad} />
+                <Link to={`/lugar/${novedad.value_url}`}>
+                  <Novedades novedad={novedad} />
+                </Link>
               </SwiperSlide>
             )
           })

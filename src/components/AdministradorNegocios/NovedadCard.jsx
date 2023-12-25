@@ -52,7 +52,7 @@ export default function EventCard({ bussinessId, event }) {
             text: novedadInput.current.text
         };
         await insertNovedad(updatedEvent);
-        toast.success("Evento actualizado satisfactoriamente");
+        toast.success("Novedad actualizada satisfactoriamente");
         setIsLoading(false);
         novedadInput.current = defaultNovedadValues
         await fetchEvents();

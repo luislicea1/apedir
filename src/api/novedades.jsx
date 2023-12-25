@@ -43,8 +43,9 @@ const getAllNovedades = async () => {
                 id: item.id,
                 url: item.bussiness.value_url,
                 province: item.bussiness.province,
+                name: item.bussiness.name,
                 perfil_pic: perfilPic,
-                name: item.name,
+                // name: item.name,
                 text: item.text
             };
         }));
