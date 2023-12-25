@@ -23,6 +23,7 @@ export default function SliderNovedades() {
     if (novedades.length === 0) fetchNovedades()
   }, []);
 
+  
   return (
     <div
       style={container}
@@ -59,7 +60,7 @@ export default function SliderNovedades() {
           {novedades.map((novedad) => {
             return (
               <SwiperSlide key={novedad.id} >
-                  <Novedades novedad={novedad} />
+                <Novedades novedad={novedad} />
               </SwiperSlide>
             )
           })
