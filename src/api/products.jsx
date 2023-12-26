@@ -159,6 +159,7 @@ const getAllProductsVipsFirst = async () => {
         image: pic,
         price: item.price,
         currency: item.currency,
+        url: item.category.bussiness.value_url,
         order: item.category.bussiness.privileges
       };
     }));
