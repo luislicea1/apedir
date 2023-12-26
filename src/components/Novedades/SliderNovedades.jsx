@@ -10,20 +10,20 @@ import Novedades from "./Novedades";
 import { Pagination, Navigation, HashNavigation } from "swiper/modules";
 import { merchantNovedades } from "../../hooks/useStore";
 import { getAllNovedades } from "../../api/novedades";
+import SkeletonNovedades from "../Skeleton/SkeletonNovedades";
 
 export default function SliderNovedades() {
-  const novedades = merchantNovedades(state => state.novedades)
-  const setNovedades = merchantNovedades(state => state.setNovedades)
+  const novedades = merchantNovedades((state) => state.novedades);
+  const setNovedades = merchantNovedades((state) => state.setNovedades);
 
   React.useEffect(() => {
     const fetchNovedades = async () => {
-      const n = await getAllNovedades()
-      setNovedades(n)
-    }
-    if (novedades.length === 0) fetchNovedades()
+      const n = await getAllNovedades();
+      setNovedades(n);
+    };
+    if (novedades.length === 0) fetchNovedades();
   }, []);
 
-  
   return (
     <div
       style={container}
@@ -31,10 +31,9 @@ export default function SliderNovedades() {
     >
       <section className="section px-6" style={section} id="novedades">
         <TituloDeSeccion title={"Novedades"}></TituloDeSeccion>
-
         <Swiper
           spaceBetween={10}
-          style={{ width: "100%", padding: "10px" }}
+          style={{ width: "100%", padding: "5px" }}
           // pagination={{
           //   clickable: true,
           // }}
@@ -57,18 +56,17 @@ export default function SliderNovedades() {
             },
           }}
         >
-          {novedades.map((novedad) => {
-            return (
-              <SwiperSlide key={novedad.id} >
-                <Novedades novedad={novedad} />
-              </SwiperSlide>
-            )
-          })
-
-          }
+          {novedades.map !== null &&
+            novedades.map((novedad) => {
+              return (
+                <SwiperSlide key={novedad.id}>
+                  <Novedades novedad={novedad} />
+                </SwiperSlide>
+              );
+            })}
+           
         </Swiper>
       </section>
-
     </div>
   );
 }
