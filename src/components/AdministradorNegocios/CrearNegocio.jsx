@@ -38,6 +38,7 @@ export default function CrearNegocio({ children }) {
     <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <div style={sectionStyle}>
         <div>
+          
           {bussiness !== null && bussiness !== undefined ? (
             <section
               className="flex justify-between"
