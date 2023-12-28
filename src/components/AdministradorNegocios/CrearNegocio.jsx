@@ -8,7 +8,7 @@ import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
 import DeleteBussinessModal from "../Admin/modals/DeleteBussinessModal";
-import { getAllProductsVipsFirst } from "../../api/products";
+//import { getAllProductsVipsFirst } from "../../api/products";
 
 
 export default function CrearNegocio({ children }) {

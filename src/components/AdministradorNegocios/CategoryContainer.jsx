@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, Button } from "@nextui-org/react";
 import ProductCard from "./ProductCard";
-import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { grid_1_col, grid_2_col } from "../styles/styles";

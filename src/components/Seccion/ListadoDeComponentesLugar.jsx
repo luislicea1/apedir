@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
-import Loader from "../Loader/Loader";
 import ComponenteLugar from "./ComponenteLugar";
-
 import "./seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
-//import { addNotification } from "../../api/notifications";
-import { Empty } from "antd";
 import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
 
 const ListadoDeComponentesLugar = () => {

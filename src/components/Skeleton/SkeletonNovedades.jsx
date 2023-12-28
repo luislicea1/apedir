@@ -3,18 +3,13 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Avatar,
   Skeleton,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom";
 
 export default function SkeletonNovedades() {
- 
 
   return (
     <Card
-      
-      
       className="max-w-[340px]"
       style={{ width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2" }}
     >

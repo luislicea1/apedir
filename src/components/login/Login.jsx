@@ -1,11 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Input } from "@nextui-org/react";
+import { Input, Button,Link } from "@nextui-org/react";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import "./login.css";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
-import { Button } from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
 import { login, signInWithGoogle } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";

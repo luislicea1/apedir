@@ -1,6 +1,5 @@
 import React from "react";
-import { Input } from "@nextui-org/react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Image} from "@nextui-org/react";
+import {Input,Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Image} from "@nextui-org/react";
 import InformationIcon from "../../Icons/information/InformationIcon";
 import ImagenInsta from "../../../assets/guia/faceInstagram.png"
 

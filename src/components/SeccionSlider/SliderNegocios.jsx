@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -10,15 +9,12 @@ import "./style.css";
 import React, { useState, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
-import Loader from "../Loader/Loader";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
 
 import "../Seccion/seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
 import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
-
-// import required modules
 import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
 
 export default function SliderNegocios() {

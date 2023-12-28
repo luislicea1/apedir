@@ -8,7 +8,7 @@ export const DeliveryIcon = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 422.518 422.518"
-    xml:space="preserve"
+   // xml:space="preserve"
     {...props}
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

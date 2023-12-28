@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import "./login.css";
 import ApedirLogoNegro from "../../assets/ApedirLogoNegro.svg";
-import { Button } from "@nextui-org/react";
 import { register } from "../../api/auth";
 import { Toaster, toast } from "sonner";
 import { btnHeight } from "../styles/styles";

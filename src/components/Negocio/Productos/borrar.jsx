@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Helmet } from "react-helmet";
@@ -9,17 +8,16 @@ import {
   ModalContent,
   ModalBody,
   useDisclosure,
+  Card, CardBody, CardFooter,Badge
 } from "@nextui-org/react";
 import { ImgCardStyle2, CardStyles2, ProductoStyle } from "../../styles/styles";
-
 import ImagenVisualizador from "../VisualizadorProducto/ImagenVisualizador";
 import DescripcionDeP from "../VisualizadorProducto/DescripcionDeP";
 import OrdenarProducto from "../VisualizadorProducto/OrdenarProducto";
 import PromoProducto from "../VisualizadorProducto/PromoProducto";
 import "./productos.css";
-
 import Crown from "../../Icons/bestchoise/crown";
-import { Badge } from "@nextui-org/react";
+
 
 export default function Producto({
   localizacion,

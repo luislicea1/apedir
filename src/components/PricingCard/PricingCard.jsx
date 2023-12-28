@@ -5,13 +5,14 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  Button
  
 } from "@nextui-org/react";
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";
 //import { Button } from "react-router-dom";
 import { flex_center } from "../styles/styles";
-import { Button } from "@nextui-org/react";
+
 export default function PricingCard({
   img,
   name,

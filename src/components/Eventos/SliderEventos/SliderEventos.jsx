@@ -1,17 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { eventsStore } from "../../../hooks/useStore";
 import "./styles.css";
-import { grid_center } from "../../styles/styles";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
-// import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar, NavbarBrand } from "@nextui-org/react";
 import { NegocioLogo } from "./NegocioLogo.jsx";
 import { useState, useEffect } from "react";
-import { MarginLeft30 } from "../../styles/styles.jsx";
+//import { MarginLeft30 } from "../../styles/styles.jsx";
 
 import Izquierda from "../../Icons/Angulo/izquierda.jsx";
 

@@ -17,9 +17,6 @@ export default function SkeletonProductosHome(props) {
         style={{ width: "100%", objectFit: "cover" }}
         className="lazyload-producto-home"
       />
-     
-
-      
     </Card>
   );
 }

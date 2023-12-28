@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Button } from "@nextui-org/react";
-import { Image } from "@nextui-org/react";
+import { Button , Image} from "@nextui-org/react";
 import { resizeImage } from "../../../api/helpers/image";
 import "./input.css";
 import { useState } from "react";

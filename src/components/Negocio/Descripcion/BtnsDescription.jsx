@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
+
 import LocationIcon from "../../Icons/Location/Location";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Tooltip,
+  Image,
+  Button,
+  Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Card
 } from "@nextui-org/react";
-import { Image } from "@nextui-org/react";
 import { MarginTop30 } from "../../styles/styles";
 import ShareLink from "../Share/ShareLink";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
@@ -15,7 +16,6 @@ import { addOrDeleteSubscription } from "../../../api/profile";
 import "./style.css";
 import { DeliveryIcon } from "../../Icons/DeliveryIcon";
 import InformationIcon from "../../Icons/information/InformationIcon";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Card} from "@nextui-org/react";
 import Horario from "../Horario/Horario";
 import IconosNegocio from "../Iconos/IconosNegocio";
 

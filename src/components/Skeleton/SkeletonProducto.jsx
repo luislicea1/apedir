@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardBody, CardFooter, Skeleton } from "@nextui-org/react";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 import { CardStyles2, ProductoStyle } from "../styles/styles";
 

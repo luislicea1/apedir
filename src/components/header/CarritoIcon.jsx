@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Badge } from "@nextui-org/react";
 import "./header.css";
-import { grid_4_col } from "../styles/styles";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
-import { Button } from "@nextui-org/react";
 import { useCartStore } from "../../hooks/useStore";
 import {
   Modal,
@@ -12,8 +9,8 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  Input, Textarea,Button,Badge
 } from "@nextui-org/react";
-import { Input, Textarea } from "@nextui-org/react";
 import { grid_1_col } from "../styles/styles";
 import { Toaster, toast } from "sonner";
 

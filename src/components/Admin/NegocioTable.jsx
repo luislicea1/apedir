@@ -1,5 +1,4 @@
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { Pagination, Input, Avatar, Checkbox } from "@nextui-org/react";
 import { SearchIcon } from "../Icons/SearchIcon";
 import DeleteBussinessModal from "./modals/DeleteBussinessModal";
 import { setIsActive } from "../../api/bussiness";
@@ -15,6 +14,7 @@ import {
   User,
   Tooltip,
   useDisclosure,
+  Pagination, Input, Avatar, Checkbox
   
 } from "@nextui-org/react";
 
