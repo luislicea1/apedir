@@ -7,7 +7,6 @@ export default function LogoCarritoNegro(props) {
       xmlns="http://www.w3.org/2000/svg"
       width={props.w}
       height={props.h}
-    
       viewBox="0 0 3655.000000 3413.000000"
       preserveAspectRatio="xMidYMid meet"
     >

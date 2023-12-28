@@ -53,8 +53,16 @@
   @media screen and (max-width: 440px) {
     
     .titulo-card-producto-panntalla-principal {
-      max-width: 20ch;
+      max-width: 10ch;
     }
+    .card-producto-list-home{
+      height: 268px;
+    }
+    .lazyload-producto-home{
+      height: 268px !important;
+      /* background: gray; */
+    }
+    
   }
   @media screen and (max-width: 338px) {
     

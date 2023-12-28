@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { getAllEvents } from "../../api/events";
-import { Empty } from 'antd';
-import Eventos from "./Eventos";
+// import { Empty } from 'antd';
+// import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
-import { grid_center } from "../styles/styles";
+// import { grid_center } from "../styles/styles";
 import SliderEventos from "./SliderEventos/SliderEventos";
 
 export default function ListadoDeEventos() {

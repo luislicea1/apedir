@@ -5,15 +5,10 @@ import { container, section } from "../styles/styles";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
-  Pagination,
-  Navigation,
-  HashNavigation,
   Autoplay,
 } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/grid";
+
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import SkeletonProductosHome from "../Skeleton/SkeletonProductoHome";
 
@@ -38,17 +33,17 @@ export default function ProductosSliderHome() {
         {productos.length === 0 ? (
           <Swiper
           spaceBetween={30}
-          pagination={false}
-          navigation={false}
-          modules={[Pagination, Navigation, HashNavigation, Autoplay]}
+          //pagination={false}
+          //navigation={false}
+          modules={[Autoplay]}
           className="slider-negocios"
           breakpoints={{
             280: {
-              slidesPerView: 1,
+              slidesPerView: 1.2,
               spaceBetween: 10,
             },
             360: {
-              slidesPerView: 1,
+              slidesPerView: 1.5,
               spaceBetween: 20,
             },
             460: {
@@ -91,9 +86,9 @@ export default function ProductosSliderHome() {
         ) : (
           <Swiper
             spaceBetween={30}
-            pagination={false}
-            navigation={false}
-            modules={[Pagination, Navigation, HashNavigation, Autoplay]}
+            //pagination={false}
+            //navigation={false}
+            modules={[ Autoplay]}
             className="slider-negocios"
             breakpoints={{
               280: {

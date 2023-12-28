@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardBody, CardFooter, Skeleton } from "@nextui-org/react";
 import "react-lazy-load-image-component/src/effects/blur.css";
-//import PropTypes from "prop-types";
-
 import { CardStyles2, ProductoStyle } from "../styles/styles";
 
 export default function SkeletonProducto({
   title,
-  img,
-  price,
   index,
-  description,
-  currency,
-  isRecomended,
-  url,
 }) {
   const sectionStyle2 = {
     width: "100%",
@@ -36,11 +28,8 @@ export default function SkeletonProducto({
       >
         <CardBody className="overflow-visible p-0 card-body-productos">
           <Skeleton 
-            
-            
             style={{ ...ProductoStyle, objectFit: "cover" }}
             className="rounded-full product-lazy-load"
-           
           />
         </CardBody>
         <CardFooter

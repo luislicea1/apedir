@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
-import { LogoStyle } from "../styles/styles";
+//import { LogoStyle } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./style.css";
+
 
 export default function ProductosHome(props) {
   return (
@@ -27,7 +28,7 @@ export default function ProductosHome(props) {
       />
       <div className="bg-black-bottom-top"></div>
 
-      <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+      <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between card-producto-home-footer">
         <div>
           <p
             className={
@@ -36,7 +37,7 @@ export default function ProductosHome(props) {
           >
             {props.name}
           </p>
-          <p className="text-white text-tiny">
+          <p className="text-white text-tiny  precio-card-producto-panntalla-principal">
             {props.price} {props.currency}
           </p>
         </div>

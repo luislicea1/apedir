@@ -3,12 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import { eventsStore } from "../../../hooks/useStore";
 import "./styles.css";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 
 
 export default function SliderEventos() {
@@ -66,13 +65,13 @@ export default function SliderEventos() {
               modifier: 1,
               slideShadows: true,
             }}
-            pagination={false}
-            modules={[EffectCoverflow, Pagination]}
+            
+            modules={[EffectCoverflow]}
             className="mySwiper"
             style={
               {
                 width: "100%",
-                padding: "10px 10px",
+                // padding: "10px 10px",
                 
               }
             }

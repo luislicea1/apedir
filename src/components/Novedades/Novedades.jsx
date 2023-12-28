@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardHeader, CardBody, Avatar } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 export default function Novedades({ novedad }) {
-  const [isFollowed, setIsFollowed] = React.useState(false);
+  // const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
     <Card as={Link} to={`/lugar/${novedad.url}`} className="max-w-[340px]" style={{ width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2" }}>

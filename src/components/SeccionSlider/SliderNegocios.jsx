@@ -1,10 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import 'swiper/css/grid';
-
 import "./style.css";
 import React, { useState, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
@@ -15,7 +11,7 @@ import "../Seccion/seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 
 import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
-import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 export default function SliderNegocios() {
   const bussinesses = useBussinessList((state) => state.bussinesses);
@@ -40,26 +36,6 @@ export default function SliderNegocios() {
     }
   }, [bussinesses, province]);
 
-  // const fetchMoreData = async () => {
-  //   try {
-  //     const response = await loadMoreBussiness(
-  //       offset,
-  //       setOffset,
-  //       bussinesses,
-  //       setBussinesses
-  //     );
-  //     setLoading(false);
-
-  //     if (!response) {
-  //       setHasMore(false);
-  //     } else {
-  //       setPage((prevPage) => prevPage + 1);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching more data:", error);
-  //   }
-  // };
-
   const fetchMoreData = async () => {
     try {
       const response = await loadMoreBussiness(
@@ -68,15 +44,8 @@ export default function SliderNegocios() {
         bussinesses,
         setBussinesses
       );
-   
-      if (!response) {
-        console.error("No hay datos disponibles.");
-        alert("errror nulo")
-        window.location.reload(true);
-        return;
-      }
-   
       setLoading(false);
+
       if (!response) {
         setHasMore(false);
       } else {
@@ -85,7 +54,9 @@ export default function SliderNegocios() {
     } catch (error) {
       console.error("Error fetching more data:", error);
     }
-   };
+  };
+
+  
    
   useEffect(() => {
     const fetchData = () => {
@@ -112,15 +83,9 @@ export default function SliderNegocios() {
     <div id="lugares">
       <Swiper
         spaceBetween={30}
-        // hashNavigation={{
-        //   watchState: true,
-        // }}
-        // pagination={{
-        //   clickable: true,
-        // }}
         pagination = {false}
         navigation={false}
-        modules={[Pagination, Navigation, HashNavigation, Autoplay]}
+        modules={[ Autoplay]}
         className="slider-negocios"
         breakpoints={{
           280: {
@@ -128,11 +93,11 @@ export default function SliderNegocios() {
             spaceBetween: 10,
           },
           380: {
-            slidesPerView: 2,
+            slidesPerView: 2.2,
             spaceBetween: 20,
           },
             711: {
-              slidesPerView: 2,
+              slidesPerView: 2.3,
               spaceBetween: 10,
             },
             

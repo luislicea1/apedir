@@ -1,13 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
-// Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import Novedades from "./Novedades";
-import { Pagination, Navigation, HashNavigation } from "swiper/modules";
 import { merchantNovedades } from "../../hooks/useStore";
 import { getAllNovedades } from "../../api/novedades";
 import SkeletonNovedades from "../Skeleton/SkeletonNovedades";
@@ -34,12 +30,8 @@ export default function SliderNovedades() {
         <Swiper
           spaceBetween={10}
           style={{ width: "100%", padding: "5px" }}
-          // pagination={{
-          //   clickable: true,
-          // }}
-          pagination={false}
-          navigation={false}
-          modules={[Pagination, Navigation, HashNavigation]}
+          
+          
           className="mySwiper"
           breakpoints={{
             711: {
