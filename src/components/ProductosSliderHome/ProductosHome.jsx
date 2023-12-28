@@ -18,7 +18,6 @@ export default function ProductosHome(props) {
     >
       <LazyLoadImage
         effect="blur"
-        removeWrapper
         alt="Card example background"
         src={props.image}
         style={{ width: "100%", objectFit: "cover" }}

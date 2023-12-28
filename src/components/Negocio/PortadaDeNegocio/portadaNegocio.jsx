@@ -3,7 +3,7 @@ import { PortadaDeNegocioStyles } from "../../styles/styles";
 import { Imagen100pcCover } from "../../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { Helmet } from "react-helmet";
+//import { Helmet } from "react-helmet";
 import './style.css'
 
 export default function PortadaDeNegocio(props) {
@@ -17,14 +17,14 @@ export default function PortadaDeNegocio(props) {
 
   return (
     <div style={PortadaDeNegocioStyles}>
-      <Helmet>
+      {/* <Helmet>
         <link
           fetchpriority="high"
           rel="preload"
           href={props.imagenPortada}
           as="image"
         />
-      </Helmet>
+      </Helmet> */}
       <img src={props.imagenPortada} alt="" style={imagenFondo}  className="blur-img-fondo"/>
       <LazyLoadImage
         alt={props.nombre}

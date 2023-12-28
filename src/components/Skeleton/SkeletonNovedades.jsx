@@ -8,13 +8,13 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
-export default function SkeletonNovedades({ novedad }) {
-  const [isFollowed, setIsFollowed] = React.useState(false);
+export default function SkeletonNovedades() {
+ 
 
   return (
     <Card
-      as={Link}
-      to={`/lugar/${novedad.url}`}
+      
+      
       className="max-w-[340px]"
       style={{ width: "90%", boxShadow: "none", border: ".5px solid #E2E2E2" }}
     >

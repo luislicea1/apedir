@@ -56,15 +56,23 @@ export default function SliderNovedades() {
             },
           }}
         >
-          {novedades.map !== null &&
+          {novedades && novedades.length > 0 ? (
             novedades.map((novedad) => {
               return (
                 <SwiperSlide key={novedad.id}>
                   <Novedades novedad={novedad} />
                 </SwiperSlide>
               );
-            })}
-           
+            })
+          ) : (
+            
+            [...Array(3)].map((_, i) => (
+              <SwiperSlide key={i}>
+                <SkeletonNovedades />
+              </SwiperSlide>
+            ))
+            
+          )}
         </Swiper>
       </section>
     </div>

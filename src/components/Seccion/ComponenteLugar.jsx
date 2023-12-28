@@ -5,7 +5,7 @@ import { CardStyles, ImgCardStyle, LogoStyle } from "../styles/styles";
 import Stars from "../Stars/Stars";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { Helmet } from "react-helmet";
+//import { Helmet } from "react-helmet";
 import "./seccion.css";
 //import { useInView } from "react-intersection-observer";
 import { getStarsFromBussiness } from "../../api/starsRate";
@@ -30,14 +30,14 @@ function ComponenteLugar(props) {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <link
           fetchpriority="high"
           rel="preload"
           href={props.imagen} // Usar la referencia en lugar del prop directamente
           as="image"
         />
-      </Helmet>
+      </Helmet> */}
       <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
         <Card
           className="py-4 tarjeta-negocio-card"

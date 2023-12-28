@@ -1,6 +1,5 @@
 import React from "react";
 import { Card,Skeleton } from "@nextui-org/react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function SkeletonProductosHome(props) {
@@ -15,16 +14,10 @@ export default function SkeletonProductosHome(props) {
       }}
     >
       <Skeleton
-        effect="blur"
-        removeWrapper
-        alt="Card example background"
-        src={props.image}
         style={{ width: "100%", objectFit: "cover" }}
-        placeholderSrc={props.imagen}
-        useIntersectionObserver={true}
         className="lazyload-producto-home"
       />
-      <div className="bg-black-bottom-top"></div>
+     
 
       
     </Card>

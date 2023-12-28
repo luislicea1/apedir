@@ -12,7 +12,6 @@ import 'swiper/css/grid';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
 
-
 export default function ListadoProductos(props) {
   const list = props.lista;
   const [carrito, setCarrito] = useState([]);
@@ -51,6 +50,7 @@ export default function ListadoProductos(props) {
 
   return (
     <div>
+      
       <TituloDeProductos
         title={props.title}
         onChangeTitle={changeTitle}
@@ -59,6 +59,7 @@ export default function ListadoProductos(props) {
       {/* <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
         {list.map(renderProducto)}
       </div> */}
+      
       <Swiper
         spaceBetween={0}
         pagination = {false}

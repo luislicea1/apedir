@@ -24,7 +24,7 @@ const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
 import Horario from "./Horario/Horario";
-import { Card, useDisclosure } from "@nextui-org/react";
+import SkeletonProducto from "../Skeleton/SkeletonProducto";
 
 const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")

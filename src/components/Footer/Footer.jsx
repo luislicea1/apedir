@@ -16,7 +16,10 @@ export default function Footer() {
       <div className="footer-logo">
         
         <LogoReduce w={100} color="white"></LogoReduce>
-        <div className="footer-social-media">
+        
+      </div>
+
+      <div className="footer-social-media">
           <div style={{ width: "100%", display: "grid", placeItems: "center" }}>
             <a href={`mailto:apedir@gmail`} target="_blank">
               <Correo color={"white"} w={"30px"}></Correo>
@@ -47,7 +50,6 @@ export default function Footer() {
             </a>
           </div>
         </div>
-      </div>
 
       <div>
         <nav className="nav-footer">

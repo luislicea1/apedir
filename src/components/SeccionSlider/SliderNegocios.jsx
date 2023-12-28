@@ -44,6 +44,26 @@ export default function SliderNegocios() {
     }
   }, [bussinesses, province]);
 
+  // const fetchMoreData = async () => {
+  //   try {
+  //     const response = await loadMoreBussiness(
+  //       offset,
+  //       setOffset,
+  //       bussinesses,
+  //       setBussinesses
+  //     );
+  //     setLoading(false);
+
+  //     if (!response) {
+  //       setHasMore(false);
+  //     } else {
+  //       setPage((prevPage) => prevPage + 1);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching more data:", error);
+  //   }
+  // };
+
   const fetchMoreData = async () => {
     try {
       const response = await loadMoreBussiness(
@@ -52,8 +72,15 @@ export default function SliderNegocios() {
         bussinesses,
         setBussinesses
       );
+   
+      if (!response) {
+        console.error("No hay datos disponibles.");
+        alert("errror nulo")
+        window.location.reload(true);
+        return;
+      }
+   
       setLoading(false);
-
       if (!response) {
         setHasMore(false);
       } else {
@@ -62,8 +89,8 @@ export default function SliderNegocios() {
     } catch (error) {
       console.error("Error fetching more data:", error);
     }
-  };
-
+   };
+   
   useEffect(() => {
     const fetchData = () => {
       fetchMoreData();
@@ -80,6 +107,11 @@ export default function SliderNegocios() {
   if (loading) {
     return <ListadoSkeleton />;
   }
+
+  // if(!filtredBussinesses){
+  //   alert("null")
+  //   window.location.reload(true)
+  // }
   return (
     <div id="lugares">
       <Swiper
