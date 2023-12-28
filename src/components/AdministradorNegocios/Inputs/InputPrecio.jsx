@@ -1,20 +1,21 @@
-
 import React, { useState } from "react";
 import { Input } from "@nextui-org/react";
 
 export default function InputPrecio({ value, setValues }) {
   return (
     <Input
+      type="number"
       label="Precio"
       placeholder="0.00"
       variant="bordered"
       value={value.price}
-      onChange={(event) =>
+      isInvalid={typeof value.price == "string"}
+      onChange={(event) => {
         setValues({
           ...value,
-          price: event.target.value,
-        })
-      }
+          price: parseFloat(event.target.value),
+        });
+      }}
       startContent={
         <div className="pointer-events-none flex items-center">
           <span className="text-default-400 text-small">$</span>
@@ -44,7 +45,6 @@ export default function InputPrecio({ value, setValues }) {
           </select>
         </div>
       }
-      type="number"
     />
   );
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, memo, useMemo } from "react";
-import { Button } from "@nextui-org/react";
+import React, { useEffect, useState, useRef } from "react";
+import { Button, Checkbox } from "@nextui-org/react";
 import InputDeFaceBook from "./Inputs/InputDeFaceBook";
 import InputDeInstagram from "./Inputs/InputDeInstagram";
 import InputTelegram from "./Inputs/InputTelegram";
@@ -15,18 +15,19 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
-import { useUserStore, useBussinessStore } from "../../hooks/useStore";
+import { useUserStore, usePlan, useBussinessStore } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
-import { useNavigate } from "react-router-dom";
-
 import InputTitle from "./Inputs/InputTitle";
+import { addNotification } from "../../api/notifications";
+import QR from "../QR/QRCodeLogo";
+import { useShallow } from "zustand/react/shallow";
 
 export default function NegocioDashboard() {
-  const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
-  const business = useBussinessStore((state) => state.bussiness);
+  const business = useBussinessStore(useShallow((state) => state.bussiness));
   const setBussiness = useBussinessStore((state) => state.setBussiness);
-
+  const plan = usePlan((state) => state.plan);
+  const [render, setRender] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchBussiness = async () => {
@@ -43,7 +44,9 @@ export default function NegocioDashboard() {
   };
 
   useEffect(() => {
-    if (business === null) fetchBussiness();
+    return () => {
+      if (business === null) fetchBussiness();
+    };
   }, [user]);
 
   useEffect(() => {
@@ -55,7 +58,8 @@ export default function NegocioDashboard() {
             ? business[key]
             : "";
       }
-      setBussinessInput(updatedBusiness);
+      bussinessInput.current = updatedBusiness;
+      setRender((render) => render + 1);
     }
   }, [business]);
 
@@ -68,6 +72,7 @@ export default function NegocioDashboard() {
     id: "",
     owner: "",
     name: "",
+    privileges: plan === "gratis" ? 1 : plan === "basico" ? 2 : 3,
     perfil_pic: "",
     front_pic: "",
     description: "",
@@ -85,31 +90,42 @@ export default function NegocioDashboard() {
     linkedin: "",
     youtube: "",
     twitter: "",
+    delivery: false,
   };
-  const [bussinessInput, setBussinessInput] = useState(
+  const bussinessInput = useRef(
     business !== null && business !== undefined
       ? business
       : defaultBussinessValues
   );
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [formError, setFormError] = useState("");
+
+  useEffect(() => {
+    if (business === null) {
+      bussinessInput.current = defaultBussinessValues;
+    }
+    setRender((render) => render + 1);
+  }, [business]);
 
   const handleUpsertBussiness = async () => {
-    if (!isFormValid) {
-      toast.error(formError);
+    try {
+      await BussinessInputSchema.validate(bussinessInput.current, {
+        strict: true,
+      });
+    } catch (e) {
+      toast.error(e.message);
       return;
     }
-    setIsLoading(true); // Activar el loader
+
+    setIsLoading(true);
     let front_pic = "";
     if (
-      bussinessInput.front_pic !== null &&
-      bussinessInput.front_pic !== "" &&
-      bussinessInput.front_pic instanceof Blob
+      bussinessInput.current.front_pic !== null &&
+      bussinessInput.current.front_pic !== "" &&
+      bussinessInput.current.front_pic instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "bussiness_front");
+      await removeImage(bussinessInput.current.id, "bussiness_front");
 
       front_pic = await uploadImage(
-        bussinessInput.front_pic,
+        bussinessInput.current.front_pic,
         imageName.front_pic,
         "bussiness_front"
       );
@@ -118,14 +134,18 @@ export default function NegocioDashboard() {
 
     let perfil_pic = "";
     if (
-      bussinessInput.perfil_pic !== null &&
-      bussinessInput.perfil_pic !== "" &&
-      bussinessInput.perfil_pic instanceof Blob
+      bussinessInput.current.perfil_pic !== null &&
+      bussinessInput.current.perfil_pic !== "" &&
+      bussinessInput.current.perfil_pic instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "perfil_pic", "bussiness_perfil");
+      await removeImage(
+        bussinessInput.current.id,
+        "perfil_pic",
+        "bussiness_perfil"
+      );
 
       perfil_pic = await uploadImage(
-        bussinessInput.perfil_pic,
+        bussinessInput.current.perfil_pic,
         imageName.perfil_pic,
         "bussiness_perfil"
       );
@@ -134,14 +154,14 @@ export default function NegocioDashboard() {
 
     let gps_location = "";
     if (
-      bussinessInput.gps_location !== null &&
-      bussinessInput.gps_location !== "" &&
-      bussinessInput.gps_location instanceof Blob
+      bussinessInput.current.gps_location !== null &&
+      bussinessInput.current.gps_location !== "" &&
+      bussinessInput.current.gps_location instanceof Blob
     ) {
-      await removeImage(bussinessInput.id, "bussiness_location");
+      await removeImage(bussinessInput.current.id, "bussiness_location");
 
       gps_location = await uploadImage(
-        bussinessInput.gps_location,
+        bussinessInput.current.gps_location,
         imageName.gps_location,
         "bussiness_location"
       );
@@ -149,7 +169,7 @@ export default function NegocioDashboard() {
     }
 
     const updatedBussinessInput = {
-      ...bussinessInput,
+      ...bussinessInput.current,
       owner: user.id,
       front_pic: front_pic,
       perfil_pic: perfil_pic,
@@ -157,26 +177,25 @@ export default function NegocioDashboard() {
     };
 
     await upsertBussiness(updatedBussinessInput);
-    setIsLoading(false); // Desactivar el loader
+
+    if (business) {
+      let notification = {
+        message: `El negocio ${bussinessInput.current.name} se ha actualizado.`,
+        bussiness: business.id,
+        addressee: null,
+        bussiness_link: business.value_url,
+      };
+      addNotification(notification);
+    }
+
+    setIsLoading(false);
 
     toast.success("Actualización exitosa");
     fetchBussiness();
-    // window.location.reload();
-
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
-
-  useEffect(() => {
-    const validateForm = async () => {
-      try {
-        await BussinessInputSchema.validate(bussinessInput);
-        setIsFormValid(true);
-      } catch (error) {
-        setIsFormValid(false);
-        setFormError(error.message);
-      }
-    };
-    validateForm();
-  }, [bussinessInput]);
 
   return (
     <div>
@@ -186,55 +205,59 @@ export default function NegocioDashboard() {
         position="bottom-center"
         duration={3000}
       />
-      <InputTitle
-        value={bussinessInput}
-        setValue={setBussinessInput}
-      ></InputTitle>
+      <InputTitle value={bussinessInput}></InputTitle>
       <ImageUploadButton
         value={bussinessInput}
-        setValue={setBussinessInput}
         imageName={imageName}
         setImageName={setImageName}
       />
+
+      <div
+        style={{
+          marginBottom: "20px",
+          width: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <QR
+          url={business?.value_url}
+          imagen={business?.perfil_pic}
+          negocio={"si"}
+        ></QR>
+      </div>
+
       <TextAreaDescription
         value={bussinessInput}
-        setValue={setBussinessInput}
-        maxChars={120}
+        maxChars={plan?.description}
       ></TextAreaDescription>
+      <Checkbox
+        isSelected={bussinessInput.current.delivery}
+        onValueChange={() => {
+          bussinessInput.current = {
+            ...bussinessInput.current,
+            delivery: !bussinessInput.current.delivery,
+          };
+          setRender((render) => render + 1);
+        }}
+      >
+        Delivery (Márquelo si hace delivery)
+      </Checkbox>
+      <br /><br />
       <InputLocation
         value={bussinessInput}
-        setValue={setBussinessInput}
         setImageName={setImageName}
       ></InputLocation>
       <div style={grid_2_col} className="mt-2 mb-2">
-        <InputGmail
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputGmail>
-        <InputPhoneNumber
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputPhoneNumber>
-        <InputWhatsapp
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputWhatsapp>
-        <InputTelegram
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputTelegram>
+        <InputGmail value={bussinessInput}></InputGmail>
+        <InputPhoneNumber value={bussinessInput}></InputPhoneNumber>
+        <InputWhatsapp value={bussinessInput}></InputWhatsapp>
+        <InputTelegram value={bussinessInput}></InputTelegram>
         <InputTelefonoLocalNumber
           value={bussinessInput}
-          setValue={setBussinessInput}
         ></InputTelefonoLocalNumber>
-        <InputDeFaceBook
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputDeFaceBook>
-        <InputDeInstagram
-          value={bussinessInput}
-          setValue={setBussinessInput}
-        ></InputDeInstagram>
+        <InputDeFaceBook value={bussinessInput}></InputDeFaceBook>
+        <InputDeInstagram value={bussinessInput}></InputDeInstagram>
       </div>
 
       {isLoading && (
@@ -250,14 +273,10 @@ export default function NegocioDashboard() {
         className="text-white mt-2"
         style={btnHeight}
         onClick={() => {
-          setBussinessInput((prevState) => {
-            const updatedState = {
-              ...prevState,
-              owner: user.id,
-            };
-
-            return updatedState;
-          });
+          bussinessInput.current = {
+            ...bussinessInput.current,
+            owner: user.id,
+          };
           handleUpsertBussiness();
         }}
       >

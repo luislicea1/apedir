@@ -1,7 +1,9 @@
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import { Pagination, Input, Avatar, Checkbox } from "@nextui-org/react";
 import { SearchIcon } from "../Icons/SearchIcon";
-
+import DeleteBussinessModal from "./modals/DeleteBussinessModal";
+import { setIsActive } from "../../api/bussiness";
+import { setBussinessPrivileges } from "../../api/bussiness";
 import React, { useState } from "react";
 import {
   Table,
@@ -11,11 +13,10 @@ import {
   TableRow,
   TableCell,
   User,
-  Chip,
   Tooltip,
-  getKeyValue,
+  useDisclosure,
+  
 } from "@nextui-org/react";
-import { fetchAllBussiness, setIsActive } from "../../api/bussiness";
 
 const columns = [
   { name: "Nombre", uid: "name" },
@@ -24,6 +25,7 @@ const columns = [
   { name: "Dirección", uid: "address" },
   { name: "Provincia", uid: "province" },
   { name: "Teléfono", uid: "phone" },
+  { name: "Privilegios", uid: "privileges" },
   { name: "Acciones", uid: "actions" },
 ];
 
@@ -33,12 +35,27 @@ const statusColorMap = {
   vacation: "warning",
 };
 
+
 const handleCheckboxChange = async (event, bussinessId) => {
   await setIsActive(bussinessId, event.target.checked);
 };
 
-export default function NegocioTable({ bussinessList }) {
+export default function NegocioTable({ bussinessList, getAllBussinesses }) {
+  const [bussinessToDelete, setBussinessToDelete] = useState(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  
   const renderCell = React.useCallback((bussiness, columnKey) => {
+    const handlePrivilegesChange = async (event, bussinessId) => {
+      const newPrivileges = parseInt(event.target.value, 10);
+    
+      try {
+        await setBussinessPrivileges(bussinessId, newPrivileges);
+        await getAllBussinesses();
+      } catch (error) {
+        console.error(error);
+      }
+    };  
+    
     const cellValue = bussiness.columnKey;
     switch (columnKey) {
       case "name":
@@ -80,11 +97,24 @@ export default function NegocioTable({ bussinessList }) {
         return <p>{bussiness.province || "N/A"}</p>;
       case "phone":
         return <p>{bussiness.phone_number || "N/A"}</p>;
+
+        case "privileges":
+          return (
+            <Input
+              type="number"
+              defaultValue={bussiness.privileges}
+              onChange={(event) => handlePrivilegesChange(event, bussiness.id)}
+            />
+          );
+        
+         
+
       case "actions":
         return (
           <div className="relative flex items-center gap-2">
             <div>
-              <Tooltip color="primary" content="Active or deactive">
+            
+              <Tooltip color="primary" content="Activar o desactivar negocio">
                 <span className="text-lg text-danger cursor-pointer active:opacity-50">
                   <Checkbox
                     isSelected={bussiness.isActive}
@@ -95,8 +125,14 @@ export default function NegocioTable({ bussinessList }) {
                 </span>
               </Tooltip>
             </div>
-            <Tooltip color="danger" content="Delete business">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+            <Tooltip color="danger" content="Eliminar negocio">
+              <span
+                onClick={() => {
+                  setBussinessToDelete(bussiness);
+                  onOpen();
+                }}
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -112,14 +148,18 @@ export default function NegocioTable({ bussinessList }) {
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 4;
 
-  const pages = Math.ceil(bussinessList.length / rowsPerPage);
+  const filteredBussinessList = bussinessList.filter((bussiness) =>
+    bussiness.name.toLowerCase().includes(filterValue.toLowerCase())
+  );
+
+  const pages = Math.ceil(filteredBussinessList.length / rowsPerPage);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return bussinessList.slice(start, end);
-  }, [page, bussinessList]);
+    return filteredBussinessList.slice(start, end);
+  }, [page, filteredBussinessList]);
 
   const onSearchChange = React.useCallback((value) => {
     if (value) {
@@ -147,7 +187,7 @@ export default function NegocioTable({ bussinessList }) {
           placeholder="Search by name..."
           startContent={<SearchIcon />}
           value={filterValue}
-          onClear={() => onClear()}
+          onClear={() => onSearchChange("")}
           onValueChange={onSearchChange}
         />
         <Table
@@ -190,6 +230,12 @@ export default function NegocioTable({ bussinessList }) {
             )}
           </TableBody>
         </Table>
+        <DeleteBussinessModal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          bussinessToDelete={bussinessToDelete}
+          getAllBussinesses={getAllBussinesses}
+        />
       </div>
     </div>
   );

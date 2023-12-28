@@ -4,35 +4,32 @@ import TituloDeProductos from "./TituloDeProductos";
 import "./productos.css";
 import "./responsive.css";
 import { grid_3_col } from "../../styles/styles";
-import { useCartStore } from "../../../hooks/useStore";
+import { useCartStore } from "../../../hooks/useStore";import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import 'swiper/css/grid';
 
-// Envolviendo el componente Producto con React.memo
-const ProductoMemo = memo(Producto);
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
 
 export default function ListadoProductos(props) {
   const list = props.lista;
   const [carrito, setCarrito] = useState([]);
-  //const [lastViewedTitle, setLastViewedTitle] = useState([]);
   const carrito2 = useCartStore((state) => state.cart);
   const setCarrito2 = useCartStore((state) => state.setCart);
 
   const changeTitle = (title) => {
-    //setLastViewedTitle(title);
-    //alert(title)
     props.onChangeTitle(title);
   };
 
   const handleAddToCart = (carrito) => {
     carrito2.push(carrito);
-    //props.onChangeCarrito(carrito2)
-
-    //console.log(carrito2)
   };
-
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado
   const renderProducto = useCallback(
     (item, index) => (
-      <ProductoMemo
+      <SwiperSlide>
+      <Producto
         key={item.id}
         index={index}
         img={item.image}
@@ -43,21 +40,57 @@ export default function ListadoProductos(props) {
         description={item.description}
         localizacion={props.localizacion}
         onChangeCarrito={handleAddToCart}
-      ></ProductoMemo>
+        isRecomended={item.isRecomended}
+        url={props.url}
+      ></Producto>
+      </SwiperSlide>
     ),
     [props.nombre, props.localizacion]
   );
 
   return (
     <div>
+      
       <TituloDeProductos
         title={props.title}
         onChangeTitle={changeTitle}
       ></TituloDeProductos>
 
-      <div className="mt-2 list-container-products" style={grid_3_col}>
+      {/* <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
         {list.map(renderProducto)}
-      </div>
+      </div> */}
+      
+      <Swiper
+        spaceBetween={0}
+        pagination = {false}
+        navigation={false}
+        modules={[Pagination, Navigation, HashNavigation, Autoplay]}
+        className="slider-negocios"
+        breakpoints={{
+          160: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+            711: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            
+            1020: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
+          loop={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+      >
+          {list.map(renderProducto)}
+      </Swiper>
     </div>
   );
 }
+
+

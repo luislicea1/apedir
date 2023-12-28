@@ -4,22 +4,24 @@ import ProductCard from "./ProductCard";
 import { Button } from "@nextui-org/react";
 import { EditIcon } from "../Icons/Edit/EditIcon";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
-import { grid_3_col, grid_1_col } from "../styles/styles";
+import { grid_1_col, grid_2_col } from "../styles/styles";
+import { toast } from "sonner";
 
 export default function CategoryContainer({
+  user,
   category,
   products,
   onOpen,
   setProductInput,
   onProductEditOpen,
   onProductDeleteOpen,
-  setCategoryInput,
+  categoryInput,
   onCategoryEditOpen,
   onCategoryDeleteOpen,
 }) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(window.screen.width);
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.screen.width);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -42,6 +44,12 @@ export default function CategoryContainer({
           color="secondary"
           variant="shadow"
           onClick={() => {
+            if (products.length === 3 && user.plan === "gratis") {
+              toast.error(
+                "Ha excedido el máximo de productos que puede añadir con su plan."
+              );
+              return;
+            }
             setProductInput((prevState) => {
               const updatedState = {
                 ...prevState,
@@ -59,14 +67,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-default-500 cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput((prevState) => {
-                  const updatedState = {
-                    ...prevState,
-                    id: category.id,
-                    category: category.category,
-                  };
-                  return updatedState;
-                });
+                categoryInput.current = {
+                  ...categoryInput.current,
+                  id: category.id,
+                  category: category.category,
+                };
                 onCategoryEditOpen();
               }}
             >
@@ -77,14 +82,11 @@ export default function CategoryContainer({
             <span
               className="text-lg text-danger cursor-pointer active:opacity-50"
               onClick={() => {
-                setCategoryInput((prevState) => {
-                  const updatedState = {
-                    ...prevState,
-                    id: category.id,
-                    category: category.category,
-                  };
-                  return updatedState;
-                });
+                categoryInput.current = {
+                  ...categoryInput.current,
+                  id: category.id,
+                  category: category.category,
+                };
                 onCategoryDeleteOpen();
               }}
             >
@@ -96,9 +98,8 @@ export default function CategoryContainer({
 
       <div
         className="mt-2 list-container"
-        style={windowWidth < 800 ? grid_1_col : grid_3_col}
+        style={windowWidth < 800 ? grid_1_col : grid_2_col}
       >
-        {/* <div className="mt-2 list-container" style={grid_3_col }> */}
         {products.map((product, index) => (
           <ProductCard
             price={product.price}
@@ -115,6 +116,7 @@ export default function CategoryContainer({
             setProductInput={setProductInput}
             onProductEditOpen={onProductEditOpen}
             isAvalaible={product.isAvalaible}
+            isRecomended={product.isRecomended}
           />
         ))}
       </div>

@@ -1,5 +1,6 @@
 import supabase from "./client";
 import { uploadImage } from "./images";
+import { getImage } from "./bussiness";
 
 const addProduct = async (product) => {
   const { data, error } = await supabase
@@ -13,6 +14,14 @@ const updateAvailability = async (id, status) => {
   const { data, error } = await supabase
     .from("products")
     .update({ isAvalaible: status })
+    .eq("id", id)
+    .select();
+};
+
+const updateRecomended = async (id, status) => {
+  const { data, error } = await supabase
+    .from("products")
+    .update({ isRecomended: status })
     .eq("id", id)
     .select();
 };
@@ -125,10 +134,51 @@ const deleteProductById = async (id) => {
   await supabase.from("products").delete().eq("id", id);
 };
 
+const getAllProductsVipsFirst = async () => {
+  const { data, error } = await supabase.from("products").select(`
+    id,
+    name,
+    image,
+    description,
+    price,
+    currency,
+    category(id, category, bussiness(*))`)
+  if (error) {
+    console.log(error)
+    return
+  }
+  if (data) {
+    const novedades = await Promise.all(data.map(async (item) => {
+      
+      const pic = await getImage('products', item.image);
+
+      return {
+        id: item.id,
+        name: item.name,
+        category: item.category.category,
+        image: pic,
+        price: item.price,
+        currency: item.currency,
+        url: item.category.bussiness.value_url,
+        order: item.category.bussiness.privileges
+      };
+    }));
+
+    return novedades.sort((a,b) => {
+      if(a.order < b.order) return 1
+      if(a.order == b.order) return 0
+      if(a.order > b.order) return -1
+    });
+  }
+}
+
+
 export {
   addProduct,
   getProducts,
   updateAvailability,
   updateProduct,
   deleteProductById,
+  updateRecomended,
+  getAllProductsVipsFirst,
 };

@@ -20,12 +20,17 @@ import InputPhoneNumber from "./Inputs/InputPhoneNumber";
 import { deleteEvent, upsertEvent } from "../../api/events";
 import { DeleteIcon } from "../Icons/DeleteIcon/DeleteIcon";
 import Loader from "../Loader/Loader";
+import { getEventsfromBussiness } from "../../api/events";
+import { merchantEvents } from "../../hooks/useStore";
 
-export default function EventCard({ bussinessId, event }) {
+export default function EventCard({ bussinessId, event, bussiness }) {
+  const setEvents = merchantEvents((state) => state.setEvents);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const [imageName, setImageName] = useState("");
   const [image, setImage] = useState(null);
+  const [render, setRender] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const defaultEventValues = {
     id: "",
     bussiness:
@@ -37,32 +42,49 @@ export default function EventCard({ bussinessId, event }) {
     phone_number: "",
   };
 
-  const [eventInput, setEventInput] = useState(
+  const fetchEvents = async () => {
+    const eventList = await getEventsfromBussiness(bussinessId);
+    setEvents(eventList);
+  };
+
+  const eventInput = React.useRef(
     event !== null && event !== undefined ? event : defaultEventValues
   );
 
   const handleDelete = async () => {
+    setIsDeleting(true);
+    console.log(event.id);
     await deleteEvent(event.id);
+    console.log("here");
+    await fetchEvents();
+    setIsDeleting(false);
   };
 
   const handleAddEvent = async () => {
     setIsLoading(true);
     let eventImage = "";
     if (
-      eventInput.image !== null &&
-      (eventInput.image !== "") & (eventInput.image instanceof Blob)
+      eventInput.current.image !== null &&
+      (eventInput.current.image !== "") &
+        (eventInput.current.image instanceof Blob)
     ) {
-      await removeImage(eventInput.image, "events");
-      eventImage = await uploadImage(eventInput.image, imageName, "events");
+      await removeImage(eventInput.current.image, "events");
+      eventImage = await uploadImage(
+        eventInput.current.image,
+        imageName,
+        "events"
+      );
       eventImage = eventImage !== null ? eventImage.path : "";
     }
     const updatedEvent = {
-      ...eventInput,
+      ...eventInput.current,
       image: eventImage,
     };
+
     await upsertEvent(updatedEvent);
     toast.success("Evento actualizado satisfactoriamente");
     setIsLoading(false);
+    await fetchEvents();
   };
 
   const handleImageChange = async (event) => {
@@ -74,16 +96,14 @@ export default function EventCard({ bussinessId, event }) {
       const lowerCaseExtension = extension.toLowerCase();
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
-      const resizedImage = await resizeImage(file, 800, 800);
+      const resizedImage = await resizeImage(file, 500, 500);
 
       setImageName(newFileName);
-      setEventInput((prevState) => {
-        const updatedState = {
-          ...prevState,
-          image: resizedImage,
-        };
-        return updatedState;
-      });
+      eventInput.current = {
+        ...eventInput.current,
+        image: resizedImage,
+      };
+      setRender((render) => render + 1);
     }
   };
   return (
@@ -109,12 +129,13 @@ export default function EventCard({ bussinessId, event }) {
         variant="bordered"
         placeholder="Escribe el nombre del evento"
         labelPlacement="outside"
-        value={eventInput.name}
+        value={eventInput.current.name}
         onChange={(event) => {
-          setEventInput({
-            ...eventInput,
+          eventInput.current = {
+            ...eventInput.current,
             name: event.target.value,
-          });
+          };
+          setRender((render) => render + 1);
         }}
       />
       <div>
@@ -131,7 +152,7 @@ export default function EventCard({ bussinessId, event }) {
             width={272}
             height={272}
             alt="Imagen del evento"
-            src={image || eventInput.image}
+            src={image || eventInput.current.image}
           />
         </div>
 
@@ -152,12 +173,13 @@ export default function EventCard({ bussinessId, event }) {
           style={{ width: "300px", height: "230px" }}
           placeholder="Escribe la descripción del evento"
           variant="bordered"
-          value={eventInput.description}
+          value={eventInput.current.description}
           onChange={(event) => {
-            setEventInput({
-              ...eventInput,
+            eventInput.current = {
+              ...eventInput.current,
               description: event.target.value,
-            });
+            };
+            setRender((render) => render + 1);
           }}
         />
       </div>
@@ -165,14 +187,11 @@ export default function EventCard({ bussinessId, event }) {
       <br />
 
       <div style={grid_2_col} className="mt-2 mb-2">
-        <InputGmail value={eventInput} setValue={setEventInput}></InputGmail>
-        <InputPhoneNumber
-          value={eventInput}
-          setValue={setEventInput}
-        ></InputPhoneNumber>
+        <InputGmail value={eventInput}></InputGmail>
+        <InputPhoneNumber value={eventInput}></InputPhoneNumber>
       </div>
       <br />
-      {isLoading && <Loader text={"Espere mientras se crea el evento"}/>}
+      {isLoading && <Loader text={"Espere mientras se crea el evento"} />}
       <Button
         color="secondary"
         className="text-white mt-2"
@@ -191,11 +210,17 @@ export default function EventCard({ bussinessId, event }) {
                 <p>Si eliminas este evento no podrás recuperarlo.</p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onClick={onClose}>
+                <Button color="danger" variant="flat" onClick={onClose}>
                   cerrar
                 </Button>
-                <Button color="primary" onClick={handleDelete}>
-                  Eliminar
+                <Button
+                  color="primary"
+                  onClick={() => {
+                    handleDelete();
+                    onClose();
+                  }}
+                >
+                  {isDeleting ? "Eliminando..." : "Eliminar"}
                 </Button>
               </ModalFooter>
             </>

@@ -1,5 +1,5 @@
 import React from "react";
-import LogoImg from "../../assets/img/img (1).webp";
+import { getBussinessImage } from "../../api/bussiness";
 import { getEventByName } from "../../api/events";
 import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import EventoCard from "./EventoCard";
@@ -8,16 +8,14 @@ import DescripcionEvento from "./DescripcionDeEvento";
 import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
-
+import { useState } from "react";
 
 export default function VerEvento({ nombre }) {
- 
+  const [image, setImage] = useState(null);
   const sectionStyle2 = {
     width: "100%",
     maxWidth: "450px",
-
     height: "100vh",
-
     background: "#202632",
   };
   const sectionStyle = {
@@ -53,6 +51,8 @@ export default function VerEvento({ nombre }) {
     const fetchEvent = async () => {
       const e = await getEventByName(nombre);
       setEvent(e);
+      const img = await getBussinessImage(e.bussiness);
+      setImage(img);
     };
     fetchEvent();
   }, []);
@@ -62,7 +62,7 @@ export default function VerEvento({ nombre }) {
       <div style={sectionStyle2}>
         <section style={sectionStyle}>
           <HeaderNegocio
-            logo={LogoImg}
+            logo={image}
             nombre={nombre}
             horario={"no"}
             anterior={"/"}
@@ -74,7 +74,7 @@ export default function VerEvento({ nombre }) {
 
             <div style={sectionDescription}>
               <TituloEvento title={event.name}></TituloEvento>
-              <HorarioEvento></HorarioEvento>
+              {/* <HorarioEvento></HorarioEvento> */}
 
               <div style={overflow}>
                 <DescripcionEvento
@@ -82,11 +82,13 @@ export default function VerEvento({ nombre }) {
                 ></DescripcionEvento>
               </div>
               <p className="text-white">Teléfono: {event.phone_number}</p>
-              <BotonesEventos></BotonesEventos>
+              <BotonesEventos whatsapp = {event.phone_number}></BotonesEventos>
             </div>
           </section>
         </section>
       </div>
     </div>
-  ): <LoaderCompletePage />;
+  ) : (
+    <LoaderCompletePage />
+  );
 }

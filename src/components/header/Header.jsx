@@ -18,7 +18,7 @@ import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
 import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
 import Izquierda from "../Icons/Angulo/izquierda";
 import { MarginLeft30 } from "../styles/styles";
-import { useBussinessStore } from "../../hooks/useStore";
+import { useBussinessStore, useCartStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../api/client.jsx";
@@ -29,7 +29,7 @@ import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
 
-export default function Header(props) {
+export default function Header() {
   const history = useHref();
   const [isBussiness, setIsBussiness] = useState(false);
   const [session, setSession] = useState(null);
@@ -37,11 +37,15 @@ export default function Header(props) {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+  const setCarrito = useCartStore((state) => state.setCart);
 
   useEffect(() => {
     const path = history.split("/");
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
+      if (bussinessData?.value_url !== selectedBussiness?.value_url) {
+        setCarrito([]);
+      }
       setSelectedBussiness(bussinessData);
     };
 
@@ -92,6 +96,7 @@ export default function Header(props) {
     fetchBussiness();
   }, [user]);
 
+  
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
@@ -114,7 +119,7 @@ export default function Header(props) {
               >
                 {selectedBussiness.name}
               </p>
-              <AbiertoCerrado />
+              <AbiertoCerrado horario = {selectedBussiness?.schedules}/>
             </div>
           </>
         ) : (
@@ -122,22 +127,14 @@ export default function Header(props) {
         )}
       </NavbarBrand>
 
-      {!isBussiness && (
-        // <React.Suspense fallback={<div></div>}>
-        <SelectProvincia />
-        // </React.Suspense>
-      )}
+      {!isBussiness && <SelectProvincia />}
 
       {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
-          {isBussiness && (
-            // <React.Suspense fallback={<div></div>}>
-            <Carrito></Carrito>
-            // </React.Suspense>
-          )}
-          {/* <React.Suspense fallback={<div></div>}> */}
+          {isBussiness &&
+            selectedBussiness &&
+            selectedBussiness.delivery == true && <Carrito></Carrito>}
           <Notification />
-          {/* </React.Suspense> */}
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
@@ -159,7 +156,7 @@ export default function Header(props) {
                 className="h-14 gap-4"
               >
                 <p className="font-semibold">{user?.email}</p>
-                <p className="font-semibold">Plan: PREMIUM</p>
+                <p className="font-semibold">Plan: {user?.plan}</p>
               </DropdownItem>
 
               {selectedBussiness === undefined && selectedBussiness !== null ? (

@@ -39,12 +39,13 @@ export const titleStyles = {
 
 export const PortadaDeNegocioStyles = {
   width: "100%",
-  height: "60vh",
+  height: "300px",
   display: "grid",
   //placeItems: "center",
   background: "#ECECEE",
+  overflow: "hidden",
   position: "relative",
-  overflow: "hidden"
+  placeItems: "center"
 };
 
 /***********GRID FLEX************************************* */
@@ -53,6 +54,13 @@ export const grid_1_col = {
   display: "grid",
   gridTemplateColumns: "repeat(1,1fr)",
   gap: "20px",
+};
+export const grid_1_col_center= {
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(1,1fr)",
+  gap: "20px",
+  placeItems: "center",
 };
 export const grid_2_col = {
   width: "100%",
@@ -122,30 +130,38 @@ export const CardStyles = {
   //maxWidth: "300px",
   width: "100%",
   //maxHeight: "400px",
-  padding: "2px"
+  padding: "2px",
+  
 };
 
 export const CardStyles2 = {
   width: "100%",
   height: "100%",
-  maxHeight: "550px",
-  paddingBottom: "10px"
+  // maxHeight: "550px",
+  paddingBottom: "10px",
+  position: "relative"
 };
 export const ImgCardStyle = {
   width: "100%",
   height: "100%",
   minHeight: "100px",
+  maxHeight: "288px",
   //minWidth: "20vw",
   display: "grid",
-  placeItems: "center",
+  placeItems: "start",
   borderRadius: "10px",
 };
 
 export const ImgCardStyle2 = {
   width: "100%",
   height: "100%",
+  //aspectRatio: "1/1",
   display: "grid",
   borderRadius: "10px",
+  maxHeight: "288px",
+  placeItems: "start",
+  //overflow: "hidden"
+  background: "gray"
 };
 export const ImgStyle = {
   minHeight: "200px",
@@ -157,14 +173,25 @@ export const LogoStyle = {
   width: "100%",
   aspectRatio: "1 / 1",
   borderRadius: "10px",
- 
+  maxHeight: "272px"
 }
 export const ProductoStyle = {
-  width: "100%",
+  height: "226px",
+  //width: "100%",
   aspectRatio: "1/1",
-  borderRadius: "10px 10px 0 0",
+  maxHeight: "226px",
+  borderRadius: "10px 10px 10px 10px",
  
 }
+
+// export const ProductoStyle = {
+//   width: "100%",
+//   height: "140px",
+//   //aspectRatio: "1/1",
+//   borderRadius: "10px",
+//   border: "1px solid #e5e7eb",
+
+// }
 export const no_shadow = {
   boxShadow: "none",
   border: "none",
@@ -188,7 +215,7 @@ export const EventoCardStyles = {
   background: "transparent",
 };
 export const eventoMargin = {
-  margin: "30px 5px 30px 5px",
+  margin: "20px 5px 20px 0px",
 };
 export const badge = {
   width: "50px",
@@ -242,9 +269,10 @@ export const ImagenFooter = {
 };
 
 export const Imagen100pcCover = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
+  // width: "100%",
+  height: "300px",
+  objectFit: "contain",
+  borderRadius: "10px"
 };
 
 export const Imagen100pc400H = {

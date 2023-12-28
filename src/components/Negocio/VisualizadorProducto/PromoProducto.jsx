@@ -4,6 +4,7 @@ import CampanaIcon from "../../Icons/Campana/CampanaIcon";
 import { NotificationIcon } from "../../Icons/NotificationIcon";
 import RelojIcon from "../../Icons/Reloj/RelojIcon";
 import { Card } from "@nextui-org/react";
+import ShareLink from "../Share/ShareLink";
 
 export default function PromoProducto(props) {
   const glass = {
@@ -45,9 +46,9 @@ export default function PromoProducto(props) {
     >
       <Like></Like>
 
-      <Card style={card}>
-        <RelojIcon w={"26px"}></RelojIcon>
-      </Card>
+      
+        <ShareLink url = {props.url}></ShareLink>
+      
       <Card style={card}>
         <NotificationIcon width={"26px"}></NotificationIcon>
       </Card>

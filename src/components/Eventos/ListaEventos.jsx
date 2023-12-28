@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, Suspense } from "react";
+import React, { useEffect, useRef } from "react";
 import { getAllEvents } from "../../api/events";
-
+import { Empty } from 'antd';
 import Eventos from "./Eventos";
 import { eventsStore } from "../../hooks/useStore";
-
-const renderLoader = () => <p>Loading</p>;
+import { grid_center } from "../styles/styles";
+import SliderEventos from "./SliderEventos/SliderEventos";
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
@@ -55,24 +55,22 @@ export default function ListadoDeEventos() {
 
   // const eventos = props.eventos;
   return (
-    <Suspense fallback={renderLoader()}>
-      <div
-        className="list-container"
-        style={listContainerStyle}
-        ref={listContainer}
-      >
-        {events &&
-          events.length > 0 &&
-          events.map((evento, index) => (
-            <Eventos
-              key={index}
-              nombre={evento.name}
-              // localizacion={evento.localizacion}
-              //numeroPersonas = {evento.numeroPersonas}
-              imagen={evento.image}
-            />
-          ))}
-      </div>
-    </Suspense>
+    <div
+      className="list-container"
+      style={listContainerStyle}
+      ref={listContainer}
+    >
+      {/* {events && events.length > 0 ? (
+        events.map((evento, index) => (
+          <Eventos key={index} nombre={evento.name} imagen={evento.image} />
+        ))
+      ) : (
+        <div style={{...grid_center, width: "100%"}}>
+           <Empty />
+        </div>  
+      
+      )} */}
+      <SliderEventos></SliderEventos>
+    </div>
   );
 }

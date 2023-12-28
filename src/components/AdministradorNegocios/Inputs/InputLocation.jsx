@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function InputLocation({ setImageName, value, setValue }) {
   const [locationImage, setLocationImage] = useState(null);
+  const [render, setRender] = useState(0);
 
   const handleImageUpload = async (event) => {
     const imageUrl = URL.createObjectURL(event.target.files[0]);
@@ -27,15 +28,12 @@ export default function InputLocation({ setImageName, value, setValue }) {
 
         return updatedState;
       });
-      setValue((prevState) => {
-        const updatedState = {
-          ...prevState,
-          gps_location: resizedImage,
-        };
-
-        return updatedState;
-      });
+      value.current = {
+        ...value.current,
+        gps_location: resizedImage,
+      };
     }
+    setRender((render) => render + 1);
   };
 
   const white = {
@@ -74,21 +72,19 @@ export default function InputLocation({ setImageName, value, setValue }) {
         label="Localización"
         placeholder="Inserte la localización de su negocio"
         labelPlacement="outside"
-        value={value.address}
+        value={value.current.address}
         onChange={(event) => {
-          setValue({
-            ...value,
+          value.current = {
+            ...value.current,
             address: event.target.value,
-          });
+          };
+          setRender((render) => render + 1);
         }}
       />
       <div />
       <div style={grid2}>
         <label>Provincia</label>
-        <SelectorProvincia
-          value={value}
-          setValue={setValue}
-        ></SelectorProvincia>
+        <SelectorProvincia value={value}></SelectorProvincia>
       </div>
 
       <div />
@@ -96,7 +92,7 @@ export default function InputLocation({ setImageName, value, setValue }) {
         <div>
           <div style={contenedor}>
             <Image
-              src={locationImage || value.gps_location}
+              src={locationImage || value.current.gps_location}
               style={imagenLogo}
               alt="localizacion del negocio"
             />

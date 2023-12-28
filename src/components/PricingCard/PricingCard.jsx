@@ -9,27 +9,28 @@ import {
 } from "@nextui-org/react";
 import DeniedIcon from "../Icons/DeniedIcon";
 import CheckIcon from "../Icons/CheckIcon";
-import { Link } from "react-router-dom";
+//import { Button } from "react-router-dom";
 import { flex_center } from "../styles/styles";
+import { Button } from "@nextui-org/react";
 export default function PricingCard({
   img,
   name,
   price,
-  bussiness_num,
+  //bussiness_num,
   front_pic,
   perfil_pic,
   description,
   product_num,
   delivery,
-  open_hour,
-  close_hour,
+  //open_hour,
+  //close_hour,
   social_media,
   phone_number,
   email,
   gps_location,
   event_post,
   booking,
-  priorize,
+  //priorize,
 }) {
   const customText = {
     // color: "#9353d3",
@@ -37,6 +38,15 @@ export default function PricingCard({
     fontWeight: "bold",
     marginLeft: "5px",
     marginRight: "5px",
+  };
+
+  //const numero = 55971705
+  const mensaje = `Buenas estoy interesado en un paquete ${name}`
+
+  const enviarMensaje = () => {
+    const numero = "55971705";
+    const url = `https://wa.me/${numero}?text=${mensaje}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -170,7 +180,7 @@ export default function PricingCard({
             marginBottom: "5px",
           }}
         >
-          <Link
+          <Button
             style={{
               padding: "10px 20px",
               backgroundColor: "#5E17EB",
@@ -178,9 +188,10 @@ export default function PricingCard({
               fontWeight: "bold",
               borderRadius: "10px",
             }}
+            onClick={enviarMensaje}
           >
             Comprar ahora
-          </Link>
+          </Button>
         </CardFooter>
       </Card>
     </Suspense>

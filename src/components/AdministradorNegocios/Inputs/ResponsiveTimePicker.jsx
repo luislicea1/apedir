@@ -1,11 +1,15 @@
 import React, { useState, useCallback, lazy, Suspense } from "react";
 import dayjs from "dayjs";
 import { TimePicker } from "antd";
-import { Card } from "@nextui-org/react";
-import { Checkbox } from "@nextui-org/react";
-import { useBussinessStore } from "../../../hooks/useStore";
-import { getSchedule, updateBussinessSchedule } from "../../../api/bussiness";
-import "./input.css"
+import { Checkbox, Card, Button } from "@nextui-org/react";
+import { useBussinessStore, useUserStore } from "../../../hooks/useStore";
+import {
+  getOneBussiness,
+  getSchedule,
+  updateBussinessSchedule,
+} from "../../../api/bussiness";
+import "./input.css";
+import Loader from "../../Loader/Loader";
 
 const format = "HH:mm";
 
@@ -92,6 +96,9 @@ const CardComponent = React.memo(function CardComponent({
 
 export default function ResponsiveTimePickers() {
   const bussiness = useBussinessStore((state) => state.bussiness);
+  const setBussiness = useBussinessStore((state) => state.setBussiness);
+  const [loading, setLoading] = useState(false);
+  const user = useUserStore((state) => state.user);
   const [dias, setDias] = useState([
     { dia: "Lunes", entrada: "8:00", salida: "20:00", trabaja: true },
     { dia: "Martes", entrada: "8:00", salida: "20:00", trabaja: true },
@@ -104,22 +111,36 @@ export default function ResponsiveTimePickers() {
   ]);
 
   React.useEffect(() => {
+    let b = bussiness;
     const fetchScheduleFromBussiness = async () => {
-      const schedules = await getSchedule(bussiness.id);
-      setDias(schedules);
-      console.log(schedules);
+      if (bussiness === null) {
+        b = await getOneBussiness(user.id);
+        setBussiness(b);
+      }
+      const schedules = await getSchedule(b.id);
+      if (schedules) {
+        setDias(schedules);
+      }
     };
-
-    fetchScheduleFromBussiness();
+    return () => fetchScheduleFromBussiness();
   }, []);
 
   const handleClick = async () => {
-    console.log("updated");
+    setLoading(true);
     await updateBussinessSchedule(bussiness.id, dias);
+    setLoading(false);
   };
 
   return (
     <div style={gridContainer}>
+      <Button variant="shadow" color="primary" onClick={handleClick}>
+        Actualizar horarios
+      </Button>
+      {loading && (
+        <Loader
+          text={"Actualizando los horarios del negocio, por favor espere..."}
+        />
+      )}
       {dias.map((dia, index) => (
         <CardComponent
           key={index}
@@ -129,7 +150,6 @@ export default function ResponsiveTimePickers() {
           setDias={setDias}
         />
       ))}
-      <button onClick={handleClick}>Actualizar horarios</button>
     </div>
   );
 }

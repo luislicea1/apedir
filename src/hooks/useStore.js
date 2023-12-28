@@ -1,4 +1,12 @@
 import { create } from "zustand";
+import { createClient } from "@supabase/supabase-js";
+
+const useSupabase = create((set) => ({
+  supabase: createClient(
+    import.meta.env.VITE_APP_SUPABASE_URL,
+    import.meta.env.VITE_APP_SUPABASE_ANON_KEY
+  ),
+}));
 
 const useUserStore = create((set) => ({
   user: null,
@@ -55,6 +63,22 @@ const merchantEvents = create((set) => ({
   setEvents: (b) => set({ events: b }),
 }));
 
+const usePlan = create((set) => ({
+  plan: null,
+  setPlan: (p) => set({ plan: p }),
+}));
+
+const useVipBussiness = create((set) => ({
+  vipBussiness: null,
+  setVipBussiness: (b) => set({ vipBussiness: b }),
+}));
+
+const merchantNovedades = create((set) => ({
+  novedades: [],
+  setNovedades: (b) => set({ novedades: b }),
+}));
+
+
 export {
   useUserStore,
   merchantEvents,
@@ -67,4 +91,8 @@ export {
   useProductsList,
   useCartStore,
   eventsStore,
+  useSupabase,
+  usePlan,
+  useVipBussiness,
+  merchantNovedades
 };

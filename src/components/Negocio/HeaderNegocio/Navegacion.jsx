@@ -4,6 +4,7 @@ export default function Navegacion(props) {
   const listContainer = useRef(null);
   const activeLinkRef = useRef(null);
   const lastViewedTitle = props.lastViewedTitle;
+  const [activeTitle, setActiveTitle] = React.useState(null);
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -35,7 +36,6 @@ export default function Navegacion(props) {
     height: "3rem",
     top: "4rem",
     zIndex: "40",
-    
   };
 
   const flex = {
@@ -71,7 +71,10 @@ export default function Navegacion(props) {
   }, [lastViewedTitle]);
 
   return links !== null ? (
-    <div style={navegacion} className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none sticky top-0 inset-x-0 border-b border-divider backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">
+    <div
+      style={navegacion}
+      className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none sticky top-0 inset-x-0 border-b border-divider backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
+    >
       <nav className="flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 ">
         <div className="flex z-40 w-full h-auto data-[menu-open=true]:border-none inset-x-0  data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 ">
           <div style={flex} ref={listContainer}>
@@ -80,11 +83,12 @@ export default function Navegacion(props) {
                 <li key={index}>
                   <a
                     ref={(ref) => {
-                      if (link.category === lastViewedTitle) {
+                      if (link.category === lastViewedTitle || link.category === activeTitle) {
                         activeLinkRef.current = ref;
                       }
                     }}
                     href={`#${link.category}`}
+                    onClick={() => setActiveTitle(link.category)}
                     style={{
                       color:
                         link.category === lastViewedTitle ? "white" : "black",

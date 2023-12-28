@@ -2,6 +2,22 @@ import supabase from "./client";
 import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
 
+const getBussinessName = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("name")
+    .eq("id", bussinessId);
+  return data.name;
+};
+
+const getBussinessUrl = async (bussinessId) => {
+  const { data, err } = await supabase
+    .from("bussiness")
+    .select("value_url")
+    .eq("id", bussinessId);
+  return data[0].value_url;
+};
+
 const upsertBussiness = async (bussiness) => {
   let bussinessToInsert = Object.keys(bussiness).reduce((acc, key) => {
     if (bussiness[key] !== null && bussiness[key] !== "") {
@@ -25,12 +41,31 @@ const upsertBussiness = async (bussiness) => {
 
 const getImage = async (bucket, path) => {
   let { data, ef } = supabase.storage.from(bucket).getPublicUrl(path);
-
   return data.publicUrl;
 };
 
-const getOneBussiness = async (ownerId) => {
+const getBussinessImage = async (id) => {
   let { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("id", id);
+
+  if (data && data[0]) {
+    if (data[0].perfil_pic) {
+      const perfil_pic = await getImage("bussiness_perfil", data[0].perfil_pic);
+
+      return perfil_pic;
+    }
+  }
+};
+
+const getAllBussinessUrl = async () => {
+  const { data } = await supabase.from("bussiness").select("id, value_url")
+  return data
+}
+
+const getOneBussiness = async (ownerId) => {
+  let { data } = await supabase
     .from("bussiness")
     .select("*")
     .eq("owner", ownerId);
@@ -53,9 +88,39 @@ const getOneBussiness = async (ownerId) => {
       );
       data[0].gps_location = gps_location;
     }
-
     return data[0];
   }
+};
+
+const getAllBussinessFromUser = async (ownerId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select("*")
+    .eq("owner", ownerId);
+  const businessesWithImages = await Promise.all(
+    data.map(async (business) => {
+      // const stars = await getStarsFromBussiness(business.id);
+      const front_pic = await getImage("bussiness_front", business.front_pic);
+      const perfil_pic = await getImage(
+        "bussiness_perfil",
+        business.perfil_pic
+      );
+      const gps_location = await getImage(
+        "bussiness_location",
+        business.gps_location
+      );
+
+      return {
+        ...business,
+        front_pic,
+        perfil_pic,
+        gps_location,
+      };
+    })
+  );
+
+  // Actualiza el estado con los nuevos elementos
+  return businessesWithImages;
 };
 
 const updateBussinessSchedule = async (bussinessId, schedules) => {
@@ -79,7 +144,8 @@ const loadMoreBussiness = async (
     .from("bussiness")
     .select("*")
     .eq("isActive", true)
-    .range(offset, offset + 19);
+    .range(offset, offset + 19)
+    .order("privileges", { ascending: false });
 
   if (error) {
     console.error(error);
@@ -154,7 +220,6 @@ const fetchAllBussiness = async () => {
     })
   );
 
-  // Actualiza el estado con los nuevos elementos
   return businessesWithImages;
 };
 
@@ -167,7 +232,6 @@ const fetchBussinessPerProvince = async (province) => {
 
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
-      // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
@@ -180,7 +244,6 @@ const fetchBussinessPerProvince = async (province) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -199,7 +262,6 @@ const fetchBussinessPerName = async (name) => {
 
   const businessesWithImages = await Promise.all(
     data.map(async (business) => {
-      // const stars = await getStarsFromBussiness(business.id);
       const front_pic = await getImage("bussiness_front", business.front_pic);
       const perfil_pic = await getImage(
         "bussiness_perfil",
@@ -212,7 +274,6 @@ const fetchBussinessPerName = async (name) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -243,7 +304,6 @@ const fetchBussinessPerURL = async (valueUrl) => {
 
       return {
         ...business,
-        // stars,
         front_pic,
         perfil_pic,
         gps_location,
@@ -265,12 +325,194 @@ const getSchedule = async (bussinessId) => {
   else return null;
 };
 
+const getSocialMedia = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select(
+      "telegram_link, facebook,whatsapp, instagram, linkedin, threads, twitter, youtube, email, phone_number"
+    )
+    .eq("id", bussinessId);
+
+  if (error) console.log(error);
+  return data;
+};
+
 const setIsActive = async (bussinessId, isActive) => {
   const { data, error } = await supabase
     .from("bussiness")
     .update({ isActive: isActive })
     .eq("id", bussinessId);
   if (error) console.error(error);
+};
+
+const setBussinessPrivileges = async (bussinessId, newPrivileges) => {
+  try {
+    const { data, error } = await supabase
+      .from("bussiness")
+      .update({ privileges: newPrivileges })
+      .eq("id", bussinessId);
+
+    if (error) {
+      console.error(error);
+    } else {
+      console.log(
+        `Privileges updated successfully for business with ID ${bussinessId}`
+      );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export {
+  // ... (otras funciones)
+  setBussinessPrivileges,
+};
+
+const deleteBussinessById = async (businessId) => {
+  // Obtener las categorías del negocio dado
+  const { data: events, error: eventsError } = await supabase
+    .from("events")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: stars, error: starsError } = await supabase
+    .from("stars_rating")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: notifications, error: notificationErr } = await supabase
+    .from("notifications")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  const { data: categories, error: categoriesError } = await supabase
+    .from("categories")
+    .select("id")
+    .eq("bussiness", businessId);
+
+  if (starsError) return;
+
+  if (notificationErr) return;
+
+  if (categoriesError) {
+    console.error(categoriesError);
+    return;
+  }
+
+  // Obtener los productos de las categorías del negocio dado
+  const { data: products, error: productsError } = await supabase
+    .from("products")
+    .select("id")
+    .in(
+      "category",
+      categories.map((category) => category.id)
+    );
+
+  if (productsError) {
+    console.error(productsError);
+    return;
+  }
+
+  // Borrar los productos del negocio dado
+  const { error: deleteProductsError } = await supabase
+    .from("products")
+    .delete()
+    .in(
+      "id",
+      products.map((product) => product.id)
+    );
+
+  if (deleteProductsError) {
+    console.error(deleteProductsError);
+    return;
+  }
+
+  // Borrar las categorías del negocio dado
+  const { error: deleteCategoriesError } = await supabase
+    .from("categories")
+    .delete()
+    .in(
+      "id",
+      categories.map((category) => category.id)
+    );
+
+  if (deleteCategoriesError) {
+    console.error(deleteCategoriesError);
+    return;
+  }
+
+  const { error: deleteEventsError } = await supabase
+    .from("events")
+    .delete()
+    .in(
+      "id",
+      events.map((event) => event.id)
+    );
+
+  if (deleteEventsError) {
+    console.log(deleteEventsError);
+    return;
+  }
+
+  const { error: deleteStarsError } = await supabase
+    .from("stars_rating")
+    .delete()
+    .in(
+      "id",
+      stars.map((star) => star.id)
+    );
+
+  if (deleteStarsError) {
+    console.log(deleteStarsError);
+    return;
+  }
+
+  const { error: deleteNotificationsError } = await supabase
+    .from("notifications")
+    .delete()
+    .in(
+      "id",
+      notifications.map((notification) => notification.id)
+    );
+
+  if (deleteNotificationsError) {
+    console.log(deleteNotificationsError);
+    return;
+  }
+
+  // Borrar el negocio dado
+  const { data: bussinessData, error: deleteBusinessError } = await supabase
+    .from("bussiness")
+    .delete()
+    .eq("id", businessId);
+
+  if (deleteBusinessError) {
+    console.error(deleteBusinessError);
+    return;
+  }
+};
+
+const bussinessNum = async (ownerId) => {
+  const { data, error } = await supabase
+    .from("bussiness")
+    .select()
+    .eq("owner", ownerId)
+    .count();
+
+  console.log(data);
+  return data;
+};
+
+const getSubscriptorsOfBussiness = async (bussinessId) => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select()
+    .contains("subscriptions", [bussinessId]);
+
+  if (error) console.error(error);
+  if (data == null) return 0;
+  return data.length;
 };
 
 export {
@@ -285,4 +527,13 @@ export {
   fetchBussinessPerURL,
   updateBussinessSchedule,
   getSchedule,
+  getBussinessImage,
+  getBussinessName,
+  getBussinessUrl,
+  getAllBussinessFromUser,
+  getSocialMedia,
+  deleteBussinessById,
+  bussinessNum,
+  getSubscriptorsOfBussiness,
+  getAllBussinessUrl
 };

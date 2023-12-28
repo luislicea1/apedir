@@ -39,6 +39,10 @@ const LazyEventManagement = lazy(() =>
   import("../components/AdministradorNegocios/EventManagement")
 );
 
+const LazyNovedadesManagement = lazy(() =>
+import("../components/AdministradorNegocios/NovedadesManagement")
+);
+
 const LazyProductsManagement = lazy(() =>
   import("../components/AdministradorNegocios/ManageProducts")
 );
@@ -186,7 +190,7 @@ const router = createBrowserRouter([
   {
     path: "/evento/:nombre",
     element: (
-      <Suspense fallback={<Loader text={"Cargando..."} />}>
+      <Suspense fallback={<LoaderCompletePage />}>
         <LazyVerEventoWrapper />
       </Suspense>
     ),
@@ -215,6 +219,10 @@ const router = createBrowserRouter([
       {
         path: "eventos",
         element: <LazyEventManagement />,
+      },
+      {
+        path: "novedades",
+        element: <LazyNovedadesManagement />,
       },
       {
         path: "productos",

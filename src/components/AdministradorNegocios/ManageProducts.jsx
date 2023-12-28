@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getProducts } from "../../api/products";
 import CategoryContainer from "./CategoryContainer";
 import { UploadIcon } from "../Icons/UploadIcon";
@@ -30,17 +30,18 @@ import { getCategories } from "../../api/categories";
 import {
   useBussinessStore,
   useCategoriesList,
+  usePlan,
   useProductsList,
   useUserStore,
 } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
+import { addNotification } from "../../api/notifications";
 
 export default function ManageProducts() {
   const user = useUserStore((state) => state.user);
-
+  const plan = usePlan((state) => state.plan);
   const bussiness = useBussinessStore((state) => state.bussiness);
   const setBussiness = useBussinessStore((state) => state.setBussiness);
-
   const categoriesGlobal = useCategoriesList((state) => state.categories);
   const setCategoriesGlobal = useCategoriesList((state) => state.setCategories);
   const productsGlobal = useProductsList((state) => state.products);
@@ -53,29 +54,35 @@ export default function ManageProducts() {
     categoriesGlobal !== null ? categoriesGlobal : []
   );
 
+  const categoryInput = useRef({
+    bussiness: bussiness ? bussiness.id : "",
+    category: "",
+  });
+
+  const [productInput, setProductInput] = useState({
+    name: "",
+    price: 0,
+    currency: "CUP",
+    description: "",
+    image: "",
+    category: "",
+    isAvalaible: true,
+  });
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const fetchBussiness = async () => {
-    if (user === null) return;
-
     const b = await getOneBussiness(user.id);
     setBussiness(b);
-    setCategoryInput((prev) => {
-      const newCat = {
-        ...prev,
-        bussiness: b.id,
-      };
-      return newCat;
-    });
+    categoryInput.current = {
+      ...categoryInput.current,
+      bussiness: b.id,
+    };
   };
 
   useEffect(() => {
-    if (bussiness === null) fetchBussiness();
+    if (bussiness === null && user) fetchBussiness();
   }, [user, bussiness]);
 
-  const [categoryInput, setCategoryInput] = useState({
-    bussiness: "",
-    category: "",
-  });
   const {
     isOpen: isProductModalOpen,
     onOpen: onProductModalOpen,
@@ -107,17 +114,7 @@ export default function ManageProducts() {
   } = useDisclosure();
 
   const [imageName, setImageName] = useState("");
-  const [productInput, setProductInput] = useState({
-    name: "",
-    price: "",
-    currency: "CUP",
-    description: "",
-    image: "",
-    category: "",
-    isAvalaible: true,
-  });
-
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [render, setRender] = useState(0);
 
   const fetchCategories = async () => {
     if (bussiness === null) return;
@@ -127,7 +124,7 @@ export default function ManageProducts() {
   };
 
   useEffect(() => {
-    fetchCategories();
+    if (bussiness) fetchCategories();
   }, [bussiness]);
 
   const fetchProducts = async () => {
@@ -141,45 +138,33 @@ export default function ManageProducts() {
     fetchProducts();
   }, [categories]);
 
-  useEffect(() => {
-    validateForm();
-  }, [productInput]);
-  // Recuperar los productos y las categorías
-
-  const validateForm = async () => {
-    try {
-      await ProductInputSchema.validate(productInput);
-      setIsFormValid(true);
-    } catch (error) {
-      setIsFormValid(false);
-    }
-  };
-
   const handleAddCategory = async () => {
-    if (categoryInput.category.trim() === "") {
+    if (categoryInput.current.category.trim() === "") {
       toast.error("El nombre de la categoría no puede estar vacío");
       return;
     }
 
-    await addCategory(categoryInput);
+    await addCategory(categoryInput.current);
 
-    setCategoryInput({
+    categoryInput.current = {
       bussiness: bussiness.id,
       category: "",
-    });
+    };
+
     await fetchCategories();
+    setRender((render) => render + 1);
   };
 
   const handleAddProduct = async () => {
-    // Añadiendo la imagen
-
-    if (!isFormValid) {
-      toast.error(
-        await ProductInputSchema.validate().catch((error) => error.message)
-      );
-
+    try {
+      await ProductInputSchema.validate(productInput, {
+        strict: true,
+      });
+    } catch (e) {
+      toast.error(e.message);
       return;
     }
+
     const insertedImage = await uploadImage(
       productInput.image,
       imageName,
@@ -191,6 +176,14 @@ export default function ManageProducts() {
       image: insertedImage.path,
     };
     await addProduct(updatedProductInput);
+
+    let notification = {
+      message: `El negocio ${bussiness.name} tiene un nuevo producto.`,
+      bussiness: bussiness.id,
+      addressee: null,
+      bussiness_link: bussiness.value_url,
+    };
+    await addNotification(notification);
 
     setProductInput({
       name: "",
@@ -250,6 +243,7 @@ export default function ManageProducts() {
         );
         return (
           <CategoryContainer
+            user={user}
             category={category}
             products={categoryProducts}
             onOpen={onProductModalOpen}
@@ -263,7 +257,6 @@ export default function ManageProducts() {
             productInput={productInput}
             setProductInput={setProductInput}
             categoryInput={categoryInput}
-            setCategoryInput={setCategoryInput}
             key={category.id}
           />
         );
@@ -271,7 +264,17 @@ export default function ManageProducts() {
 
       <label className="custum-file-upload" htmlFor="file">
         <div className="icon">
-          <CategoryIcon onOpen={onOpen} />
+          <CategoryIcon
+            onOpen={() => {
+              if (categories.length === 1 && user.plan === "gratis") {
+                toast.error(
+                  "Ha excedido la cantidad de categorias que se pueden añadir en su plan."
+                );
+                return;
+              }
+              onOpen();
+            }}
+          />
         </div>
         <div className="text">
           <span>Agregar nueva categoría</span>
@@ -291,6 +294,7 @@ export default function ManageProducts() {
                   <ModalBody>
                     <Input
                       autoFocus
+                      required
                       label="Nombre"
                       placeholder="Escribe el nombre del producto"
                       variant="bordered"
@@ -376,7 +380,7 @@ export default function ManageProducts() {
                         handleAddProduct();
                         onClose();
                       }}
-                      disabled={!isFormValid}
+                      // disabled={!isFormValid}
                     >
                       Agregar
                     </Button>
@@ -405,14 +409,13 @@ export default function ManageProducts() {
                       isRequired
                       placeholder="Escribe el nombre de la categoría"
                       variant="bordered"
-                      value={categoryInput.category}
-                      onChange={(event) =>
-                        setCategoryInput((prevState) => ({
-                          ...prevState,
-                          bussiness: bussiness.id,
+                      // value={categoryInput.current.category}
+                      onChange={(event) => {
+                        categoryInput.current = {
+                          ...categoryInput.current,
                           category: event.target.value,
-                        }))
-                      }
+                        };
+                      }}
                     />
                   </ModalBody>
                   <ModalFooter>
@@ -420,6 +423,7 @@ export default function ManageProducts() {
                       Cerrar
                     </Button>
                     <Button
+                      className="text-white"
                       color="secondary"
                       onPress={() => {
                         handleAddCategory();
@@ -440,11 +444,12 @@ export default function ManageProducts() {
             onOpenChange={onProductEditOpenChange}
             productInput={productInput}
             setProductInput={setProductInput}
-            setCategoryInput={setCategoryInput}
+            // setCategoryInput={setCategoryInput}
             handleImageChange={handleImageChange}
             imageName={imageName}
             setImageName={setImageName}
             fetchProducts={fetchProducts}
+            bussiness={bussiness}
           />
 
           <ModalEditCategory
@@ -452,7 +457,9 @@ export default function ManageProducts() {
             isOpen={isCategoryEditOpen}
             onOpenChange={onCategoryEditOpenChange}
             categoryInput={categoryInput}
-            setCategoryInput={setCategoryInput}
+            bussiness={bussiness}
+
+            // setCategoryInput={setCategoryInput}
           />
 
           <ModalDeleteProduct
@@ -461,6 +468,7 @@ export default function ManageProducts() {
             onOpenChange={onProductDeleteOpenChange}
             productToDelete={productInput}
             fetchProducts={fetchProducts}
+            bussiness={bussiness}
           />
           <ModalDeleteCategory
             isOpen={isCategoryDeleteOpen}
@@ -468,6 +476,7 @@ export default function ManageProducts() {
             onOpen={onCategoryDeleteOpen}
             fetchCategories={fetchCategories}
             onOpenChange={onCategoryDeleteOpenChange}
+            bussiness={bussiness}
           />
         </div>
       </label>

@@ -19,7 +19,7 @@ export default function DescripcionNegocio(props) {
 
   return (
     <>
-      <article className="mt-2">
+      {/* <article className="mt-2">
         {description}
         {words.length > 30 && (
           <button
@@ -30,7 +30,7 @@ export default function DescripcionNegocio(props) {
             {showFullDescription ? "Leer menos" : "Leer más"}
           </button>
         )}
-      </article>
+      </article> */}
       <BtnDescription
         contact={props.contact}
         suscrito={props.suscrito}
@@ -39,8 +39,11 @@ export default function DescripcionNegocio(props) {
         bussinessId={props.bussinessId}
         localizacion={props.localizacion}
         gps_location={props.gps_location}
+        delivery={props.delivery}
         like={props.like}
         url={props.url}
+        description = {description}
+        bussiness = {props.bussiness}
       ></BtnDescription>
     </>
   );

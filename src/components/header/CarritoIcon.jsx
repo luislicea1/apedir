@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "@nextui-org/react";
 import "./header.css";
-import { grid_4_col} from "../styles/styles";
+import { grid_4_col } from "../styles/styles";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
-import {
-  Button,
-} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { useCartStore } from "../../hooks/useStore";
 import {
   Modal,
@@ -17,6 +15,7 @@ import {
 } from "@nextui-org/react";
 import { Input, Textarea } from "@nextui-org/react";
 import { grid_1_col } from "../styles/styles";
+import { Toaster, toast } from "sonner";
 
 export default function Carrito() {
   const [isInvisible, setIsInvisible] = React.useState(false);
@@ -24,19 +23,56 @@ export default function Carrito() {
   const setCarrito = useCartStore((state) => state.setCart);
   const [totalPrice, setTotalPrice] = React.useState(0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  //const {cantidad,setCantidad} = useState(null);
   const productInfo = carrito.map((product) => {
     return `${product.title},  Cantidad: ${product.quantity}`;
-   });
-   
+  });
+
   const [nombre, setNombre] = React.useState("");
   const [direccion, setDireccion] = React.useState("");
   const [detalles, setDetalles] = React.useState("");
-  const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join("%0A")}`;
+  const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join(
+    "%0A"
+  )}`;
 
   const enviarMensaje = () => {
     const numero = "55641782";
+    if ((nombre === "") | (direccion === ""))
+      return toast.error("Los campos no pueden estar vacios");
+
     const url = `https://wa.me/${numero}?text=${mensaje}`;
     window.open(url, "_blank");
+  };
+
+  /** */
+  const incrementar = (product) => {
+    const newQuantity = product.quantity + 1;
+    const valuePrice = product.price / product.quantity;
+    const newPrice = product.price + valuePrice;
+    setCarrito(
+      carrito.map((p) =>
+        p.title === product.title
+          ? { ...p, quantity: newQuantity, price: newPrice }
+          : p
+      )
+    );
+  };
+
+  const disminuir = (product) => {
+    if (product.quantity > 1) {
+      const newQuantity = product.quantity - 1;
+      const valuePrice = product.price / product.quantity;
+      const newPrice = product.price - valuePrice;
+      setCarrito(
+        carrito.map((p) =>
+          p.title === product.title
+            ? { ...p, quantity: newQuantity, price: newPrice }
+            : p
+        )
+      );
+    } else {
+      setCarrito(carrito.filter((p) => p.title !== product.title));
+    }
   };
 
   useEffect(() => {
@@ -48,6 +84,25 @@ export default function Carrito() {
   }, [carrito]);
 
   const isCarritoVacio = carrito.length === 0;
+
+  const btn = {
+    background: "white",
+    color: "black",
+    borderRadius: "50%",
+    border: "1px solid black",
+    width: "30px",
+    height: "30px",
+    display: "grid",
+    placeItems: "center",
+  };
+  const center = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3,1fr)",
+    placeItems: "center",
+    width: "100%",
+    color: "white",
+    textAlign: "center",
+  };
 
   return (
     <div className="mt-2">
@@ -66,38 +121,51 @@ export default function Carrito() {
             </Badge>
           </Button>
 
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            size="full"
-          >
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="full">
+            <Toaster
+              position="bottom-center"
+              duration={3000}
+              expand={false}
+              richColors
+              theme="dark"
+              style={{ zIndex: "560" }}
+            />
             <ModalContent>
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
                     Carrito
                   </ModalHeader>
-                  <ModalBody style={{minHeight:"300px", background: "white"}}>
-                    <div className="carrito-list-products">
+                  <ModalBody
+                    style={{ minHeight: "300px", background: "white" }}
+                  >
+                    <div className="carrito-list-products" >
                       {carrito.map((product, index) => (
                         <div key={index}>
-                          <div style={grid_4_col}>
-                            <img
+                          <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "5px", placeItems: "center"}}>
+                            {/* <img
                               src={product.image}
                               alt={product.title}
                               width="50px"
-                            />
+                            /> */}
                             <span>
                               <p>{product.title}</p>
                             </span>
-                            <span>{product.quantity}</span>
+                            <span style={{display: "flex", gap: "1rem"}}>
+                              <button onClick={() => disminuir(product)} style={btn}>
+                                -
+                              </button>
+                              {product.quantity}
+                              <button onClick={() => incrementar(product)} style={btn}>
+                                +
+                              </button>
+                            </span>
                             <span>$ {product.price}</span>
                           </div>
                           <hr />
                         </div>
                       ))}
                     </div>
-                    
 
                     <div
                       style={{
@@ -111,12 +179,12 @@ export default function Carrito() {
                       <strong>$ {totalPrice}</strong>
                     </div>
 
-                    <div style={grid_1_col}> 
+                    <div style={grid_1_col}>
                       <Input
                         type="text"
                         variant="bordered"
                         label="Nombre"
-                        placeholder="Escriba el nombre de la persona encargada de resivir el pedido"
+                        placeholder="Escriba el nombre de la persona encargada de recibir el pedido"
                         labelPlacement="outside"
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}

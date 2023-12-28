@@ -5,7 +5,6 @@ import Like from "../Like/Like";
 export default function EventoCard({ image }) {
   const img = {
     height: "30vh",
-    borderRadius: "0px",
     marginTop: "5vh",
     borderRadius: "10px"
   };

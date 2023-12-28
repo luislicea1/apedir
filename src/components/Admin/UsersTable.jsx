@@ -27,10 +27,18 @@ import dateConverter from "../../utils/dateConverter";
 import UserRoleDropDown from "./UserRoleDropDown";
 import ActiveDropdw from "./ActiveDropdw";
 import { deleteProfile, updateProfile } from "../../api/profile";
+import PlanDropDown from "./PlanDropdown";
+
 const roleColorMap = {
   admin: "danger",
   user: "success",
   merchant: "warning",
+};
+
+const planColorMap = {
+  premium: "secondary",
+  basico: "warning",
+  gratis: "success",
 };
 const statusOptions = [
   { name: "Activo", uid: "active" },
@@ -42,6 +50,7 @@ const columns = [
   { name: "TELÉFONO", uid: "phone_number" },
   { name: "ACTIVO", uid: "isActive" },
   { name: "ROL", uid: "role" },
+  { name: "PLAN", uid: "plan" },
   { name: "FECHA CREACIÓN", uid: "createdAt", sortable: true },
   { name: "ACCIONES", uid: "actions" },
 ];
@@ -167,6 +176,17 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
             {user.role}
           </Chip>
         );
+      case "plan":
+        return (
+          <Chip
+            className="capitalize"
+            color={planColorMap[user.plan]}
+            size="sm"
+            variant="flat"
+          >
+            {user.plan}
+          </Chip>
+        );
       case "createdAt":
         return <span>{dateConverter(user.createdAt)}</span>;
       case "isActive":
@@ -183,7 +203,7 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
       case "actions":
         return (
           <div className="relative flex items-center  gap-2">
-            <Tooltip content="Edit user">
+            <Tooltip content="Editar usuario">
               <span
                 className="text-lg text-default-500 cursor-pointer active:opacity-50"
                 onClick={() => openModal(user)}
@@ -191,7 +211,7 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Eliminar usuario">
               <span
                 className="text-lg text-danger cursor-pointer active:opacity-50"
                 onClick={() => deleteUser(user)}
@@ -444,10 +464,24 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
                       }
                     />
                     <br />
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <div style={{ width: "50%" }}>
-                        <span className="w-[30%] text-small text-default-400">
-                          Selecciona el rol{" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span className="w-[30%] text-small text-default-500">
+                          ROL{" "}
                         </span>
                         <br />
                         <UserRoleDropDown
@@ -461,9 +495,16 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
                           }
                         />
                       </div>
-                      <div style={{ width: "50%" }}>
-                        <span className="w-[30%] text-small text-default-400">
-                          Selecciona el estado
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span className="w-[30%] text-small text-default-500">
+                          ESTADO
                         </span>
                         <br />
                         <ActiveDropdw
@@ -472,6 +513,28 @@ export default function UsersTable({ users, setUsers, fetchUsers }) {
                             setEditedUser({
                               ...editedUser,
                               isActive: value === "active" ? true : false,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span className="w-[30%] text-small text-default-500">
+                          PLAN
+                        </span>
+                        <br />
+                        <PlanDropDown
+                          plan={selectedUser.plan}
+                          onChange={(value) => {
+                            setEditedUser({
+                              ...editedUser,
+                              plan: value,
                             });
                           }}
                         />
