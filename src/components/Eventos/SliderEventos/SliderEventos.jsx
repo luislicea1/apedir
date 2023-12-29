@@ -8,7 +8,7 @@ import "./styles.css";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
 import { EffectCoverflow } from "swiper/modules";
-
+import { getAllEvents } from "../../../api/events";
 
 export default function SliderEventos() {
   const listContainer = useRef(null);
@@ -53,7 +53,7 @@ export default function SliderEventos() {
       {events && events.length > 0 ? (
         <>
           <Swiper
-            loop = {true}
+            loop={true}
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
@@ -65,20 +65,20 @@ export default function SliderEventos() {
               modifier: 1,
               slideShadows: true,
             }}
-            
+
             modules={[EffectCoverflow]}
             className="mySwiper"
             style={
               {
                 width: "100%",
                 // padding: "10px 10px",
-                
+
               }
             }
           >
-           
+
             {events.map((evento, index) => (
-              <SwiperSlide key={index}  className="swiper-slide-events">
+              <SwiperSlide key={index} className="swiper-slide-events">
                 <Eventos nombre={evento.name} imagen={evento.image}></Eventos>
               </SwiperSlide>
             ))}

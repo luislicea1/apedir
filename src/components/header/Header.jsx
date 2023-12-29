@@ -25,21 +25,25 @@ import supabase from "../../api/client.jsx";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
 import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
-import SelectProvincia from "./SelectProvincia.jsx";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
+import Search from "./Search/Search";
+import { showFilter as useShowFilter } from "../../hooks/useStore";
 
 export default function Header() {
   const history = useHref();
   const [isBussiness, setIsBussiness] = useState(false);
+  const [isHome, setIsHome] = useState(false)
   const [session, setSession] = useState(null);
   const [selectedBussiness, setSelectedBussiness] = useState(null);
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const setCarrito = useCartStore((state) => state.setCart);
+  const setShowFilter = useShowFilter(state => state.setShowFilter)
 
   useEffect(() => {
+
     const path = history.split("/");
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
@@ -49,12 +53,22 @@ export default function Header() {
       setSelectedBussiness(bussinessData);
     };
 
+    if (path.length === 0 || path[0] === ',') {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+      setShowFilter(false)
+    }
+
     if (path.includes("lugar")) {
       fetchData();
       setIsBussiness(true);
+      setIsHome(false)
     } else {
       setSelectedBussiness(null);
       setIsBussiness(false);
+      setIsHome(false)
+
     }
   }, [history]);
 
@@ -74,6 +88,12 @@ export default function Header() {
         const u = await getUser(session.user.email);
         setUser(u);
       }
+    }
+    const path = history.split("/")
+    if (path.length === 0 || path.toString() === ',') {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
     }
 
     const authListener = supabase.auth.onAuthStateChange(handleAuthStateChange);
@@ -96,7 +116,7 @@ export default function Header() {
     fetchBussiness();
   }, [user]);
 
-  
+
   return (
     <Navbar isBordered disableAnimation>
       <NavbarBrand>
@@ -119,15 +139,16 @@ export default function Header() {
               >
                 {selectedBussiness.name}
               </p>
-              <AbiertoCerrado horario = {selectedBussiness?.schedules}/>
+              <AbiertoCerrado horario={selectedBussiness?.schedules} />
             </div>
           </>
         ) : (
           <AcmeLogo />
+
         )}
       </NavbarBrand>
 
-      {!isBussiness && <SelectProvincia />}
+      {isHome && <Search />}
 
       {session !== null && user !== null ? (
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>

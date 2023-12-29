@@ -11,7 +11,6 @@ export default function Eventos(props) {
       <Link to={`/evento/${props.nombre}`} aria-label="evento">
         <Card
           style={{
-            
             borderRadius: "20px",
             overflow: "hidden",
             // width: "180px",
@@ -26,7 +25,7 @@ export default function Eventos(props) {
           <LazyLoadImage
             alt={props.nombre}
             src={props.imagen}
-            
+
             effect="blur"
             // style={{ objectFit: "cover", width: "200px", height: "200px" }}
             style={{ objectFit: "cover", width: "300px", height: "300px" }}

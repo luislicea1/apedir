@@ -31,5 +31,6 @@ export const SearchIcon = ({
       strokeWidth={strokeWidth}
     />
   </svg>
+  
 );
 

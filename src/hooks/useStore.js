@@ -78,6 +78,35 @@ const merchantNovedades = create((set) => ({
   setNovedades: (b) => set({ novedades: b }),
 }));
 
+const showFilter = create((set) => ({
+  showFilter: false,
+  setShowFilter: (v) => set({ showFilter: v }),
+}));
+
+const useCategoryFilter = create((set) => ({
+  category: "",
+  setCategory: (v) => set({ category: v }),
+}));
+
+const useSearchInput = create((set) => ({
+  search: "",
+  setSearch: (v) => set({ search: v }),
+}));
+
+const useFiltredBussiness = create((set) => ({
+  bussinessList: [],
+  seBussinessList: (v) => set({ bussinessList: v }),
+}));
+
+const useFiltredProducts = create((set) => ({
+  products: [],
+  seProducts: (v) => set({ products: v }),
+}));
+
+const useFiltredEvents = create((set) => ({
+  events: [],
+  setEvents: (v) => set({ events: v }),
+}));
 
 export {
   useUserStore,
@@ -94,5 +123,11 @@ export {
   useSupabase,
   usePlan,
   useVipBussiness,
-  merchantNovedades
+  merchantNovedades,
+  showFilter,
+  useCategoryFilter,
+  useSearchInput,
+  useFiltredBussiness,
+  useFiltredProducts,
+  useFiltredEvents
 };

@@ -26,6 +26,16 @@ export default function CrearNegocio({ children }) {
     if (user && user.plan) fetchPlan();
   }, [user]);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const p = await getAllProductsVipsFirst()
+      console.log(p)
+    }
+
+    fetchProducts()
+  }, []);
+
+
   const sectionStyle = {
     width: "100%",
     maxWidth: "900px",

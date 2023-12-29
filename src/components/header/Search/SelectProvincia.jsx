@@ -7,7 +7,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-import { useProvinceStore } from "../../hooks/useStore";
+import { useProvinceStore } from "../../../hooks/useStore";
 export default function SelectProvincia() {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["Todas"]));
 
@@ -34,6 +34,7 @@ export default function SelectProvincia() {
           className="capitalize"
           style={{ paddingLeft: "10px" }}
         >
+          <p>Provincia</p>
           <p style={{ width: "100%", display: "flex" }}>{selectedValue}</p>
         </Button>
       </DropdownTrigger>

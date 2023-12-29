@@ -1,9 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Header from "../components/header/Header";
+import { showFilter as useShowFilter } from "../hooks/useStore";
+import FilterBar from "../components/header/Search/FilterBar";
+import FiltredItems from "../components/header/Search/FiltredItems";
+
 
 export default function Page({ children }) {
-  
+  const showFilter = useShowFilter(state => state.showFilter)
   return (
     <div>
       <Helmet>
@@ -20,7 +24,15 @@ export default function Page({ children }) {
         />
       </Helmet>
       <Header />
-      {children}
+      {
+        showFilter ? (
+          <>
+            <FilterBar />
+            <FiltredItems />
+          </>
+        ) :
+          children
+      }
     </div>
   );
 }

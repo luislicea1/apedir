@@ -144,7 +144,6 @@ const getAllProductsVipsFirst = async () => {
     currency,
     category(id, category, bussiness(*))`)
   if (error) {
-    console.log(error)
     return
   }
   if (data) {

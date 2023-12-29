@@ -1,11 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSearchInput, showFilter as useShowFilter } from "../../hooks/useStore";
+
 
 export const AcmeLogo = () => {
-  
+  const setShowFilter = useShowFilter(state => state.setShowFilter)
+  const setSearchInput = useSearchInput(state => state.setSearchInput)
+  const navigate = useNavigate()
 
   return (
-    <Link to="/" aria-label="Home">
+    <Link to='/' aria-label="Home" >
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
@@ -13,9 +18,12 @@ export const AcmeLogo = () => {
         height="27.5px"
         viewBox="0 0 3325.000000 1532.000000"
         preserveAspectRatio="xMidYMid meet"
+        onClick={() => {
+          setShowFilter(false)
+        }}
       >
         <metadata>
-          Created by potrace 1.16, written by Peter Selinger 2001-2019
+          Creado por el Team de Apedir
         </metadata>
         <g
           transform="translate(0.000000,1532.000000) scale(0.100000,-0.100000)"

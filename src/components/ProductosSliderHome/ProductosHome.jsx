@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
-//import { LogoStyle } from "../styles/styles";
+import { Link } from "react-router-dom";
+import { LogoStyle } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./style.css";
+
 
 
 export default function ProductosHome(props) {

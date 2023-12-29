@@ -66,21 +66,18 @@ export default function ProductosSliderHome() {
             disableOnInteraction: false,
           }}
         >
-          <SwiperSlide>
-            <SkeletonProductosHome />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SkeletonProductosHome />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SkeletonProductosHome />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SkeletonProductosHome />
-          </SwiperSlide>
-          <SwiperSlide>
-            <SkeletonProductosHome />
-          </SwiperSlide>
+          {productos.map((producto) => (
+            <SwiperSlide key={producto.id}>
+              <ProductosHome
+                key={producto.id}
+                image={producto.image}
+                name={producto.name}
+                price={producto.price}
+                currency={producto.currency}
+                url={producto.url}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
           
         ) : (
