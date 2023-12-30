@@ -1,5 +1,6 @@
 import { getImage } from "./bussiness";
-import supabase from "./client";
+import { supabase } from "./client";
+
 
 const upsertEvent = async (event) => {
   let eventToInsert = Object.keys(event).reduce((acc, key) => {

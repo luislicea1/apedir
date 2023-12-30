@@ -1,5 +1,5 @@
 import getIcon from "../utils/getIcon";
-import supabase from "./client";
+import { supabase } from "./client";
 import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
 

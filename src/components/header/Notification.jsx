@@ -13,7 +13,7 @@ import {
   deleteUserNotification,
   getNotificationsFromUser,
 } from "../../api/notifications";
-import supabase from "../../api/client";
+import { supabase } from "../../api/client";
 
 export default function Notification() {
   const user = useUserStore((state) => state.user);

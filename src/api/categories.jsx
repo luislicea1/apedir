@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 
 const getCategories = async (bussiness) => {
   let { data: categories, error } = await supabase

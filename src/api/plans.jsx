@@ -1,4 +1,4 @@
-import supabase from "./client";
+import { supabase } from "./client";
 
 const getPlans = async () => {
   const { data, error } = await supabase.from("plans").select("*");

@@ -1,5 +1,5 @@
-import supabase from "./client";
 import { getUser } from "./profile";
+import { supabase } from "./client";
 
 async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({

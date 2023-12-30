@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 import { uploadImage } from "./images";
 import { getImage } from "./bussiness";
 

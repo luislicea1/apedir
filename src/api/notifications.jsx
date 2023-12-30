@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 
 const addNotification = async (notification) => {
   let { data: idList, err } = await supabase

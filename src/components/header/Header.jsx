@@ -21,7 +21,7 @@ import { MarginLeft30 } from "../styles/styles";
 import { useBussinessStore, useCartStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
-import supabase from "../../api/client.jsx";
+import { supabase } from "../../api/client";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
 import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";

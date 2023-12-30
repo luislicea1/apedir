@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 import { updateProfileStars, getUserStarsForBussiness } from "./profile";
 
 const addStars = async (stars, user, bussiness) => {
