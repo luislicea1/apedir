@@ -68,7 +68,11 @@ export default function ListadoProductos(props) {
         className="slider-negocios"
         breakpoints={{
           160: {
-            slidesPerView: 2,
+            slidesPerView: 2.2,
+            spaceBetween: 10,
+          },
+          420: {
+            slidesPerView: 2.5,
             spaceBetween: 10,
           },
             711: {
