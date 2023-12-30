@@ -99,8 +99,6 @@ export default function FiltredItems() {
                 </div>
 
             </>}
-
-
         </div>
     )
 }

@@ -7,11 +7,15 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./seccion.css";
 import { getStarsFromBussiness } from "../../api/starsRate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import getIcon from "../../utils/getIcon";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faS } from "@fortawesome/free-solid-svg-icons";
 
 function ComponenteLugar(props) {
   const [stars, setStars] = useState(null);
   //const imagenRef = useRef(props.imagen); // Almacenar la imagen en una referencia
-
+  library.add(faS)
   useEffect(() => {
     const fetchStars = async () => {
       const s = await getStarsFromBussiness(props.id);
@@ -28,49 +32,43 @@ function ComponenteLugar(props) {
 
   return (
     <>
-      {/* <Helmet>
-        <link
-          fetchpriority="high"
-          rel="preload"
-          href={props.imagen} // Usar la referencia en lugar del prop directamente
-          as="image"
-        />
-      </Helmet> */}
       <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
         <Card
           className="py-4 tarjeta-negocio-card"
-          style={{ ...CardStyles, margin: "5px 5px 5px 5px", boxShadow: "none", border: ".8px solid #D4D4D8"}}
+          style={{ ...CardStyles, margin: "5px 5px 5px 5px", boxShadow: "none", border: ".8px solid #D4D4D8" }}
         >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">
               {props.localizacion}
             </p>
 
-            <h2
-              className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
-              style={{}}
-            >
-              {props.nombre}
-            </h2>
+            <section>
+              <h2
+                className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
+                style={{}}
+              >
+                {props.nombre}
+              </h2>
+            </section>
             <Stars readOnly w={100} rate={stars?.average ? stars.average : 0} />
           </CardHeader>
           <CardBody
             className="overflow-visible py-2 card-body-seccion"
             style={ImgCardStyle}
-            
+
           >
             <LazyLoadImage
               alt={props.nombre}
               src={props.imagen}
               effect="blur"
-              style={{ ...LogoStyle, objectFit: "cover"}}
+              style={{ ...LogoStyle, objectFit: "cover" }}
               placeholderSrc={props.imagen}
               useIntersectionObserver={true}
               className="lazyload"
               threshold={100}
               delayTime={300}
               delayMethod="throttle"
-              
+
             />
           </CardBody>
         </Card>

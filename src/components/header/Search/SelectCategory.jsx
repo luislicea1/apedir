@@ -43,7 +43,7 @@ export default function SelectCategory() {
                     className="capitalize"
                     style={{ paddingLeft: "10px" }}
                 >
-                    <p>Negocio de: </p>
+                    <p>Categoría</p>
                     <p style={{ width: "100%", display: "flex" }}>{selectedValue}</p>
                 </Button>
             </DropdownTrigger>

@@ -16,7 +16,6 @@ export default function Search() {
                     setSearch(event.target.value)
                 }}
                 onFocus={() => setShowFilter(true)}
-                // onBlur={() => setShowFilter(false)}
                 onClear={() => {
                     setSearch("")
                     setShowFilter(false)

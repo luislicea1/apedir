@@ -43,7 +43,6 @@ export default function Header() {
   const setShowFilter = useShowFilter(state => state.setShowFilter)
 
   useEffect(() => {
-
     const path = history.split("/");
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
@@ -53,8 +52,9 @@ export default function Header() {
       setSelectedBussiness(bussinessData);
     };
 
-    if (path.length === 0 || path[0] === ',') {
+    if (path.length === 0 || path[0] === ',' || history === '/') {
       setIsHome(true);
+
     } else {
       setIsHome(false);
       setShowFilter(false)

@@ -17,7 +17,7 @@ const ListadoDeComponentesLugar = () => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  
+
   const filtredBussinesses = useMemo(() => {
     if (bussinesses?.length === 0) {
       return null;
@@ -44,9 +44,11 @@ const ListadoDeComponentesLugar = () => {
       } else {
         setPage((prevPage) => prevPage + 1);
       }
+
     } catch (error) {
       console.error("Error fetching more data:", error);
     }
+
   };
 
   useEffect(() => {
@@ -77,7 +79,7 @@ const ListadoDeComponentesLugar = () => {
         alignContent: "stretch",
       }}
     >
-      
+
       {filtredBussinesses !== null &&
         filtredBussinesses.map((item) => {
           return (
@@ -100,7 +102,7 @@ const ListadoDeComponentesLugar = () => {
         </div>
       )}
     </div>
-    
+
   );
 };
 

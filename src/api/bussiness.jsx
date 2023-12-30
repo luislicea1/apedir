@@ -1,3 +1,4 @@
+import getIcon from "../utils/getIcon";
 import supabase from "./client";
 import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
@@ -152,6 +153,8 @@ const loadMoreBussiness = async (
     return;
   }
   if (data.length === 0) {
+    alert("No data")
+    console.log("No data")
     return;
   }
   // Obtener imágenes asociadas a cada negocio
