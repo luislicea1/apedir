@@ -53,7 +53,7 @@ export default function Footer() {
 
       <div>
         <nav className="nav-footer">
-          <Link href="/" underline="hover" style={{ color: "white" }}>
+          <Link href="/" underline="hover" style={{ color: "white" }} >
             Home
           </Link>
           <Link href="#eventos" underline="hover" style={{ color: "white" }}>
@@ -61,6 +61,9 @@ export default function Footer() {
           </Link>
           <Link href="#novedades" underline="hover" style={{ color: "white" }}>
             Novedades
+          </Link>
+          <Link href="#productos-recomendados" underline="hover" style={{ color: "white" }}>
+            Productos Recomendados
           </Link>
           <Link href="#lugares" underline="hover" style={{ color: "white" }}>
             Lugares
@@ -78,11 +81,11 @@ export default function Footer() {
         </nav>
       </div>
 
-      <div className="footer-contact" style={{ width: "60%" }} >
+      <div className="footer-contact" style={{ width: "100%" }} >
         <h3>Contactenos</h3>
         <Textarea
           fullWidth
-          style={{ color: "black", border: "white" }}
+          style={{ color: "black", border: "white" , height: "100px"}}
           // variant="bordered"
           minLength={10}
           placeholder="Escribenos un mensaje y te responderemos cuanto antes"
@@ -92,7 +95,7 @@ export default function Footer() {
         />
 
         <Button
-          // style={{ width: "300px" }}
+          style={{ width: "100%" }}
           color="warning"
           onClick={() =>
             window.open(
