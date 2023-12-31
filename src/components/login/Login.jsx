@@ -25,7 +25,6 @@ export default function Login() {
     const { session, message, isValid } = await login(
       email.value,
       password.value,
-      supabase
     );
     if (isValid && session) return navigate("/");
     else toast.error(message);
@@ -75,7 +74,7 @@ export default function Login() {
           <Link
             isBlock
             showAnchorIcon
-            onClick={signInWithGoogle(supabase)}
+            onClick={signInWithGoogle}
             color="secondary"
           >
             Inicia sesión con Google

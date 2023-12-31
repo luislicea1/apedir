@@ -72,8 +72,6 @@ export default function FiltredItems() {
         if (category !== "todas") {
             const bList = originalBusinessList.filter(bussiness => bussiness.category === category)
             setBussinessList(bList)
-            console.log(category)
-            console.log(bList)
         }
         else {
             setEvents(originalEvents)

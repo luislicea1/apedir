@@ -130,7 +130,6 @@ const updateBussinessSchedule = async (bussinessId, schedules) => {
     .update({ schedules: schedules })
     .eq("id", bussinessId);
 
-  console.log({ data });
   console.log({ error });
 };
 
@@ -185,7 +184,6 @@ const loadMoreBussiness = async (
 
   const newOf = offset + 19;
   setOffset(newOf);
-  console.log(businessesWithImages)
   return businessesWithImages.length > 0 ? true : false;
 };
 
@@ -504,7 +502,6 @@ const bussinessNum = async (ownerId) => {
     .eq("owner", ownerId)
     .count();
 
-  console.log(data);
   return data;
 };
 
