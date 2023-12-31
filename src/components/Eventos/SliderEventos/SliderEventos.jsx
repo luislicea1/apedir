@@ -1,16 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
 import { eventsStore } from "../../../hooks/useStore";
+import "./styles.css";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
 import { EffectCoverflow } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "./styles.css";
 
 export default function SliderEventos() {
   const listContainer = useRef(null);
   const events = eventsStore((state) => state.events);
+
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -36,37 +38,46 @@ export default function SliderEventos() {
       }
     };
   }, []);
-
   return (
     <>
       {events && events.length > 0 ? (
-        <Swiper
-          loop={true}
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          modules={[EffectCoverflow]}
-          className="mySwiper"
-          style={{
-            width: "100%",
-          }}
-        >
-          {events.map((evento, index) => (
-            <SwiperSlide key={index} className="swiper-slide-events">
-              <Eventos nombre={evento.name} imagen={evento.image} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <>
+          <Swiper
+            loop={true}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+
+            modules={[EffectCoverflow]}
+            className="mySwiper"
+            style={
+              {
+                width: "100%",
+                // padding: "10px 10px",
+
+              }
+            }
+          >
+
+            {events.map((evento, index) => (
+              <SwiperSlide key={index} className="swiper-slide-events">
+                <Eventos nombre={evento.name} imagen={evento.image}></Eventos>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
       ) : (
-        <Empty />
+        <>
+          <Empty />
+        </>
       )}
     </>
   );

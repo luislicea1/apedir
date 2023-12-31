@@ -65,11 +65,7 @@ const SliderNegocios = () => {
     }
   }, [inView, hasMore]);
 
-  if (loading) {
-    return <ListadoSkeleton />;
-  }
-
-  return (
+  return loading ? <ListadoSkeleton /> : (
     <div id="lugares">
       <Swiper
         spaceBetween={30}

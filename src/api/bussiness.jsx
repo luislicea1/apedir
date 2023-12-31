@@ -185,6 +185,7 @@ const loadMoreBussiness = async (
 
   const newOf = offset + 19;
   setOffset(newOf);
+  console.log(businessesWithImages)
   return businessesWithImages.length > 0 ? true : false;
 };
 
