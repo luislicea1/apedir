@@ -1,4 +1,3 @@
-import { getUser } from "./profile";
 import { supabase } from "./client";
 
 async function signInWithGoogle() {

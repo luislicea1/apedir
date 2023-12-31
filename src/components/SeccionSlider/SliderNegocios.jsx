@@ -1,19 +1,15 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "./style.css";
 import React, { useState, useEffect, useMemo } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBussiness } from "../../api/bussiness";
 import ComponenteLugar from "../Seccion/ComponenteLugar";
-
-import "../Seccion/seccion.css";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
-
 import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
 import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "./style.css";
 
-export default function SliderNegocios() {
+const SliderNegocios = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
   const setBussinesses = useBussinessList((state) => state.setBussinesses);
   const province = useProvinceStore((state) => state.province);
@@ -26,7 +22,7 @@ export default function SliderNegocios() {
   });
 
   const filtredBussinesses = useMemo(() => {
-    if (bussinesses?.length === 0) {
+    if (!bussinesses || bussinesses.length === 0) {
       return null;
     }
     if (province !== "todas") {
@@ -56,8 +52,6 @@ export default function SliderNegocios() {
     }
   };
 
-  
-   
   useEffect(() => {
     const fetchData = () => {
       fetchMoreData();
@@ -75,116 +69,40 @@ export default function SliderNegocios() {
     return <ListadoSkeleton />;
   }
 
-  // if(!filtredBussinesses){
-  //   alert("null")
-  //   window.location.reload(true)
-  // }
   return (
     <div id="lugares">
       <Swiper
         spaceBetween={30}
-        pagination = {false}
+        pagination={false}
         navigation={false}
-        modules={[ Autoplay]}
+        modules={[Autoplay]}
         className="slider-negocios"
         breakpoints={{
-          280: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          380: {
-            slidesPerView: 2.2,
-            spaceBetween: 20,
-          },
-            711: {
-              slidesPerView: 2.3,
-              spaceBetween: 10,
-            },
-            
-            1020: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-          }}
-          loop={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          
-         
+          280: { slidesPerView: 1, spaceBetween: 10 },
+          380: { slidesPerView: 2.2, spaceBetween: 20 },
+          711: { slidesPerView: 2.3, spaceBetween: 10 },
+          1020: { slidesPerView: 3, spaceBetween: 10 },
+        }}
+        loop={true}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
       >
         {filtredBussinesses !== null &&
-          filtredBussinesses.map((item) => {
-            
-            return (
-              <SwiperSlide key={item.id}>
-                <ComponenteLugar
-                  id={item.id}
-                  imagen={item.perfil_pic}
-                  localizacion={item.province}
-                  gps_location={item.gps_location}
-                  nombre={item.name}
-                  numeroPersonas={item.numeroPersonas}
-                  url={item.value_url}
-                ></ComponenteLugar>
-              </SwiperSlide>
-            );
-          })}
-      </Swiper>
-    </div>
-     
-   
-  );
-}
-
-
-/**
- *  <Swiper
-        spaceBetween={30}
-        // hashNavigation={{
-        //   watchState: true,
-        // }}
-        // pagination={{
-        //   clickable: true,
-        // }}
-        pagination = {false}
-        navigation={true}
-        modules={[Pagination, Navigation, HashNavigation]}
-        className="mySwiper"
-        breakpoints={{
-            711: {
-              slidesPerView: 2,
-              spaceBetween: 0,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 0,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 0,
-            },
-          }}
-      >
-        {filtredBussinesses !== null &&
-          filtredBussinesses.map((item) => {
-            
-            return (
-              <SwiperSlide key={item.id}>
-                <ComponenteLugar
-                  id={item.id}
-                  imagen={item.perfil_pic}
-                  localizacion={item.province}
-                  gps_location={item.gps_location}
-                  nombre={item.name}
-                  numeroPersonas={item.numeroPersonas}
-                  url={item.value_url}
-                ></ComponenteLugar>
-              </SwiperSlide>
-            );
-          })}
+          filtredBussinesses.map((item) => (
+            <SwiperSlide key={item.id}>
+              <ComponenteLugar
+                id={item.id}
+                imagen={item.perfil_pic}
+                localizacion={item.province}
+                gps_location={item.gps_location}
+                nombre={item.name}
+                numeroPersonas={item.numeroPersonas}
+                url={item.value_url}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );
- */
+};
+
+export default SliderNegocios;

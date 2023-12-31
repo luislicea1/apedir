@@ -9,7 +9,6 @@ import {
   Input,
 } from "@nextui-org/react";
 import { updateCategory } from "../../../api/categories";
-import { useSupabase } from "../../../hooks/useStore";
 
 export default function ModalEditCategory({
   fetchCategories,
@@ -18,7 +17,6 @@ export default function ModalEditCategory({
   categoryInput,
   bussiness,
 }) {
-  const supabase = useSupabase((state) => state.supabase);
   const [loading, setLoading] = useState(false);
   const [render, setRender] = useState(0);
 

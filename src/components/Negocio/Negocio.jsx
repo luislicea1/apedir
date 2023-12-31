@@ -1,8 +1,6 @@
 import React, { useState, useEffect, lazy, useRef } from "react";
-
 import { Link, useHref } from "react-router-dom";
 import { NegocioSection } from "../styles/styles";
-import Navegacion from "./HeaderNegocio/Navegacion";
 import {
   fetchBussinessPerURL,
   getSubscriptorsOfBussiness,
@@ -12,6 +10,7 @@ import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useUserStore } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
+import { Chip } from "@nextui-org/react"
 
 import Stars from "../Stars/Stars";
 import {
@@ -23,8 +22,6 @@ const Promo = lazy(() => import("./Promo/Promo"));
 const ListadoProductos = lazy(() => import("./Productos/ListadoProductos"));
 const TituloNegocio = lazy(() => import("./TituloNegocio/TituloNegocio"));
 const DescripcionNegocio = lazy(() => import("./Descripcion/Descripcion"));
-import Horario from "./Horario/Horario";
-import SkeletonProducto from "../Skeleton/SkeletonProducto";
 
 const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")
@@ -148,7 +145,9 @@ export default function Negocio() {
           ></PortadaDeNegocio>
           <div className="p-2 m-2">
             <div >
+
               <TituloNegocio title={bussiness.name}></TituloNegocio>
+
               {user !== null ? (
                 <Stars
                   rate={userStars}
@@ -162,7 +161,10 @@ export default function Negocio() {
                   <Stars readOnly w={100} />
                 </Link>
               )}
+
               <br />
+
+              <Chip color="secondary" style={{ color: "white" }}>{bussiness.category}</Chip>
 
               <DescripcionNegocio
                 descripcion={bussiness.description}
@@ -176,13 +178,13 @@ export default function Negocio() {
                 delivery={bussiness.delivery}
                 like={"si"}
                 url={history}
-                bussiness = {bussiness}
+                bussiness={bussiness}
               ></DescripcionNegocio>
 
               <Promo
                 seguidores={subsNum.current}
                 productos={products.length}
-                
+
               ></Promo>
             </div>
 
@@ -198,8 +200,8 @@ export default function Negocio() {
                 return (
                   categoryProducts.length > 0 && (
                     <ListadoProductos
+                      key={idx} 
                       id={category.id}
-                      key={idx}
                       title={category.category}
                       nombre={category.category}
                       localizacion={category.category}
@@ -223,7 +225,6 @@ export default function Negocio() {
         </div>
       </section>
 
-      
     </div>
   ) : (
     <LoaderCompletePage />

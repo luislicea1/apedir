@@ -6,11 +6,11 @@ export default function BestChoiceIcon(props) {
         fill={props.color}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
         width={props.w}
         height={props.h}
         viewBox="0 0 41.883 41.883"
-        xml:space="preserve"
+        xmlSpace="preserve"
       >
         <g>
           <path

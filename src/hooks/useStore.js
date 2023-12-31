@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { createClient } from "@supabase/supabase-js";
 
 const useUserStore = create((set) => ({
   user: null,
@@ -121,5 +120,5 @@ export {
   useSearchInput,
   useFiltredBussiness,
   useFiltredProducts,
-  useFiltredEvents
+  useFiltredEvents,
 };

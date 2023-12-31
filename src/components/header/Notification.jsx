@@ -13,7 +13,9 @@ import {
   deleteUserNotification,
   getNotificationsFromUser,
 } from "../../api/notifications";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { supabase } from "../../api/client";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 export default function Notification() {
   const user = useUserStore((state) => state.user);
@@ -55,10 +57,11 @@ export default function Notification() {
               isInvisible={isInvisible}
               shape="circle"
             >
-              <NotificationIcon className="fill-current" size={30} />
+              <FontAwesomeIcon icon={faBell} size="xl" />
             </Badge>
           ) : (
-            <NotificationIcon className="fill-current" size={30} />
+            <FontAwesomeIcon icon={faBell} size="xl" />
+
           )}
         </div>
       </DropdownTrigger>

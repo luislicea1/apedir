@@ -5,7 +5,7 @@ import { getAllBussinessFromUser } from "../../api/bussiness";
 import NegocioIdVip from "./NegocioIdVip";
 import { grid_2_col } from "../styles/styles";
 import { useBussinessStore } from "../../hooks/useStore";
-import supabase from "../../api/client";
+import { supabase } from "../../api/client";
 import { toast, Toaster } from "sonner";
 
 export default function VipListNegocios({ userId, ...props }) {
@@ -52,7 +52,7 @@ export default function VipListNegocios({ userId, ...props }) {
     <>
       <div
         style={container}
-        // className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
+      // className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70"
       >
         <section className="section px-6" style={section}>
           <TituloDeSeccion title={props.title}></TituloDeSeccion>

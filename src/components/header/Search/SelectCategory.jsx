@@ -9,7 +9,7 @@ import {
 
 import { useCategoryFilter } from '../../../hooks/useStore';
 import { getBussinessCategories } from '../../../api/search';
-export default function SelectCategory() {
+export default function SelectCategory({ value }) {
     const [selectedKeys, setSelectedKeys] = React.useState(new Set(["Todas"]));
 
     const [categories, setCategories] = useState([])
@@ -25,6 +25,12 @@ export default function SelectCategory() {
         setSelectedKeys(selectedKeys);
         const selectedValue = Array.from(selectedKeys)[0];
         setCategory(selectedValue);
+        if (value) {
+            value.current = {
+                ...value.current,
+                category: selectedValue
+            }
+        }
     };
 
     useEffect(() => {
@@ -44,7 +50,7 @@ export default function SelectCategory() {
                     style={{ paddingLeft: "10px" }}
                 >
                     <p>Categoría</p>
-                    <p style={{ width: "100%", display: "flex" }}>{selectedValue}</p>
+                    <p style={{ width: "100%", display: "flex" }}>{value ? value.current.category : selectedValue}</p>
                 </Button>
             </DropdownTrigger>
             <DropdownMenu
@@ -56,7 +62,6 @@ export default function SelectCategory() {
                 style={{ padding: "20px" }}
             >
                 {categories.map((item) => {
-                    console.log(item)
                     return <DropdownItem key={item.name}>{item.name}</DropdownItem>
                 })}
             </DropdownMenu>

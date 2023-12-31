@@ -7,6 +7,7 @@ import {
 } from "react-share";
 import { EmailShareButton, EmailIcon } from "react-share";
 import { Snippet } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import React from "react";
 import {
@@ -15,7 +16,8 @@ import {
   PopoverContent,
   Button,
 } from "@nextui-org/react";
-import ShareIcon from "../../Icons/Share/ShareIcon";
+
+import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 
 export default function ShareLink(props) {
 
@@ -24,7 +26,7 @@ export default function ShareLink(props) {
     <Popover placement="top" showArrow backdrop="opaque">
       <PopoverTrigger style={{ background: "white", maxWidth: "40px", minWidth: "40px", padding: "0", borderRadius: "50%" }}>
         <Button>
-          <ShareIcon color={"black"} w={"24px"} h={"24px"} />
+          <FontAwesomeIcon icon={faShareNodes} size="2x" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

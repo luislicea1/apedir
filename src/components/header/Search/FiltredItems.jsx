@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useFiltredBussiness, useFiltredEvents, useFiltredProducts, useProvinceStore, useSearchInput } from '../../../hooks/useStore'
+import { useCategoryFilter, useFiltredBussiness, useFiltredEvents, useFiltredProducts, useProvinceStore, useSearchInput } from '../../../hooks/useStore'
 import { getBussiness, getEvents, getProducts } from '../../../api/search';
 import useDebouncedValue from '../../../hooks/useDebounce';
 import Bussinesses from './Bussinesses';
@@ -18,6 +18,7 @@ export default function FiltredItems() {
     const setProducts = useFiltredProducts(state => state.seProducts)
     const events = useFiltredEvents(state => state.events)
     const setEvents = useFiltredEvents(state => state.setEvents)
+    const category = useCategoryFilter(state => state.category)
 
     // Listas originales
     const [originalBusinessList, setOriginalBusinessList] = useState([]);
@@ -66,6 +67,19 @@ export default function FiltredItems() {
             setProducts(originalProducts)
         }
     }, [province]);
+
+    useEffect(() => {
+        if (category !== "todas") {
+            const bList = originalBusinessList.filter(bussiness => bussiness.category === category)
+            setBussinessList(bList)
+            console.log(category)
+            console.log(bList)
+        }
+        else {
+            setEvents(originalEvents)
+        }
+    }, [category]);
+
 
     return (
         <div>

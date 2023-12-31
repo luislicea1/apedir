@@ -43,11 +43,11 @@ export default function ProductosHome(props) {
             {props.price} {props.currency}
           </p>
         </div>
-        <a href={`lugar/${props.url}`}>
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            Visitar Sitio
-          </Button>
-        </a>
+
+        <Button as={Link} to={`lugar/${props.url}`} className="text-tiny" color="primary" radius="full" size="sm">
+          Visitar Sitio
+        </Button>
+
       </CardFooter>
     </Card>
   );
