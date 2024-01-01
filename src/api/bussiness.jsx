@@ -40,6 +40,13 @@ const upsertBussiness = async (bussiness) => {
   console.log({ error });
 };
 
+const getImageWithDimensions = async (bucket, path, width, height) => {
+  let { data, ef } = supabase.storage.from(bucket).getPublicUrl(path, {
+   
+  });
+  return data.publicUrl;
+
+}
 const getImage = async (bucket, path) => {
   let { data, ef } = supabase.storage.from(bucket).getPublicUrl(path);
   return data.publicUrl;
@@ -536,5 +543,6 @@ export {
   deleteBussinessById,
   bussinessNum,
   getSubscriptorsOfBussiness,
-  getAllBussinessUrl
+  getAllBussinessUrl,
+  getImageWithDimensions
 };

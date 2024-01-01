@@ -53,10 +53,10 @@ const SliderNegocios = () => {
   };
 
   useEffect(() => {
-    const fetchData = () => {
-      fetchMoreData();
+    const fetchData = async () => {
+      await fetchMoreData();
     };
-    fetchData();
+    return () => fetchData();
   }, []);
 
   useEffect(() => {

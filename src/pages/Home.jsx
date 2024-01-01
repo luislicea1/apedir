@@ -1,10 +1,17 @@
-import Seccion from "../components/Seccion/Seccion";
-import SeccionEventos from "../components/Eventos/SeccionEventos";
 import React from "react";
 import { Toaster, toast } from "sonner";
-import SliderNovedades from "../components/Novedades/SliderNovedades";
-import Footer from "../components/Footer/Footer";
-import ProductosSliderHome from "../components/ProductosSliderHome/ProductosSliderHome";
+
+// import Seccion from "../components/Seccion/Seccion";
+// import SeccionEventos from "../components/Eventos/SeccionEventos";
+// import SliderNovedades from "../components/Novedades/SliderNovedades";
+// import Footer from "../components/Footer/Footer";
+// import ProductosSliderHome from "../components/ProductosSliderHome/ProductosSliderHome";
+
+const Seccion = React.lazy(() => import("../components/Seccion/Seccion"))
+const SeccionEventos = React.lazy(() => import("../components/Eventos/SeccionEventos"))
+const SliderNovedades = React.lazy(() => import("../components/Novedades/SliderNovedades"))
+const Footer = React.lazy(() => import("../components/Footer/Footer"))
+const ProductosSliderHome = React.lazy(() => import("../components/ProductosSliderHome/ProductosSliderHome"))
 
 export default function Home() {
 
@@ -29,6 +36,6 @@ export default function Home() {
       <Seccion title="Lugares"></Seccion>
       <Toaster richColors theme="dark" duration={3000} position="bottom-center" />
       <Footer></Footer>
-    </div> 
+    </div>
   );
 }

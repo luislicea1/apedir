@@ -1,7 +1,7 @@
 import { supabase } from "./client";
 
 import { uploadImage } from "./images";
-import { getImage } from "./bussiness";
+import { getImage, getImageWithDimensions } from "./bussiness";
 
 const addProduct = async (product) => {
   const { data, error } = await supabase
@@ -150,7 +150,7 @@ const getAllProductsVipsFirst = async () => {
   if (data) {
     const novedades = await Promise.all(data.map(async (item) => {
       
-      const pic = await getImage('products', item.image);
+      const pic = await getImageWithDimensions('products', item.image, 303, 348);
 
       return {
         id: item.id,
