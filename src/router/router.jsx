@@ -2,8 +2,9 @@ import React from "react";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import Home from "../pages/Home";
+// import Home from "../pages/Home";
 import Page from "../pages/Page";
+
 
 import {
   RequireUserRole,
@@ -13,6 +14,8 @@ import {
 import { CircularProgress } from "@nextui-org/react";
 import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
 import Loader from "../components/Loader/Loader";
+
+const Home = lazy(() => import("../pages/Home"))
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
@@ -40,7 +43,7 @@ const LazyEventManagement = lazy(() =>
 );
 
 const LazyNovedadesManagement = lazy(() =>
-import("../components/AdministradorNegocios/NovedadesManagement")
+  import("../components/AdministradorNegocios/NovedadesManagement")
 );
 
 const LazyProductsManagement = lazy(() =>

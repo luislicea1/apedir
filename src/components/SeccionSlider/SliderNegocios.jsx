@@ -53,17 +53,19 @@ const SliderNegocios = () => {
     }
   };
 
+  const fetchStars = async () => {
+    const ids = bussinesses.map(business => business.id)
+    const starsMap = await getStarsFromBusinesses(ids);
+    setBussinesses(bussinesses.map(business => ({ ...business, stars: starsMap[business.id] })));
+  };
+
   useEffect(() => {
     fetchMoreData()
   }, []);
 
   useEffect(() => {
-    const fetchStars = async () => {
-      const starsMap = await getStarsFromBusinesses(bussinesses.map(business => business.id));
-      setBussinesses(bussinesses.map(business => ({ ...business, stars: starsMap[business.id] })));
-    };
-    if (bussinesses !== null) fetchStars();
-  }, [bussinesses]);
+    if (bussinesses.length > 0) fetchStars();
+  }, [bussinesses.length]);
 
   useEffect(() => {
     if (inView && hasMore) {

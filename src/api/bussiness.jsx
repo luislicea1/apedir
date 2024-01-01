@@ -152,8 +152,7 @@ const loadMoreBussiness = async (
     return;
   }
   if (data.length === 0) {
-    alert("No data")
-    console.log("No data")
+    console.log('No data')
     return;
   }
   // Obtener imágenes asociadas a cada negocio

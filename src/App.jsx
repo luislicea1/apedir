@@ -6,6 +6,7 @@ import router from "./router/router";
 
 
 function App() {
+
   return (
     <React.StrictMode>
       <NextUIProvider>

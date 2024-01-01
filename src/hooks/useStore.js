@@ -16,7 +16,7 @@ const useProvinceStore = create((set) => ({
 }));
 
 const useBussinessList = create((set) => ({
-  bussinesses: null,
+  bussinesses: [],
   setBussinesses: (b) => set({ bussinesses: b }),
 }));
 
