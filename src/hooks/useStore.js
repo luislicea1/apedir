@@ -100,6 +100,14 @@ const useFiltredEvents = create((set) => ({
   setEvents: (v) => set({ events: v }),
 }));
 
+
+const useProductsHome = create((set) => ({
+  products: [],
+  setProducts: (v) => set({ products: v }),
+}));
+
+
+
 export {
   useUserStore,
   merchantEvents,
@@ -121,4 +129,5 @@ export {
   useFiltredBussiness,
   useFiltredProducts,
   useFiltredEvents,
+  useProductsHome,
 };

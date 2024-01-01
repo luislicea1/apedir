@@ -1,7 +1,7 @@
 import { supabase } from "./client";
 
 import { uploadImage } from "./images";
-import { getImage, getImageWithDimensions } from "./bussiness";
+import { getImage } from "./bussiness";
 
 const addProduct = async (product) => {
   const { data, error } = await supabase
@@ -149,8 +149,8 @@ const getAllProductsVipsFirst = async () => {
   }
   if (data) {
     const novedades = await Promise.all(data.map(async (item) => {
-      
-      const pic = await getImageWithDimensions('products', item.image, 303, 348);
+
+      const pic = await getImage('products', item.image);
 
       return {
         id: item.id,
@@ -164,10 +164,10 @@ const getAllProductsVipsFirst = async () => {
       };
     }));
 
-    return novedades.sort((a,b) => {
-      if(a.order < b.order) return 1
-      if(a.order == b.order) return 0
-      if(a.order > b.order) return -1
+    return novedades.sort((a, b) => {
+      if (a.order < b.order) return 1
+      if (a.order == b.order) return 0
+      if (a.order > b.order) return -1
     });
   }
 }

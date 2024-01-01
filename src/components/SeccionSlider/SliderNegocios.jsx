@@ -6,6 +6,7 @@ import ComponenteLugar from "../Seccion/ComponenteLugar";
 import { useBussinessList, useProvinceStore } from "../../hooks/useStore";
 import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
 import { Autoplay } from "swiper/modules";
+import { getStarsFromBusinesses } from "../../api/starsRate";
 import "swiper/css";
 import "./style.css";
 
@@ -53,11 +54,16 @@ const SliderNegocios = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchMoreData();
-    };
-    fetchData();
+    fetchMoreData()
   }, []);
+
+  useEffect(() => {
+    const fetchStars = async () => {
+      const starsMap = await getStarsFromBusinesses(bussinesses.map(business => business.id));
+      setBussinesses(bussinesses.map(business => ({ ...business, stars: starsMap[business.id] })));
+    };
+    if (bussinesses !== null) fetchStars();
+  }, [bussinesses]);
 
   useEffect(() => {
     if (inView && hasMore) {
@@ -80,7 +86,7 @@ const SliderNegocios = () => {
           1020: { slidesPerView: 3, spaceBetween: 10 },
         }}
         loop={true}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        autoplay={{ delay: 5500, disableOnInteraction: false }}
       >
         {filtredBussinesses !== null &&
           filtredBussinesses.map((item) => (
@@ -93,6 +99,7 @@ const SliderNegocios = () => {
                 nombre={item.name}
                 numeroPersonas={item.numeroPersonas}
                 url={item.value_url}
+                stars={item.stars}
               />
             </SwiperSlide>
           ))}

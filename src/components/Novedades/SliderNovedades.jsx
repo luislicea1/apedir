@@ -5,20 +5,11 @@ import { container, section } from "../styles/styles";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import Novedades from "./Novedades";
 import { merchantNovedades } from "../../hooks/useStore";
-import { getAllNovedades } from "../../api/novedades";
+
 import SkeletonNovedades from "../Skeleton/SkeletonNovedades";
 
 export default function SliderNovedades() {
   const novedades = merchantNovedades((state) => state.novedades);
-  const setNovedades = merchantNovedades((state) => state.setNovedades);
-
-  React.useEffect(() => {
-    const fetchNovedades = async () => {
-      const n = await getAllNovedades();
-      setNovedades(n);
-    };
-    if (novedades.length === 0) fetchNovedades();
-  }, []);
 
   return (
     <div

@@ -1,5 +1,6 @@
 import React from "react";
 import { Toaster, toast } from "sonner";
+import useHomeData from "../hooks/useHomeData";
 
 // import Seccion from "../components/Seccion/Seccion";
 // import SeccionEventos from "../components/Eventos/SeccionEventos";
@@ -14,6 +15,7 @@ const Footer = React.lazy(() => import("../components/Footer/Footer"))
 const ProductosSliderHome = React.lazy(() => import("../components/ProductosSliderHome/ProductosSliderHome"))
 
 export default function Home() {
+  useHomeData()
 
   React.useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);

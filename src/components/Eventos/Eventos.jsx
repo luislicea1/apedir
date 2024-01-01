@@ -30,7 +30,7 @@ export default function Eventos(props) {
             // style={{ objectFit: "cover", width: "200px", height: "200px" }}
             style={{ objectFit: "cover", width: "300px", height: "300px" }}
             delayMethod="debounce"
-            delayTime={100}
+            delayTime={50}
             placeholderSrc={props.imagen}
             useIntersectionObserver={true}
             className="card-events-lazyload"

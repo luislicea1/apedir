@@ -1,20 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { getAllEvents } from "../../api/events";
-import { eventsStore } from "../../hooks/useStore";
+import React, { useRef } from "react";
 import SliderEventos from "./SliderEventos/SliderEventos";
 
 export default function ListadoDeEventos() {
   const listContainer = useRef(null);
-  const setEvents = eventsStore((state) => state.setEvents);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const e = await getAllEvents();
-      setEvents(e);
-    };
-    fetchEvents();
-  }, [setEvents]);
-
 
   const listContainerStyle = {
     display: "flex",
