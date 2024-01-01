@@ -19,7 +19,7 @@ export default function ProductosSliderHome() {
       const resultados = await getAllProductsVipsFirst();
       setProductos(resultados);
     };
-    return () => fetchData();
+    fetchData();
   }, []);
 
   const renderSwiper = useMemo(() => {
