@@ -23,7 +23,7 @@ export default function ProductosHome(props) {
         effect="blur"
         alt="Card example background"
         src={props.image}
-        style={{ width: "100%", objectFit: "cover" }}
+        // style={{ width: "100%", objectFit: "cover" }}
         placeholderSrc={props.imagen}
         useIntersectionObserver={true}
         className="lazyload-producto-home"

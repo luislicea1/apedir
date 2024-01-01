@@ -10,7 +10,7 @@ export const AcmeLogo = () => {
   const navigate = useNavigate()
 
   return (
-    <Link to='/' aria-label="Home" >
+    <section onClick={() => navigate('/')} aria-label="Home" >
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
@@ -249,6 +249,6 @@ l118 119 0 -383 0 -382 435 0 435 0 0 2590 0 2590 -435 0 -435 0 -2 -371 -3
           />
         </g>
       </svg>
-    </Link>
+    </section>
   );
 };
