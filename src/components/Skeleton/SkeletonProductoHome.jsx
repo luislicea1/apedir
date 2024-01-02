@@ -2,6 +2,7 @@ import React from "react";
 import { Card,Skeleton } from "@nextui-org/react";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
+
 export default function SkeletonProductosHome(props) {
   return (
     <Card

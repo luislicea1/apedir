@@ -3,18 +3,15 @@ import ProductosHome from "./ProductosHome";
 import { container, section } from "../styles/styles";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Autoplay,
-} from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import { useProductsHome } from "../../hooks/useStore";
-import ListadoSkeleton from "../Skeleton/ListadoSkeleton";
+import SkeletonProductosHome from "../Skeleton/SkeletonProductoHome";
 
 export default function ProductosSliderHome() {
-
-  const productos = useProductsHome(state => state.products)
+  const productos = useProductsHome((state) => state.products);
 
   return (
     <div
@@ -56,19 +53,37 @@ export default function ProductosSliderHome() {
             disableOnInteraction: false,
           }}
         >
-          {productos?.length > 0 ? productos.map((producto) => (
-            <SwiperSlide key={producto.id}>
-              <ProductosHome
-                key={producto.id}
-                image={producto.image}
-                name={producto.name}
-                price={producto.price}
-                currency={producto.currency}
-                url={producto.url}
-              />
-            </SwiperSlide>
-          )) : (
-            <ListadoSkeleton />
+          {productos?.length > 0 ? (
+            productos.map((producto) => (
+              <SwiperSlide key={producto.id}>
+                <ProductosHome
+                  key={producto.id}
+                  image={producto.image}
+                  name={producto.name}
+                  price={producto.price}
+                  currency={producto.currency}
+                  url={producto.url}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
+            <>
+              <SwiperSlide>
+                <SkeletonProductosHome />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SkeletonProductosHome />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SkeletonProductosHome />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SkeletonProductosHome />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SkeletonProductosHome />
+              </SwiperSlide>
+            </>
           )}
         </Swiper>
       </section>
