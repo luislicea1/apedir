@@ -24,6 +24,8 @@ export default function ProductosHome(props) {
         alt="Card example background"
         src={props.image}
         // style={{ width: "100%", objectFit: "cover" }}
+        threshold={100}
+        delayTime={300}
         placeholderSrc={props.imagen}
         useIntersectionObserver={true}
         className="lazyload-producto-home"
