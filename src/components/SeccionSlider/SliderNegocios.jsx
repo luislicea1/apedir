@@ -13,6 +13,7 @@ import "./style.css";
 const SliderNegocios = () => {
   const bussinesses = useBussinessList((state) => state.bussinesses);
   const setBussinesses = useBussinessList((state) => state.setBussinesses);
+  
   const province = useProvinceStore((state) => state.province);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
