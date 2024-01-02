@@ -90,6 +90,17 @@ export default function Header() {
   };
 
   useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  
+  useEffect(() => {
     async function handleAuthStateChange(_event, session) {
       if (session) {
         setSession(session);
@@ -124,7 +135,7 @@ export default function Header() {
       <NavbarBrand>
         {isBussiness && selectedBussiness !== null ? (
           <>
-            <LinkReact href="/">
+            <LinkReact to="/">
               <Izquierda h={"20px"} w={"20px"} />
             </LinkReact>
 

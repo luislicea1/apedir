@@ -13,7 +13,6 @@ import {
 } from "../components/ProtectRole";
 import { CircularProgress } from "@nextui-org/react";
 import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
-import Loader from "../components/Loader/Loader";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
