@@ -28,14 +28,14 @@ function ComponenteLugar(props) {
           <CardHeader className="pb-0 pt-2 px-4 flex-col  items-start ">
             <section className="flex w-full justify-between">
 
-              <p className="text-tiny uppercase font-bold">
+              <span className="uppercase font-bold" style={{ fontSize: "14px" }}>
                 {props.localizacion}
-              </p>
-              {props.privileges > 2 &&
-                <Chip color="white">
+              </span>
+              <Chip color="white">
+                {props.privileges > 2 &&
                   <PremiumIcon width={18} />
-                </Chip>
-              }
+                }
+              </Chip>
             </section>
             <section>
               <h2
