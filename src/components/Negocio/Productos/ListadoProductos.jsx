@@ -4,10 +4,11 @@ import TituloDeProductos from "./TituloDeProductos";
 import "./productos.css";
 import "./responsive.css";
 import { grid_3_col } from "../../styles/styles";
-import { useCartStore } from "../../../hooks/useStore";import "swiper/css";
+import { useCartStore } from "../../../hooks/useStore"; import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'swiper/css/grid';
+import SkeletonProductosHome from "../../Skeleton/SkeletonProductoHome";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, HashNavigation, Grid, Autoplay } from "swiper/modules";
@@ -17,6 +18,7 @@ export default function ListadoProductos(props) {
   const [carrito, setCarrito] = useState([]);
   const carrito2 = useCartStore((state) => state.cart);
   const setCarrito2 = useCartStore((state) => state.setCart);
+
 
   const changeTitle = (title) => {
     props.onChangeTitle(title);
@@ -46,11 +48,11 @@ export default function ListadoProductos(props) {
       </SwiperSlide>
     ),
     [props.nombre, props.localizacion]
-   );
+  );
 
   return (
     <div>
-      
+
       <TituloDeProductos
         title={props.title}
         onChangeTitle={changeTitle}
@@ -59,10 +61,10 @@ export default function ListadoProductos(props) {
       {/* <div className="mt-2 list-container-products" style={{...grid_3_col, placeItems: 'center'}}>
         {list.map(renderProducto)}
       </div> */}
-      
+
       <Swiper
         spaceBetween={0}
-        pagination = {false}
+        pagination={false}
         navigation={false}
         modules={[Pagination, Navigation, HashNavigation, Autoplay]}
         className="slider-negocios"
@@ -75,23 +77,27 @@ export default function ListadoProductos(props) {
             slidesPerView: 2.5,
             spaceBetween: 10,
           },
-            711: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            
-            1020: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-          }}
-          loop={true}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
+          711: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+
+          1020: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+        }}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
       >
-          {list.map(renderProducto)}
+        {lista.length > 0 ? (
+          <SkeletonProductosHome />
+        ) : (
+          list.map(renderProducto)
+        )}
       </Swiper>
     </div>
   );

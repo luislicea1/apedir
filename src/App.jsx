@@ -3,7 +3,7 @@ import "./App.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/router";
-
+import { supabase } from "./api/client";
 
 function App() {
 

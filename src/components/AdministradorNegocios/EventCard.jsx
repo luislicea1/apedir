@@ -96,7 +96,7 @@ export default function EventCard({ bussinessId, event, bussiness }) {
       const lowerCaseExtension = extension.toLowerCase();
       const newFileName = file.name.replace(extension, lowerCaseExtension);
 
-      const resizedImage = await resizeImage(file, 500, 500);
+      const resizedImage = await resizeImage(file, 400, 400);
 
       setImageName(newFileName);
       eventInput.current = {

@@ -56,7 +56,11 @@ const SliderNegocios = () => {
   const fetchStars = async () => {
     const ids = bussinesses.map(business => business.id)
     const starsMap = await getStarsFromBusinesses(ids);
-    setBussinesses(bussinesses.map(business => ({ ...business, stars: starsMap[business.id] })));
+    const newB = bussinesses
+      .sort((a, b) => a.privileges - b.privileges)
+      .map(business => ({ ...business, stars: starsMap[business.id] }));
+
+    setBussinesses(newB);
   };
 
   useEffect(() => {
@@ -102,6 +106,7 @@ const SliderNegocios = () => {
                 numeroPersonas={item.numeroPersonas}
                 url={item.value_url}
                 stars={item.stars}
+                privileges={item.privileges}
               />
             </SwiperSlide>
           ))}
