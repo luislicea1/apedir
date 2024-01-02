@@ -7,7 +7,7 @@ const uploadImage = async (image, name, bucket) => {
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(filename, image, {
-      contentType: 'image/webp'
+      contentType: 'image/webp', cacheControl: 31536000
     });
   console.log({ error });
   return data;

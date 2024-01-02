@@ -2,17 +2,17 @@ import React from "react";
 import { Toaster, toast } from "sonner";
 import useHomeData from "../hooks/useHomeData";
 
-// import Seccion from "../components/Seccion/Seccion";
-// import SeccionEventos from "../components/Eventos/SeccionEventos";
-// import SliderNovedades from "../components/Novedades/SliderNovedades";
-// import Footer from "../components/Footer/Footer";
-// import ProductosSliderHome from "../components/ProductosSliderHome/ProductosSliderHome";
+import Seccion from "../components/Seccion/Seccion";
+import SeccionEventos from "../components/Eventos/SeccionEventos";
+import SliderNovedades from "../components/Novedades/SliderNovedades";
+import Footer from "../components/Footer/Footer";
+import ProductosSliderHome from "../components/ProductosSliderHome/ProductosSliderHome";
 
-const Seccion = React.lazy(() => import("../components/Seccion/Seccion"))
-const SeccionEventos = React.lazy(() => import("../components/Eventos/SeccionEventos"))
-const SliderNovedades = React.lazy(() => import("../components/Novedades/SliderNovedades"))
-const Footer = React.lazy(() => import("../components/Footer/Footer"))
-const ProductosSliderHome = React.lazy(() => import("../components/ProductosSliderHome/ProductosSliderHome"))
+// const SeccionEventos = React.lazy(() => import("../components/Eventos/SeccionEventos"))
+// const SliderNovedades = React.lazy(() => import("../components/Novedades/SliderNovedades"))
+// const ProductosSliderHome = React.lazy(() => import("../components/ProductosSliderHome/ProductosSliderHome"))
+// const Seccion = React.lazy(() => import("../components/Seccion/Seccion"))
+// const Footer = React.lazy(() => import("../components/Footer/Footer"))
 
 export default function Home() {
   useHomeData()

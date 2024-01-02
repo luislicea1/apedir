@@ -52,7 +52,7 @@ const LazyAdministradorNegocioGratuito = lazy(() =>
   import("../pages/AdministradorNegocioGratuito")
 );
 const LazyVerEventoWrapper = lazy(() =>
-  import("../components/VisualizadorContenido/verEventoWrapper")
+  import("../components/VisualizadorContenido/VerEvento")
 );
 const LazyNegocioTableWrapper = lazy(() =>
   import("../pages/Admin/AdminBussiness")
