@@ -2,8 +2,8 @@ import React from "react";
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-// import Home from "../pages/Home";
 import Page from "../pages/Page";
+import Home from "../pages/Home";
 
 
 import {
@@ -14,8 +14,6 @@ import {
 import { CircularProgress } from "@nextui-org/react";
 import LoaderCompletePage from "../components/Loader/LoaderCompletePage";
 import Loader from "../components/Loader/Loader";
-
-const Home = lazy(() => import("../pages/Home"))
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 

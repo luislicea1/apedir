@@ -18,7 +18,7 @@ import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
 import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
 import Izquierda from "../Icons/Angulo/izquierda";
 import { MarginLeft30 } from "../styles/styles";
-import { useBussinessStore, useCartStore } from "../../hooks/useStore";
+import { showFilter, useBussinessStore, useCartStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../api/client";
@@ -41,6 +41,7 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const setCarrito = useCartStore((state) => state.setCart);
+  const setShowFilter = showFilter(state => state.setShowFilter)
 
   const location = useLocation();
   const path = location.pathname.split("/");
@@ -55,11 +56,13 @@ export default function Header() {
         setSelectedBussiness(bussinessData);
       }
     };
- 
+
     if (path.includes("lugar")) {
       fetchData();
       setIsBussiness(true);
       setIsHome(false)
+      setShowFilter(false)
+
     } else {
       setSelectedBussiness(null);
       setIsBussiness(false);
@@ -121,7 +124,7 @@ export default function Header() {
       <NavbarBrand>
         {isBussiness && selectedBussiness !== null ? (
           <>
-            <LinkReact to="/">
+            <LinkReact href="/">
               <Izquierda h={"20px"} w={"20px"} />
             </LinkReact>
 
