@@ -2,7 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 //import AdminNavBar from "../../components/Admin/AdminNavBar";
 //import PlansTable from "../../components/Admin/PlansTable";
 import { getPlans } from "../../api/plans";
-import supabase from "../../api/client";
+import {supabase} from "../../api/client";
 
 const PlansTable = lazy(() => import("../../components/Admin/PlansTable"));
 

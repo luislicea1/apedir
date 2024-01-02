@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 import { updateProfileStars, getUserStarsForBussiness } from "./profile";
 
 const addStars = async (stars, user, bussiness) => {
@@ -35,19 +36,23 @@ const addStars = async (stars, user, bussiness) => {
   await updateProfileStars(user, bussiness, stars);
 };
 
-const getStarsFromBussiness = async (bussinessId) => {
+const getStarsFromBusinesses = async (businessIds) => {
   const { data, error } = await supabase
     .from("stars_rating")
     .select("*")
-    .eq("bussiness", bussinessId)
+    .in("bussiness", businessIds)
     .limit(1);
-  return data ? data[0] : null;
-};
-
+  const starsMap = {};
+  data.forEach(star => {
+    starsMap[star.bussiness] = star;
+  });
+  return starsMap;
+ };
+ 
 const getStarsAllBussiness = async () => {
   const { data, err } = await supabase.from("stars_rating").select("*");
 
   console.log(err);
 };
 
-export { addStars, getStarsFromBussiness, getStarsAllBussiness };
+export { addStars, getStarsFromBusinesses, getStarsAllBussiness };

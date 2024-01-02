@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Input, Button,Link } from "@nextui-org/react";
+import { Input, Button, Link } from "@nextui-org/react";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import "./login.css";
@@ -10,7 +10,6 @@ import { Toaster, toast } from "sonner";
 import { btnHeight } from "../styles/styles";
 
 export default function Login() {
-  
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -25,7 +24,7 @@ export default function Login() {
 
     const { session, message, isValid } = await login(
       email.value,
-      password.value
+      password.value,
     );
     if (isValid && session) return navigate("/");
     else toast.error(message);

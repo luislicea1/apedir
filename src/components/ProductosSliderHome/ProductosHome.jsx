@@ -23,7 +23,9 @@ export default function ProductosHome(props) {
         effect="blur"
         alt="Card example background"
         src={props.image}
-        style={{ width: "100%", objectFit: "cover" }}
+        // style={{ width: "100%", objectFit: "cover" }}
+        threshold={100}
+        delayTime={300}
         placeholderSrc={props.imagen}
         useIntersectionObserver={true}
         className="lazyload-producto-home"
@@ -43,11 +45,11 @@ export default function ProductosHome(props) {
             {props.price} {props.currency}
           </p>
         </div>
-        <a href={`lugar/${props.url}`}>
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            Visitar Sitio
-          </Button>
-        </a>
+
+        <Button as={Link} to={`lugar/${props.url}`} className="text-tiny" color="primary" radius="full" size="sm">
+          Visitar Sitio
+        </Button>
+
       </CardFooter>
     </Card>
   );

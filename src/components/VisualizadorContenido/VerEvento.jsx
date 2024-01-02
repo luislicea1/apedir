@@ -9,8 +9,10 @@ import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function VerEvento({ nombre }) {
+export default function VerEvento() {
+  const { nombre } = useParams();
   const [image, setImage] = useState(null);
   const sectionStyle2 = {
     width: "100%",

@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 import { getImage } from "./bussiness";
 
 const getBussiness = async (searchInput) => {

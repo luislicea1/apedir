@@ -1,8 +1,10 @@
 import React from 'react'
 import ComponenteLugar from '../../Seccion/ComponenteLugar';
+import { showFilter } from '../../../hooks/useStore';
 
 
 export default function Bussinesses({ filtredBussinesses }) {
+    const setShowFilter = showFilter(state => state.setShowFilter)
     return (
 
         <div

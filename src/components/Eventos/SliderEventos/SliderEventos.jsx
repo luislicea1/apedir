@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -8,46 +8,10 @@ import "./styles.css";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
 import { EffectCoverflow } from "swiper/modules";
-import { getAllEvents } from "../../../api/events";
 
 export default function SliderEventos() {
-  const listContainer = useRef(null);
-  // const [events, setEvents] = useState([]);
   const events = eventsStore((state) => state.events);
-  const setEvents = eventsStore((state) => state.setEvents);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const e = await getAllEvents();
-      setEvents(e);
-    };
-    fetchEvents();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = (e) => {
-      e.preventDefault();
-      let scrollAmount = 0;
-      if (e.deltaY < 0) {
-        scrollAmount = Math.max(-30, e.deltaY);
-      } else {
-        scrollAmount = Math.min(30, e.deltaY);
-      }
-      listContainer.current.scrollLeft += scrollAmount;
-    };
-
-    if (listContainer.current) {
-      listContainer.current.addEventListener("wheel", handleScroll, {
-        passive: false,
-      });
-    }
-
-    return () => {
-      if (listContainer.current) {
-        listContainer.current.removeEventListener("wheel", handleScroll);
-      }
-    };
-  }, []);
   return (
     <>
       {events && events.length > 0 ? (
@@ -71,7 +35,6 @@ export default function SliderEventos() {
             style={
               {
                 width: "100%",
-                // padding: "10px 10px",
 
               }
             }
@@ -86,7 +49,7 @@ export default function SliderEventos() {
         </>
       ) : (
         <>
-          <Empty></Empty>
+          <Empty />
         </>
       )}
     </>

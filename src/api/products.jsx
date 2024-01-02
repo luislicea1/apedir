@@ -1,4 +1,5 @@
-import supabase from "./client";
+import { supabase } from "./client";
+
 import { uploadImage } from "./images";
 import { getImage } from "./bussiness";
 
@@ -148,7 +149,7 @@ const getAllProductsVipsFirst = async () => {
   }
   if (data) {
     const novedades = await Promise.all(data.map(async (item) => {
-      
+
       const pic = await getImage('products', item.image);
 
       return {
@@ -163,10 +164,10 @@ const getAllProductsVipsFirst = async () => {
       };
     }));
 
-    return novedades.sort((a,b) => {
-      if(a.order < b.order) return 1
-      if(a.order == b.order) return 0
-      if(a.order > b.order) return -1
+    return novedades.sort((a, b) => {
+      if (a.order < b.order) return 1
+      if (a.order == b.order) return 0
+      if (a.order > b.order) return -1
     });
   }
 }

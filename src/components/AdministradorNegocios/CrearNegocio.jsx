@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardBody, useDisclosure } from "@nextui-org/react";
 import { useBussinessStore, usePlan, useUserStore } from "../../hooks/useStore";
 import { getOneBussiness } from "../../api/bussiness";
-import supabase from "../../api/client";
+import { supabase } from "../../api/client";
 import CambioDePaquete from "./CambioDePaquete";
 import VipListNegocios from "./VipListNegocios";
 import { getPlan } from "../../api/plans";
@@ -25,16 +25,6 @@ export default function CrearNegocio({ children }) {
     };
     if (user && user.plan) fetchPlan();
   }, [user]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const p = await getAllProductsVipsFirst()
-      console.log(p)
-    }
-
-    fetchProducts()
-  }, []);
-
 
   const sectionStyle = {
     width: "100%",
@@ -75,7 +65,7 @@ export default function CrearNegocio({ children }) {
         ) : null}
 
         <div>
-          
+
           {bussiness !== null && bussiness !== undefined ? (
             <section
               className="flex justify-between"

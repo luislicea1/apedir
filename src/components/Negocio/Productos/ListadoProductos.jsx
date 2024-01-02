@@ -28,25 +28,25 @@ export default function ListadoProductos(props) {
   // Usando useCallback para evitar la creación de nuevas funciones en cada renderizado
   const renderProducto = useCallback(
     (item, index) => (
-      <SwiperSlide>
-      <Producto
-        key={item.id}
-        index={index}
-        img={item.image}
-        price={item.price}
-        currency={item.currency}
-        title={item.name}
-        nombre={props.nombre}
-        description={item.description}
-        localizacion={props.localizacion}
-        onChangeCarrito={handleAddToCart}
-        isRecomended={item.isRecomended}
-        url={props.url}
-      ></Producto>
+      <SwiperSlide key={item.id}>
+        <Producto
+          key={item.id}
+          index={index}
+          img={item.image}
+          price={item.price}
+          currency={item.currency}
+          title={item.name}
+          nombre={props.nombre}
+          description={item.description}
+          localizacion={props.localizacion}
+          onChangeCarrito={handleAddToCart}
+          isRecomended={item.isRecommended}
+          url={props.url}
+        />
       </SwiperSlide>
     ),
     [props.nombre, props.localizacion]
-  );
+   );
 
   return (
     <div>

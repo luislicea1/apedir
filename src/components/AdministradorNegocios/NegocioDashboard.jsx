@@ -15,12 +15,13 @@ import { getOneBussiness, upsertBussiness } from "../../api/bussiness";
 import BussinessInputSchema from "../../schemas/bussinessInputSchema";
 import { Toaster, toast } from "sonner";
 import { grid_2_col, btnHeight } from "../styles/styles";
-import { useUserStore, usePlan, useBussinessStore } from "../../hooks/useStore";
+import { useUserStore, usePlan, useBussinessStore, useCategoryFilter } from "../../hooks/useStore";
 import Loader from "../Loader/Loader";
 import InputTitle from "./Inputs/InputTitle";
 import { addNotification } from "../../api/notifications";
 import QR from "../QR/QRCodeLogo";
 import { useShallow } from "zustand/react/shallow";
+import SelectCategory from "../header/Search/SelectCategory"
 
 export default function NegocioDashboard() {
   const user = useUserStore((state) => state.user);
@@ -29,6 +30,7 @@ export default function NegocioDashboard() {
   const plan = usePlan((state) => state.plan);
   const [render, setRender] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const category = useCategoryFilter(state => state.category)
 
   const fetchBussiness = async () => {
     try {
@@ -78,6 +80,7 @@ export default function NegocioDashboard() {
     description: "",
     address: "",
     province: "Santiago de Cuba",
+    category: "",
     gps_location: "",
     email: "",
     phone_number: "",
@@ -113,6 +116,10 @@ export default function NegocioDashboard() {
     } catch (e) {
       toast.error(e.message);
       return;
+    }
+    bussinessInput.current = {
+      ...bussinessInput.current,
+      category: category
     }
 
     setIsLoading(true);
@@ -243,6 +250,8 @@ export default function NegocioDashboard() {
       >
         Delivery (Márquelo si hace delivery)
       </Checkbox>
+      <br /><br />
+      <SelectCategory value={bussinessInput} />
       <br /><br />
       <InputLocation
         value={bussinessInput}

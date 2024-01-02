@@ -1,4 +1,4 @@
-import supabase from "./client";
+import { supabase } from "./client";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -6,7 +6,9 @@ const uploadImage = async (image, name, bucket) => {
   const filename = `${uuidv4()}-${name}`;
   const { data, error } = await supabase.storage
     .from(bucket)
-    .upload(filename, image);
+    .upload(filename, image, {
+      contentType: 'image/webp', cacheControl: 31536000
+    });
   console.log({ error });
   return data;
 };

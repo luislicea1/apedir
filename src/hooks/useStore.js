@@ -1,12 +1,4 @@
 import { create } from "zustand";
-import { createClient } from "@supabase/supabase-js";
-
-const useSupabase = create((set) => ({
-  supabase: createClient(
-    import.meta.env.VITE_APP_SUPABASE_URL,
-    import.meta.env.VITE_APP_SUPABASE_ANON_KEY
-  ),
-}));
 
 const useUserStore = create((set) => ({
   user: null,
@@ -24,7 +16,7 @@ const useProvinceStore = create((set) => ({
 }));
 
 const useBussinessList = create((set) => ({
-  bussinesses: null,
+  bussinesses: [],
   setBussinesses: (b) => set({ bussinesses: b }),
 }));
 
@@ -108,6 +100,14 @@ const useFiltredEvents = create((set) => ({
   setEvents: (v) => set({ events: v }),
 }));
 
+
+const useProductsHome = create((set) => ({
+  products: [],
+  setProducts: (v) => set({ products: v }),
+}));
+
+
+
 export {
   useUserStore,
   merchantEvents,
@@ -120,7 +120,6 @@ export {
   useProductsList,
   useCartStore,
   eventsStore,
-  useSupabase,
   usePlan,
   useVipBussiness,
   merchantNovedades,
@@ -129,5 +128,6 @@ export {
   useSearchInput,
   useFiltredBussiness,
   useFiltredProducts,
-  useFiltredEvents
+  useFiltredEvents,
+  useProductsHome,
 };

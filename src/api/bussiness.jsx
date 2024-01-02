@@ -1,4 +1,5 @@
-import supabase from "./client";
+import getIcon from "../utils/getIcon";
+import { supabase } from "./client";
 import { getUserByID } from "./profile";
 // import { getStarsFromBussiness } from "./starsRate";
 
@@ -129,7 +130,6 @@ const updateBussinessSchedule = async (bussinessId, schedules) => {
     .update({ schedules: schedules })
     .eq("id", bussinessId);
 
-  console.log({ data });
   console.log({ error });
 };
 
@@ -152,6 +152,7 @@ const loadMoreBussiness = async (
     return;
   }
   if (data.length === 0) {
+    console.log('No data')
     return;
   }
   // Obtener imágenes asociadas a cada negocio
@@ -500,7 +501,6 @@ const bussinessNum = async (ownerId) => {
     .eq("owner", ownerId)
     .count();
 
-  console.log(data);
   return data;
 };
 
@@ -535,5 +535,5 @@ export {
   deleteBussinessById,
   bussinessNum,
   getSubscriptorsOfBussiness,
-  getAllBussinessUrl
+  getAllBussinessUrl,
 };

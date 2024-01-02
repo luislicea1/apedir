@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import "./header.css";
 import { Link as LinkReact } from "react-router-dom";
 import { useHref } from "react-router-dom";
@@ -18,17 +18,18 @@ import { NegocioLogo } from "../Negocio/HeaderNegocio/NegocioLogo";
 import AbiertoCerrado from "../Negocio/HeaderNegocio/AbiertoCerrado";
 import Izquierda from "../Icons/Angulo/izquierda";
 import { MarginLeft30 } from "../styles/styles";
-import { useBussinessStore, useCartStore } from "../../hooks/useStore";
+import { showFilter, useBussinessStore, useCartStore } from "../../hooks/useStore";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { useNavigate } from "react-router-dom";
-import supabase from "../../api/client.jsx";
+import { supabase } from "../../api/client";
 import { getUser } from "../../api/profile.jsx";
 import { useUserStore } from "../../hooks/useStore";
 import { fetchBussinessPerURL, getOneBussiness } from "../../api/bussiness";
 import Carrito from "./CarritoIcon.jsx";
 import Notification from "./Notification.jsx";
-import Search from "./Search/Search";
-import { showFilter as useShowFilter } from "../../hooks/useStore";
+import { useLocation } from "react-router-dom";
+
+const Search = lazy(() => import('./Search/Search'))
 
 export default function Header() {
   const history = useHref();
@@ -40,37 +41,44 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const setCarrito = useCartStore((state) => state.setCart);
-  const setShowFilter = useShowFilter(state => state.setShowFilter)
+  const setShowFilter = showFilter(state => state.setShowFilter)
+
+  const location = useLocation();
+  const path = location.pathname.split("/");
 
   useEffect(() => {
-
-    const path = history.split("/");
     const fetchData = async () => {
-      const bussinessData = await fetchBussinessPerURL(path[2]);
-      if (bussinessData?.value_url !== selectedBussiness?.value_url) {
-        setCarrito([]);
+      if (path[2]) {
+        const bussinessData = await fetchBussinessPerURL(path[2]);
+        if (bussinessData?.value_url !== selectedBussiness?.value_url) {
+          setCarrito([]);
+        }
+        setSelectedBussiness(bussinessData);
       }
-      setSelectedBussiness(bussinessData);
     };
-
-    if (path.length === 0 || path[0] === ',') {
-      setIsHome(true);
-    } else {
-      setIsHome(false);
-      setShowFilter(false)
-    }
 
     if (path.includes("lugar")) {
       fetchData();
       setIsBussiness(true);
       setIsHome(false)
+      setShowFilter(false)
+
     } else {
       setSelectedBussiness(null);
       setIsBussiness(false);
       setIsHome(false)
-
     }
-  }, [history]);
+  }, [location]);
+
+
+  useEffect(() => {
+    const pathString = history.split('/').toString()
+    if (pathString.length === 1) {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+  }, [history, isHome]);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -82,18 +90,23 @@ export default function Header() {
   };
 
   useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  
+  useEffect(() => {
     async function handleAuthStateChange(_event, session) {
       if (session) {
         setSession(session);
         const u = await getUser(session.user.email);
         setUser(u);
       }
-    }
-    const path = history.split("/")
-    if (path.length === 0 || path.toString() === ',') {
-      setIsHome(true);
-    } else {
-      setIsHome(false);
     }
 
     const authListener = supabase.auth.onAuthStateChange(handleAuthStateChange);

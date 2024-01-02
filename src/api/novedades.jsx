@@ -1,5 +1,6 @@
 import { getImage } from "./bussiness";
-import supabase from "./client";
+import { supabase } from "./client";
+
 
 const getNovedadesfromBussiness = async (bussinessId) => {
     const { data, error } = await supabase.from("novedades").select("*").eq("bussiness", bussinessId)

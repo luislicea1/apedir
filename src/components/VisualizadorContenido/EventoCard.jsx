@@ -42,7 +42,7 @@ export default function EventoCard({ image }) {
         style={{...img, zIndex: "100"}}
         src={image }
         alt="NextUI Album Cover Image with delay"
-        classNames="m-5"
+        className="m-5"
       />
        <img
         className='blur-img-fondo'

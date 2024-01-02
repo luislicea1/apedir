@@ -1,5 +1,6 @@
 import { banUser } from "./auth";
-import supabase from "./client";
+import { supabase } from "./client";
+
 
 const getRole = async (email) => {
   let { data: profiles, error } = await supabase
