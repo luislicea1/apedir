@@ -71,11 +71,7 @@ export default function Footer() {
           <Link href="/plans" underline="hover" style={{ color: "white" }}>
             Planes y Precios
           </Link>
-          <Link
-            href="/ayudaInformacion"
-            underline="hover"
-            style={{ color: "white" }}
-          >
+          <Link href="/ayudaInformacion" underline="hover" style={{ color: "white" }}>
             Ayuda e Información
           </Link>
         </nav>
@@ -95,8 +91,8 @@ export default function Footer() {
         />
 
         <Button
-          style={{ width: "100%" }}
-          color="warning"
+          style={{ width: "100%", color: "black" }}
+          color="primary"
           onClick={() =>
             window.open(
               `https://wa.me/55971705?text=${encodeURIComponent(message)}`
