@@ -8,7 +8,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import "./seccion.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faS } from "@fortawesome/free-solid-svg-icons";
-import { Badge } from "@nextui-org/react"
+import { Chip } from "@nextui-org/react"
 import { PremiumIcon } from "../Icons/PremiumIcon";
 
 function ComponenteLugar(props) {
@@ -20,20 +20,23 @@ function ComponenteLugar(props) {
     <>
 
       <Link to={`/lugar/${props.url}`} aria-label={"negocio"}>
-        {props.privileges > 2 && <section
-          style={{ color: "red", position: 'absolute', top: '20px', right: '5px', zIndex: 5 }}
-        >
-          <PremiumIcon width={30} />
-        </section>
-        }
+
         <Card
           className="py-4 tarjeta-negocio-card"
           style={{ ...CardStyles, margin: "5px 5px 5px 5px", boxShadow: "none", border: ".8px solid #D4D4D8", position: 'relative' }}>
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start ">
 
-            <p className="text-tiny uppercase font-bold">
-              {props.localizacion}
-            </p>
+          <CardHeader className="pb-0 pt-2 px-4 flex-col  items-start ">
+            <section className="flex w-full justify-between">
+
+              <p className="text-tiny uppercase font-bold">
+                {props.localizacion}
+              </p>
+              {props.privileges > 2 &&
+                <Chip color="white">
+                  <PremiumIcon width={18} />
+                </Chip>
+              }
+            </section>
             <section>
               <h2
                 className="font-bold text-large mb-2 titulo-card-negocio-panntalla-principal"
