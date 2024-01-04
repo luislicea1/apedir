@@ -129,6 +129,7 @@ export default function Header() {
     fetchBussiness();
   }, [user]);
 
+ 
 
   return (
     <Navbar isBordered disableAnimation>
@@ -167,7 +168,7 @@ export default function Header() {
         <NavbarContent as="div" justify="end" style={{ gap: "30px" }}>
           {isBussiness &&
             selectedBussiness &&
-            selectedBussiness.delivery == true && <Carrito></Carrito>}
+            selectedBussiness.delivery == true && <Carrito number = {selectedBussiness.phone_number}></Carrito>}
           <Notification />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>

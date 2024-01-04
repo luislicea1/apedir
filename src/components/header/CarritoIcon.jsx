@@ -14,7 +14,7 @@ import {
 import { grid_1_col } from "../styles/styles";
 import { Toaster, toast } from "sonner";
 
-export default function Carrito() {
+export default function Carrito(props) {
   const [isInvisible, setIsInvisible] = React.useState(false);
   const carrito = useCartStore((state) => state.cart);
   const setCarrito = useCartStore((state) => state.setCart);
@@ -31,9 +31,10 @@ export default function Carrito() {
   const mensaje = `-------Apedir-------%0A%0ANombre: ${nombre}%0ADirección: ${direccion}%0ADetalles: ${detalles}%0A%0A------Productos------- %0A%0A${productInfo.join(
     "%0A"
   )}`;
-
+   
   const enviarMensaje = () => {
-    const numero = "55641782";
+    const numero = props.number;
+    
     if ((nombre === "") | (direccion === ""))
       return toast.error("Los campos no pueden estar vacios");
 
