@@ -46,7 +46,7 @@ const CardComponent = React.memo(function CardComponent({
     (event) => {
       setDias(
         dias.map((d, i) =>
-          i === index ? { ...d, trabaja: event.target.checked } : d
+          i === index ? { ...d, trabaja: !d.trabaja } : d
         )
       );
     },
@@ -71,9 +71,9 @@ const CardComponent = React.memo(function CardComponent({
       </div>
       <div>
         <Checkbox
-          checked={dia.trabaja}
+          isSelected={dia.trabaja}
+          onValueChange={handleCheckboxChange}
           color="primary"
-          onChange={handleCheckboxChange}
         />
         <label htmlFor="">Trabaja</label>
       </div>
@@ -111,19 +111,14 @@ export default function ResponsiveTimePickers() {
   ]);
 
   React.useEffect(() => {
-    let b = bussiness;
     const fetchScheduleFromBussiness = async () => {
-      if (bussiness === null) {
-        b = await getOneBussiness(user.id);
-        setBussiness(b);
-      }
-      const schedules = await getSchedule(b.id);
-      if (schedules) {
-        setDias(schedules);
-      }
+      const schedules = await getSchedule(bussiness.id);
+      console.log(schedules)
+      setDias(schedules);
+
     };
-    return () => fetchScheduleFromBussiness();
-  }, []);
+    if (bussiness) fetchScheduleFromBussiness();
+  }, [bussiness]);
 
   const handleClick = async () => {
     setLoading(true);
