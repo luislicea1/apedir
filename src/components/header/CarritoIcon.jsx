@@ -14,12 +14,8 @@ import {
 import { grid_1_col } from "../styles/styles";
 import { Toaster, toast } from "sonner";
 
-<<<<<<< HEAD
-export default function Carrito(props) {
-=======
 export default function Carrito() {
   const whatsapp = whatsappBussinessLink(state => state.whatsapp)
->>>>>>> 6877e30 (agregado el link de whatsapp de forma dinámica)
   const [isInvisible, setIsInvisible] = React.useState(false);
   const carrito = useCartStore((state) => state.cart);
   const setCarrito = useCartStore((state) => state.setCart);
