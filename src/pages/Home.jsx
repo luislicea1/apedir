@@ -32,8 +32,8 @@ export default function Home() {
 
   return (
     <div>
-      <SeccionEventos title="Eventos"></SeccionEventos>
       <SliderNovedades></SliderNovedades>
+      <SeccionEventos title="Eventos"></SeccionEventos>
       <ProductosSliderHome></ProductosSliderHome>
       <Seccion title="Lugares"></Seccion>
       <Toaster richColors theme="dark" duration={3000} position="bottom-center" />

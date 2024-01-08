@@ -35,6 +35,8 @@ export const titleStyles = {
   display: "flex",
   float: "left",
   marginBottom: "20px",
+  fontSize: "1.2rem",
+  fontWeight: "bold",
 };
 
 export const PortadaDeNegocioStyles = {
