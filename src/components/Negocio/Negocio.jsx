@@ -8,7 +8,7 @@ import {
 import { getCategories } from "../../api/categories";
 import { getProducts } from "../../api/products";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
-import { useUserStore } from "../../hooks/useStore";
+import { useUserStore, whatsappBussinessLink } from "../../hooks/useStore";
 import { useInView } from "react-intersection-observer";
 import { Chip } from "@nextui-org/react"
 
@@ -27,6 +27,7 @@ const PortadaDeNegocio = lazy(() =>
   import("./PortadaDeNegocio/portadaNegocio")
 );
 export default function Negocio() {
+  const setWhatsapp = whatsappBussinessLink(state => state.setWhatsapp)
   const history = useHref();
   const [bussiness, setBussiness] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -57,6 +58,7 @@ export default function Negocio() {
     const fetchData = async () => {
       const bussinessData = await fetchBussinessPerURL(path[2]);
       setBussiness(bussinessData);
+      setWhatsapp(bussinessData.whatsapp)
       //console.log(bussinessData);
     };
 
@@ -200,7 +202,7 @@ export default function Negocio() {
                 return (
                   categoryProducts.length > 0 && (
                     <ListadoProductos
-                      key={idx} 
+                      key={idx}
                       id={category.id}
                       title={category.category}
                       nombre={category.category}

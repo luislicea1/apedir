@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./header.css";
 import LogoCarritoNegro from "../../assets/logoReduce/LogoCarritoNegro";
-import { useCartStore } from "../../hooks/useStore";
+import { useCartStore, whatsappBussinessLink } from "../../hooks/useStore";
 import {
   Modal,
   ModalContent,
@@ -9,12 +9,13 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Input, Textarea,Button,Badge
+  Input, Textarea, Button, Badge
 } from "@nextui-org/react";
 import { grid_1_col } from "../styles/styles";
 import { Toaster, toast } from "sonner";
 
-export default function Carrito(props) {
+export default function Carrito() {
+  const whatsapp = whatsappBussinessLink(state => state.whatsapp)
   const [isInvisible, setIsInvisible] = React.useState(false);
   const carrito = useCartStore((state) => state.cart);
   const setCarrito = useCartStore((state) => state.setCart);
@@ -33,12 +34,10 @@ export default function Carrito(props) {
   )}`;
    
   const enviarMensaje = () => {
-    const numero = props.number;
-    
     if ((nombre === "") | (direccion === ""))
       return toast.error("Los campos no pueden estar vacios");
 
-    const url = `https://wa.me/${numero}?text=${mensaje}`;
+    const url = `https://wa.me/${whatsapp}?text=${mensaje}`;
     window.open(url, "_blank");
   };
 
@@ -140,7 +139,7 @@ export default function Carrito(props) {
                     <div className="carrito-list-products" >
                       {carrito.map((product, index) => (
                         <div key={index}>
-                          <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "5px", placeItems: "center"}}>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "5px", placeItems: "center" }}>
                             {/* <img
                               src={product.image}
                               alt={product.title}
@@ -149,7 +148,7 @@ export default function Carrito(props) {
                             <span>
                               <p>{product.title}</p>
                             </span>
-                            <span style={{display: "flex", gap: "1rem"}}>
+                            <span style={{ display: "flex", gap: "1rem" }}>
                               <button onClick={() => disminuir(product)} style={btn}>
                                 -
                               </button>

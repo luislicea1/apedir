@@ -106,7 +106,10 @@ const useProductsHome = create((set) => ({
   setProducts: (v) => set({ products: v }),
 }));
 
-
+const whatsappBussinessLink = create((set) => ({
+  whatsapp: "",
+  setWhatsapp: (v) => set({ whatsapp: v }),
+}));
 
 export {
   useUserStore,
@@ -130,4 +133,5 @@ export {
   useFiltredProducts,
   useFiltredEvents,
   useProductsHome,
+  whatsappBussinessLink
 };
