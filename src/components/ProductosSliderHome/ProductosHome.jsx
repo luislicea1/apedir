@@ -12,7 +12,7 @@ import "./style.css";
 
 export default function ProductosHome(props) {
   return (
-    <Link to={`lugar/${props.url}`}>
+    <Link to={`lugar/${props.url}`} style={{width: "100%"}}>
       <Card
         isFooterBlurred
         className="w-full h-[300px] col-span-12 sm:col-span-5 card-producto-list-home"

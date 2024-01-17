@@ -9,6 +9,7 @@ import "swiper/css";
 import TituloDeSeccion from "../Seccion/TituloDeSeccion";
 import { useProductsHome } from "../../hooks/useStore";
 import SkeletonProductosHome from "../Skeleton/SkeletonProductoHome";
+import { Button } from "@nextui-org/react";
 
 export default function ProductosSliderHome() {
   const productos = useProductsHome((state) => state.products);
@@ -50,11 +51,11 @@ export default function ProductosSliderHome() {
                 spaceBetween: 10,
               },
             }}
-            loop={true}
-            autoplay={{
-              delay: 5500,
-              disableOnInteraction: false,
-            }}
+            // loop={true}
+            // autoplay={{
+            //   delay: 5500,
+            //   disableOnInteraction: false,
+            // }}
           >
             {productos?.length > 0 ? (
               productos.map((producto) => (
@@ -111,10 +112,13 @@ export default function ProductosSliderHome() {
                 ))}
           </div>
         )}
-        {!showGrid && (
-          <button onClick={() => setShowGrid(!showGrid)}>Ver todos</button>
-        )}
+        <div>
+          {!showGrid && (
+            <Button onClick={() => setShowGrid(!showGrid)}>Ver todos</Button>
+          )}
+        </div>
       </section>
+      
     </div>
   );
 }
