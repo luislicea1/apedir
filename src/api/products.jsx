@@ -151,12 +151,13 @@ const getAllProductsVipsFirst = async () => {
     const novedades = await Promise.all(data.map(async (item) => {
 
       const pic = await getImage('products', item.image);
-
+      const perfil_pic = await getImage('bussiness_perfil', item.category.bussiness.perfil_pic)
       return {
         id: item.id,
         name: item.name,
         category: item.category.category,
         image: pic,
+        perfil_pic: perfil_pic,
         price: item.price,
         currency: item.currency,
         url: item.category.bussiness.value_url,

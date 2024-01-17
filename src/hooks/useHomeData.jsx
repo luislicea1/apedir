@@ -26,7 +26,6 @@ export default function useHomeData() {
         setProducts(resultados);
     };
     useEffect(() => {
-
         fetchEvents()
         fetchNovedades();
         fetchProducts();
