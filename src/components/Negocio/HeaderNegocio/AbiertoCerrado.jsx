@@ -10,7 +10,7 @@ export default function AbiertoCerrado(props) {
     color: "red",
   };
 
-  const horario = props.horario
+  const horario = props.horario;
 
   useEffect(() => {
     const actualizarEstatus = () => {
@@ -29,7 +29,7 @@ export default function AbiertoCerrado(props) {
         "viernes",
         "sabado",
       ][dia];
-      const horarioDia = horario.find(h => h.dia.toLowerCase() === diaSemana);
+      const horarioDia = horario.find((h) => h.dia.toLowerCase() === diaSemana);
 
       if (!horarioDia) {
         setEstaAbierto(false);
@@ -38,29 +38,44 @@ export default function AbiertoCerrado(props) {
 
       const [horaApertura, horaCierre] = [horarioDia.entrada, horarioDia.salida];
 
+      const horaActualObj = new Date();
       const horaAperturaObj = new Date();
+      const horaCierreObj = new Date();
+
+      // Establecer las horas
+      horaActualObj.setHours(horaActual.getHours(), horaActual.getMinutes(), 0, 0);
       horaAperturaObj.setHours(
         parseInt(horaApertura.split(":")[0]),
-        parseInt(horaApertura.split(":")[1])
+        parseInt(horaApertura.split(":")[1]),
+        0,
+        0
       );
-      const horaCierreObj = new Date();
       horaCierreObj.setHours(
         parseInt(horaCierre.split(":")[0]),
-        parseInt(horaCierre.split(":")[1])
+        parseInt(horaCierre.split(":")[1]),
+        0,
+        0
       );
 
-      if (horaActual >= horaAperturaObj && horaActual <= horaCierreObj) {
+      const estabaAbierto = estaAbierto; // Guardar el estado anterior
+
+      if (horaActualObj >= horaAperturaObj && horaActualObj <= horaCierreObj) {
         setEstaAbierto(true);
       } else {
         setEstaAbierto(false);
       }
+
+      // Verificar si cambió de abierto a cerrado
+      if (estabaAbierto && !estaAbierto) {
+        window.location.reload(); // Recargar la página
+      }
     };
 
     actualizarEstatus();
-    const intervalo = setInterval(actualizarEstatus, 60000);
+    const intervalo = setInterval(actualizarEstatus, 500);
 
     return () => clearInterval(intervalo);
-  }, [horario]);
+  }, [horario, estaAbierto]);
 
   return (
     <div>
