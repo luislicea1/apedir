@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import ProductosHome from "./ProductosHome";
 import { container, section } from "../styles/styles";
 
@@ -12,8 +12,8 @@ import SkeletonProductosHome from "../Skeleton/SkeletonProductoHome";
 
 export default function ProductosSliderHome() {
   const productos = useProductsHome((state) => state.products);
-  console.log(productos)
-  
+  const [showGrid, setShowGrid] = useState(false);
+
   return (
     <div
       id={"productos-recomendado"}
@@ -22,6 +22,7 @@ export default function ProductosSliderHome() {
     >
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={"Productos Recomendados"}></TituloDeSeccion>
+        <button onClick={() => setShowGrid(!showGrid)}>Ver más</button>
         <Swiper
           spaceBetween={30}
           modules={[Autoplay]}
@@ -48,11 +49,11 @@ export default function ProductosSliderHome() {
               spaceBetween: 10,
             },
           }}
-          loop={true}
-          autoplay={{
-            delay: 5500,
-            disableOnInteraction: false,
-          }}
+          // loop={true}
+          // autoplay={{
+          //   delay: 5500,
+          //   disableOnInteraction: false,
+          // }}
         >
           {productos?.length > 0 ? (
             productos.map((producto) => (
@@ -64,6 +65,7 @@ export default function ProductosSliderHome() {
                   price={producto.price}
                   currency={producto.currency}
                   url={producto.url}
+                  perfil = {producto.perfil_pic}
                 />
               </SwiperSlide>
             ))

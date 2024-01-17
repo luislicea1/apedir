@@ -122,6 +122,7 @@ const SliderNegocios = () => {
                 url={item.value_url}
                 stars={item.stars}
                 privileges={item.privileges}
+                category = {item.category}
               />
             </SwiperSlide>
           ))}

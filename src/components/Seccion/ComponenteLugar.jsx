@@ -57,17 +57,17 @@ function ComponenteLugar(props) {
                 {props.nombre}
               </p>
               <p className="text-white text-tiny  precio-card-producto-panntalla-principal">
-                {/* {props.localizacion} */}
-                <Stars
+                {props.category}
+                {/* <Stars
                   readOnly
                   w={100}
                   rate={stars?.average ? stars.average : 0}
-                />
+                /> */}
               </p>
             </div>
 
-            <Chip color="white">
-              {props.privileges > 2 && <PremiumIcon width={18} />}
+            <Chip color="white" >
+              {props.privileges > 2 && <PremiumIcon width={18} color = {"white"}/>}
             </Chip>
           </CardFooter>
         </Card>
