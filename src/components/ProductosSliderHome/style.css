@@ -50,6 +50,62 @@
     text-overflow: ellipsis;
   }
 
+  .grid-principal-page{
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   gap: 10px;
+  }
+  @media screen and (min-width: 260px) {
+    
+    .grid-principal-page{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+     }
+   
+  }
+  @media screen and (min-width: 360px) {
+    
+    .grid-principal-page{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+     }
+   
+  }
+
+  @media screen and (min-width: 460px) {
+    
+    .grid-principal-page{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+     }
+   
+  }
+
+  @media screen and (min-width: 711px) {
+    
+    .grid-principal-page{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+     }
+   
+  }
+
+  @media screen and (min-width: 1020px) {
+    
+    .grid-principal-page{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+     }
+   
+  }
+  
+
+
   @media screen and (max-width: 440px) {
     
     .titulo-card-producto-panntalla-principal {

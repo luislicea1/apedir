@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import ProductosHome from "./ProductosHome";
 import { container, section } from "../styles/styles";
 
@@ -22,73 +22,98 @@ export default function ProductosSliderHome() {
     >
       <section className="section px-6" style={section}>
         <TituloDeSeccion title={"Productos Recomendados"}></TituloDeSeccion>
-        <button onClick={() => setShowGrid(!showGrid)}>Ver más</button>
-        <Swiper
-          spaceBetween={30}
-          modules={[Autoplay]}
-          className="slider-negocios"
-          breakpoints={{
-            280: {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
-            },
-            360: {
-              slidesPerView: 1.5,
-              spaceBetween: 20,
-            },
-            460: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            711: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1020: {
-              slidesPerView: 4,
-              spaceBetween: 10,
-            },
-          }}
-          // loop={true}
-          // autoplay={{
-          //   delay: 5500,
-          //   disableOnInteraction: false,
-          // }}
-        >
-          {productos?.length > 0 ? (
-            productos.map((producto) => (
-              <SwiperSlide key={producto.id}>
-                <ProductosHome
-                  key={producto.id}
-                  image={producto.image}
-                  name={producto.name}
-                  price={producto.price}
-                  currency={producto.currency}
-                  url={producto.url}
-                  perfil = {producto.perfil_pic}
-                />
-              </SwiperSlide>
-            ))
-          ) : (
-            <>
-              <SwiperSlide>
-                <SkeletonProductosHome />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SkeletonProductosHome />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SkeletonProductosHome />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SkeletonProductosHome />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SkeletonProductosHome />
-              </SwiperSlide>
-            </>
-          )}
-        </Swiper>
+
+        {!showGrid && (
+          <Swiper
+            spaceBetween={30}
+            modules={[Autoplay]}
+            className="slider-negocios"
+            breakpoints={{
+              280: {
+                slidesPerView: 1.2,
+                spaceBetween: 10,
+              },
+              360: {
+                slidesPerView: 1.5,
+                spaceBetween: 20,
+              },
+              460: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              711: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              1020: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+              },
+            }}
+            loop={true}
+            autoplay={{
+              delay: 5500,
+              disableOnInteraction: false,
+            }}
+          >
+            {productos?.length > 0 ? (
+              productos.map((producto) => (
+                <SwiperSlide key={producto.id}>
+                  <ProductosHome
+                    key={producto.id}
+                    image={producto.image}
+                    name={producto.name}
+                    price={producto.price}
+                    currency={producto.currency}
+                    url={producto.url}
+                    perfil={producto.perfil_pic}
+                  />
+                </SwiperSlide>
+              ))
+            ) : (
+              <>
+                <SwiperSlide>
+                  <SkeletonProductosHome />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SkeletonProductosHome />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SkeletonProductosHome />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SkeletonProductosHome />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SkeletonProductosHome />
+                </SwiperSlide>
+              </>
+            )}
+          </Swiper>
+        )}
+        {showGrid && (
+          <div className="grid-principal-page">
+            {productos?.length > 0
+              ? productos.map((producto) => (
+                  <ProductosHome
+                    key={producto.id}
+                    image={producto.image}
+                    name={producto.name}
+                    price={producto.price}
+                    currency={producto.currency}
+                    url={producto.url}
+                    perfil={producto.perfil_pic}
+                  />
+                ))
+              : // Mostrar skeletons
+                Array.from({ length: 5 }).map((_, index) => (
+                  <SkeletonProductosHome key={index} />
+                ))}
+          </div>
+        )}
+        {!showGrid && (
+          <button onClick={() => setShowGrid(!showGrid)}>Ver todos</button>
+        )}
       </section>
     </div>
   );
