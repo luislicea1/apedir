@@ -10,7 +10,7 @@ import { color } from "framer-motion";
 
 
 export default function ProductosHome(props) {
-  console.log(props)
+
   return (
     <Card
       isFooterBlurred
