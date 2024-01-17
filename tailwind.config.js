@@ -13,7 +13,7 @@ export const plugins = [nextui({
   themes: {
     light: {
       colors: {
-        primary: "#FFD600",
+        primary: "#5E17EB",
         secondary: "#5E17EB",
         //default: "#000000",
       }

@@ -253,6 +253,7 @@ export default function Header() {
             color="primary"
             showAnchorIcon
             variant="solid"
+            style={{color: "white"}}
           >
             Sign In
           </Button>

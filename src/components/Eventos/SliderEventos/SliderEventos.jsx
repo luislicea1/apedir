@@ -7,7 +7,7 @@ import { eventsStore } from "../../../hooks/useStore";
 import "./styles.css";
 import { Empty } from "antd";
 import Eventos from "../Eventos";
-import { EffectCoverflow } from "swiper/modules";
+//import { EffectCoverflow } from "swiper/modules";
 
 export default function SliderEventos() {
   const events = eventsStore((state) => state.events);
@@ -17,32 +17,38 @@ export default function SliderEventos() {
       {events && events.length > 0 ? (
         <>
           <Swiper
-            loop={true}
-            effect={"coverflow"}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={"auto"}
-            coverflowEffect={{
-              rotate: 50,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
+            spaceBetween={30}
+           
+            className="slider-negocios"
+            breakpoints={{
+              280: {
+                slidesPerView: 1.2,
+                spaceBetween: 10,
+              },
+              360: {
+                slidesPerView: 1.5,
+                spaceBetween: 20,
+              },
+              460: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              711: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              1020: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+              },
             }}
-
-            modules={[EffectCoverflow]}
-            className="mySwiper"
-            style={
-              {
-                width: "100%",
-
-              }
-            }
+            loop={true}
+            
           >
 
             {events.map((evento, index) => (
               <SwiperSlide key={index} className="swiper-slide-events">
-                <Eventos nombre={evento.name} imagen={evento.image}></Eventos>
+                <Eventos name={evento.name} imagen={evento.image} created_ad = {evento.created_ad} bussiness = {evento.bussiness}></Eventos>
               </SwiperSlide>
             ))}
           </Swiper>

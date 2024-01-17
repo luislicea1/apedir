@@ -20,7 +20,7 @@ export default function SliderNovedades() {
         <TituloDeSeccion title={"Novedades"}></TituloDeSeccion>
         <Swiper
           spaceBetween={10}
-          style={{ width: "100%", padding: "5px" }}
+          style={{ width: "100%", padding: "0px" }}
           
           
           className="mySwiper"

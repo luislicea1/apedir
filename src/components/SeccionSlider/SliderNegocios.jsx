@@ -82,18 +82,32 @@ const SliderNegocios = () => {
     <div id="lugares">
       <Swiper
         spaceBetween={30}
-        pagination={false}
-        navigation={false}
-        modules={[Autoplay]}
+           
         className="slider-negocios"
         breakpoints={{
-          280: { slidesPerView: 1, spaceBetween: 10 },
-          380: { slidesPerView: 2.2, spaceBetween: 20 },
-          711: { slidesPerView: 2.3, spaceBetween: 10 },
-          1020: { slidesPerView: 3, spaceBetween: 10 },
+          280: {
+            slidesPerView: 1.2,
+            spaceBetween: 10,
+          },
+          360: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+          },
+          460: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          711: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1020: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
         }}
         loop={true}
-        autoplay={{ delay: 5500, disableOnInteraction: false }}
+        
       >
         {filtredBussinesses !== null &&
           filtredBussinesses.map((item) => (

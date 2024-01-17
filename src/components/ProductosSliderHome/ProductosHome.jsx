@@ -1,14 +1,16 @@
 import React from "react";
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { Link } from "react-router-dom";
-import { LogoStyle } from "../styles/styles";
+//import { LogoStyle } from "../styles/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./style.css";
+import { color } from "framer-motion";
 
 
 
 export default function ProductosHome(props) {
+  console.log(props)
   return (
     <Card
       isFooterBlurred
@@ -46,7 +48,7 @@ export default function ProductosHome(props) {
           </p>
         </div>
 
-        <Button as={Link} to={`lugar/${props.url}`} className="text-tiny" color="primary" radius="full" size="sm">
+        <Button as={Link} to={`lugar/${props.url}`} className="text-tiny" color="primary" radius="full" size="sm" style={{color: "white"}}>
           Visitar Sitio
         </Button>
 

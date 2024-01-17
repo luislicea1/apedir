@@ -54,7 +54,7 @@ export default function BtnDescription(props) {
             setClicked(true);
           }}
         >
-          <p>Suscribirse</p>
+          <p style={{color: "white"}}>Suscribirse</p>
           <div className="svg-icon-notification ">
             <FontAwesomeIcon icon={faBell} size="xl" />
 

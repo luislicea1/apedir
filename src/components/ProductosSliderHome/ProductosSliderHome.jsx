@@ -12,7 +12,7 @@ import SkeletonProductosHome from "../Skeleton/SkeletonProductoHome";
 
 export default function ProductosSliderHome() {
   const productos = useProductsHome((state) => state.products);
-
+  console.log(productos)
   return (
     <div
       id={"productos-recomendado"}

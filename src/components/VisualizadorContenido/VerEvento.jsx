@@ -5,7 +5,7 @@ import HeaderNegocio from "../Negocio/HeaderNegocio/HeaderNegocio";
 import EventoCard from "./EventoCard";
 import BotonesEventos from "./BotonesEventos";
 import DescripcionEvento from "./DescripcionDeEvento";
-import HorarioEvento from "./HorarioEvento";
+//import HorarioEvento from "./HorarioEvento";
 import TituloEvento from "./TituloEvento";
 import LoaderCompletePage from "../Loader/LoaderCompletePage";
 import { useState } from "react";
@@ -51,6 +51,7 @@ export default function VerEvento() {
 
   React.useEffect(() => {
     const fetchEvent = async () => {
+      
       const e = await getEventByName(nombre);
       setEvent(e);
       const img = await getBussinessImage(e.bussiness);
@@ -58,6 +59,7 @@ export default function VerEvento() {
     };
     fetchEvent();
   }, []);
+
 
   return event !== null ? (
     <div className="container flex z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none  top-0 inset-x-0   backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 bg-background/70">

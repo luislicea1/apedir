@@ -1,5 +1,5 @@
 export const container = {
-  marginTop: "30px",
+  marginTop: "10px",
 };
 
 export const section = {
@@ -34,7 +34,7 @@ export const titleStyles = {
   width: "100%",
   display: "flex",
   float: "left",
-  marginBottom: "20px",
+  marginBottom: "10px",
   fontSize: "1.2rem",
   fontWeight: "bold",
 };
@@ -120,6 +120,12 @@ export const flex_center = {
   alignItems: "center",
   gap: "5px",
 };
+
+export const flex_left = {
+  display: "flex",
+  alignItems: "start",
+  gap: "15px"
+}
 
 export const grid_center = {
   display: "grid",
